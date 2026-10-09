@@ -385,3 +385,14 @@ STRINGS.update({
     "sorting.hint_auto": ("AI CAT helps automatically", "AI CAT ayuda automáticamente"),
     "sorting.basket_format": ("Basket %lld", "Canasta %lld"),
 })
+
+# ---- scenario 2 board (M5) ---------------------------------------------------
+STRINGS.update({
+    "labeling.select_tip": ("Tap a card, then tell AI CAT what animal it is.", "Toca una tarjeta y dile a AI CAT qué animal es."),
+    "labeling.meter_title": ("AI CAT's accuracy on hidden cards", "Precisión de AI CAT en tarjetas ocultas"),
+    "labeling.accuracy_format": ("%lld%% correct", "%lld%% correcto"),
+    "labeling.progress_format": ("%lld of %lld cards labeled", "%lld de %lld tarjetas etiquetadas"),
+    "labeling.guess_format": ("AI CAT thinks: %@ (%lld of %lld neighbours agree)", "AI CAT piensa: %@ (%lld de %lld vecinos coinciden)"),
+    "labeling.guess_none": ("AI CAT has no data yet. Label a card!", "AI CAT aún no tiene datos. ¡Etiqueta una tarjeta!"),
+    "labeling.hint_format": ("Hint: this one is a %@", "Pista: esta es un %@"),
+})

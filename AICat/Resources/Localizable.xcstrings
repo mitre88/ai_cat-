@@ -3945,6 +3945,125 @@
         }
       }
     },
+    "labeling.accuracy_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld%% correct"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld%% correcto"
+          }
+        }
+      }
+    },
+    "labeling.guess_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT thinks: %@ (%lld of %lld neighbours agree)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT piensa: %@ (%lld de %lld vecinos coinciden)"
+          }
+        }
+      }
+    },
+    "labeling.guess_none": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT has no data yet. Label a card!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT aún no tiene datos. ¡Etiqueta una tarjeta!"
+          }
+        }
+      }
+    },
+    "labeling.hint_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hint: this one is a %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pista: esta es un %@"
+          }
+        }
+      }
+    },
+    "labeling.meter_title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT's accuracy on hidden cards"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Precisión de AI CAT en tarjetas ocultas"
+          }
+        }
+      }
+    },
+    "labeling.progress_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld of %lld cards labeled"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld de %lld tarjetas etiquetadas"
+          }
+        }
+      }
+    },
+    "labeling.select_tip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap a card, then tell AI CAT what animal it is."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca una tarjeta y dile a AI CAT qué animal es."
+          }
+        }
+      }
+    },
     "map.stage_format": {
       "extractionState": "manual",
       "localizations": {

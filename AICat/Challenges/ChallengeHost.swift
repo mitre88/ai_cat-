@@ -9,6 +9,7 @@ struct ChallengeHost: View {
     @State private var session: ChallengeSession
     @State private var world: WorldModel
     @State private var sorting: PatternGardenController?
+    @State private var labeling: DataLibraryController?
 
     init(spec: ChallengeSpec) {
         self.spec = spec
@@ -51,6 +52,8 @@ struct ChallengeHost: View {
     private var board: some View {
         if let sorting {
             SortingBoard(controller: sorting)
+        } else if let labeling {
+            LabelingBoard(controller: labeling)
         } else {
             ComingSoonBoard(spec: spec)
         }
@@ -62,6 +65,12 @@ struct ChallengeHost: View {
             if sorting == nil {
                 let controller = PatternGardenController(spec: spec, world: world, session: session, app: app)
                 sorting = controller
+                controller.start()
+            }
+        case .labeling:
+            if labeling == nil {
+                let controller = DataLibraryController(spec: spec, world: world, session: session, app: app)
+                labeling = controller
                 controller.start()
             }
         default:
