@@ -96,8 +96,9 @@ final class NeuronMachineTests: XCTestCase {
                         XCTAssertFalse(NeuronContent.isLinearlySeparable(rows, inputs: inputs), "two-layer targets need the hidden layer")
                     }
                 }
+                let base = specs[0]
                 let spec = ChallengeSpec(id: "test.\(inputs).\(layers)", scenario: .neuronFactory, index: 1, tier: 1, isMaster: false, mechanic: .neuronDials,
-                                         titleKey: TextKey("x"), goalKey: TextKey("x"), conceptKey: TextKey("x"), itemRange: 3...5,
+                                         titleKey: base.titleKey, goalKey: base.goalKey, conceptKey: base.conceptKey, itemRange: 3...5,
                                          params: ["inputs": inputs, "layers": layers])
                 var challenge = NeuronContent.make(spec: spec, difficulty: difficulty, seed: 7)
                 XCTAssertEqual(challenge.network.inputCount, inputs)
