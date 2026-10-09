@@ -187,6 +187,10 @@ AICatCore (SwiftPM, solo Foundation) → currículo, crecimiento, dificultad, pu
 - La voz usa la categoría de audio **playback / spokenAudio** mezclada con otros sonidos: AI CAT se oye aunque el interruptor de silencio esté activo (es contenido hablado esencial); el adulto puede apagar la voz en la zona de padres.
 - El cerebro generativo **nunca bloquea**: cada petición compite contra un temporizador que devuelve el guion aunque el modelo ignore la cancelación; las historias y respuestas esperan su turno en vez de rechazarse.
 
+### 7.1b Modo de humo
+
+Con el argumento de lanzamiento `-AICatSmoke` (`SmokeMode`), la app salta el onboarding, abre el mapa y, cuando el mundo de inicio queda adjunto (texturas subidas, cielo, rig del gato) y lleva 60 cuadros renderizados, imprime `AICAT_SMOKE: world=garden textures=N/N sky=true usdz=false` y `frames=60 OK`, y termina con código 0. `Tools/simulator_smoke.sh` lo ejecuta en un simulador (CI lo corre en cada push). El perfil del modo humo nunca se guarda.
+
 ### 7.2 Sombras y texturas
 
 - **Sin assets de imagen**: todas las texturas se generan en el dispositivo al arrancar con **ruido de valor** en una retícula que envuelve (teselable) y suma fractal (fBm) de 2–4 octavas. La matemática vive en `AICatCore/Textures/ProceduralTextures.swift` (solo Foundation) y `swift test` comprueba periodicidad exacta en la costura `f(u+1, v) = f(u, v)` de las 11 superficies y 5 campos de altura, rangos en [0, 1], determinismo byte a byte, mapas de normales unitarios que apuntan hacia fuera y el degradado monótono de la sombra de contacto. La app solo envuelve los píxeles en un `CGImage` (`ProceduralImages`) y los sube con el semántico correcto (`TextureLibrary`).
