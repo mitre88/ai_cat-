@@ -12,3 +12,10 @@ What this catches: wrong labels or types between the app's own files, main-actor
 misuse of the modelled framework signatures, and anything the syntax pass misses.
 What it cannot catch: a framework signature that differs from the shadow. Keep the shadows in sync
 with Apple's docs when adding new framework calls.
+
+## Added while the boards grew
+
+`position`, `onTapGesture`, `clipped`, `coordinateSpace(_:)` with `NamedCoordinateSpace`, `aspectRatio`, `zIndex`,
+`scrollDisabled`, `task(priority:_:)`, `task(id:priority:_:)`, `ProgressView()`, `Color.primary` / `Color.secondary`,
+and the Capture stubs (`CameraClassifier`, `CameraPreview`, `SpeechListener`) in `AppStubs.swift`. When a board uses a
+new modifier, add it here with the same signature as Apple's and keep the body a no-op.

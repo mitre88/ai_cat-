@@ -59,7 +59,7 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 | `Config/Info.plist` | Explicit Info.plist (kept outside the synchronized folder on purpose). |
 | `Packages/AICatCore/` | Foundation-only Swift package: curriculum, growth model, adaptive difficulty, scoring, learners (decision stump, k-NN), challenge state machines, tests. |
 | `Tools/` | Python helpers: reference math model, string catalog generator, project validator. |
-| `Docs/` | Game design document and art pipeline. |
+| `Docs/` | Game design document, art pipeline, manual QA plan, changelog and the privacy policy (EN/ES). |
 
 ## How the playable worlds use real AI
 
