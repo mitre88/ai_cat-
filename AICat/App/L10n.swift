@@ -52,10 +52,17 @@ enum L10n {
         string(key, language: current)
     }
 
+    /// The kitten's chosen name. Game strings say "AI CAT" and get the name substituted, so labels and
+    /// speech bubbles agree; product and parent-facing strings (`app.*`, `parent.*`, `onboarding.*`) keep it.
+    nonisolated(unsafe) static var catName: String = "AI CAT"
+
     static func string(_ key: String, language: Language) -> String {
-        let value = bundle(for: language).localizedString(forKey: key, value: nil, table: "Localizable")
+        var value = bundle(for: language).localizedString(forKey: key, value: nil, table: "Localizable")
         if value == key, language != .english {
-            return bundle(for: .english).localizedString(forKey: key, value: key, table: "Localizable")
+            value = bundle(for: .english).localizedString(forKey: key, value: key, table: "Localizable")
+        }
+        if catName != "AI CAT", !key.hasPrefix("app."), !key.hasPrefix("parent."), !key.hasPrefix("onboarding.") {
+            value = value.replacingOccurrences(of: "AI CAT", with: catName)
         }
         return value
     }

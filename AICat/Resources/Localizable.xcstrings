@@ -336,7 +336,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Explorador (6–7)"
+            "value": "Nivel explorador (6–7)"
           }
         }
       }
@@ -370,7 +370,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Maestro (11–12)"
+            "value": "Nivel maestro (11–12)"
           }
         }
       }
@@ -551,13 +551,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT is preparing this challenge. The first two worlds are ready to play!"
+            "value": "AI CAT is still preparing this challenge."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT está preparando este reto. ¡Los dos primeros mundos ya se pueden jugar!"
+            "value": "AI CAT todavía está preparando este reto."
           }
         }
       }
@@ -568,13 +568,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "This workshop is still being built"
+            "value": "This challenge is still being built"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Este taller todavía se está construyendo"
+            "value": "Este reto todavía se está construyendo"
           }
         }
       }
@@ -1050,7 +1050,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Etiqueta cada tarjeta y mira cómo sube mi medidor."
+            "value": "Etiqueta cada tarjeta y mira cómo sube mi medidor de precisión."
           }
         }
       }
@@ -1186,7 +1186,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Datos limpios y balanceados son el secreto de una buena IA."
+            "value": "Los datos limpios y balanceados son el secreto de una buena IA."
           }
         }
       }
@@ -1254,7 +1254,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Coloca animales en el tablero por tamaño y pelusa."
+            "value": "Coloca animales en el tablero por tamaño y qué tan peludos son."
           }
         }
       }
@@ -1390,7 +1390,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Los valores atípicos pueden confundir a un clasificador."
+            "value": "Los datos raros (atípicos) pueden confundir a un clasificador."
           }
         }
       }
@@ -1577,7 +1577,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Otra vez y otra vez"
+            "value": "Una y otra vez"
           }
         }
       }
@@ -1639,13 +1639,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rewards tell an agent what is good."
+            "value": "Rewards tell me what is good."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Las recompensas le dicen al agente qué es bueno."
+            "value": "Las recompensas me dicen qué es bueno."
           }
         }
       }
@@ -1690,13 +1690,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Penalties teach what to avoid."
+            "value": "Losing points teaches what to avoid."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Los castigos enseñan qué evitar."
+            "value": "Perder puntos enseña qué evitar."
           }
         }
       }
@@ -1707,13 +1707,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Add a puddle with a penalty and see how my path changes."
+            "value": "Add a puddle that costs points and see how my path changes."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Agrega un charco con castigo y mira cómo cambia mi camino."
+            "value": "Agrega un charco que quita puntos y mira cómo cambia mi camino."
           }
         }
       }
@@ -1781,7 +1781,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Casillas tibias"
+            "value": "Casillas cálidas"
           }
         }
       }
@@ -1792,13 +1792,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Exploring and exploiting is a balance."
+            "value": "Trying new paths and using what I know: I need both."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Explorar y aprovechar es un equilibrio."
+            "value": "Probar caminos nuevos y usar lo que ya sé: necesito las dos cosas."
           }
         }
       }
@@ -2200,13 +2200,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "On-device vision keeps your photos private."
+            "value": "On-device vision keeps what the camera sees private."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "La visión en el dispositivo mantiene tus fotos privadas."
+            "value": "La visión en el dispositivo mantiene en privado lo que ve la cámara."
           }
         }
       }
@@ -2421,13 +2421,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Have a short conversation with me and spot when I'm unsure."
+            "value": "Have a short conversation with me and spot when I'm wrong."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ten una conversación corta conmigo y detecta cuándo no estoy seguro."
+            "value": "Ten una conversación corta conmigo y descubre cuándo me equivoco."
           }
         }
       }
@@ -2512,7 +2512,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Datos balanceados son datos más justos."
+            "value": "Los datos balanceados son más justos."
           }
         }
       }
@@ -2801,7 +2801,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Con ejemplos, como las frutas que ordenaste para mí."
+            "value": "Con ejemplos, como las frutas que acomodaste para mí."
           }
         }
       }
@@ -3016,13 +3016,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "They stay on this device. I never send them anywhere."
+            "value": "I never save them and never send them anywhere."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Se quedan en este dispositivo. Nunca las envío a ningún lado."
+            "value": "No las guardo y nunca las envío a ningún lado."
           }
         }
       }
@@ -3481,7 +3481,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajustes"
+            "value": "Configuración"
           }
         }
       }
@@ -3498,7 +3498,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Saltar"
+            "value": "Omitir"
           }
         }
       }
@@ -3872,7 +3872,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "¡Hola! Soy AI CAT. ¿Listo para aprender conmigo?"
+            "value": "¡Hola! Soy AI CAT. ¿Todo listo para aprender conmigo?"
           }
         }
       }
@@ -3917,13 +3917,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Here's a clue. Watch where this one goes."
+            "value": "Here's a hint. Watch what I do."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aquí va una pista. Mira a dónde va esta."
+            "value": "Aquí va una ayudita. Mira lo que hago."
           }
         }
       }
@@ -3934,13 +3934,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Psst… let me show you one."
+            "value": "Psst… I'll show you one step."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Psst… déjame mostrarte una."
+            "value": "Psst… te muestro un paso."
           }
         }
       }
@@ -3957,7 +3957,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bostezo… Aquí estoy cuando quieras."
+            "value": "Uaaah… Aquí estoy cuando quieras."
           }
         }
       }
@@ -4025,7 +4025,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Este es el reto maestro. ¡Menos pistas, más pensar!"
+            "value": "Este es el reto maestro. ¡Menos ayuda, más pensar!"
           }
         }
       }
@@ -4144,7 +4144,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bienvenido a la fábrica de mi cerebro."
+            "value": "Pasa a la fábrica de mi cerebro."
           }
         }
       }
@@ -4246,7 +4246,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "¡Guau, crecí! ¡Gracias!"
+            "value": "¡Miau, crecí! ¡Gracias!"
           }
         }
       }
@@ -4382,7 +4382,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Brecha de justicia: %lld%%"
+            "value": "Diferencia de justicia: %lld%%"
           }
         }
       }
@@ -4416,7 +4416,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@: %lld%% reconocidos"
+            "value": "Pelaje %@: %lld%% reconocidos"
           }
         }
       }
@@ -4671,7 +4671,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "negros"
+            "value": "negro"
           }
         }
       }
@@ -4688,7 +4688,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "naranjas"
+            "value": "naranja"
           }
         }
       }
@@ -4705,7 +4705,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "rayados"
+            "value": "rayado"
           }
         }
       }
@@ -4722,7 +4722,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "blancos"
+            "value": "blanco"
           }
         }
       }
@@ -4784,7 +4784,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Delete the private data and ask first"
+            "value": "Delete the private data and ask for permission"
           }
         },
         "es": {
@@ -4807,7 +4807,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "gatos %@: %lld"
+            "value": "Gatos de pelaje %@: %lld"
           }
         }
       }
@@ -4858,7 +4858,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "¡Sí! No hay gatos %@ en los ejemplos, así que AI CAT nunca los aprendió."
+            "value": "¡Sí! No hay gatos de pelaje %@ en los ejemplos, así que AI CAT nunca los aprendió."
           }
         }
       }
@@ -5929,7 +5929,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "¡Construirla!"
+            "value": "¡Constrúyela!"
           }
         }
       }
@@ -6252,7 +6252,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gafas de visión"
+            "value": "Lentes de visión"
           }
         }
       }
@@ -6320,7 +6320,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld%% correcto"
+            "value": "%lld%% de aciertos"
           }
         }
       }
@@ -6331,13 +6331,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT thinks: %@ (%lld of %lld neighbours agree)"
+            "value": "AI CAT's guess: %@ (%lld of %lld neighbours agree)"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT piensa: %@ (%lld de %lld vecinos coinciden)"
+            "value": "AI CAT adivina: %@ (%lld de %lld vecinos coinciden)"
           }
         }
       }
@@ -6490,7 +6490,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cauteloso"
+            "value": "Cuidadoso"
           }
         }
       }
@@ -6688,13 +6688,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT found a short path. Make it unsafe so the long way is better!"
+            "value": "AI CAT found a short path. Add puddles so the long way is better!"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT encontró un camino corto. ¡Hazlo peligroso para que el camino largo sea mejor!"
+            "value": "AI CAT encontró un camino corto. ¡Ponle charcos para que el camino largo sea mejor!"
           }
         }
       }
@@ -6722,7 +6722,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT can't reach the treat without a puddle. Move one."
+            "value": "AI CAT can't reach the treat without stepping in a puddle. Move one."
           }
         },
         "es": {
@@ -7130,13 +7130,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rule to learn: the lamp lights when at least three lamps are on."
+            "value": "Rule to learn: the lamp lights when at least three input lamps are on."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Regla a aprender: la lámpara enciende cuando al menos tres lámparas están encendidas."
+            "value": "Regla a aprender: la lámpara enciende cuando al menos tres lámparas de entrada están encendidas."
           }
         }
       }
@@ -7147,13 +7147,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rule to learn: the lamp lights when the first two lamps are different."
+            "value": "Rule to learn: the lamp lights when the first two input lamps are different."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Regla a aprender: la lámpara enciende cuando las dos primeras lámparas son distintas."
+            "value": "Regla a aprender: la lámpara enciende cuando las dos primeras lámparas de entrada son distintas."
           }
         }
       }
@@ -7198,13 +7198,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Press train and watch the error go down. Too fast can bounce; too slow takes forever."
+            "value": "Press Train and watch the error go down. Too fast can bounce; too slow takes forever."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pulsa entrenar y mira cómo baja el error. Muy rápido puede rebotar; muy lento tarda una eternidad."
+            "value": "Toca Entrenar y mira cómo baja el error. Muy rápido puede rebotar; muy lento tarda una eternidad."
           }
         }
       }
@@ -7289,7 +7289,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "¡La misma adivinanza que AI CAT!"
+            "value": "¡Elegiste igual que AI CAT!"
           }
         }
       }
@@ -7300,13 +7300,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Guess %lld of %lld"
+            "value": "Round %lld of %lld"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Adivinanza %lld de %lld"
+            "value": "Ronda %lld de %lld"
           }
         }
       }
@@ -7340,7 +7340,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "La adivinanza de AI CAT: \"%@\" (la contó más veces)."
+            "value": "AI CAT eligió: \"%@\" (la contó más veces)."
           }
         }
       }
@@ -7408,7 +7408,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Adultos: abran la zona de padres desde el mapa (mantener la pata) para elegir la edad y los ajustes."
+            "value": "Adultos: la zona de padres se abre desde el mapa (mantén presionada la pata) para elegir la edad y los ajustes."
           }
         }
       }
@@ -7425,7 +7425,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "¿Listo para jugar?"
+            "value": "¿Todo listo para jugar?"
           }
         }
       }
@@ -7476,7 +7476,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Edad del niño"
+            "value": "Edad del niño o la niña"
           }
         }
       }
@@ -7578,7 +7578,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Comprobar"
+            "value": "Verificar"
           }
         }
       }
@@ -8020,7 +8020,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "¡Graduarse!"
+            "value": "¡Gradúate!"
           }
         }
       }
@@ -8139,7 +8139,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Una adivinanza con suerte"
+            "value": "Pura suerte"
           }
         }
       }
@@ -8173,7 +8173,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT aprendió la regla de las frutas con los ejemplos que ordenaste. ¿Cómo se llama eso?"
+            "value": "AI CAT aprendió la regla de las frutas con los ejemplos que acomodaste. ¿Cómo se llama eso?"
           }
         }
       }
@@ -8207,7 +8207,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Examen de graduación"
+            "value": "Preguntas de graduación"
           }
         }
       }
@@ -8524,13 +8524,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "New: %@"
+            "value": "New accessory: %@"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nuevo: %@"
+            "value": "Nuevo accesorio: %@"
           }
         }
       }
@@ -8734,7 +8734,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "↑ pelusa"
+            "value": "↑ peludo"
           }
         }
       }
@@ -8785,7 +8785,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT acierta %lld%% (meta %lld%%)"
+            "value": "AI CAT acierta el %lld%% (meta: %lld%%)"
           }
         }
       }
@@ -8870,7 +8870,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Una computadora puede seguir una regla que le das, o aprender la regla con tus ejemplos. ¡Eso segundo es IA!"
+            "value": "Una computadora puede seguir una regla que le das, o aprender la regla con tus ejemplos. ¡Lo segundo es IA!"
           }
         }
       }
@@ -8887,7 +8887,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "¡Bienvenido a mi jardín! Acomoda las frutas en las canastas y mira cómo aprendo el patrón."
+            "value": "¡Te doy la bienvenida a mi jardín! Acomoda las frutas en las canastas y mira cómo aprendo el patrón."
           }
         }
       }
@@ -9142,7 +9142,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Un algoritmo es una lista de pasos claros. Las computadoras los siguen tal cual, hasta los tontos."
+            "value": "Un algoritmo es una lista de pasos claros. Las computadoras los siguen tal cual, ¡hasta los pasos tontos!"
           }
         }
       }
@@ -9210,7 +9210,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Algunas IA aprenden probando: los buenos movimientos ganan recompensas, los malos las pierden. Tras muchos intentos encuentra el mejor camino."
+            "value": "Algunas IA aprenden probando: los buenos movimientos ganan recompensas, los malos las pierden. Después de muchos intentos encuentran el mejor camino."
           }
         }
       }
@@ -9295,7 +9295,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "¡Bienvenido a la fábrica donde se construye mi cerebro! Gira las perillas y enciende la lámpara correcta."
+            "value": "¡Esta es la fábrica donde se construye mi cerebro! Gira las perillas y enciende la lámpara correcta."
           }
         }
       }
@@ -9425,13 +9425,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "On this stage we play with words: tokens, guessing the next word and, finally, talking to me!"
+            "value": "In this world we play with words: tokens, guessing the next word and, finally, talking to me!"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "En este escenario jugamos con palabras: tokens, adivinar la siguiente palabra y, al final, ¡hablar conmigo!"
+            "value": "En este mundo jugamos con palabras: tokens, adivinar la siguiente palabra y, al final, ¡hablar conmigo!"
           }
         }
       }
@@ -9958,7 +9958,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Había una vez %1$@ que vivía cerca de %2$@."
+            "value": "Había una vez %1$@ que vivía en %2$@."
           }
         }
       }
@@ -9975,7 +9975,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada mañana, %1$@ corría a %2$@ para jugar."
+            "value": "Cada mañana, %1$@ corría hasta %2$@ para jugar."
           }
         }
       }
@@ -9986,7 +9986,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nobody at %2$@ had ever met %1$@, until today."
+            "value": "Nobody near %2$@ had ever met %1$@, until today."
           }
         },
         "es": {
@@ -10825,7 +10825,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toca las fichas en orden para armar la palabra como la parte AI CAT."
+            "value": "Toca las fichas en orden para armar la palabra tal como la divide AI CAT."
           }
         }
       }
@@ -10842,7 +10842,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Esa pieza no. ¿Qué pieza empieza el resto de la palabra?"
+            "value": "Ese pedazo no. ¿Qué pedazo empieza el resto de la palabra?"
           }
         }
       }
@@ -10876,7 +10876,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Si hay charco: salta"
+            "value": "Si hay charco adelante: salta"
           }
         }
       }
@@ -10927,7 +10927,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Girar izquierda"
+            "value": "Girar a la izquierda"
           }
         }
       }
@@ -10944,7 +10944,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Girar derecha"
+            "value": "Girar a la derecha"
           }
         }
       }
@@ -11369,7 +11369,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ (%lld%% seguro)"
+            "value": "«%@» (en inglés, %lld%% seguro)"
           }
         }
       }
@@ -11590,7 +11590,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Acerca hasta que aparezcan los números y toca cada píxel con un 9: los más brillantes."
+            "value": "Haz zoom hasta que aparezcan los números y toca cada píxel con un 9: los más brillantes."
           }
         }
       }
@@ -11624,7 +11624,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "¡Primero acerca hasta los números!"
+            "value": "¡Primero haz zoom hasta ver los números!"
           }
         }
       }
@@ -11771,13 +11771,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Yes! The most clues wins."
+            "value": "Yes! The shape with the most clues wins."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "¡Sí! Ganan las pistas."
+            "value": "¡Sí! Gana la forma con más pistas."
           }
         }
       }

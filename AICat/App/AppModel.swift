@@ -24,6 +24,7 @@ final class AppModel {
         let initial = loaded ?? PlayerProfile(catName: "AI CAT", ageBand: .apprentice, languageCode: L10n.Language.preferred.rawValue)
         profile = initial
         L10n.current = L10n.Language(rawValue: initial.languageCode) ?? .english
+        L10n.catName = initial.catName
         voice = CatVoice()
         voice.isEnabled = initial.voiceEnabled
         brain = BrainRouter()
@@ -46,6 +47,7 @@ final class AppModel {
     func update(_ change: (inout PlayerProfile) -> Void) {
         change(&profile)
         L10n.current = language
+        L10n.catName = profile.catName
         voice.isEnabled = profile.voiceEnabled
         save()
     }

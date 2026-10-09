@@ -41,13 +41,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT looks through the camera to guess what things are (scenario 7). Nothing is saved or sent anywhere."
+            "value": "AI CAT looks through the camera to guess what things are (world 7). Nothing is saved or sent anywhere."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT mira por la cámara para adivinar qué son las cosas (escenario 7). No se guarda ni se envía nada."
+            "value": "AI CAT mira por la cámara para adivinar qué son las cosas (mundo 7). Nada se guarda ni se envía a ningún lado."
           }
         }
       }
@@ -58,13 +58,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT listens to a sentence to show it as text and tokens (scenario 8). Nothing is recorded or sent anywhere."
+            "value": "AI CAT listens to a sentence to show it as text and tokens (world 8). Nothing is recorded or sent anywhere."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT escucha una oración para mostrarla como texto y tokens (escenario 8). No se graba ni se envía nada."
+            "value": "AI CAT escucha una oración para mostrarla como texto y tokens (mundo 8). Nada se graba ni se envía a ningún lado."
           }
         }
       }
