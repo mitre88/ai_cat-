@@ -86,7 +86,7 @@ final class NeuronFactoryController {
         let pedestal = PropFactory.pedestal(color: Color(red: 0.5, green: 0.5, blue: 0.58), radius: 0.36)
         pedestal.position = [-0.45, 0, 0.3]
         world.addProp(pedestal, id: "machine")
-        let column = ModelEntity(mesh: .generateBox(size: [0.06, 0.5, 0.06], cornerRadius: 0.01), materials: [Materials.matte(Color(red: 0.4, green: 0.4, blue: 0.46))])
+        let column = ModelEntity(mesh: .generateBox(size: [0.06, 0.5, 0.06], cornerRadius: 0.01), materials: [Materials.metal(Color(red: 0.4, green: 0.4, blue: 0.46))])
         column.position = [-0.45, 0.35, 0.3]
         world.addProp(column, id: "column")
         for i in 0..<inputCount {

@@ -77,6 +77,15 @@ Guion para la primera sesión con Xcode: cada bloque dice qué tocar y qué debe
 - Cerrar y reabrir la app conserva progreso; "Reiniciar progreso" pide confirmación.
 - VoiceOver lee casillas, píxeles, cables y tarjetas con su etiqueta; Dynamic Type grande no rompe los tableros (son ScrollView).
 
+### Visual (texturas y sombras)
+
+- Al entrar a cada mundo, el suelo muestra grano (pasto, losas, tablones, metal, arena, alfombra, azulejo) y no un color plano; si queda plano, `TextureLibrary.prepare` falló al subir la textura (revisar consola: `TextureResource(image:withName:options:)`).
+- Troncos con corteza, copas/setos/arbustos con hojas, canastas de mimbre **del color de su canasta** (el niño sigue distinguiéndolas), pedestales de piedra apoyados sobre el suelo (no medio enterrados), bancos/estantes/escenario de madera, engranajes y chimeneas metálicas.
+- Bajo el gato y bajo cada prop hay una sombra suave que no parpadea al mover la cámara (planos decorativos 0.003 m, sombras de props 0.006 m, sombra del gato 0.008 m); el sendero del mundo 4 y la alfombra de la biblioteca no "cortan" las sombras.
+- El gato se lee como negro carbón con hebras visibles bajo la luz de contorno, nunca como una silueta plana ni como gris.
+- Primera carga de un mundo con todas sus texturas: menos de 1 s en iPhone (se generan en segundo plano, 512² el suelo, 256² los props); cambiar de postura en el Duo no vuelve a generarlas.
+- Modo claro/oscuro del sistema no cambia el mundo 3D (la iluminación es propia).
+
 ## Regresiones a vigilar (corregidas tras las revisiones adversariales)
 
 - Mundo 1: tras aprender la regla, AI CAT **camina y lleva** las frutas restantes antes de que aparezca el resultado.

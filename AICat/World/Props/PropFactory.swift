@@ -2,21 +2,36 @@ import RealityKit
 import SwiftUI
 import AICatCore
 
-/// Low-poly props built from primitives. Replace any of them with USDZ later (see Docs/ART_PIPELINE.md).
+/// Low-poly props built from primitives, dressed with the procedural textures and standing on a soft contact
+/// shadow. Every prop's origin is at ground level, so callers position them with y = 0.
+/// Replace any of them with USDZ later (see Docs/ART_PIPELINE.md).
 @MainActor
 enum PropFactory {
-    static func tree(height: Float, palette: WorldPalette) -> Entity {
+    /// Height of prop contact shadows: above the ground (0) and the decorative planes (0.003), below AI CAT's (0.008).
+    static let shadowHeight: Float = 0.006
+
+    /// Soft contact shadow for something standing on the ground: an unlit disc that darkens the ground under it,
+    /// like ambient occlusion, on every device.
+    static func contactShadow(width: Float, depth: Float? = nil, opacity: Float = 0.35) -> ModelEntity {
+        let disc = ModelEntity(mesh: .generatePlane(width: width, depth: depth ?? width, cornerRadius: 0), materials: [Materials.blobShadow(opacity: opacity)])
+        disc.name = "contactShadow"
+        disc.position = [0, shadowHeight, 0]
+        return disc
+    }
+
+    static func tree(height: Float, canopy: Color) -> Entity {
         let tree = Entity()
-        let trunk = ModelEntity(mesh: .generateCylinder(height: height * 0.35, radius: height * 0.05), materials: [Materials.matte(Color(red: 0.45, green: 0.3, blue: 0.18))])
+        let trunk = ModelEntity(mesh: .generateCylinder(height: height * 0.35, radius: height * 0.05), materials: [Materials.bark(Color(red: 0.50, green: 0.34, blue: 0.20))])
         trunk.position = [0, height * 0.175, 0]
-        let canopy = ModelEntity(mesh: .generateCone(height: height * 0.7, radius: height * 0.28), materials: [Materials.matte(palette.accent)])
-        canopy.position = [0, height * 0.35 + height * 0.35, 0]
-        let canopy2 = ModelEntity(mesh: .generateCone(height: height * 0.5, radius: height * 0.22), materials: [Materials.matte(palette.accent.opacity(0.9))])
-        canopy2.position = [0, height * 0.35 + height * 0.62, 0]
-        for model in [trunk, canopy, canopy2] {
+        let lower = ModelEntity(mesh: .generateCone(height: height * 0.7, radius: height * 0.28), materials: [Materials.leaves(canopy)])
+        lower.position = [0, height * 0.35 + height * 0.35, 0]
+        let upper = ModelEntity(mesh: .generateCone(height: height * 0.5, radius: height * 0.22), materials: [Materials.leaves(canopy, repeats: 2)])
+        upper.position = [0, height * 0.35 + height * 0.62, 0]
+        for model in [trunk, lower, upper] {
             model.components.set(GroundingShadowComponent(castsShadow: true))
             tree.addChild(model)
         }
+        tree.addChild(contactShadow(width: height * 0.6))
         return tree
     }
 
@@ -32,16 +47,20 @@ enum PropFactory {
         return flower
     }
 
-    static func hedge(width: Float, height: Float, color: Color) -> ModelEntity {
-        let hedge = ModelEntity(mesh: .generateBox(size: [width, height, height * 0.8], cornerRadius: height * 0.3), materials: [Materials.matte(color)])
-        hedge.position = [0, height / 2, 0]
-        hedge.components.set(GroundingShadowComponent(castsShadow: true))
+    /// A clipped hedge standing on the ground (origin at its base).
+    static func hedge(width: Float, height: Float, color: Color) -> Entity {
+        let hedge = Entity()
+        let body = ModelEntity(mesh: .generateBox(size: [width, height, height * 0.8], cornerRadius: height * 0.3), materials: [Materials.leaves(color, repeats: 4)])
+        body.position = [0, height / 2, 0]
+        body.components.set(GroundingShadowComponent(castsShadow: true))
+        hedge.addChild(body)
+        hedge.addChild(contactShadow(width: width + 0.2, depth: height * 0.8 + 0.2))
         return hedge
     }
 
     static func bookshelf(width: Float, height: Float, palette: WorldPalette) -> Entity {
         let shelf = Entity()
-        let frame = ModelEntity(mesh: .generateBox(size: [width, height, 0.25], cornerRadius: 0.01), materials: [Materials.matte(palette.ground)])
+        let frame = ModelEntity(mesh: .generateBox(size: [width, height, 0.25], cornerRadius: 0.01), materials: [Materials.wood(palette.ground, repeats: 2)])
         frame.position = [0, height / 2, 0]
         frame.components.set(GroundingShadowComponent(castsShadow: true))
         shelf.addChild(frame)
@@ -59,12 +78,13 @@ enum PropFactory {
                 shelf.addChild(book)
             }
         }
+        shelf.addChild(contactShadow(width: width + 0.3, depth: 0.6))
         return shelf
     }
 
-    /// Open basket: a bucket body with a contrasting rim. Collider is a static cylinder so fruit lands inside.
+    /// Open woven basket: a bucket body with a contrasting rim. Collider is a static box so fruit lands inside.
     static func basket(color: Color, radius: Float, height: Float) -> ModelEntity {
-        let basket = ModelEntity(mesh: .generateCylinder(height: height, radius: radius), materials: [Materials.matte(color)])
+        let basket = ModelEntity(mesh: .generateCylinder(height: height, radius: radius), materials: [Materials.wicker(color)])
         basket.position = [0, height / 2, 0]
         let rim = ModelEntity(mesh: .generateCylinder(height: height * 0.12, radius: radius * 1.08), materials: [Materials.glossy(color.opacity(0.95))])
         rim.position = [0, height * 0.5, 0]
@@ -72,13 +92,20 @@ enum PropFactory {
         basket.components.set(GroundingShadowComponent(castsShadow: true))
         basket.collision = CollisionComponent(shapes: [.generateBox(size: [radius * 2, height, radius * 2])])
         basket.physicsBody = PhysicsBodyComponent(shapes: [.generateBox(size: [radius * 2, height, radius * 2])], mass: 0, material: PhysicsMaterialResource.generate(staticFriction: 0.8, dynamicFriction: 0.7, restitution: 0.05), mode: .static)
+        let shadow = contactShadow(width: radius * 2.8, opacity: 0.4)
+        shadow.position = [0, -height / 2 + shadowHeight, 0]   // the basket's origin is at its centre
+        basket.addChild(shadow)
         return basket
     }
 
-    static func pedestal(color: Color, radius: Float) -> ModelEntity {
-        let pedestal = ModelEntity(mesh: .generateCylinder(height: 0.06, radius: radius), materials: [Materials.matte(color)])
-        pedestal.position = [0, 0.03, 0]
-        pedestal.components.set(GroundingShadowComponent(castsShadow: true))
+    /// A low stone plinth standing on the ground (origin at its base).
+    static func pedestal(color: Color, radius: Float) -> Entity {
+        let pedestal = Entity()
+        let slab = ModelEntity(mesh: .generateCylinder(height: 0.06, radius: radius), materials: [Materials.stone(color, repeats: 2)])
+        slab.position = [0, 0.03, 0]
+        slab.components.set(GroundingShadowComponent(castsShadow: true))
+        pedestal.addChild(slab)
+        pedestal.addChild(contactShadow(width: radius * 2.6))
         return pedestal
     }
 }

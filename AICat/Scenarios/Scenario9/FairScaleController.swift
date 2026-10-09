@@ -102,7 +102,7 @@ final class FairScaleController {
         let base = PropFactory.pedestal(color: Color(red: 0.55, green: 0.45, blue: 0.35), radius: 0.3)
         base.position = [-0.45, 0, 0.3]
         world.addProp(base, id: "scale_base")
-        let post = ModelEntity(mesh: .generateBox(size: [0.05, 0.6, 0.05], cornerRadius: 0.01), materials: [Materials.matte(Color(red: 0.45, green: 0.35, blue: 0.25))])
+        let post = ModelEntity(mesh: .generateBox(size: [0.05, 0.6, 0.05], cornerRadius: 0.01), materials: [Materials.wood(Color(red: 0.45, green: 0.35, blue: 0.25), repeats: 1)])
         post.position = [-0.45, 0.4, 0.3]
         world.addProp(post, id: "scale_post")
         let beam = ModelEntity(mesh: .generateBox(size: [0.7, 0.03, 0.04], cornerRadius: 0.01), materials: [Materials.glossy(Color(red: 0.85, green: 0.7, blue: 0.3))])

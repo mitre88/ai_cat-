@@ -73,7 +73,7 @@ final class AlgorithmTrailController {
             for x in 0..<w.width {
                 let cell = TrailCell(x, y)
                 let tile = ModelEntity(mesh: .generateBox(size: [Self.cellSize * 0.92, 0.02, Self.cellSize * 0.92], cornerRadius: 0.01),
-                                       materials: [Materials.matte(cell == w.goal ? Color.yellow : Color(red: 0.78, green: 0.86, blue: 0.70))])
+                                       materials: [Materials.stone(cell == w.goal ? Color.yellow : Color(red: 0.78, green: 0.86, blue: 0.70), repeats: 1)])
                 tile.position = worldPosition(of: cell) + [0, 0.01, 0]
                 world.addProp(tile, id: "tile_\(x)_\(y)")
                 if w.isPuddle(cell) {

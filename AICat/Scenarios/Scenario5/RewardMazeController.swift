@@ -113,13 +113,13 @@ final class RewardMazeController {
         for cell in maze.allCells {
             if maze[cell] == .wall {
                 let wall = ModelEntity(mesh: .generateBox(size: [cellSize * 0.94, 0.14, cellSize * 0.94], cornerRadius: 0.015),
-                                       materials: [Materials.matte(Self.wallColor)])
+                                       materials: [Materials.leaves(Self.wallColor, repeats: 2)])
                 wall.position = worldPosition(of: cell) + [0, 0.07, 0]
                 wall.components.set(GroundingShadowComponent(castsShadow: true))
                 world.addProp(wall, id: "wall_\(cell.x)_\(cell.y)")
             } else {
                 let tile = ModelEntity(mesh: .generateBox(size: [cellSize * 0.92, 0.02, cellSize * 0.92], cornerRadius: 0.01),
-                                       materials: [Materials.matte(Self.baseTileColor)])
+                                       materials: [Materials.stone(Self.baseTileColor, repeats: 1)])
                 tile.position = worldPosition(of: cell) + [0, 0.01, 0]
                 world.addProp(tile, id: Self.tileID(cell))
             }

@@ -105,11 +105,11 @@ final class CatVoiceController {
         stage.position = [0, 0, 0.1]
         world.addProp(stage, id: "stage")
         for (index, side) in [-1, 1].enumerated() {
-            let curtain = ModelEntity(mesh: .generateBox(size: [0.16, 0.9, 0.05], cornerRadius: 0.01), materials: [Materials.matte(Color(red: 0.7, green: 0.15, blue: 0.2))])
+            let curtain = ModelEntity(mesh: .generateBox(size: [0.16, 0.9, 0.05], cornerRadius: 0.01), materials: [Materials.carpet(Color(red: 0.7, green: 0.15, blue: 0.2), repeats: 2)])
             curtain.position = [Float(side) * 0.62, 0.45, -0.25]
             world.addProp(curtain, id: "curtain_\(index)")
         }
-        let stand = ModelEntity(mesh: .generateCylinder(height: 0.3, radius: 0.012), materials: [Materials.matte(Color.gray)])
+        let stand = ModelEntity(mesh: .generateCylinder(height: 0.3, radius: 0.012), materials: [Materials.metal(Color.gray)])
         stand.position = [-0.3, 0.17, 0.35]
         world.addProp(stand, id: "mic_stand")
         let mic = ModelEntity(mesh: .generateSphere(radius: 0.04), materials: [Materials.matte(Color(red: 0.3, green: 0.3, blue: 0.35))])

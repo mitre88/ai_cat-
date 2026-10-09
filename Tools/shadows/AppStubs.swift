@@ -57,5 +57,5 @@ final class SpeechListener {
 
 // World/ProceduralImages.swift (CoreGraphics): only its signature matters for the type-check.
 enum ProceduralImages {
-    static func image(for kind: TextureKind, size: Int = 512) -> CGImage? { nil }
+    static func image(for kind: TextureKind, size: Int? = nil) -> CGImage? { nil }
 }

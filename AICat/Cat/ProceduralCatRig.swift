@@ -133,7 +133,7 @@ final class ProceduralCatRig: CatRig {
 
         let shadowWidth = bodyLength * 1.6 + 0.12
         shadowDisc.model = ModelComponent(mesh: .generatePlane(width: shadowWidth, depth: shadowWidth * 0.75, cornerRadius: 0), materials: [Materials.blobShadow])
-        shadowDisc.position = [0, 0.004, bodyLength * 0.06]
+        shadowDisc.position = [0, 0.008, bodyLength * 0.06]   // above the props' contact shadows (0.006) and decorative planes (0.003)
 
         rebuildAccessories()
         animator.configure(morphology: m)

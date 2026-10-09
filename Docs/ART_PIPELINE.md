@@ -35,4 +35,12 @@ All text is generated from `Tools/strings_source.py` into the String Catalogs. N
 
 ## Texturas procedurales (estado actual)
 
-No hay imágenes en el bundle: `AICat/World/ProceduralImages.swift` genera cada textura con ruido de valor teselable y las sube `TextureLibrary` con el semántico correcto (color o normal). Para sustituir una por una textura pintada: añade el PNG al asset catalog y cambia `TextureLibrary.prepare` para cargarla con `TextureResource(named:)` bajo la misma `TextureKind`; `Materials` no cambia. Para un gato USDZ con sus propias texturas, el rig USDZ ignora `Materials.fur` y conserva sus materiales.
+No hay imágenes en el bundle. Las fórmulas (ruido de valor teselable + fBm) viven en `Packages/AICatCore/Sources/AICatCore/Textures/ProceduralTextures.swift`, con pruebas en `ProceduralTexturesTests`; `AICat/World/ProceduralImages.swift` las envuelve en un `CGImage` y `TextureLibrary` las sube con el semántico correcto (color o normal) una vez por lanzamiento, en segundo plano. Regla de diseño: la textura aporta **estructura** (brillo medio ≈ 0.75–0.95, matiz leve) y el tinte del material aporta el **color** de la paleta, así un mismo "wood" sirve para el piso de la biblioteca, los bancos del taller y el escenario del teatro.
+
+Catálogo (`TextureKind`): `grass`, `stone`, `wood`, `metal`, `carpet`, `labTile`, `sand`, `fur`, `bark`, `leaves`, `wicker` (color), `blobShadow` (solo alfa) y los mapas de normales `grassNormal`, `stoneNormal`, `woodNormal`, `furNormal`, `barkNormal`. Qué texturas carga cada mundo: `TextureLibrary.props(for:)`.
+
+Para sustituir una por una textura pintada: añade el PNG al asset catalog y cambia `TextureLibrary.prepare` para cargarla con `TextureResource(named:)` bajo la misma `TextureKind` (si es de color, mantenla clara para que el tinte siga mandando); `Materials` no cambia. Para añadir una superficie nueva: un caso en `TextureKind`, su fórmula periódica en `NoiseField` (y su altura si lleva normal map), un helper en `Materials` y el mundo que la usa en `props(for:)`; las pruebas de costura y rango la cubren automáticamente.
+
+### Sombras de contacto
+
+`PropFactory.contactShadow(width:depth:opacity:)` crea el disco unlit (`Materials.blobShadow(opacity:)`) que los props llevan en su base; `SceneBuilder.shadow(at:_:width:depth:into:)` lo pone bajo los primitivos colocados por su centro. Un USDZ que sustituya a un prop debe conservar el origen a nivel del suelo y puede quedarse con el disco (es un hijo aparte).
