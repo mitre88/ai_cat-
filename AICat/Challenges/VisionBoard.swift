@@ -43,7 +43,6 @@ struct VisionBoard: View {
                 controller.approveParent()
             }
         }
-        .onDisappear { controller.stopCamera() }
     }
 
     private var confirmTitle: String {
@@ -199,8 +198,10 @@ struct VisionBoard: View {
             case .idle:
                 Button(L10n.string("vision.live.start_camera")) { controller.openEyes() }
                     .buttonStyle(KidButtonStyle(tint: Theme.eyeGreen))
+                    .disabled(controller.isDone)
                 Button(L10n.string("vision.live.use_samples")) { controller.useSamples() }
                     .buttonStyle(.bordered)
+                    .disabled(controller.isDone)
             case .starting:
                 HStack(spacing: 8) {
                     ProgressView()
@@ -211,6 +212,9 @@ struct VisionBoard: View {
                     .frame(height: 220)
                     .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                 guessesList
+                Button(L10n.string("vision.live.use_samples")) { controller.useSamples() }
+                    .buttonStyle(.bordered)
+                    .disabled(controller.isDone)
             case .samples:
                 if controller.cameraDenied {
                     Text(L10n.string("vision.live.denied")).font(.caption).foregroundStyle(.secondary)
@@ -233,6 +237,11 @@ struct VisionBoard: View {
                 Button(L10n.string("vision.live.next_sample")) { controller.nextSample() }
                     .buttonStyle(.bordered)
                     .disabled(controller.isClassifying || controller.isDone)
+                if CameraClassifier.isSupported && !controller.cameraDenied {
+                    Button(L10n.string("vision.live.start_camera")) { controller.openEyes() }
+                        .buttonStyle(.bordered)
+                        .disabled(controller.isDone)
+                }
             }
             if challenge.isSolved {
                 Text(L10n.string("vision.live.done")).font(.callout.bold()).foregroundStyle(Theme.eyeGreen)
@@ -291,15 +300,28 @@ struct PixelGridView: View {
         .background(Theme.cardBackground, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 
+    @ViewBuilder
     private func cell(_ point: PixelPoint) -> some View {
+        if let onTap {
+            Button {
+                onTap(point)
+            } label: {
+                cellContent(point)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(Text(L10n.format("a11y.pixel_format", point.x + 1, point.y + 1, image[point])))
+        } else {
+            cellContent(point)
+                .accessibilityLabel(Text(L10n.format("a11y.pixel_format", point.x + 1, point.y + 1, image[point])))
+        }
+    }
+
+    private func cellContent(_ point: PixelPoint) -> some View {
         let value = image[point]
         let isHighlighted = highlighted.contains(point)
         let isWrong = wrong.contains(point)
         let isHinted = hinted == point
-        return Button {
-            onTap?(point)
-        } label: {
-            ZStack {
+        return ZStack {
                 Rectangle().fill(CatEyesController.grey(value))
                 if isHighlighted {
                     Rectangle().stroke(Color.orange, lineWidth: 2)
@@ -317,9 +339,5 @@ struct PixelGridView: View {
                 }
             }
             .frame(width: cellSize, height: cellSize)
-        }
-        .buttonStyle(.plain)
-        .disabled(onTap == nil)
-        .accessibilityLabel(Text(L10n.format("a11y.pixel_format", point.x + 1, point.y + 1, value)))
     }
 }

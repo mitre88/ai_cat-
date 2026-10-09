@@ -54,19 +54,34 @@ final class BrainRouter: CatBrain {
         }
     }
 
+    /// Races `operation` against a timer. Returns the fallback at the deadline even if the operation keeps
+    /// running (its late result is discarded), so the game never waits on the model.
     static func withTimeout<T: Sendable>(seconds: Double, fallback: T, operation: @escaping @Sendable () async -> T) async -> T {
-        await withTaskGroup(of: T?.self) { group in
-            group.addTask { await operation() }
-            group.addTask {
+        await withCheckedContinuation { (continuation: CheckedContinuation<T, Never>) in
+            let once = ResumeOnce(continuation)
+            let work = Task {
+                let value = await operation()
+                once.resume(value)
+            }
+            Task {
                 try? await Task.sleep(nanoseconds: UInt64(seconds * 1_000_000_000))
-                return nil
+                once.resume(fallback)
+                work.cancel()
             }
-            var result = fallback
-            if let first = await group.next() {
-                result = first ?? fallback
-            }
-            group.cancelAll()
-            return result
+        }
+    }
+
+    private final class ResumeOnce<T: Sendable>: @unchecked Sendable {
+        private let lock = NSLock()
+        private var done = false
+        private let continuation: CheckedContinuation<T, Never>
+        init(_ continuation: CheckedContinuation<T, Never>) { self.continuation = continuation }
+        func resume(_ value: T) {
+            lock.lock()
+            defer { lock.unlock() }
+            guard !done else { return }
+            done = true
+            continuation.resume(returning: value)
         }
     }
 }

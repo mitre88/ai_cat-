@@ -43,7 +43,6 @@ struct LanguageBoard: View {
                 controller.approveParent()
             }
         }
-        .onDisappear { controller.stopListening() }
     }
 
     @ViewBuilder

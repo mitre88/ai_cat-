@@ -249,7 +249,7 @@ final class CatVoiceController {
 
     /// Creative mode: the child picks one of three questions and the on-device model answers (filtered).
     func ask(_ question: String) {
-        guard creativeModeOn, !isAsking else { return }
+        guard !isDone, creativeModeOn, !isAsking else { return }
         askedQuestion = question
         modelAnswer = nil
         modelDeclined = false

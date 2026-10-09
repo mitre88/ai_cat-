@@ -37,7 +37,6 @@ struct TrailBoard: View {
             .padding()
         }
         .background(Theme.mapBackground)
-        .onDisappear { controller.stop() }
     }
 
     private var programCard: some View {

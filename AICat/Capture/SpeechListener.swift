@@ -4,6 +4,7 @@ import Observation
 
 /// On-device speech recognition for scenario 8. Audio is transcribed on the device only
 /// (`requiresOnDeviceRecognition`), never recorded, and the microphone closes after each sentence.
+/// `listen` always returns: on a recogniser error, on the timer, or when `stop()` is called.
 @MainActor
 @Observable
 final class SpeechListener {
@@ -12,8 +13,13 @@ final class SpeechListener {
     private(set) var isDenied = false
 
     @ObservationIgnored private let audioEngine = AVAudioEngine()
+    @ObservationIgnored private var recognizer: SFSpeechRecognizer?
     @ObservationIgnored private var request: SFSpeechAudioBufferRecognitionRequest?
     @ObservationIgnored private var task: SFSpeechRecognitionTask?
+    @ObservationIgnored private var timer: Task<Void, Never>?
+    @ObservationIgnored private var pending: ResumeOnce?
+    @ObservationIgnored private var tapInstalled = false
+    @ObservationIgnored private var sessionID = 0
 
     static func isSupported(language: L10n.Language) -> Bool {
         guard let recognizer = SFSpeechRecognizer(locale: language.locale) else { return false }
@@ -52,58 +58,95 @@ final class SpeechListener {
             return nil
         }
         guard let recognizer = SFSpeechRecognizer(locale: language.locale), recognizer.isAvailable else { return nil }
+        self.recognizer = recognizer
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.record, mode: .measurement, options: [.duckOthers])
+            try audioSession.setActive(true, options: [.notifyOthersOnDeactivation])
+        } catch {
+            restoreAudioSession()   // another app or a call holds the microphone
+            return nil
+        }
+        let input = audioEngine.inputNode
+        let format = input.outputFormat(forBus: 0)
+        guard format.sampleRate > 0, format.channelCount > 0 else {   // an invalid format would make installTap throw an NSException
+            restoreAudioSession()
+            return nil
+        }
         let request = SFSpeechAudioBufferRecognitionRequest()
         request.shouldReportPartialResults = true
         request.requiresOnDeviceRecognition = true
-        let audioSession = AVAudioSession.sharedInstance()
-        try? audioSession.setCategory(.record, mode: .measurement, options: [.duckOthers])
-        try? audioSession.setActive(true, options: [.notifyOthersOnDeactivation])
-        let input = audioEngine.inputNode
-        let format = input.outputFormat(forBus: 0)
-        input.removeTap(onBus: 0)
+        if tapInstalled { input.removeTap(onBus: 0) }
         input.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, _ in
             request.append(buffer)
         }
+        tapInstalled = true
         audioEngine.prepare()
         do {
             try audioEngine.start()
         } catch {
+            input.removeTap(onBus: 0)
+            tapInstalled = false
             restoreAudioSession()
             return nil
         }
+        sessionID += 1
+        let mySession = sessionID
         isListening = true
         partialText = ""
         self.request = request
         let text: String? = await withCheckedContinuation { (continuation: CheckedContinuation<String?, Never>) in
             let once = ResumeOnce(continuation)
+            pending = once
             task = recognizer.recognitionTask(with: request) { [weak self] result, error in
                 let transcript = result?.bestTranscription.formattedString
                 let isFinal = result?.isFinal ?? false
                 let failed = error != nil
                 Task { @MainActor in
-                    if let transcript { self?.partialText = transcript }
+                    guard let self, self.sessionID == mySession else {
+                        once.resume(transcript)
+                        return
+                    }
+                    if let transcript { self.partialText = transcript }
                     if isFinal { once.resume(transcript) }
-                    if failed { once.resume(self?.partialText.isEmpty == false ? self?.partialText : nil) }
+                    if failed { once.resume(self.partialText.isEmpty ? nil : self.partialText) }
                 }
             }
-            Task { @MainActor [weak self] in
+            timer?.cancel()
+            timer = Task { @MainActor [weak self] in
                 try? await Task.sleep(nanoseconds: UInt64(seconds * 1_000_000_000))
-                self?.request?.endAudio()
+                guard !Task.isCancelled, let self, self.sessionID == mySession else { return }
+                request.endAudio()   // this session's request, never a later one
                 try? await Task.sleep(nanoseconds: 1_200_000_000)
-                once.resume(self?.partialText.isEmpty == false ? self?.partialText : nil)
+                guard !Task.isCancelled, self.sessionID == mySession else { return }
+                once.resume(self.partialText.isEmpty ? nil : self.partialText)
             }
         }
+        pending = nil
         stop()
         return text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false ? text : nil
     }
 
+    /// Ends the current session (idempotent). A pending `listen` returns with whatever was heard so far.
     func stop() {
-        audioEngine.stop()
-        audioEngine.inputNode.removeTap(onBus: 0)
+        timer?.cancel()
+        timer = nil
+        if let pending {
+            self.pending = nil
+            pending.resume(partialText.isEmpty ? nil : partialText)
+        }
+        if audioEngine.isRunning {
+            audioEngine.stop()
+        }
+        if tapInstalled {
+            audioEngine.inputNode.removeTap(onBus: 0)
+            tapInstalled = false
+        }
         request?.endAudio()
         task?.cancel()
         task = nil
         request = nil
+        recognizer = nil
         isListening = false
         restoreAudioSession()
     }

@@ -1,4 +1,5 @@
 import AVFoundation
+import ImageIO
 import Vision
 import UIKit
 import Observation
@@ -20,9 +21,11 @@ final class CameraClassifier {
     let session = AVCaptureSession()
 
     @ObservationIgnored private let output = AVCaptureVideoDataOutput()
-    @ObservationIgnored private let queue = DispatchQueue(label: "aicat.camera.frames")
+    @ObservationIgnored private let sessionQueue = DispatchQueue(label: "aicat.camera.session")
+    @ObservationIgnored private let frameQueue = DispatchQueue(label: "aicat.camera.frames")
     @ObservationIgnored private var analyzer: FrameAnalyzer?
     @ObservationIgnored private var configured = false
+    @ObservationIgnored private var errorObserver: NSObjectProtocol?
 
     static var isSupported: Bool {
         AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) != nil
@@ -36,6 +39,7 @@ final class CameraClassifier {
         }
     }
 
+    /// Starts the session on its own queue; `isRunning` reflects what the session reports afterwards.
     func start() async {
         guard !isRunning else { return }
         guard await requestAccess() else {
@@ -44,14 +48,20 @@ final class CameraClassifier {
         }
         if !configured { configure() }
         let session = self.session
-        await Task.detached(priority: .userInitiated) { session.startRunning() }.value
-        isRunning = true
+        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
+            sessionQueue.async {
+                if !session.isRunning { session.startRunning() }
+                continuation.resume()
+            }
+        }
+        isRunning = session.isRunning
     }
 
     func stop() {
-        guard isRunning else { return }
         let session = self.session
-        Task.detached(priority: .utility) { session.stopRunning() }
+        sessionQueue.async {
+            if session.isRunning { session.stopRunning() }
+        }
         isRunning = false
         guesses = []
     }
@@ -69,11 +79,22 @@ final class CameraClassifier {
             session.addInput(input)
         }
         output.alwaysDiscardsLateVideoFrames = true
-        output.setSampleBufferDelegate(analyzer, queue: queue)
+        output.setSampleBufferDelegate(analyzer, queue: frameQueue)
         if session.canAddOutput(output) {
             session.addOutput(output)
         }
         session.commitConfiguration()
+        errorObserver = NotificationCenter.default.addObserver(forName: AVCaptureSession.runtimeErrorNotification, object: session, queue: .main) { [weak self] _ in
+            Task { @MainActor in
+                self?.isRunning = false
+                self?.guesses = []
+            }
+        }
+    }
+
+    /// Keeps Vision's idea of "up" in sync with the interface orientation (the preview reports it).
+    func setVisionOrientation(_ orientation: CGImagePropertyOrientation) {
+        analyzer?.setOrientation(orientation)
     }
 
     /// Classifies a sample picture drawn from an emoji (used when there is no camera or access was refused).
@@ -98,10 +119,17 @@ final class CameraClassifier {
 final class FrameAnalyzer: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, @unchecked Sendable {
     private let lock = NSLock()
     private var lastAnalysis = Date.distantPast
+    private var orientation: CGImagePropertyOrientation = .right
     private let onGuesses: @Sendable ([CameraClassifier.Guess]) -> Void
 
     init(onGuesses: @escaping @Sendable ([CameraClassifier.Guess]) -> Void) {
         self.onGuesses = onGuesses
+    }
+
+    func setOrientation(_ value: CGImagePropertyOrientation) {
+        lock.lock()
+        orientation = value
+        lock.unlock()
     }
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -109,10 +137,11 @@ final class FrameAnalyzer: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
         let now = Date()
         let due = now.timeIntervalSince(lastAnalysis) > 1
         if due { lastAnalysis = now }
+        let orientation = self.orientation
         lock.unlock()
         guard due, let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         let request = VNClassifyImageRequest()
-        let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right, options: [:])
+        let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: orientation, options: [:])
         try? handler.perform([request])
         onGuesses(Self.top(from: request.results ?? []))
     }

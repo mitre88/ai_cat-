@@ -55,7 +55,12 @@ struct ChallengeHost: View {
             app.say(spec.isMaster ? .masterIntro : .challengeStart)
             setUpController()
         }
-        .onDisappear { app.hush() }
+        .onDisappear {
+            app.hush()
+            trail?.stop()
+            eyes?.stopCamera()
+            voice?.stopListening()
+        }
         .onChange(of: session.progress) { _, _ in
             lastProgressChange = Date()
             idleNudges = 0

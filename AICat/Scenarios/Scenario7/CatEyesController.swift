@@ -248,7 +248,7 @@ final class CatEyesController {
     }
 
     func openEyes() {
-        guard cameraState == .idle else { return }
+        guard !isDone, cameraState == .idle || cameraState == .samples else { return }
         guard CameraClassifier.isSupported else {
             useSamples()
             return
@@ -268,12 +268,14 @@ final class CatEyesController {
     }
 
     func useSamples() {
+        guard !isDone else { return }
+        if cameraState == .running { camera.stop() }
         cameraState = .samples
         classifyCurrentSample()
     }
 
     func nextSample() {
-        guard cameraState == .samples else { return }
+        guard !isDone, cameraState == .samples else { return }
         sampleIndex += 1
         classifyCurrentSample()
     }
