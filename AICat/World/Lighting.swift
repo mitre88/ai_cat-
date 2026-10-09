@@ -1,5 +1,6 @@
 import RealityKit
 import UIKit
+import AICatCore
 
 /// Sun (directional light with a fixed shadow box over the set), a soft sky-tinted fill and a cool rim light
 /// from behind. The sun can rise with the hinge angle.
@@ -9,8 +10,11 @@ final class Lighting {
     private let sun = Entity()
     private let fill = Entity()
     private let rim = Entity()
-    private var elevation: Float = 0.9      // radians above the horizon
-    private var azimuth: Float = 0.7        // radians around the Y axis
+    private var elevation = Float(ProceduralSky.defaultSunElevation)   // radians above the horizon; the sky's sun uses the same
+    private var azimuth = Float(ProceduralSky.defaultSunAzimuth)       // radians around the Y axis
+
+    /// Point lights are in lumens: 40 000 lm at ~3.7 m is ≈ 230 lux, a 5–7 % fill against the 3 200–4 800 lux sun.
+    static let fillLumens: Float = 40_000
 
     init() {
         root.name = "lighting"
@@ -21,7 +25,7 @@ final class Lighting {
         // If shadows vanish on device, fall back to `.automatic(maximumDistance: 10)`.
         sun.components.set(DirectionalLightComponent.Shadow(shadowProjection: .fixed(zNear: 0.5, zFar: 20, orthographicScale: 10), depthBias: 1.2, cullMode: nil))
         fill.name = "fill"
-        fill.components.set(PointLightComponent(color: UIColor(red: 0.85, green: 0.9, blue: 1.0, alpha: 1), intensity: 900, attenuationRadius: 14))
+        fill.components.set(PointLightComponent(color: UIColor(red: 0.85, green: 0.9, blue: 1.0, alpha: 1), intensity: Self.fillLumens, attenuationRadius: 14))
         fill.position = [-2.5, 2.5, 2.5]
         rim.name = "rim"
         rim.components.set(DirectionalLightComponent(color: UIColor(red: 0.75, green: 0.85, blue: 1.0, alpha: 1), intensity: 1100, isRealWorldProxy: false))
@@ -40,7 +44,7 @@ final class Lighting {
     }
 
     func setTheme(skyTint: UIColor) {
-        fill.components.set(PointLightComponent(color: skyTint, intensity: 900, attenuationRadius: 14))
+        fill.components.set(PointLightComponent(color: skyTint, intensity: Self.fillLumens, attenuationRadius: 14))
         rim.components.set(DirectionalLightComponent(color: skyTint, intensity: 1100, isRealWorldProxy: false))
     }
 

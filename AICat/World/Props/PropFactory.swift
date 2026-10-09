@@ -16,6 +16,7 @@ enum PropFactory {
         let disc = ModelEntity(mesh: .generatePlane(width: width, depth: depth ?? width, cornerRadius: 0), materials: [Materials.blobShadow(opacity: opacity)])
         disc.name = "contactShadow"
         disc.position = [0, shadowHeight, 0]
+        disc.components.set(DynamicLightShadowComponent(castsShadow: false))   // a shadow must not cast a shadow
         return disc
     }
 

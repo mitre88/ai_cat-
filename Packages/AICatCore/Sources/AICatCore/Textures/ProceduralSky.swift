@@ -22,18 +22,33 @@ public struct SkyColors: Equatable, Sendable {
 /// position gives the ambient light a direction. Row 0 is the zenith, the middle row the horizon.
 /// Periodic in u (the seam at the back of the sky is invisible).
 public enum ProceduralSky {
-    /// Where the sun sits in the image (u across, v down); its elevation matches the directional light.
-    public static let sunU = 0.68
-    public static let sunV = 0.26
+    /// The directional light's default direction (radians): azimuth around +Y, elevation above the horizon.
+    /// `Lighting` reads these, so the sun in the image and the light that casts the shadows agree.
+    public static let defaultSunAzimuth = 0.7
+    public static let defaultSunElevation = 0.9
+    /// Which turn fraction of the image faces azimuth 0 in RealityKit's equirectangular mapping. Checked
+    /// once on the device: if the sun disc shows on the wrong side of the set relative to the shadows, try
+    /// 0, 0.25 or 0.75, or mirror the azimuth sign in `sunUV`.
+    public static let equirectAzimuthOrigin = 0.5
 
-    public static func render(_ colors: SkyColors, width: Int = 512, height: Int = 256, seed: UInt32 = 5) -> RGBAImage {
+    /// Image position (u across, v down) of a light direction.
+    public static func sunUV(azimuth: Double, elevation: Double) -> (u: Double, v: Double) {
+        var u = (equirectAzimuthOrigin + azimuth / (2 * Double.pi)).truncatingRemainder(dividingBy: 1)
+        if u < 0 { u += 1 }
+        return (u, 0.5 - elevation / Double.pi)
+    }
+
+    public static var defaultSun: (u: Double, v: Double) { sunUV(azimuth: defaultSunAzimuth, elevation: defaultSunElevation) }
+
+    public static func render(_ colors: SkyColors, width: Int = 512, height: Int = 256, sun: (u: Double, v: Double)? = nil, seed: UInt32 = 5) -> RGBAImage {
         let width = max(4, width)
         let height = max(4, height)
+        let sun = sun ?? defaultSun
         let field = NoiseField(size: width, seed: seed)
         var pixels = [UInt8](repeating: 255, count: width * height * 4)
         for y in 0..<height {
             for x in 0..<width {
-                let c = color(colors, u: Double(x) / Double(width), v: Double(y) / Double(height), field: field)
+                let c = color(colors, u: Double(x) / Double(width), v: Double(y) / Double(height), sun: sun, field: field)
                 let index = (y * width + x) * 4
                 pixels[index] = ProceduralTextures.byte(c.r)
                 pixels[index + 1] = ProceduralTextures.byte(c.g)
@@ -45,7 +60,7 @@ public enum ProceduralSky {
     }
 
     /// Final colour at (u, v): gradient, then clouds, then the sun on top (it must stay visible for the light).
-    public static func color(_ colors: SkyColors, u: Double, v: Double, field: NoiseField) -> ProceduralTextures.RGB {
+    public static func color(_ colors: SkyColors, u: Double, v: Double, sun: (u: Double, v: Double)? = nil, field: NoiseField) -> ProceduralTextures.RGB {
         var c = gradient(colors, v)
         let clouds = cloudDensity(u: u, v: v, field: field)
         if clouds > 0 {
@@ -53,10 +68,10 @@ public enum ProceduralSky {
             let shade = 0.84 + 0.16 * detail
             c = mix(c, (shade, shade, shade), clouds * 0.9)
         }
-        let sun = sunlight(u: u, v: v)
-        c.r = min(1, c.r + sun.disc * 1.0 + sun.glow * 0.60)
-        c.g = min(1, c.g + sun.disc * 0.98 + sun.glow * 0.52)
-        c.b = min(1, c.b + sun.disc * 0.90 + sun.glow * 0.36)
+        let light = sunlight(u: u, v: v, sun: sun ?? defaultSun)
+        c.r = min(1, c.r + light.disc * 1.0 + light.glow * 0.60)
+        c.g = min(1, c.g + light.disc * 0.98 + light.glow * 0.52)
+        c.b = min(1, c.b + light.disc * 0.90 + light.glow * 0.36)
         return c
     }
 
@@ -82,17 +97,18 @@ public enum ProceduralSky {
 
     /// Sun disc (hard edge) and glow (Gaussian in angle) at (u, v), from the angle between that direction
     /// and the sun's on the sphere: the disc is round wherever it sits in the equirectangular image.
-    public static func sunlight(u: Double, v: Double) -> (disc: Double, glow: Double) {
-        let angle = angleToSun(u: u, v: v)
+    public static func sunlight(u: Double, v: Double, sun: (u: Double, v: Double)? = nil) -> (disc: Double, glow: Double) {
+        let angle = angleToSun(u: u, v: v, sun: sun ?? defaultSun)
         let disc = 1 - smoothstep(0.075, 0.10, angle)   // ≈ 5° radius: a cartoon sun, big enough to read in the IBL
         let glow = 0.5 * exp(-(angle / 0.30) * (angle / 0.30))
         return (disc, glow)
     }
 
     /// Angle (radians) between the direction of pixel (u, v) and the sun's direction.
-    public static func angleToSun(u: Double, v: Double) -> Double {
+    public static func angleToSun(u: Double, v: Double, sun: (u: Double, v: Double)? = nil) -> Double {
         let a = direction(u: u, v: v)
-        let s = direction(u: sunU, v: sunV)
+        let sun = sun ?? defaultSun
+        let s = direction(u: sun.u, v: sun.v)
         let dot = max(-1, min(1, a.x * s.x + a.y * s.y + a.z * s.z))
         return acos(dot)
     }

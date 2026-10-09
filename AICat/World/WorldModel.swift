@@ -50,11 +50,13 @@ final class WorldModel {
     }
 
     private func runPreparation() async {
-        if let usdz = await USDZCatRig.load() {
-            cat = usdz
-        }
+        async let usdz = USDZCatRig.load()
+        async let skyResource = SkyEnvironment.resource(for: theme)
         await TextureLibrary.shared.prepare(TextureLibrary.kinds(for: theme))
-        sky = await SkyEnvironment.resource(for: theme)
+        if let loaded = await usdz {
+            cat = loaded
+        }
+        sky = await skyResource
     }
 
     /// Call from a RealityView's make closure before `prepare()`; pass the token to `attach` so a view

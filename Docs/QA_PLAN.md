@@ -87,6 +87,11 @@ Guion para la primera sesión con Xcode: cada bloque dice qué tocar y qué debe
 - Modo claro/oscuro del sistema no cambia el mundo 3D (la iluminación es propia).
 - El cielo muestra degradado, sol y nubes (no un degradado plano); las sombras del sol caen en la misma dirección que el sol del cielo. Si no hay sombras del sol en ningún mundo, cambiar la proyección fija por `.automatic(maximumDistance: 10)` en `Lighting.swift`.
 - Las frutas del mundo 1 tienen poros finos y brillo; su color sigue siendo inequívoco (rojo, amarillo, verde, morado).
+- El sol del cielo está del mismo lado que de donde vienen las sombras del sol. Si está en el lado opuesto o girado 90°, cambiar `ProceduralSky.equirectAzimuthOrigin` (0, 0.25, 0.5, 0.75) en el núcleo.
+- Los biseles de las losas de piedra y las juntas de los tablones se ven hundidos/levantados de forma coherente con el sol. Si el relieve parece al revés, poner `ProceduralTextures.greenSign = -1`.
+- El cuerpo y la cola del gato muestran hebras como la cabeza y las patas (cápsulas con UV); las frutas largas muestran poros.
+- La cara en sombra del gato y de los props no es negra: se ve el relleno teñido del cielo.
+- Dentro de un reto, canastas, pedestales, frutas y props del controlador salen texturizados (el controlador se crea tras preparar texturas); no hay cuadrados negros bajo nada.
 
 ## Regresiones a vigilar (corregidas tras las revisiones adversariales)
 

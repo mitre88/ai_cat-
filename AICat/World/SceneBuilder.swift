@@ -44,6 +44,7 @@ enum SceneBuilder {
             }
             let rug = ModelEntity(mesh: .generatePlane(width: 3.2, depth: 2.2, cornerRadius: 0.3), materials: [Materials.carpet(palette.secondary.opacity(0.9), repeats: 3)])
             rug.position = [0, decorHeight, -0.4]
+            rug.components.set(DynamicLightShadowComponent(castsShadow: false))
             root.addChild(rug)
         case .workshop:
             for x in [-2.0, 2.0] {
@@ -64,6 +65,7 @@ enum SceneBuilder {
         case .trail:
             let path = ModelEntity(mesh: .generatePlane(width: 1.3, depth: 6, cornerRadius: 0.4), materials: [Materials.sand(palette.secondary)])
             path.position = [0.6, decorHeight, -2.2]
+            path.components.set(DynamicLightShadowComponent(castsShadow: false))
             root.addChild(path)
             for (x, z, h) in [(-2.6, -2.0, 1.5), (2.8, -3.0, 1.8), (-3.0, -3.2, 1.2), (3.2, -1.4, 1.1)] {
                 let tree = PropFactory.tree(height: Float(h), canopy: palette.primary)

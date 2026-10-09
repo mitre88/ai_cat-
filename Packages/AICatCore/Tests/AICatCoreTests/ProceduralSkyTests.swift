@@ -50,13 +50,21 @@ final class ProceduralSkyTests: XCTestCase {
         XCTAssert(fraction > 0.05 && fraction < 0.6, "cloud cover \(fraction) should be a few clouds, not overcast")
     }
 
+    func testSunPositionFollowsTheLightDirection() {
+        let sun = ProceduralSky.sunUV(azimuth: ProceduralSky.defaultSunAzimuth, elevation: ProceduralSky.defaultSunElevation)
+        XCTAssertEqual(sun.v, 0.5 - 0.9 / Double.pi, accuracy: 1e-12, "elevation 0.9 rad above the horizon row")
+        XCTAssertEqual(sun.u, 0.5 + 0.7 / (2 * Double.pi), accuracy: 1e-12)
+        XCTAssertEqual(ProceduralSky.sunUV(azimuth: 0, elevation: Double.pi / 2).v, 0, accuracy: 1e-12, "zenith")
+        XCTAssertEqual(ProceduralSky.sunUV(azimuth: -4, elevation: 0).u, ProceduralSky.sunUV(azimuth: -4 + 2 * Double.pi, elevation: 0).u, accuracy: 1e-12, "wraps")
+    }
+
     func testSunIsRoundAndSitsWhereTheLightComesFrom() {
-        XCTAssertEqual(ProceduralSky.angleToSun(u: ProceduralSky.sunU, v: ProceduralSky.sunV), 0, accuracy: 1e-9)
-        XCTAssertEqual(ProceduralSky.sunlight(u: ProceduralSky.sunU, v: ProceduralSky.sunV).disc, 1, accuracy: 1e-9)
-        XCTAssertEqual(ProceduralSky.sunlight(u: ProceduralSky.sunU + 0.5, v: 1 - ProceduralSky.sunV).disc, 0, accuracy: 1e-9, "opposite side of the sky")
+        XCTAssertEqual(ProceduralSky.angleToSun(u: ProceduralSky.defaultSun.u, v: ProceduralSky.defaultSun.v), 0, accuracy: 1e-9)
+        XCTAssertEqual(ProceduralSky.sunlight(u: ProceduralSky.defaultSun.u, v: ProceduralSky.defaultSun.v).disc, 1, accuracy: 1e-9)
+        XCTAssertEqual(ProceduralSky.sunlight(u: ProceduralSky.defaultSun.u + 0.5, v: 1 - ProceduralSky.defaultSun.v).disc, 0, accuracy: 1e-9, "opposite side of the sky")
         // Same angular distance left and right of the sun along its row: the disc is symmetric on the sphere.
-        let left = ProceduralSky.angleToSun(u: ProceduralSky.sunU - 0.02, v: ProceduralSky.sunV)
-        let right = ProceduralSky.angleToSun(u: ProceduralSky.sunU + 0.02, v: ProceduralSky.sunV)
+        let left = ProceduralSky.angleToSun(u: ProceduralSky.defaultSun.u - 0.02, v: ProceduralSky.defaultSun.v)
+        let right = ProceduralSky.angleToSun(u: ProceduralSky.defaultSun.u + 0.02, v: ProceduralSky.defaultSun.v)
         XCTAssertEqual(left, right, accuracy: 1e-9)
         let image = ProceduralSky.render(colors, width: 128, height: 64)
         XCTAssertEqual(image, ProceduralSky.render(colors, width: 128, height: 64), "deterministic")
@@ -73,9 +81,9 @@ final class ProceduralSkyTests: XCTestCase {
             }
         }
         XCTAssert(count > 4, "the disc must cover a few pixels at 128 × 64")
-        XCTAssertEqual(sumX / count, ProceduralSky.sunU * 128, accuracy: 1.0)
-        XCTAssertEqual(sumY / count, ProceduralSky.sunV * 64, accuracy: 1.0)
-        let centre = image.pixel(Int(ProceduralSky.sunU * 128), Int(ProceduralSky.sunV * 64))
+        XCTAssertEqual(sumX / count, ProceduralSky.defaultSun.u * 128, accuracy: 1.0)
+        XCTAssertEqual(sumY / count, ProceduralSky.defaultSun.v * 64, accuracy: 1.0)
+        let centre = image.pixel(Int(ProceduralSky.defaultSun.u * 128), Int(ProceduralSky.defaultSun.v * 64))
         XCTAssertEqual(Int(centre.r) + Int(centre.g) + Int(centre.b), 255 * 3, "the sun's centre is pure white")
     }
 }

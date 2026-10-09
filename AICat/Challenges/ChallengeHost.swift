@@ -53,6 +53,12 @@ struct ChallengeHost: View {
         }
         .onAppear {
             app.say(spec.isMaster ? .masterIntro : .challengeStart)
+        }
+        .task {
+            // Textures and sky first, so every prop the controller builds gets its textured material
+            // (materials are chosen when an entity is built and never re-applied).
+            await world.prepare()
+            guard !Task.isCancelled else { return }
             setUpController()
         }
         .onDisappear {
@@ -109,7 +115,8 @@ struct ChallengeHost: View {
         } else if let voice {
             LanguageBoard(controller: voice)
         } else {
-            ComingSoonBoard(spec: spec)
+            ProgressView()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 

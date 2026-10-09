@@ -24,12 +24,33 @@ enum SkyEnvironment {
         return (Double(r), Double(g), Double(b))
     }
 
-    /// nil when the resource cannot be created (the SwiftUI gradient stays as the sky). The pixels are
-    /// computed off the main thread.
+    @MainActor private static var cache: [WorldTheme: EnvironmentResource] = [:]
+    @MainActor private static var loads: [WorldTheme: Task<EnvironmentResource?, Never>] = [:]
+
+    /// The sky of a theme, rendered once per launch (pixels off the main thread, then the environment's
+    /// prefiltering) and shared by every world of that theme; nil when the resource cannot be created
+    /// (the SwiftUI gradient stays as the sky).
     @MainActor
     static func resource(for theme: WorldTheme) async -> EnvironmentResource? {
-        let image = await Task.detached(priority: .userInitiated) { SkyEnvironment.image(for: theme) }.value
-        guard let image else { return nil }
-        return try? await EnvironmentResource(equirectangular: image, withName: "sky-\(theme.rawValue)")
+        if let cached = cache[theme] { return cached }
+        let load: Task<EnvironmentResource?, Never>
+        if let running = loads[theme] {
+            load = running
+        } else {
+            load = Task<EnvironmentResource?, Never> { @MainActor in
+                let image = await Task.detached(priority: .userInitiated) { SkyEnvironment.image(for: theme) }.value
+                guard let image else { return nil }
+                return try? await EnvironmentResource(equirectangular: image, withName: "sky-\(theme.rawValue)")
+            }
+            loads[theme] = load
+        }
+        let resource = await load.value
+        if let resource {
+            cache[theme] = resource
+        }
+        if loads[theme] == load {
+            loads[theme] = nil
+        }
+        return resource
     }
 }

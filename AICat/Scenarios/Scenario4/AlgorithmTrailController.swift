@@ -83,7 +83,7 @@ final class AlgorithmTrailController {
                 }
             }
         }
-        let fish = ModelEntity(mesh: MeshResource(shape: .generateCapsule(height: 0.16, radius: 0.045)), materials: [Materials.glossy(Color.orange)])
+        let fish = ModelEntity(mesh: Meshes.capsule(height: 0.16, radius: 0.045), materials: [Materials.glossy(Color.orange)])
         fish.orientation = simd_quatf(angle: .pi / 2, axis: [0, 0, 1])
         fish.position = worldPosition(of: w.goal) + [0, 0.06, 0]
         fish.components.set(GroundingShadowComponent(castsShadow: true))

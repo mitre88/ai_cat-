@@ -150,7 +150,7 @@ final class RewardMazeController {
                 world.removeProp(id: treatID)
             case .treat:
                 if world.prop(id: treatID) == nil {
-                    let fish = ModelEntity(mesh: MeshResource(shape: .generateCapsule(height: 0.16, radius: 0.045)),
+                    let fish = ModelEntity(mesh: Meshes.capsule(height: 0.16, radius: 0.045),
                                            materials: [Materials.glossy(Color.orange)])
                     fish.orientation = simd_quatf(angle: .pi / 2, axis: [0, 0, 1])
                     fish.position = worldPosition(of: cell) + [0, 0.06, 0]

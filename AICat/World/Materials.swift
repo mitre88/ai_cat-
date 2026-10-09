@@ -130,7 +130,7 @@ enum Materials {
         if let resource = TextureLibrary.shared.texture(.blobShadow) {
             material.blending = .transparent(opacity: .init(scale: opacity, texture: MaterialParameters.Texture(resource)))
         } else {
-            material.blending = .transparent(opacity: .init(floatLiteral: opacity * 0.45))
+            material.blending = .transparent(opacity: .init(floatLiteral: 0))   // never a hard black square
         }
         material.writesDepth = false
         return material

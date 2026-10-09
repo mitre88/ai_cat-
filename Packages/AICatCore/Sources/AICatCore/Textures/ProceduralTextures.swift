@@ -111,8 +111,13 @@ public enum ProceduralTextures {
         }
     }
 
-    /// Tangent-space normal map from a tileable height field: n = normalize(−∂h/∂x·s, −∂h/∂y·s, 1),
-    /// encoded as (n + 1) / 2. Central differences wrap around, so the map tiles like the height field.
+    /// Tangent-space normal map from a tileable height field, encoded as (n + 1) / 2 with
+    /// n = normalize(−∂h/∂u·s, +∂h/∂row·s, 1): RealityKit (like USD) reads normal maps OpenGL-style, +Y
+    /// towards increasing v, and v = 0 is the bottom row of the image, so the green channel takes the
+    /// gradient along increasing row index. Central differences wrap, so the map tiles like the height field.
+    /// If the relief looks inverted on the device (stone bevels lit from the wrong side), flip `greenSign`.
+    static let greenSign: Double = 1
+
     private static func paintNormal(_ pixels: inout [UInt8], _ size: Int, strength: Double, _ height: (Double, Double) -> Double) {
         var heights = [Double](repeating: 0, count: size * size)
         for y in 0..<size {
@@ -128,7 +133,7 @@ public enum ProceduralTextures {
                 let dx = (h(x + 1, y) - h(x - 1, y)) * Double(size) / 2
                 let dy = (h(x, y + 1) - h(x, y - 1)) * Double(size) / 2
                 let nx = -dx * strength / 64
-                let ny = -dy * strength / 64
+                let ny = greenSign * dy * strength / 64
                 let length = (nx * nx + ny * ny + 1).squareRoot()
                 let index = (y * size + x) * 4
                 pixels[index] = byte((nx / length) * 0.5 + 0.5)
@@ -255,12 +260,13 @@ public struct NoiseField: Sendable {
 
     // MARK: Surfaces (colour) — mean brightness near 1, faint hue; the palette tint supplies the colour
 
-    /// Patches of darker and lighter grass, fine blades and a few pale specks.
+    /// Patches of darker and lighter grass, two layers of fine blades (sharpened) and a few pale specks.
     public func grass(_ u: Double, _ v: Double) -> ProceduralTextures.RGB {
         let patches = fbm(u, v, cells: 6, octaves: 4)
-        let blades = noise(u, v, cellsX: 96, cellsY: 14, salt: 7)
+        let blades = smoothstep(0.30, 0.85, noise(u, v, cellsX: 140, cellsY: 20, salt: 7))
+        let blades2 = noise(u, v, cellsX: 90, cellsY: 12, salt: 8)
         let speck = hash(cell(u * Double(size), size), cell(v * Double(size), size), 99) > 0.985
-        let k = 0.70 + 0.40 * patches + 0.20 * (blades - 0.5)
+        let k = 0.70 + 0.34 * patches + 0.22 * (blades - 0.5) + 0.12 * (blades2 - 0.5)
         return mix(scale((0.94, 1.0, 0.86), k), (1.0, 1.0, 0.80), speck ? 0.5 : 0)
     }
 
@@ -276,15 +282,15 @@ public struct NoiseField: Sendable {
         return (1.0 * tone, 0.99 * tone, 0.97 * tone)
     }
 
-    /// Six planks with wavy grain `sin(22u + fBm)` and dark seams.
+    /// Six planks (seams along u) with wavy grain lines running along each plank: `sin(54v + fBm)`.
     public func wood(_ u: Double, _ v: Double) -> ProceduralTextures.RGB {
         let planks = 6
         let fv = fract(v * Double(planks))
         let seam = fv < 0.035 || fv > 0.965
         let plankShift = hash(0, cell(v * Double(planks), planks), 11)
-        let wobble = fbm(u, v, cells: 3, octaves: 2) * 4
-        let grain = 0.5 + 0.5 * sin((u * 22 + wobble + plankShift * 7) * 2 * .pi)
-        let tone = seam ? 0.50 : 0.84 + 0.14 * grain + 0.08 * (fbm(u, v, cells: 48, octaves: 2) - 0.5)
+        let wobble = fbm(u, v, cells: 3, octaves: 2) * 1.6
+        let grain = 0.5 + 0.5 * sin((v * 54 + wobble + plankShift * 7) * 2 * .pi)
+        let tone = seam ? 0.50 : 0.84 + 0.12 * grain + 0.08 * (fbm(u, v, cells: 48, octaves: 2) - 0.5)
         return (1.0 * tone, 0.90 * tone, 0.78 * tone)
     }
 
@@ -334,16 +340,17 @@ public struct NoiseField: Sendable {
     public func bark(_ u: Double, _ v: Double) -> ProceduralTextures.RGB {
         let ridges = noise(u, v, cellsX: 40, cellsY: 5, salt: 41)
         let mottle = fbm(u, v, cells: 10, octaves: 3, salt: 42)
-        let tone = 0.58 + 0.34 * ridges + 0.16 * (mottle - 0.5)
+        let tone = 0.64 + 0.32 * ridges + 0.16 * (mottle - 0.5)
         return (1.0 * tone, 0.93 * tone, 0.85 * tone)
     }
 
-    /// Foliage: overlapping leaf-sized blobs, lit from above (the top of each blob is lighter).
+    /// Foliage: overlapping leaf-sized blobs with crisp edges, a finer layer on top and broad shading.
     public func leaves(_ u: Double, _ v: Double) -> ProceduralTextures.RGB {
-        let blobs = noise(u, v, cellsX: 28, cellsY: 28, salt: 51)
+        let blobs = noise(u, v, cellsX: 36, cellsY: 36, salt: 51)
+        let fine = noise(u, v, cellsX: 72, cellsY: 72, salt: 53)
         let shade = fbm(u, v, cells: 5, octaves: 3, salt: 52)
-        let edge = smoothstep(0.35, 0.75, blobs)
-        let tone = 0.62 + 0.36 * edge + 0.16 * (shade - 0.5)
+        let edge = smoothstep(0.40, 0.62, 0.7 * blobs + 0.3 * fine)
+        let tone = 0.66 + 0.32 * edge + 0.16 * (shade - 0.5)
         return mix((0.95 * tone, 1.0 * tone, 0.90 * tone), (1.0, 1.0, 0.82), edge > 0.95 ? 0.35 : 0)
     }
 
@@ -354,15 +361,16 @@ public struct NoiseField: Sendable {
         let across = 0.5 + 0.5 * sin(v * Double(strands) * 2 * .pi)
         let parity = (cell(u * Double(strands), strands) + cell(v * Double(strands), strands)) % 2
         let weave = parity == 0 ? along : across
-        let tone = 0.62 + 0.36 * weave + 0.08 * (fbm(u, v, cells: 12, octaves: 2, salt: 61) - 0.5)
+        let tone = 0.66 + 0.32 * weave + 0.08 * (fbm(u, v, cells: 12, octaves: 2, salt: 61) - 0.5)
         return (1.0 * tone, 0.96 * tone, 0.90 * tone)
     }
 
-    /// Fruit peel: small pores (dimples) over a faint mottle, glossy in the material.
+    /// Fruit peel: round pale spots (the tops of the peel's bumps) over a faint mottle, glossy in the material.
     public func fruit(_ u: Double, _ v: Double) -> ProceduralTextures.RGB {
-        let pores = noise(u, v, cellsX: 40, cellsY: 40, salt: 71)
-        let mottle = fbm(u, v, cells: 6, octaves: 2, salt: 72)
-        let tone = 0.84 + 0.16 * smoothstep(0.30, 0.80, pores) + 0.06 * (mottle - 0.5)
+        let pores = noise(u, v, cellsX: 18, cellsY: 18, salt: 71)
+        let spots = smoothstep(0.58, 0.80, pores)
+        let mottle = fbm(u, v, cells: 5, octaves: 2, salt: 72)
+        let tone = 0.86 + 0.12 * spots + 0.08 * (mottle - 0.5)
         return (1.0 * tone, 0.98 * tone, 0.95 * tone)
     }
 
@@ -377,7 +385,7 @@ public struct NoiseField: Sendable {
     // MARK: Heights (for normal maps)
 
     public func grassHeight(_ u: Double, _ v: Double) -> Double {
-        0.6 * fbm(u, v, cells: 20, octaves: 3, salt: 31) + 0.4 * noise(u, v, cellsX: 96, cellsY: 14, salt: 7)
+        0.6 * fbm(u, v, cells: 20, octaves: 3, salt: 31) + 0.4 * noise(u, v, cellsX: 140, cellsY: 20, salt: 7)
     }
 
     public func stoneHeight(_ u: Double, _ v: Double) -> Double {
@@ -394,7 +402,7 @@ public struct NoiseField: Sendable {
         let fv = fract(v * planks)
         let seam = min(fv, 1 - fv)
         let plankBevel = clamp01(seam / 0.05)
-        let grain = 0.5 + 0.5 * sin((u * 22 + fbm(u, v, cells: 3, octaves: 2) * 4) * 2 * .pi)
+        let grain = 0.5 + 0.5 * sin((v * 54 + fbm(u, v, cells: 3, octaves: 2) * 1.6) * 2 * .pi)
         return 0.8 * plankBevel + 0.2 * grain
     }
 
@@ -403,7 +411,7 @@ public struct NoiseField: Sendable {
     }
 
     public func fruitHeight(_ u: Double, _ v: Double) -> Double {
-        0.5 + 0.5 * smoothstep(0.30, 0.80, noise(u, v, cellsX: 40, cellsY: 40, salt: 71))
+        0.5 + 0.5 * smoothstep(0.58, 0.80, noise(u, v, cellsX: 18, cellsY: 18, salt: 71))
     }
 
     public func barkHeight(_ u: Double, _ v: Double) -> Double {

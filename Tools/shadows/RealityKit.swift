@@ -88,10 +88,32 @@ public enum CTTextAlignment { case left, center, right }
 public enum CTLineBreakMode { case byWordWrapping, byCharWrapping, byClipping }
 
 @MainActor
+public enum MeshBuffers {
+    public struct Positions { public init(_ values: [SIMD3<Float>]) {} }
+    public struct Normals { public init(_ values: [SIMD3<Float>]) {} }
+    public struct TextureCoordinates { public init(_ values: [SIMD2<Float>]) {} }
+}
+
+public struct MeshDescriptor {
+    public enum Primitives { case triangles([UInt32]) }
+    public var name: String
+    public var positions = MeshBuffers.Positions([])
+    public var normals: MeshBuffers.Normals?
+    public var textureCoordinates: MeshBuffers.TextureCoordinates?
+    public var primitives: Primitives?
+    public init(name: String) { self.name = name }
+}
+
+public struct DynamicLightShadowComponent: Component {
+    public var castsShadow: Bool
+    public init(castsShadow: Bool) { self.castsShadow = castsShadow }
+}
+
 public class MeshResource {
     public typealias Font = UIFont
     public init() {}
     public convenience init(shape: ShapeResource) { self.init() }
+    public static func generate(from descriptors: [MeshDescriptor]) throws -> MeshResource { MeshResource() }
     public var bounds: BoundingBox { BoundingBox(min: .zero, max: .one) }
     public static func generateBox(size: Float, cornerRadius: Float = 0) -> MeshResource { MeshResource() }
     public static func generateBox(size: SIMD3<Float>, cornerRadius: Float = 0) -> MeshResource { MeshResource() }

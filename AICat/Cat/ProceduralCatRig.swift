@@ -56,6 +56,7 @@ final class ProceduralCatRig: CatRig {
         }
         root.addChild(accessories)
         shadowDisc.name = "contactShadow"
+        shadowDisc.components.set(DynamicLightShadowComponent(castsShadow: false))
         root.addChild(shadowDisc)
         for model in [body, head, earL, earR] + legs + tailSegments {
             model.components.set(GroundingShadowComponent(castsShadow: true))
@@ -79,7 +80,7 @@ final class ProceduralCatRig: CatRig {
         let tailLength = Float(m.tailLength)
         let tailRadius = Float(m.tailRadius)
 
-        body.model = ModelComponent(mesh: MeshResource(shape: .generateCapsule(height: bodyLength, radius: bodyRadius)), materials: [Materials.fur])
+        body.model = ModelComponent(mesh: Meshes.capsule(height: bodyLength, radius: bodyRadius), materials: [Materials.fur])
         body.position = [0, Float(m.bodyCenterHeight), 0]
         body.orientation = simd_quatf(angle: .pi / 2, axis: [1, 0, 0])   // capsule axis along Z
 
@@ -123,7 +124,7 @@ final class ProceduralCatRig: CatRig {
 
         tailPivot.position = [0, Float(m.bodyCenterHeight) + bodyRadius * 0.35, -bodyLength * 0.48]
         let segmentLength = tailLength / Float(tailSegments.count)
-        let segmentMesh = MeshResource(shape: .generateCapsule(height: segmentLength * 1.15, radius: tailRadius))
+        let segmentMesh = Meshes.capsule(height: segmentLength * 1.15, radius: tailRadius)
         for (index, segment) in tailSegments.enumerated() {
             segment.model = ModelComponent(mesh: segmentMesh, materials: [Materials.fur])
             // each segment hangs off the previous one, curling upwards
