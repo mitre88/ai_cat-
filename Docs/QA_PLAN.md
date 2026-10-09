@@ -4,6 +4,8 @@ Guion para la primera sesión con Xcode: cada bloque dice qué tocar y qué debe
 
 ## 0. Arranque
 
+> Estado: la app compila para simulador en GitHub Actions con Xcode 26.6 (`AICAT_DUO` off). En la Mac, `Tools/xcode_smoke.sh --no-duo` debería pasar a la primera; `Tools/xcode_smoke.sh` (Duo on) requiere Xcode 27.1 y es la única parte sin compilar.
+
 - `Tools/xcode_smoke.sh` (Xcode 27.1) o `Tools/xcode_smoke.sh --no-duo` (Xcode 26): pruebas del paquete en verde y build del simulador sin errores.
 - Primer arranque: onboarding pide solo el nombre del gato (nunca el del niño) y el idioma. AI CAT saluda en voz alta.
 - Zona de padres: mantener la pata 2 s + suma correcta → ajustes. Cambiar banda de edad, idioma, voz, modo creativo y "reducir efectos" se reflejan al instante.

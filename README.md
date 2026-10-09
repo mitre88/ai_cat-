@@ -6,7 +6,7 @@ physically (continuous morphology from kitten to adult cat) and in knowledge. Bi
 100 % on device, designed first for **iPhone Duo** (outer 5.4" display, inner 7.6" display, hinge postures)
 and runs on any iPhone with iOS 26+.
 
-Status: **all 10 scenarios playable** (40 challenges), core package green on GitHub Actions with Apple's toolchain (macOS `swift test`, 108 tests) and on Linux, procedural textures and normal maps on grounds, props and fur (the texture math is unit-tested in the core package), contact shadows under the kitten and under every prop, rim light. Worlds 7 and 8 use the camera and the microphone, behind the parental gate, with sample pictures and sentence chips as fallbacks. Design document: `Docs/GDD.md`.
+Status: **all 10 scenarios playable** (40 challenges). **The whole app builds for the iOS simulator on GitHub Actions with Xcode 26.6 (iOS 26.5 SDK, `AICAT_DUO` off)**, the core package passes its 108 tests on macOS and Linux, and every file is also type-checked on Linux against shadow frameworks. Only the iPhone Duo files (iOS 27.1 SDK) remain unbuilt until Xcode 27.1 is at hand. procedural textures and normal maps on grounds, props and fur (the texture math is unit-tested in the core package), contact shadows under the kitten and under every prop, rim light. Worlds 7 and 8 use the camera and the microphone, behind the parental gate, with sample pictures and sentence chips as fallbacks. Design document: `Docs/GDD.md`.
 
 ## Inicio rápido (ES)
 
@@ -79,7 +79,7 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 
 ## First build on a Mac
 
-Everything was verified on Linux (package tests, syntax of every file, whole-app type-check against the shadow frameworks in `Tools/shadows`) and the core package also builds and passes its tests on macOS in CI (`.github/workflows/verify.yml`), so the remaining risk sits in the app target, where Apple's real SDKs may differ from the shadows. Run `Tools/xcode_smoke.sh` (Xcode 27.1) or `Tools/xcode_smoke.sh --no-duo` (Xcode 26) and map any error to this list:
+The app target builds in CI with Xcode 26.6 (`.github/workflows/verify.yml`, job `ios-app`, `AICAT_DUO` off), the core package passes its tests on macOS and Linux, and every file is type-checked on Linux against the shadow frameworks in `Tools/shadows`. What is NOT verified yet: the `AICat/Layout/Duo/*` files (they need the iOS 27.1 SDK) and everything that only shows at run time (rendering, permissions, Foundation Models, camera, microphone). The table below is now mostly about run-time behaviour; compile errors should only appear with Xcode 27.1 and the Duo flag. Run `Tools/xcode_smoke.sh` (Xcode 27.1) or `Tools/xcode_smoke.sh --no-duo` (Xcode 26) and map any error to this list:
 
 | Area | Files | What could differ |
 |---|---|---|

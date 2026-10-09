@@ -31,9 +31,8 @@ jobs:
         run: cd Packages/AICatCore && swift test
 
   ios-app:
-    name: iOS app (simulator build with the newest Xcode on the runner, Duo off)
+    name: iOS app (simulator build, Xcode 26 on the runner, Duo off)
     runs-on: macos-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - name: Pick the newest Xcode on the runner
