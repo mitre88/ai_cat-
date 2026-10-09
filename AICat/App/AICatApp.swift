@@ -2,9 +2,12 @@ import SwiftUI
 
 @main
 struct AICatApp: App {
+    @State private var app = AppModel()
+
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environment(app)
         }
     }
 }

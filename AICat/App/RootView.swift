@@ -1,18 +1,31 @@
 import SwiftUI
+import AICatCore
 
-/// M0 placeholder. Replaced by the real root (onboarding → scenario map → scenarios) in M2.
 struct RootView: View {
+    @Environment(AppModel.self) private var app
+
     var body: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "cat.fill")
-                .font(.system(size: 72))
-                .foregroundStyle(Color.accentColor)
-            Text(L10n.string("app.name"))
-                .font(.largeTitle.bold())
-            Text(L10n.string("app.tagline"))
-                .font(.title3)
-                .foregroundStyle(.secondary)
+        @Bindable var app = app
+        Group {
+            if app.profile.onboardingDone {
+                NavigationStack(path: $app.path) {
+                    ScenarioMapView()
+                        .navigationDestination(for: ScenarioID.self) { id in
+                            ScenarioHostView(scenarioID: id)
+                        }
+                        .navigationDestination(for: ChallengeSpec.self) { spec in
+                            ChallengeHost(spec: spec)
+                        }
+                }
+                .id(app.language)
+            } else {
+                OnboardingView()
+            }
         }
-        .padding()
+        .environment(\.locale, app.language.locale)
+        .sheet(isPresented: $app.isParentZonePresented) {
+            ParentFlowView()
+                .environment(app)
+        }
     }
 }
