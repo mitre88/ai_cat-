@@ -25,3 +25,12 @@ MODDIR=$(find "$BUILD" -name "AICatCore.swiftmodule" -maxdepth 4 | head -1)
   AICat/App/L10n.swift AICat/Intelligence/CatBrain.swift AICat/Intelligence/ScriptedBrain.swift \
   AICat/Intelligence/KidSafeFilter.swift AICat/Intelligence/FoundationModelsBrain.swift AICat/Intelligence/BrainRouter.swift \
   AICat/Persistence/ProgressStore.swift && echo "typecheck ok"
+echo "=== typecheck the whole app against the shadow frameworks (Tools/shadows) ==="
+SHADOWS=${SHADOW_BUILD:-$BUILD/shadows}
+mkdir -p "$SHADOWS"
+for m in simd UIKit SwiftUI RealityKit; do
+  "$TC/swiftc" -emit-module -parse-as-library -module-name $m -emit-module-path "$SHADOWS/$m.swiftmodule" -I "$SHADOWS" "Tools/shadows/$m.swift" || exit 1
+done
+APP_FILES=$(find AICat -name "*.swift" | grep -v "Intelligence/CatVoice.swift" | grep -v "World/SkyEnvironment.swift" | sort)
+"$TC/swiftc" -typecheck -swift-version 5 -D AICAT_DUO -D DEBUG -parse-as-library -I "$SHADOWS" -I "$(dirname "$MODDIR")" -module-name AICatApp \
+  $APP_FILES Tools/shadows/AppStubs.swift && echo "shadow typecheck ok"
