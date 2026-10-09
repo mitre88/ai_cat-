@@ -30,8 +30,8 @@ La banda la elige un adulto en la **zona de padres** (puerta parental: mantener 
 | 6 | Fábrica de Neuronas | Aprendizaje | Redes neuronales, pesos | neuronas de cables ternarios y umbral; dos capas; red sigmoide que se entrena sola con curva de error | **jugable** |
 | 7 | Ojos de AI CAT | Percepción | Visión por computadora | píxeles, bordes, cámara on-device | definido |
 | 8 | Voz de AI CAT | Interacción natural | Lenguaje natural, tokens | hablarle al gato (voz + modelo on-device) | definido |
-| 9 | Balanza Justa | Impacto social | Sesgo, justicia, privacidad | arreglar un dataset sesgado | definido |
-| 10 | Laboratorio Creativo | Interacción natural | IA generativa, proyecto final | crear con el modelo on-device; graduación | definido |
+| 9 | Balanza Justa | Impacto social | Sesgo, justicia, privacidad | grupo faltante, balancear el dataset (balanza 3D), minimización de datos, juzgar casos | **jugable** |
+| 10 | Laboratorio Creativo | Interacción natural | IA generativa, proyecto final | semillas de historia (gramática generativa o modelo on-device), remezcla, diseño de un ayudante, examen de graduación | **jugable** |
 
 Cada mundo tiene 3 retos (tier 1, 2, 3) y un **reto maestro** (tier 3, opcional para avanzar). Todo el texto (títulos, objetivos, conceptos, guion de AI CAT) existe en ES y EN en `Tools/strings_source.py`; la estructura vive como literales Swift en `Packages/AICatCore/Sources/AICatCore/Curriculum.swift`.
 
@@ -88,6 +88,24 @@ Cada mundo tiene 3 retos (tier 1, 2, 3) y un **reto maestro** (tier 3, opcional 
 4. **Maestro ingeniero** — red 4-3-1 con sigmoides sobre la tabla de verdad completa (16 filas); el niño elige la velocidad de aprendizaje 🐢 0.5 / 🐇 3 / 🚀 20, pulsa "Entrenar" (60 épocas) y ve la curva de error; puede pedir "pesos nuevos" (reinicio aleatorio).
 
 **La IA real detrás**: niveles 1–3, neuronas **ternarias** `y = [Σ wᵢxᵢ ≥ k]` con `wᵢ ∈ {−1,0,1}`, `k ∈ 0…n`; la pista pone la primera perilla que difiere de la solución guardada. Nivel 4, **descenso de gradiente** por lotes completos con entropía cruzada: `∂L/∂z_out = o − t`, `∂L/∂z_h = (o − t)·w₂·h·(1 − h)`, pesos iniciales U(−0.8, 0.8) con semilla. Medido en Python (40 semillas): con η = 3 la regla XOR converge en 167 épocas (mediana, máx. 354) y "al menos tres" en ~30; con η = 20 solo 5/40 convergen (rebota: lección de "demasiado rápido"); con η = 0.5 XOR tarda ~1000 épocas (lección de "demasiado lento"). Puntuación: niveles 1–3 `max(0.7, 1 − 0.02·max(0, giros − 2·perillas))` si resuelto, si no `aciertos/2`; nivel 4 `max(0.6, 1 − 0.05·max(0, pulsaciones − 3))`.
+
+### 3.9 Balanza Justa (detalle)
+
+1. **Solo gatos negros** — el dataset se muestra con conteos por pelaje y los aciertos de AI CAT con gatos nuevos (✓/✗); el niño toca el pelaje que falta en los ejemplos.
+2. **Equilibra la balanza** — mover tarjetas de una reserva al dataset hasta que cada pelaje tenga ≥ k ejemplos (k = 2, maestro 3); la balanza 3D se inclina con la brecha.
+3. **Mantenlo privado** — decidir qué datos guarda una app: **solo si el juego lo necesita Y no es privado** (minimización de datos: "tu color favorito" no es privado, pero tampoco necesario).
+4. **Maestro juez** — 2–4 casos reales (un gato naranja "perro", juguetes por género, caras guardadas para avatares, nadie leyó el ensayo…): causa + remedio.
+
+**La IA real detrás**: el simulador de reconocimiento es `rec(g) = min(1, n_g / k)` por grupo y la **brecha de justicia** `max_g rec(g) − min_g rec(g)` (una métrica de igualdad de oportunidades simplificada); la balanza del escenario rota `−0.35·brecha` rad. Las pruebas garantizan que en el nivel 1 falta exactamente un pelaje y que en el nivel 2 la reserva alcanza para todos. Puntuación: nivel 1 `max(0.5, 1 − 0.25·fallos)`; nivel 2 `max(0.7, 1 − 0.05·tarjetas de más)`; niveles 3 y 4, fracción de aciertos.
+
+### 3.10 Laboratorio Creativo (detalle)
+
+1. **Semillas de historia** — elegir quién/dónde/qué entre fichas (nunca texto libre) y "hacer crecer" la historia; hay que producir 2–3 historias con semillas distintas.
+2. **Remezcla** — tocar una oración la cambia por otra variante; cambiar ≥ 2–3 y elegir título.
+3. **Diseña un ayudante** — objetivo, datos y reglas para "mi IA ayudante" contra una lista de 6 comprobaciones (objetivo claro, datos que ayudan, sin datos privados, regla de privacidad, una persona revisa, sin reglas riesgosas).
+4. **Graduación** — examen de 3–6 preguntas sobre los diez mundos + diploma con el nombre del gato y las estadísticas.
+
+**La IA real detrás**: la historia sale de un **modelo generativo mínimo**: una gramática de 3 oraciones × 3 variantes con huecos (%1 personaje, %2 lugar, %3 objeto) muestreada con semilla (`SeededGenerator`): mismas semillas ⇒ misma historia; cambiar una palabra cambia la historia. Con **modo creativo** (opt-in parental) y Apple Intelligence disponible, el modelo on-device escribe las tres oraciones (`@Generable ModelStory`, 8 s de tope, cada oración por `KidSafeFilter`; si algo falla, queda la historia de patrones) y la tarjeta dice quién la escribió. Las plantillas evitan concordancias de género en español (sin pronombres ni adjetivos tras los huecos).
 
 ## 4. Modelos matemáticos
 
@@ -153,6 +171,6 @@ AICatCore (SwiftPM, solo Foundation) → currículo, crecimiento, dificultad, pu
 
 - M8 ✅: escenarios 3 (tablero 2D: umbral, recta, centroides, atípicos) y 4 (bloques de instrucciones ejecutados por el gato), reutilizando `ChallengeSession` y `AdaptiveStage`.
 - M9 ✅: 5 (Q-learning tabular visible, el niño diseña el laberinto) y 6 (neuronas ternarias por perillas, dos capas, red sigmoide que se entrena sola).
-- M10: 7 (Vision on-device) y 8 (reconocimiento de voz on-device + Foundation Models), con permisos localizados y puerta parental.
-- M11: 9 y 10, exportación de "mi mini IA", graduación.
+- M10 ✅: 9 (sesgo, balance, privacidad, juez) y 10 (historias generativas, remezcla, ayudante, graduación). Se adelantó a 7 y 8 porque se verifica por completo sin dispositivo.
+- M11: 7 (Vision on-device) y 8 (reconocimiento de voz on-device + Foundation Models), con permisos localizados y puerta parental.
 - Arte: sustituir el gato y los mundos procedurales por USDZ (`Docs/ART_PIPELINE.md`).

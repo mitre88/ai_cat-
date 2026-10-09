@@ -19,6 +19,12 @@ struct CreativeCatLine {
     @Guide(description: "One of: happy, curious, proud, thinking, sleepy, excited")
     var emotion: String
 }
+
+@Generable
+struct ModelStory {
+    @Guide(description: "Exactly three short, kind, playful sentences for a child, in the requested language, each about the given character, place and object. No real people, nothing scary, no links, no numbers.")
+    var sentences: [String]
+}
 #endif
 
 /// Picks AI CAT's line with Apple Intelligence (Foundation Models), entirely on device.
@@ -77,7 +83,30 @@ final class FoundationModelsBrain: CatBrain {
         #endif
     }
 
+    func story(from seeds: [String], context: BrainContext) async -> [String]? {
+        #if canImport(FoundationModels)
+        guard context.creativeMode, Self.isAvailable, Self.supports(context.language.locale), seeds.count == 3 else { return nil }
+        do {
+            let session = makeSession(for: context)
+            let response = try await session.respond(to: storyPrompt(seeds: seeds, context: context), generating: ModelStory.self)
+            let maxWords = context.ageBand.maxSentenceWords + 6
+            let cleaned = response.content.sentences.prefix(3).compactMap { KidSafeFilter.sanitize($0, maxWords: maxWords) }
+            return cleaned.count == 3 ? Array(cleaned) : nil
+        } catch {
+            return nil
+        }
+        #else
+        return nil
+        #endif
+    }
+
     #if canImport(FoundationModels)
+    private func storyPrompt(seeds: [String], context: BrainContext) -> String {
+        let languageName = context.language == .spanish ? "Spanish" : "English"
+        return "Write a tiny story in \(languageName) for a child, in exactly three short sentences (at most \(context.ageBand.maxSentenceWords + 4) words each). " +
+            "Character: \(seeds[0]). Place: \(seeds[1]). Object: \(seeds[2]). Kind and playful, with a happy ending."
+    }
+
     private func makeSession(for context: BrainContext) -> LanguageModelSession {
         let key = "\(context.language.rawValue)-\(context.ageBand.rawValue)-\(context.catName)"
         if let session, sessionKey == key { return session }

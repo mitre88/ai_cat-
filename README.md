@@ -6,7 +6,7 @@ physically (continuous morphology from kitten to adult cat) and in knowledge. Bi
 100 % on device, designed first for **iPhone Duo** (outer 5.4" display, inner 7.6" display, hinge postures)
 and runs on any iPhone with iOS 26+.
 
-Status: foundation + 10 scenarios defined + **scenarios 1 to 6 playable**. Design document: `Docs/GDD.md`.
+Status: foundation + 10 scenarios defined + **scenarios 1 to 6, 9 and 10 playable** (7 and 8 need the camera and microphone and come last). Design document: `Docs/GDD.md`.
 
 ## Inicio rápido (ES)
 
@@ -52,7 +52,7 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 | `AICat/World` | RealityKit stage: materials, lighting with shadows, camera rig, sets, props, sky/IBL, drag interaction, celebration. |
 | `AICat/Cat` | `CatRig` protocol, procedural kitten, animator, USDZ slot. |
 | `AICat/Challenges` | Challenge host and session, sorting and labeling boards, result overlay. |
-| `AICat/Scenarios` | World map, scenario host, controllers for scenarios 1 to 6. |
+| `AICat/Scenarios` | World map, scenario host, controllers for scenarios 1 to 6, 9 and 10. |
 | `AICat/Intelligence` | Scripted brain, Foundation Models brain, router with timeout, kid-safe filter, text-to-speech. |
 | `AICat/Parent` | Parental gate and parent zone. |
 | `Config/Info.plist` | Explicit Info.plist (kept outside the synchronized folder on purpose). |
@@ -68,6 +68,8 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 - **Algorithm Trail**: a tiny interpreter runs the child's block program (forward, turn, jump, *if puddle ahead*, *repeat n*) step by step on the 3-D cat, with a step limit that turns an endless loop into a visible "that program never ends". Fewer runs to reach the fish mean a higher score.
 - **Reward Maze**: real tabular Q-learning (α 0.5, γ 0.9, ε-greedy). The child designs the maze (treat, puddles), AI CAT explores in batches, every tile is painted with V(s) = max Q(s, a) so values visibly spread back from the treat, and the greedy policy is replayed on stage. The master level asks for a long *safe* path and lets the child pick how curious (ε) the kitten is. Changing the map makes AI CAT forget, because the old values are no longer true.
 - **Neuron Factory**: neurons with wires in {−1, 0, +1} and a "needs at least k" threshold that the child sets by hand; level 3 samples examples that provably need a hidden layer (brute-force separability check). The master level trains a 4-3-1 sigmoid network by full-batch gradient descent on cross-entropy; the child picks the learning rate (slow / medium / turbo, and turbo really does bounce) and watches the error curve.
+- **Fair Scale**: a data set with a missing coat and the kitten's failed guesses on exactly that coat; a balance game where recognition per group grows with its examples and the scale on stage tilts with the fairness gap; a data-minimisation sort (keep only what the game needs *and* is not private); and real-world cases to judge (cause + fix).
+- **Creative Lab**: a tiny generative model (a seeded three-sentence grammar: same seeds, same story; change a word, change the story) that the child remixes; with creative mode on and Apple Intelligence available, the on-device model writes the sentences instead, every one filtered by `KidSafeFilter`, and the card says which one wrote it. The child then designs a helper AI (goal, data, rules) against a six-point checklist, and graduates with a quiz over the ten worlds.
 
 ## QA checklist
 

@@ -425,6 +425,7 @@ public struct ProgressView<Label: View>: View {
     public var body: Never { fatalError() }
 }
 extension ProgressView where Label == EmptyView {
+    public init() {}
     public init<V: BinaryFloatingPoint>(value: V?, total: V = 1.0) {}
 }
 public struct Form<Content: View>: View {
