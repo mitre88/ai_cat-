@@ -124,7 +124,7 @@ public struct PixelChallenge: Sendable {
         return false
     }
 
-    public var scoreAccuracy: Double { isSolved ? max(0.5, 1 - 0.15 * Double(wrongPicks)) : 0 }
+    public var scoreAccuracy: Double { isSolved ? max(0.6, 1 - 0.15 * Double(wrongPicks)) : 0 }
 }
 
 // MARK: - Level 2: edges

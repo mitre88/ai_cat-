@@ -104,7 +104,7 @@ public struct TokenChallenge: Sendable {
         return .accepted
     }
 
-    public var scoreAccuracy: Double { isComplete ? max(0.5, 1 - 0.1 * Double(mistakes)) : 0 }
+    public var scoreAccuracy: Double { isComplete ? max(0.6, 1 - 0.1 * Double(mistakes)) : 0 }
 }
 
 // MARK: - Level 2: next word

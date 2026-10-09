@@ -23,7 +23,7 @@ echo "=== typecheck Foundation-only app files ==="
 MODDIR=$(find "$BUILD" -name "AICatCore.swiftmodule" -maxdepth 4 | head -1)
 "$TC/swiftc" -typecheck -swift-version 5 -D AICAT_DUO -I "$(dirname "$MODDIR")" -module-name AICatApp \
   AICat/App/L10n.swift AICat/Intelligence/CatBrain.swift AICat/Intelligence/ScriptedBrain.swift \
-  AICat/Intelligence/KidSafeFilter.swift AICat/Intelligence/FoundationModelsBrain.swift AICat/Intelligence/BrainRouter.swift \
+  AICat/Intelligence/FoundationModelsBrain.swift AICat/Intelligence/BrainRouter.swift \
   AICat/Persistence/ProgressStore.swift && echo "typecheck ok"
 echo "=== typecheck the whole app against the shadow frameworks (Tools/shadows) ==="
 SHADOWS=${SHADOW_BUILD:-$BUILD/shadows}

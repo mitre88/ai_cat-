@@ -144,15 +144,66 @@ public struct NeuronChallenge: Sendable {
         turns += 1
     }
 
-    /// Sets the first dial that disagrees with AI CAT's own solution. Nil when nothing differs.
+    /// A hint is one dial change. Preferred: the single change that fixes the most examples without moving
+    /// further from AI CAT's own solution (so a child's different-but-valid design is respected); otherwise the
+    /// first dial that differs from the closest equivalent solution. Each hint strictly improves the
+    /// (examples right, distance to solution) pair, so hints always converge. Nil when already solved.
     @discardableResult
     public mutating func hint() -> NeuronDial? {
         hintsUsed += 1
-        for dial in network.allDials where network.value(of: dial) != solution.value(of: dial) {
-            network.set(dial, to: solution.value(of: dial))
+        guard !isSolved else { return nil }
+        let target = closestSolution()
+        let baseline = correctCount
+        let baseDistance = Self.distance(network, target)
+        var best: (dial: NeuronDial, value: Int, correct: Int, distance: Int)?
+        for dial in network.allDials {
+            let current = network.value(of: dial)
+            for candidate in candidateValues(for: dial) where candidate != current {
+                var trial = network
+                trial.set(dial, to: candidate)
+                let score = examples.filter { trial.predict($0.inputs) == $0.target }.count
+                let distance = Self.distance(trial, target)
+                guard score > baseline, distance <= baseDistance else { continue }
+                if let current = best {
+                    if score > current.correct || (score == current.correct && distance < current.distance) {
+                        best = (dial, candidate, score, distance)
+                    }
+                } else {
+                    best = (dial, candidate, score, distance)
+                }
+            }
+        }
+        if let best {
+            network.set(best.dial, to: best.value)
+            return best.dial
+        }
+        for dial in network.allDials where network.value(of: dial) != target.value(of: dial) {
+            network.set(dial, to: target.value(of: dial))
             return dial
         }
         return nil
+    }
+
+    /// Dials that differ between two networks of the same shape.
+    static func distance(_ a: TernaryNetwork, _ b: TernaryNetwork) -> Int {
+        a.allDials.filter { a.value(of: $0) != b.value(of: $0) }.count
+    }
+
+    /// With two hidden neurons the solution with them swapped is the same function: hint towards the closer one.
+    private func closestSolution() -> TernaryNetwork {
+        guard solution.hidden.count == 2, solution.output.weights.count == 2 else { return solution }
+        var swapped = solution
+        swapped.hidden = [solution.hidden[1], solution.hidden[0]]
+        swapped.output.weights = [solution.output.weights[1], solution.output.weights[0]]
+        return Self.distance(network, swapped) < Self.distance(network, solution) ? swapped : solution
+    }
+
+    private func candidateValues(for dial: NeuronDial) -> [Int] {
+        switch dial {
+        case .hiddenWeight, .outputWeight: return [-1, 0, 1]
+        case .hiddenThreshold(let n): return Array(0...network.hidden[n].weights.count)
+        case .outputThreshold: return Array(0...network.output.weights.count)
+        }
     }
 
     /// Solved = 1 minus 0.02 per turn beyond two per dial (never below 0.7); unsolved = half the fraction right.
@@ -334,10 +385,33 @@ public enum NeuronContent {
                            output: TernaryNeuron(weights: out.0, threshold: out.1))
         }
         if layers >= 2 {
+            switch inputs {
+            case ...2:
+                return [
+                    double(([1, 1], 2), ([1, 1], 1), ([-1, 1], 1)),    // XOR
+                    double(([1, 1], 2), ([1, 1], 1), ([1, -1], 0)),    // same (XNOR)
+                ]
+            case 3:
+                return [
+                    double(([1, 1, 0], 2), ([1, 1, 0], 1), ([-1, 1], 1)),   // lamp 1 XOR lamp 2
+                    double(([1, 0, 1], 2), ([1, 0, 1], 1), ([-1, 1], 1)),   // lamp 1 XOR lamp 3
+                    double(([1, 1, 1], 1), ([1, 1, 1], 2), ([1, -1], 1)),   // exactly one lamp on
+                ]
+            default:
+                return [
+                    double(([1, 1, 0, 0], 2), ([1, 1, 0, 0], 1), ([-1, 1], 1)),   // lamp 1 XOR lamp 2
+                    double(([1, 1, 1, 1], 1), ([1, 1, 1, 1], 2), ([1, -1], 1)),   // exactly one lamp on
+                    double(([0, 0, 1, 1], 2), ([0, 0, 1, 1], 1), ([-1, 1], 1)),   // lamp 3 XOR lamp 4
+                ]
+            }
+        }
+        if inputs >= 4 {
             return [
-                double(([1, 1, 0], 2), ([1, 1, 0], 1), ([-1, 1], 1)),   // lamp 1 XOR lamp 2
-                double(([1, 0, 1], 2), ([1, 0, 1], 1), ([-1, 1], 1)),   // lamp 1 XOR lamp 3
-                double(([1, 1, 1], 1), ([1, 1, 1], 2), ([1, -1], 1)),   // exactly one lamp on
+                single([1, 1, 1, 1], 2),    // at least two
+                single([1, 0, 0, 1], 2),    // first and last
+                single([0, 1, 1, 0], 1),    // either middle lamp
+                single([1, 0, 0, -1], 1),   // first on, last off
+                single([1, 1, 1, 1], 4),    // all four
             ]
         }
         if inputs <= 2 {
@@ -381,11 +455,12 @@ public enum NeuronContent {
     /// params: "inputs" (2…4), "layers" (1|2). Rows are a seeded sample of the truth table with both answers
     /// present; for two layers the sample is guaranteed to need the hidden layer.
     public static func make(spec: ChallengeSpec, difficulty: AdaptiveDifficulty, seed: UInt64) -> NeuronChallenge {
-        let inputs = max(2, min(4, spec.param("inputs", default: 2)))
+        let requestedInputs = max(2, min(4, spec.param("inputs", default: 2)))
         let layers = max(1, min(2, spec.param("layers", default: 1)))
         var rng = SeededGenerator(seed: seed)
-        let options = targets(inputs: inputs, layers: layers)
+        let options = targets(inputs: requestedInputs, layers: layers)
         let solution = options[Int(rng.next() % UInt64(options.count))]
+        let inputs = solution.inputCount   // the dials always match the stored solution
         let labelled = allRows(inputs: inputs).map { NeuronExample(inputs: $0, target: solution.predict($0)) }
         var count = difficulty.itemCount(in: spec.itemRange)
         if layers == 2 { count = max(count, 4) }

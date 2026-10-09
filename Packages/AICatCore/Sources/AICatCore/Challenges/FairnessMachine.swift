@@ -54,10 +54,10 @@ public struct BiasHuntChallenge: Sendable {
         return coat == missingCoat
     }
 
-    /// Right first time = 1; each wrong pick costs 0.25, never below 0.5.
+    /// Right first time = 1; each wrong pick costs 0.25, never below 0.6 (the pass mark).
     public var scoreAccuracy: Double {
         guard isSolved else { return 0 }
-        return max(0.5, 1 - 0.25 * Double(picks.count - 1))
+        return max(0.6, 1 - 0.25 * Double(picks.count - 1))
     }
 }
 

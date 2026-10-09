@@ -24,6 +24,7 @@ final class AlgorithmTrailController {
     @ObservationIgnored private let app: AppModel
     @ObservationIgnored private var finishCountdown: Float?
     @ObservationIgnored private var started = false
+    @ObservationIgnored private var runTask: Task<Void, Never>?
 
     static let cellSize: Float = 0.32
 
@@ -148,6 +149,12 @@ final class AlgorithmTrailController {
 
     func requestHint() {
         guard canRequestHint else { return }
+        // A program that already reaches the fish does not need a hint: just run it (no hint spent).
+        if TrailInterpreter.run(challenge.program, in: challenge.world).outcome == .goal {
+            hintedBlock = nil
+            app.say(.encouragement)
+            return
+        }
         hintsLeft -= 1
         session.noteHint()
         if let block = challenge.hint() {
@@ -158,6 +165,17 @@ final class AlgorithmTrailController {
             hintedBlock = challenge.hint()
             app.say(.aiNeedsMore)
         }
+        if case .repeatForward(let count)? = hintedBlock {
+            repeatCount = count
+        }
+    }
+
+    /// Stops a run in progress (the view is going away).
+    func stop() {
+        runTask?.cancel()
+        runTask = nil
+        world.cat.stopWalking()
+        isRunning = false
     }
 
     // MARK: Running
@@ -170,15 +188,18 @@ final class AlgorithmTrailController {
         let result = challenge.run()
         lastOutcome = nil
         app.say(.challengeStart)
-        Task { [weak self] in
+        runTask?.cancel()
+        runTask = Task { [weak self] in
             guard let self else { return }
             for event in result.events {
+                guard !Task.isCancelled else { return }
                 await self.animate(event)
             }
+            guard !Task.isCancelled else { return }
             self.lastOutcome = result.outcome
-            self.isRunning = false
             switch result.outcome {
             case .goal:
+                self.isRunning = false
                 self.isDone = true
                 self.session.progress = 1
                 self.world.celebrate()
@@ -187,11 +208,15 @@ final class AlgorithmTrailController {
             case .splash:
                 self.app.say(.wrong)
                 try? await Task.sleep(nanoseconds: 900_000_000)
+                guard !Task.isCancelled else { return }
                 self.resetCat()
+                self.isRunning = false
             case .lost, .tooLong:
                 self.app.say(.encouragement)
                 try? await Task.sleep(nanoseconds: 700_000_000)
+                guard !Task.isCancelled else { return }
                 self.resetCat()
+                self.isRunning = false
             }
         }
     }

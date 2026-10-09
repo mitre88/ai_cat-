@@ -74,13 +74,41 @@ final class NeuronMachineTests: XCTestCase {
             hints += 1
         }
         XCTAssertTrue(challenge.isSolved, "hints converge to the solution")
-        XCTAssertLessThanOrEqual(hints, dials)
+        XCTAssertLessThanOrEqual(hints, dials + challenge.examples.count)
         XCTAssertEqual(challenge.scoreAccuracy, 1, accuracy: 1e-12, "few turns → full score")
         var twiddler = NeuronContent.make(spec: specs[0], difficulty: difficulty, seed: 3)
         for _ in 0..<30 { twiddler.cycleWeight(.outputWeight(index: 1)) }
         XCTAssertLessThan(twiddler.scoreAccuracy, 0.5, "unsolved scores half the fraction right")
         while !twiddler.isSolved { twiddler.hint() }
         XCTAssertEqual(twiddler.scoreAccuracy, max(0.7, 1 - 0.02 * Double(max(0, twiddler.turns - 2 * dials))), accuracy: 1e-12)
+    }
+
+    func testEveryInputCountHasConsistentTargets() {
+        for layers in 1...2 {
+            for inputs in 2...4 {
+                for target in NeuronContent.targets(inputs: inputs, layers: layers) {
+                    XCTAssertEqual(target.inputCount, inputs)
+                    XCTAssertTrue(target.hidden.allSatisfy { $0.weights.count == inputs })
+                    XCTAssertEqual(target.output.weights.count, layers == 2 ? target.hidden.count : inputs)
+                    let rows = NeuronContent.allRows(inputs: inputs).map { NeuronExample(inputs: $0, target: target.predict($0)) }
+                    XCTAssertTrue(rows.contains { $0.target == 1 } && rows.contains { $0.target == 0 }, "targets are not constant")
+                    if layers == 2 {
+                        XCTAssertFalse(NeuronContent.isLinearlySeparable(rows, inputs: inputs), "two-layer targets need the hidden layer")
+                    }
+                }
+                let spec = ChallengeSpec(id: "test.\(inputs).\(layers)", scenario: .neuronFactory, index: 1, tier: 1, isMaster: false, mechanic: .neuronDials,
+                                         titleKey: TextKey("x"), goalKey: TextKey("x"), conceptKey: TextKey("x"), itemRange: 3...5,
+                                         params: ["inputs": inputs, "layers": layers])
+                var challenge = NeuronContent.make(spec: spec, difficulty: difficulty, seed: 7)
+                XCTAssertEqual(challenge.network.inputCount, inputs)
+                var guardCount = 0
+                while !challenge.isSolved, guardCount < 40 {
+                    XCTAssertNotNil(challenge.hint(), "hints never crash and always make progress")
+                    guardCount += 1
+                }
+                XCTAssertTrue(challenge.isSolved)
+            }
+        }
     }
 
     func testGradientStepReducesLoss() {

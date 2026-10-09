@@ -546,6 +546,7 @@ extension View {
     public func onAppear(perform action: (() -> Void)? = nil) -> _Modified<Self> { _Modified() }
     public func onDisappear(perform action: (() -> Void)? = nil) -> _Modified<Self> { _Modified() }
     public func onChange<V: Equatable>(of value: V, initial: Bool = false, _ action: @escaping (V, V) -> Void) -> _Modified<Self> { _Modified() }
+    public func scrollDisabled(_ disabled: Bool) -> _Modified<Self> { _Modified() }
     public func task(priority: TaskPriority = .userInitiated, _ action: @escaping @Sendable () async -> Void) -> _Modified<Self> { _Modified() }
     public func task<T: Equatable>(id value: T, priority: TaskPriority = .userInitiated, _ action: @escaping @Sendable () async -> Void) -> _Modified<Self> { _Modified() }
     public func onSubmit(_ action: @escaping () -> Void) -> _Modified<Self> { _Modified() }

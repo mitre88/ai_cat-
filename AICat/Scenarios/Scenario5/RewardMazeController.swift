@@ -347,13 +347,18 @@ final class RewardMazeController {
         placeCat(at: challenge.world.start)
     }
 
-    /// Progress: the start tile warming up (V(start) from −0.5 to +0.3) is the policy getting ready.
+    /// Progress: how close the best known path gets to the treat (0 before exploring, 1 when solved).
     private func updateProgress() {
         guard !challenge.isSolved else {
             session.progress = 1
             return
         }
-        let v = challenge.learner.q.value(at: challenge.world.start)
-        session.progress = max(0, min(0.9, (v + 0.5) / 0.8))
+        guard let batch = challenge.lastBatch, let treat = challenge.world.treat, let last = batch.greedy.path.last else {
+            session.progress = 0
+            return
+        }
+        let total = Double(max(challenge.world.start.manhattan(to: treat), 1))
+        let remaining = Double(last.manhattan(to: treat))
+        session.progress = max(0, min(0.9, 1 - remaining / total))
     }
 }

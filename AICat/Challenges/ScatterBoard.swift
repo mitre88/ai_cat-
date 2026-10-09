@@ -6,6 +6,7 @@ import AICatCore
 struct ScatterBoard: View {
     let controller: ClassifierWorkshopController
     @Environment(AppModel.self) private var app
+    @State private var isDragging = false
 
     var body: some View {
         ScrollView {
@@ -16,7 +17,7 @@ struct ScatterBoard: View {
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                 ScatterMeter(accuracy: controller.accuracy, target: controller.challenge.targetAccuracy)
-                ScatterCanvas(controller: controller)
+                ScatterCanvas(controller: controller, isDragging: $isDragging)
                     .aspectRatio(1, contentMode: .fit)
                     .frame(maxWidth: 440)
                 HStack {
@@ -45,6 +46,7 @@ struct ScatterBoard: View {
             }
             .padding()
         }
+        .scrollDisabled(isDragging)
         .background(Theme.mapBackground)
     }
 
@@ -156,6 +158,7 @@ struct GridLinesShape: Shape {
 
 struct ScatterCanvas: View {
     let controller: ClassifierWorkshopController
+    @Binding var isDragging: Bool
 
     var body: some View {
         GeometryReader { geo in
@@ -231,18 +234,23 @@ struct ScatterCanvas: View {
             .gesture(
                 DragGesture(minimumDistance: 0, coordinateSpace: .named("board"))
                     .onChanged { value in
+                        isDragging = true
                         onMove(Double(value.location.x / max(size.width, 1)), 1 - Double(value.location.y / max(size.height, 1)))
                     }
+                    .onEnded { _ in isDragging = false }
             )
     }
 
+    /// The whole board drags the threshold; the scroll view is locked while a finger is down.
     private func boardDrag(size: CGSize) -> some Gesture {
         DragGesture(minimumDistance: 0, coordinateSpace: .named("board"))
             .onChanged { value in
                 if case .threshold = controller.challenge.model {
+                    isDragging = true
                     controller.setThreshold(Double(value.location.x / max(size.width, 1)))
                 }
             }
+            .onEnded { _ in isDragging = false }
     }
 }
 

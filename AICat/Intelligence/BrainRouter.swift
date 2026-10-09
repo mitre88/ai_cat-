@@ -22,8 +22,18 @@ final class BrainRouter: CatBrain {
         }
     }
 
+    /// Waits (briefly) for a line request in flight instead of refusing: the model runs one request at a time.
+    private func waitForTurn() async -> Bool {
+        var waited = 0
+        while inFlight && waited < 60 {
+            try? await Task.sleep(nanoseconds: 100_000_000)
+            waited += 1
+        }
+        return !inFlight
+    }
+
     func story(from seeds: [String], context: BrainContext) async -> [String]? {
-        guard context.creativeMode, FoundationModelsBrain.isAvailable, !inFlight else { return nil }
+        guard context.creativeMode, FoundationModelsBrain.isAvailable, await waitForTurn() else { return nil }
         inFlight = true
         defer { inFlight = false }
         let generative = self.generative
@@ -35,7 +45,7 @@ final class BrainRouter: CatBrain {
     static let storyTimeoutSeconds: Double = 8
 
     func answer(question: String, context: BrainContext) async -> String? {
-        guard context.creativeMode, FoundationModelsBrain.isAvailable, !inFlight else { return nil }
+        guard context.creativeMode, FoundationModelsBrain.isAvailable, await waitForTurn() else { return nil }
         inFlight = true
         defer { inFlight = false }
         let generative = self.generative

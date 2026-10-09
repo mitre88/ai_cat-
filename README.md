@@ -54,7 +54,7 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 | `AICat/Challenges` | Challenge host and session, sorting and labeling boards, result overlay. |
 | `AICat/Scenarios` | World map, scenario host, one controller folder per scenario (1–10). |
 | `AICat/Capture` | Camera classifier (AVFoundation + Vision), camera preview and on-device speech listener (Speech). Excluded from the Linux type-check and stubbed in `Tools/shadows/AppStubs.swift`. |
-| `AICat/Intelligence` | Scripted brain, Foundation Models brain, router with timeout, kid-safe filter, text-to-speech. |
+| `AICat/Intelligence` | Scripted brain, Foundation Models brain, router with timeout, text-to-speech. The kid-safe filter lives in `AICatCore/Safety` so it is unit-tested. |
 | `AICat/Parent` | Parental gate and parent zone. |
 | `Config/Info.plist` | Explicit Info.plist (kept outside the synchronized folder on purpose). |
 | `Packages/AICatCore/` | Foundation-only Swift package: curriculum, growth model, adaptive difficulty, scoring, learners (decision stump, k-NN), challenge state machines, tests. |

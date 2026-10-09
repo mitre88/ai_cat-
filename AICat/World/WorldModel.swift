@@ -52,7 +52,9 @@ final class WorldModel {
         root.addChild(camera.entity)
         SceneBuilder.build(theme: theme, into: root)
         root.addChild(propsRoot)
-        cat.root.position = [0, 0, 0.2]
+        if cat.root.position == .zero {
+            cat.root.position = [0, 0, 0.2]   // default spot unless a controller already placed the cat
+        }
         root.addChild(cat.root)
         lighting.setTheme(skyTint: UIColor(Theme.palette(for: theme).sky))
         camera.applyPosture(posture)

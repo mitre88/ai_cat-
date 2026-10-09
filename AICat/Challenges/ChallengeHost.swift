@@ -60,6 +60,9 @@ struct ChallengeHost: View {
             lastProgressChange = Date()
             idleNudges = 0
         }
+        .onChange(of: app.speech) { _, _ in
+            lastProgressChange = Date()
+        }
         .task { await watchIdle() }
     }
 

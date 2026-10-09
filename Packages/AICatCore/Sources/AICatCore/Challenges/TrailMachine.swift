@@ -265,10 +265,10 @@ public struct TrailChallenge: Codable, Sendable {
         return solution[program.count]
     }
 
-    /// Solved on the first run = 1.0; each extra run costs 0.15, never below 0.55. Unsolved = 0.
+    /// Solved on the first run = 1.0; each extra run costs 0.15, never below 0.6 (the pass mark). Unsolved = 0.
     public var scoreAccuracy: Double {
         guard isSolved else { return 0 }
-        return max(0.55, 1 - 0.15 * Double(max(runs - 1, 0)))
+        return max(0.6, 1 - 0.15 * Double(max(runs - 1, 0)))
     }
 }
 

@@ -71,7 +71,12 @@ final class FairScaleController {
     }
 
     var canConfirm: Bool { !isDone && isSolved }
-    var canRequestHint: Bool { hintsLeft > 0 && !isDone && !isSolved }
+    var canRequestHint: Bool {
+        guard hintsLeft > 0, !isDone else { return false }
+        if let privacy { return privacy.correctCount < privacy.items.count }
+        if let judge { return !judge.isComplete }
+        return !isSolved
+    }
 
     private var scoreAccuracy: Double {
         hunt?.scoreAccuracy ?? balance?.scoreAccuracy ?? privacy?.scoreAccuracy ?? judge?.scoreAccuracy ?? 0
@@ -165,8 +170,9 @@ final class FairScaleController {
         hunt = challenge
         if right {
             feedback = .rightPick(coat)
-            world.cat.play(gesture: .jump)
-            app.say(.aiLearned)
+            react()
+            confirm()
+            return
         } else {
             feedback = .wrongPick
             world.cat.play(gesture: .shake)

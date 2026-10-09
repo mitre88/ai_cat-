@@ -2,15 +2,15 @@ import Foundation
 
 /// Last gate before any generated text reaches a child. Conservative on purpose: when in doubt, drop it
 /// and let the scripted line play instead.
-enum KidSafeFilter {
-    static let blockedFragments: [String] = [
+public enum KidSafeFilter {
+    public static let blockedFragments: [String] = [
         "http", "www.", "@", ".com", "kill", "die", "dead", "blood", "gun", "knife", "sex", "drug", "stupid", "hate", "idiot",
         "address", "phone", "password", "matar", "muert", "sangre", "pistola", "cuchillo", "sexo", "droga", "estúpid",
         "odio", "idiota", "dirección", "teléfono", "contraseña", "instagram", "tiktok", "youtube",
     ]
 
     /// Returns a cleaned line or nil when the text must not be shown.
-    static func sanitize(_ raw: String, maxWords: Int) -> String? {
+    public static func sanitize(_ raw: String, maxWords: Int) -> String? {
         var text = raw.replacingOccurrences(of: "\n", with: " ")
             .replacingOccurrences(of: "  ", with: " ")
             .trimmingCharacters(in: .whitespacesAndNewlines)

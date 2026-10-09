@@ -159,9 +159,9 @@ final class CreativeLabController {
         guard let story = challenge.generate(seed: storySeed) else { return }
         seedsChallenge = challenge
         world.cat.play(gesture: .headTilt)
+        imagine(story)
         app.say(.correct)
         react()
-        imagine(story)
     }
 
     /// Creative mode: ask the on-device model for its own three sentences; the pattern story stays otherwise.
@@ -174,7 +174,10 @@ final class CreativeLabController {
         imagineTask = Task { [weak self] in
             guard let self else { return }
             let sentences = await self.app.brain.story(from: seedWords, context: context)
-            guard !Task.isCancelled else { return }
+            guard !Task.isCancelled else {
+                self.isImagining = false
+                return
+            }
             if let sentences, var challenge = self.seedsChallenge, challenge.latest?.seeds == story.seeds {
                 challenge.attachModelSentences(sentences)
                 self.seedsChallenge = challenge
