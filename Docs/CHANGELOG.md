@@ -13,6 +13,7 @@ Resumen legible de lo que se construyó, por hito. El detalle está en `git log`
 | M10 | Escenarios 9 (grupo faltante, balanza, privacidad, juez) y 10 (gramática generativa o modelo on-device, remezcla, ayudante, graduación). |
 | M11 | Escenarios 7 (píxeles, bordes por umbral, formas, cámara con Vision) y 8 (tokens, bigramas, voz on-device, conversación con errores plantados), permisos localizados y puerta parental antes de cámara y micrófono. |
 | M12 | Accesibilidad (VoiceOver en controles con emoji), script de humo para Mac, tabla de riesgos del primer build. |
+| Revisiones | Cinco revisiones adversariales por agentes (mundos 1–2, 3–4–9–10, 5–6, 7–8 e infraestructura) con sus correcciones: fin de reto que no llegaba (Balanza nivel 1), lección central del mundo 1 que se saltaba, pisos de puntuación por debajo del aprobado, arrastres bloqueados por el scroll, carreras de tareas, crash potencial del micrófono, ciclo de vida de cámara/voz en cambios de postura, temporizador real del cerebro generativo. |
 | Endurecimiento | Paridad de especificadores `%lld`/`%@` entre idiomas en el validador, decoración procedural de los 10 mundos, CI en GitHub Actions (Linux + macOS), referencia Python con valores dorados para Q-learning, red neuronal y gramática, reporte de progreso por mundo para padres, plan de QA manual, APIs verificadas contra la referencia de Apple, AI CAT habla si el niño se queda quieto, filtro kid-safe en el núcleo con pruebas. |
 
 ## Cómo verificar

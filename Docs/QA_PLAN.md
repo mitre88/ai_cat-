@@ -76,3 +76,17 @@ Guion para la primera sesión con Xcode: cada bloque dice qué tocar y qué debe
 - Reducir movimiento: sin partículas ni amanecer.
 - Cerrar y reabrir la app conserva progreso; "Reiniciar progreso" pide confirmación.
 - VoiceOver lee casillas, píxeles, cables y tarjetas con su etiqueta; Dynamic Type grande no rompe los tableros (son ScrollView).
+
+## Regresiones a vigilar (corregidas tras las revisiones adversariales)
+
+- Mundo 1: tras aprender la regla, AI CAT **camina y lleva** las frutas restantes antes de que aparezca el resultado.
+- Mundos 1 y 2: tocar "pista" mientras una pista brilla no gasta otra pista; soltar mal una fruta y volver a agarrarla de inmediato no la hace temblar.
+- Mundo 3: arrastrar una manija o un centroide **hacia arriba o abajo** mueve la manija (el tablero no se desplaza).
+- Mundo 4: llegar al pez en la cuarta ejecución o después aprueba (nunca "celebrar y reprobar"); una pista con REPETIR pone el selector en el número correcto; pedir pista con un programa ya correcto no lo borra; tocar "Corre" dos veces seguidas no teletransporta al gato.
+- Mundo 5: la barra de progreso empieza en 0 y sube con lo cerca que llega el mejor camino.
+- Mundo 6: las pistas respetan un diseño distinto pero válido (p. ej. neuronas ocultas intercambiadas) y siempre convergen.
+- Mundo 7: con cámara negra o fallida aparece "usar imágenes de muestra"; girar el teléfono no apaga la cámara; en horizontal la vista previa no sale de lado.
+- Mundo 8: con una llamada en curso, "Escucha" no cierra la app (muestra "no disponible"); dos escuchas seguidas no se cortan; girar el teléfono no cancela la escucha.
+- Mundo 9: tocar el pelaje correcto en el nivel 1 **termina el reto** y desbloquea el nivel 2; las pistas de privacidad siguen disponibles mientras haya respuestas mal.
+- Mundo 10: con modo creativo y Apple Intelligence, la historia sí la escribe el modelo (tarjeta "escrita por el modelo"), no siempre el libro de patrones.
+- Todos: AI CAT dice una frase si el niño pasa 35 s sin avanzar; cambiar de postura en el Duo no reinicia cámara, micrófono ni ejecuciones.
