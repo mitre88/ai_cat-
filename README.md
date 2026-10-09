@@ -6,7 +6,7 @@ physically (continuous morphology from kitten to adult cat) and in knowledge. Bi
 100 % on device, designed first for **iPhone Duo** (outer 5.4" display, inner 7.6" display, hinge postures)
 and runs on any iPhone with iOS 26+.
 
-Status: **all 10 scenarios playable** (40 challenges), procedural textures and normal maps on grounds, props and fur (the texture math is unit-tested in the core package), contact shadows under the kitten and under every prop, rim light. Worlds 7 and 8 use the camera and the microphone, behind the parental gate, with sample pictures and sentence chips as fallbacks. Design document: `Docs/GDD.md`.
+Status: **all 10 scenarios playable** (40 challenges), core package green on GitHub Actions with Apple's toolchain (macOS `swift test`, 108 tests) and on Linux, procedural textures and normal maps on grounds, props and fur (the texture math is unit-tested in the core package), contact shadows under the kitten and under every prop, rim light. Worlds 7 and 8 use the camera and the microphone, behind the parental gate, with sample pictures and sentence chips as fallbacks. Design document: `Docs/GDD.md`.
 
 ## Inicio rápido (ES)
 
@@ -79,7 +79,7 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 
 ## First build on a Mac
 
-Everything was verified on Linux (package tests, syntax of every file, whole-app type-check against the shadow frameworks in `Tools/shadows`), so the remaining risk sits where Apple's real SDKs differ from the shadows. Run `Tools/xcode_smoke.sh` (Xcode 27.1) or `Tools/xcode_smoke.sh --no-duo` (Xcode 26) and map any error to this list:
+Everything was verified on Linux (package tests, syntax of every file, whole-app type-check against the shadow frameworks in `Tools/shadows`) and the core package also builds and passes its tests on macOS in CI (`.github/workflows/verify.yml`), so the remaining risk sits in the app target, where Apple's real SDKs may differ from the shadows. Run `Tools/xcode_smoke.sh` (Xcode 27.1) or `Tools/xcode_smoke.sh --no-duo` (Xcode 26) and map any error to this list:
 
 | Area | Files | What could differ |
 |---|---|---|
