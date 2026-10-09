@@ -18,6 +18,8 @@ struct ChallengeHost: View {
     @State private var creative: CreativeLabController?
     @State private var eyes: CatEyesController?
     @State private var voice: CatVoiceController?
+    @State private var lastProgressChange = Date()
+    @State private var idleNudges = 0
 
     init(spec: ChallengeSpec) {
         self.spec = spec
@@ -54,6 +56,26 @@ struct ChallengeHost: View {
             setUpController()
         }
         .onDisappear { app.hush() }
+        .onChange(of: session.progress) { _, _ in
+            lastProgressChange = Date()
+            idleNudges = 0
+        }
+        .task { await watchIdle() }
+    }
+
+    /// AI CAT nudges a child who has been quiet for a while (35 s, then every 60 s); ends with the view.
+    private func watchIdle() async {
+        while !Task.isCancelled {
+            try? await Task.sleep(nanoseconds: 5_000_000_000)
+            guard !Task.isCancelled, !session.isFinished, !app.voice.isSpeaking else { continue }
+            let quiet = Date().timeIntervalSince(lastProgressChange)
+            let threshold: TimeInterval = idleNudges == 0 ? 35 : 60
+            if quiet > threshold {
+                idleNudges += 1
+                lastProgressChange = Date()
+                app.say(.idle)
+            }
+        }
     }
 
     @ViewBuilder
