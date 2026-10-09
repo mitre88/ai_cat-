@@ -41,7 +41,7 @@ public struct PlayerProfile: Codable, Equatable, Sendable {
 
     public var growth: Double { GrowthModel.normalizedGrowth(xp: Double(totalXP)) }
     public var stage: Int { GrowthModel.stage(xp: Double(totalXP)) }
-    public var morphology: Morphology { Morphology.interpolated(growth: growth) }
+    public var morphology: CatMorphology { CatMorphology.interpolated(growth: growth) }
     public var stageProgress: Double { GrowthModel.progressWithinStage(xp: Double(totalXP)) }
     public var xpToNextStage: Int {
         let next = min(stage + 1, GrowthModel.stageCount)

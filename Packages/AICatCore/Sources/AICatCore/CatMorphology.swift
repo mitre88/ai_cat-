@@ -2,7 +2,7 @@ import Foundation
 
 /// AI CAT's body proportions as a function of growth. Every value is in metres (ratios are unit-less).
 /// The procedural rig and the camera read these so the world keeps coherent proportions.
-public struct Morphology: Equatable, Sendable {
+public struct CatMorphology: Equatable, Sendable {
     public var bodyLength: Double
     public var headRadiusRatio: Double   // head radius / body length
     public var legLength: Double
@@ -19,14 +19,14 @@ public struct Morphology: Equatable, Sendable {
         self.eyeRadiusRatio = eyeRadiusRatio
     }
 
-    public static let kitten = Morphology(bodyLength: 0.18, headRadiusRatio: 0.42, legLength: 0.05, earScale: 1.30, tailLength: 0.10, eyeRadiusRatio: 0.28)
-    public static let adult = Morphology(bodyLength: 0.45, headRadiusRatio: 0.30, legLength: 0.16, earScale: 1.00, tailLength: 0.30, eyeRadiusRatio: 0.18)
+    public static let kitten = CatMorphology(bodyLength: 0.18, headRadiusRatio: 0.42, legLength: 0.05, earScale: 1.30, tailLength: 0.10, eyeRadiusRatio: 0.28)
+    public static let adult = CatMorphology(bodyLength: 0.45, headRadiusRatio: 0.30, legLength: 0.16, earScale: 1.00, tailLength: 0.30, eyeRadiusRatio: 0.18)
 
     /// p(ĝ) = p_kitten + (p_adult − p_kitten) · smoothstep(ĝ)
-    public static func interpolated(growth: Double) -> Morphology {
+    public static func interpolated(growth: Double) -> CatMorphology {
         let s = GrowthModel.smoothstep(growth)
         func mix(_ a: Double, _ b: Double) -> Double { a + (b - a) * s }
-        return Morphology(
+        return CatMorphology(
             bodyLength: mix(kitten.bodyLength, adult.bodyLength),
             headRadiusRatio: mix(kitten.headRadiusRatio, adult.headRadiusRatio),
             legLength: mix(kitten.legLength, adult.legLength),
@@ -36,7 +36,7 @@ public struct Morphology: Equatable, Sendable {
         )
     }
 
-    public static func forXP(_ xp: Double) -> Morphology {
+    public static func forXP(_ xp: Double) -> CatMorphology {
         interpolated(growth: GrowthModel.normalizedGrowth(xp: xp))
     }
 

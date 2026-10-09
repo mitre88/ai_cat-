@@ -7,7 +7,7 @@ Everything on stage is generated from primitives so the game runs without a sing
 1. Export the cat as `AICat.usdz` and drop it into `AICat/Resources/` (the synchronized folder picks it up).
 2. Conventions expected by `USDZCatRig`:
    - 1 unit = 1 metre; the model stands on the ground at the origin; **nose points to +Z**, up is +Y.
-   - The visual bounds' height is used to scale the model to `Morphology.standingHeight` (kitten 0.21 m → adult 0.62 m), so author the model at any size.
+   - The visual bounds' height is used to scale the model to `CatMorphology.standingHeight` (kitten 0.21 m → adult 0.62 m), so author the model at any size.
    - The first animation in the file loops as idle (`availableAnimations.first`). Add `walk`/`jump` clips to extend `USDZCatRig.play(gesture:)`.
    - Materials: PBR (USDZ preview surface). Black fur with a subtle sheen reads best against the sets.
 3. Run the app: `WorldModel.prepare()` loads the USDZ when present and falls back to `ProceduralCatRig` otherwise.

@@ -1,4 +1,5 @@
 import SwiftUI
+import AICatCore
 
 /// Resolves the current `PostureInfo` for its container and hands it to `content`.
 /// Without the iPhone Duo SDK the posture comes from size classes only.

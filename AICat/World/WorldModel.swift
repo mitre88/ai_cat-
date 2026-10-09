@@ -103,7 +103,7 @@ final class WorldModel {
         guard abs(growth - lastGrowth) > 1e-9 else { return }
         let first = lastGrowth < 0
         lastGrowth = growth
-        cat.apply(morphology: Morphology.interpolated(growth: growth), animated: animated && !first)
+        cat.apply(morphology: CatMorphology.interpolated(growth: growth), animated: animated && !first)
     }
 
     func wear(_ items: [KnowledgeItem]) {

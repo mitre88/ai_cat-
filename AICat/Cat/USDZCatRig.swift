@@ -10,7 +10,7 @@ final class USDZCatRig: CatRig {
     static let resourceName = "AICat"
 
     let root = Entity()
-    private(set) var morphology: Morphology = .kitten
+    private(set) var morphology: CatMorphology = .kitten
     private(set) var emotion: CatEmotion = .happy
     private let model: Entity
     private let baseHeight: Float
@@ -38,7 +38,7 @@ final class USDZCatRig: CatRig {
         apply(morphology: .kitten, animated: false)
     }
 
-    func apply(morphology: Morphology, animated: Bool) {
+    func apply(morphology: CatMorphology, animated: Bool) {
         self.morphology = morphology
         let scale = Float(morphology.standingHeight) / baseHeight
         if animated {

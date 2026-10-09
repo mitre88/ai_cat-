@@ -6,7 +6,7 @@ final class GrowthModelTests: XCTestCase {
         for g in GoldenValues.growth {
             XCTAssertEqual(GrowthModel.normalizedGrowth(xp: g.xp), g.normalized, accuracy: 1e-12, "xp \(g.xp)")
             XCTAssertEqual(GrowthModel.stage(xp: g.xp), g.stage, "stage at xp \(g.xp)")
-            let m = Morphology.forXP(g.xp)
+            let m = CatMorphology.forXP(g.xp)
             XCTAssertEqual(m.bodyLength, g.bodyLength, accuracy: 1e-12)
             XCTAssertEqual(m.headRadiusRatio, g.headRadiusRatio, accuracy: 1e-12)
             XCTAssertEqual(m.legLength, g.legLength, accuracy: 1e-12)
@@ -45,10 +45,10 @@ final class GrowthModelTests: XCTestCase {
     }
 
     func testMorphologyEndpoints() {
-        XCTAssertEqual(Morphology.interpolated(growth: 0), Morphology.kitten)
-        XCTAssertEqual(Morphology.interpolated(growth: 1), Morphology.adult)
-        let mid = Morphology.interpolated(growth: 0.5)
-        XCTAssertGreaterThan(mid.standingHeight, Morphology.kitten.standingHeight)
-        XCTAssertLessThan(mid.standingHeight, Morphology.adult.standingHeight)
+        XCTAssertEqual(CatMorphology.interpolated(growth: 0), CatMorphology.kitten)
+        XCTAssertEqual(CatMorphology.interpolated(growth: 1), CatMorphology.adult)
+        let mid = CatMorphology.interpolated(growth: 0.5)
+        XCTAssertGreaterThan(mid.standingHeight, CatMorphology.kitten.standingHeight)
+        XCTAssertLessThan(mid.standingHeight, CatMorphology.adult.standingHeight)
     }
 }

@@ -1,4 +1,5 @@
 import RealityKit
+import AICatCore
 import simd
 
 /// Third-person camera that frames AI CAT with proportions that follow its morphology and the posture.

@@ -4,11 +4,11 @@ import SwiftUI
 import AICatCore
 
 /// AI CAT built from primitives. Local convention: the nose points to +Z, the tail to −Z, Y is up,
-/// and the root sits on the ground between the paws. Every dimension comes from `Morphology`.
+/// and the root sits on the ground between the paws. Every dimension comes from `CatMorphology`.
 @MainActor
 final class ProceduralCatRig: CatRig {
     let root = Entity()
-    private(set) var morphology: Morphology = .kitten
+    private(set) var morphology: CatMorphology = .kitten
     private(set) var emotion: CatEmotion = .happy
 
     // parts
@@ -60,9 +60,9 @@ final class ProceduralCatRig: CatRig {
         apply(morphology: .kitten, animated: false)
     }
 
-    // MARK: Morphology
+    // MARK: CatMorphology
 
-    func apply(morphology m: Morphology, animated: Bool) {
+    func apply(morphology m: CatMorphology, animated: Bool) {
         let previousHeight = Float(morphology.standingHeight)
         morphology = m
         let bodyLength = Float(m.bodyLength)
@@ -208,6 +208,12 @@ final class ProceduralCatRig: CatRig {
         animator.walkTarget = nil
     }
 
+    /// Yaw (rotation about Y) of an orientation whose forward axis is +Z.
+    private static func yaw(of orientation: simd_quatf) -> Float {
+        let forward = orientation.act(SIMD3<Float>(0, 0, 1))
+        return atan2(forward.x, forward.z)
+    }
+
     var chestPosition: SIMD3<Float> {
         root.convert(position: [0, Float(morphology.bodyCenterHeight), 0], to: nil)
     }
@@ -227,19 +233,21 @@ final class ProceduralCatRig: CatRig {
             growthScaleTween = t >= 1 ? nil : tween
             if t >= 1 { root.scale = [1, 1, 1] }
         }
-        let pose = animator.step(deltaTime: deltaTime, rootPosition: root.position, rootYaw: animator.yaw(of: root.orientation), cameraPosition: cameraPosition, headPivotWorld: headPosition)
+        let pose = animator.step(deltaTime: deltaTime, rootPosition: root.position, rootYaw: Self.yaw(of: root.orientation), cameraPosition: cameraPosition)
         root.position = pose.rootPosition
         root.orientation = simd_quatf(angle: pose.rootYaw, axis: [0, 1, 0])
         body.scale = pose.bodyScale
         body.orientation = simd_quatf(angle: .pi / 2 + pose.bodyPitch, axis: [1, 0, 0])
-        headPivot.orientation = pose.headOrientation
+        headPivot.orientation = simd_quatf(angle: pose.headYaw, axis: [0, 1, 0])
+            * simd_quatf(angle: -pose.headPitch, axis: [1, 0, 0])
+            * simd_quatf(angle: pose.headRoll, axis: [0, 0, 1])
         headPivot.position = [0, Float(morphology.headCenterHeight) + pose.headLift, Float(morphology.bodyLength) * 0.42 + pose.headForward]
         tailPivot.orientation = simd_quatf(angle: pose.tailYaw, axis: [0, 1, 0]) * simd_quatf(angle: pose.tailPitch, axis: [1, 0, 0])
         for (index, leg) in legs.enumerated() {
             leg.orientation = simd_quatf(angle: pose.legSwing[index], axis: [1, 0, 0])
         }
-        eyeL.scale = [1, pose.eyeOpen.left, 1]
-        eyeR.scale = [1, pose.eyeOpen.right, 1]
+        eyeL.scale = [1, pose.eyeOpenLeft, 1]
+        eyeR.scale = [1, pose.eyeOpenRight, 1]
         earL.orientation = simd_quatf(angle: -0.28 - pose.earSpread, axis: [0, 0, 1]) * simd_quatf(angle: pose.earPitch, axis: [1, 0, 0])
         earR.orientation = simd_quatf(angle: 0.28 + pose.earSpread, axis: [0, 0, 1]) * simd_quatf(angle: pose.earPitch, axis: [1, 0, 0])
     }

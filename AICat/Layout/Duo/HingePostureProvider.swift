@@ -1,5 +1,6 @@
 #if AICAT_DUO
 import SwiftUI
+import AICatCore
 
 /// iPhone Duo posture: reads the fold (an active `division` reserved region) for layout and the live
 /// hinge angle for effects only, as Apple recommends. Requires the iOS 27.1 SDK (Xcode 27.1).

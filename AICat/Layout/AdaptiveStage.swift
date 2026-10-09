@@ -1,4 +1,5 @@
 import SwiftUI
+import AICatCore
 
 /// Lays out the 3D stage and the challenge board for a posture.
 /// Division frames are in the coordinate space of the `PostureReader` container.

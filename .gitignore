@@ -20,3 +20,4 @@ AICat.xcodeproj/xcuserdata/
 __pycache__/
 *.pyc
 Tools/out/
+.swift-toolchain/

@@ -5,13 +5,13 @@ import AICatCore
 @MainActor
 protocol CatRig: AnyObject {
     var root: Entity { get }
-    var morphology: Morphology { get }
+    var morphology: CatMorphology { get }
     var emotion: CatEmotion { get }
     /// World-space point at the cat's chest, for the camera.
     var chestPosition: SIMD3<Float> { get }
     var headPosition: SIMD3<Float> { get }
 
-    func apply(morphology: Morphology, animated: Bool)
+    func apply(morphology: CatMorphology, animated: Bool)
     func set(emotion: CatEmotion)
     func play(gesture: CatGesture)
     /// Point of interest the eyes and head follow (world space). nil = look at the camera.

@@ -1,5 +1,6 @@
 #if AICAT_DUO
 import SwiftUI
+import AICatCore
 
 /// Soft shadow drawn along the fold so the two halves read as one scene.
 struct FoldGap: View {
