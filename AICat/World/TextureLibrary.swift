@@ -14,6 +14,9 @@ final class TextureLibrary {
 
     func texture(_ kind: TextureKind) -> TextureResource? { cache[kind] }
 
+    /// How many of `kinds` are uploaded (smoke report).
+    func cachedCount(of kinds: [TextureKind]) -> Int { Set(kinds).filter { cache[$0] != nil }.count }
+
     /// Generates and uploads the textures that are not cached yet. Every missing texture is generated at the
     /// same time (one detached task each, so a world's set takes about one texture's time on a multi-core
     /// phone); a second caller for a texture already being generated waits for it instead of returning

@@ -21,7 +21,11 @@ final class AppModel {
     init(store: ProgressStore = ProgressStore()) {
         self.store = store
         let loaded = store.load()
-        let initial = loaded ?? PlayerProfile(catName: "AI CAT", ageBand: .apprentice, languageCode: L10n.Language.preferred.rawValue)
+        var initial = loaded ?? PlayerProfile(catName: "AI CAT", ageBand: .apprentice, languageCode: L10n.Language.preferred.rawValue)
+        if SmokeMode.isActive {   // straight to the map, silent (never saved)
+            initial.onboardingDone = true
+            initial.voiceEnabled = false
+        }
         profile = initial
         L10n.current = L10n.Language(rawValue: initial.languageCode) ?? .english
         L10n.catName = initial.catName

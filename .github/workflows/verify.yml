@@ -48,8 +48,13 @@ jobs:
           MAJOR=$(xcodebuild -version | head -1 | awk '{print $2}' | cut -d. -f1)
           if [ "${MAJOR:-0}" -lt 26 ]; then echo "Xcode $MAJOR < 26 (iOS 26 SDK needed): app build skipped"; exit 0; fi
           xcodebuild build -project AICat.xcodeproj -scheme AICat -destination "generic/platform=iOS Simulator" \
+            -derivedDataPath /tmp/aicat-dd \
             SWIFT_ACTIVE_COMPILATION_CONDITIONS='DEBUG' CODE_SIGNING_ALLOWED=NO > /tmp/xcodebuild.log 2>&1 || true
           echo "=== distinct errors ==="
           grep -E "error:" /tmp/xcodebuild.log | sed -E 's#^.*/(AICat/|Packages/|Config/)#\1#' | sort -u | head -150
           grep -E "\*\* BUILD (SUCCEEDED|FAILED) \*\*" /tmp/xcodebuild.log | tail -1
           grep -q "BUILD SUCCEEDED" /tmp/xcodebuild.log
+          echo "=== distinct warnings (first 60) ==="
+          grep -E "warning:" /tmp/xcodebuild.log | sed -E 's#^.*/(AICat/|Packages/|Config/)#\1#' | sort -u | head -60 || true
+      - name: Launch in the simulator (-AICatSmoke) and wait for the home world to render
+        run: Tools/simulator_smoke.sh /tmp/aicat-dd/Build/Products/Debug-iphonesimulator/AICat.app 150
