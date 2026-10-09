@@ -91,6 +91,7 @@ Guion para la primera sesión con Xcode: cada bloque dice qué tocar y qué debe
 - Los biseles de las losas de piedra y las juntas de los tablones se ven hundidos/levantados de forma coherente con el sol. Si el relieve parece al revés, poner `ProceduralTextures.greenSign = -1`.
 - El cuerpo y la cola del gato muestran hebras como la cabeza y las patas (cápsulas con UV); las frutas largas muestran poros.
 - La cara en sombra del gato y de los props no es negra: se ve el relleno teñido del cielo.
+- Los suelos texturizados se ven algo más oscuros que el color plano de la paleta (la textura multiplica en luz lineal: media 0.85–0.92 sRGB ≈ 0.70–0.82 lineal). Si un mundo queda apagado, subir la media de su textura en `NoiseField` o aclarar `palette.ground` en `Theme.swift`; `Tools/render_textures.sh` muestra las texturas tal cual se generan.
 - Dentro de un reto, canastas, pedestales, frutas y props del controlador salen texturizados (el controlador se crea tras preparar texturas); no hay cuadrados negros bajo nada.
 
 ## Regresiones a vigilar (corregidas tras las revisiones adversariales)
