@@ -260,14 +260,18 @@ public struct NoiseField: Sendable {
 
     // MARK: Surfaces (colour) — mean brightness near 1, faint hue; the palette tint supplies the colour
 
-    /// Patches of darker and lighter grass, two layers of fine blades (sharpened) and a few pale specks.
+    /// Grass: two layers of thin, tall blade strokes (anisotropic noise sharpened to isolated highlights) over
+    /// a darker base with broad patches, plus a few pale specks.
     public func grass(_ u: Double, _ v: Double) -> ProceduralTextures.RGB {
         let patches = fbm(u, v, cells: 6, octaves: 4)
-        let blades = smoothstep(0.30, 0.85, noise(u, v, cellsX: 140, cellsY: 20, salt: 7))
-        let blades2 = noise(u, v, cellsX: 90, cellsY: 12, salt: 8)
+        let strokes1 = smoothstep(0.60, 0.88, noise(u, v, cellsX: 200, cellsY: 22, salt: 7))
+        let strokes2 = smoothstep(0.60, 0.88, noise(u + 0.37, v + 0.21, cellsX: 150, cellsY: 16, salt: 8))
+        let blades = max(strokes1, strokes2)
+        let soil = fbm(u, v, cells: 40, octaves: 2, salt: 9)
         let speck = hash(cell(u * Double(size), size), cell(v * Double(size), size), 99) > 0.985
-        let k = 0.70 + 0.34 * patches + 0.22 * (blades - 0.5) + 0.12 * (blades2 - 0.5)
-        return mix(scale((0.94, 1.0, 0.86), k), (1.0, 1.0, 0.80), speck ? 0.5 : 0)
+        let k = 0.70 + 0.22 * patches + 0.16 * blades - 0.06 * (1 - blades) * soil
+        let base = scale((0.92, 1.0, 0.84), k)
+        return mix(mix(base, (1.0, 1.0, 0.86), blades * 0.15), (1.0, 1.0, 0.80), speck ? 0.5 : 0)
     }
 
     /// Flagstones: 4 × 4 slabs, each a slightly different tone, mortar in between.
@@ -385,7 +389,9 @@ public struct NoiseField: Sendable {
     // MARK: Heights (for normal maps)
 
     public func grassHeight(_ u: Double, _ v: Double) -> Double {
-        0.6 * fbm(u, v, cells: 20, octaves: 3, salt: 31) + 0.4 * noise(u, v, cellsX: 140, cellsY: 20, salt: 7)
+        let strokes1 = smoothstep(0.60, 0.88, noise(u, v, cellsX: 200, cellsY: 22, salt: 7))
+        let strokes2 = smoothstep(0.60, 0.88, noise(u + 0.37, v + 0.21, cellsX: 150, cellsY: 16, salt: 8))
+        return 0.5 * fbm(u, v, cells: 20, octaves: 3, salt: 31) + 0.5 * max(strokes1, strokes2)
     }
 
     public func stoneHeight(_ u: Double, _ v: Double) -> Double {
