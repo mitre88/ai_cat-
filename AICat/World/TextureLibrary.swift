@@ -24,7 +24,7 @@ final class TextureLibrary {
                 load = Task { @MainActor in
                     let image = await Task.detached(priority: .userInitiated) { ProceduralImages.image(for: kind) }.value
                     guard let image else { return nil }
-                    let options = TextureResource.CreateOptions(semantic: kind.isNormalMap ? .normal : .color)
+                    let options = TextureResource.CreateOptions(semantic: Self.semantic(for: kind))
                     return try? await TextureResource(image: image, withName: "aicat.\(kind.rawValue)", options: options)
                 }
                 loads[kind] = load
@@ -34,6 +34,14 @@ final class TextureLibrary {
             }
             loads[kind] = nil
         }
+    }
+
+    /// How RealityKit should interpret each texture: normal maps as normals, the contact shadow as the
+    /// opacity map it feeds (`PhysicallyBasedMaterial.Opacity.textureSemantic`), everything else as colour.
+    static func semantic(for kind: TextureKind) -> TextureResource.Semantic {
+        if kind.isNormalMap { return .normal }
+        if kind == .blobShadow { return PhysicallyBasedMaterial.Opacity.textureSemantic }
+        return .color
     }
 
     /// Ground surface of a theme: colour texture, normal map and how many times it repeats across the set.

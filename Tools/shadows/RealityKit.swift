@@ -139,7 +139,7 @@ public enum MaterialParameters {
 }
 
 public enum MaterialParameterTypes {
-    public struct Opacity: ExpressibleByFloatLiteral { public init(floatLiteral value: Float) {}; public init(scale: Float, texture: MaterialParameters.Texture?) {} }
+    public struct Opacity: ExpressibleByFloatLiteral { public init(floatLiteral value: Float) {}; public init(scale: Float, texture: MaterialParameters.Texture?) {}; public static var textureSemantic: TextureResource.Semantic { .raw } }
     public enum Blending { case opaque, transparent(opacity: Opacity) }
     public struct TextureCoordinateTransform { public init(offset: SIMD2<Float>, scale: SIMD2<Float>, rotation: Float) {} }
 }
