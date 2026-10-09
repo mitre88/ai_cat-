@@ -779,3 +779,9 @@ STRINGS.update({
     "a11y.threshold_down": ("Lower the dial", "Bajar la perilla"),
     "a11y.threshold_up": ("Raise the dial", "Subir la perilla"),
 })
+
+# ---- parent progress report ------------------------------------------------------
+STRINGS.update({
+    "parent.worlds_section": ("What your child has learned", "Lo que tu hijo o hija ha aprendido"),
+    "parent.world_progress_format": ("%lld of %lld challenges passed · %lld of %lld stars", "%lld de %lld retos superados · %lld de %lld estrellas"),
+})

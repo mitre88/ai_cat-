@@ -25,7 +25,9 @@ final class SpeechListener {
             SFSpeechRecognizer.requestAuthorization { continuation.resume(returning: $0) }
         }
         guard status == .authorized else { return false }
-        return await AVAudioApplication.requestRecordPermission()
+        return await withCheckedContinuation { continuation in
+            AVAudioApplication.requestRecordPermission { granted in continuation.resume(returning: granted) }
+        }
     }
 
     private final class ResumeOnce: @unchecked Sendable {

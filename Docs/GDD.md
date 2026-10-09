@@ -138,6 +138,10 @@ Cada mundo tiene 3 retos (tier 1, 2, 3) y un **reto maestro** (tier 3, opcional 
 
 `Tools/reference_model.py` implementa estos modelos en Python, valida invariantes (monotonía, límites, bordes de etapa) y genera `GoldenValues.swift`; las pruebas de `AICatCore` (`swift test`) verifican que Swift produce exactamente los mismos números.
 
+### 4.4 Referencia Python de los algoritmos con semilla
+
+`Tools/reference_rl_nn.py` reimplementa en Python, de forma independiente, el generador SplitMix64 (`SeededGenerator`), el Q-learning del laberinto, la red sigmoide 4-3-1 y el muestreo de la gramática de historias, y genera `GoldenRLValues.swift`; `GoldenRLTests` comprueba que Swift produce los mismos números (trayectorias de 6 episodios, valores Q, pérdida tras 10 épocas, variantes de historia) con tolerancias de 1e-12.
+
 ## 5. AI CAT
 
 - **Personalidad**: curioso, amable, celebra el esfuerzo, admite cuando no está seguro.

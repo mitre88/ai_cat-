@@ -134,7 +134,7 @@ final class FoundationModelsBrain: CatBrain {
         links, phone numbers or products. If unsure, say something encouraging about learning.
         """
         let created = LanguageModelSession(instructions: instructions)
-        created.prewarm()
+        created.prewarm(promptPrefix: nil)
         session = created
         sessionKey = key
         return created

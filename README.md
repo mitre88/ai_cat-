@@ -86,6 +86,8 @@ Everything was verified on Linux (package tests, syntax of every file, whole-app
 | RealityKit details | `AICat/World/*`, `AICat/Cat/*`, scenario controllers | `MeshResource(shape:)`, `GroundingShadowComponent`, `ImageBasedLightComponent`, `ParticleEmitterComponent.Presets`, `DragGesture().targetedToAnyEntity()`; all centralised, fix once. |
 | Text-to-speech, sky | `AICat/Intelligence/CatVoice.swift`, `AICat/World/SkyEnvironment.swift` | Stubbed on Linux; small files. |
 
+Checked against Apple's reference pages on 2026-10-09 (so these should not be the problem): `MeshResource.generateBox(size:cornerRadius:)`, `generateSphere`, `generateCylinder`, `generateCone`, `generatePlane(width:depth:cornerRadius:)`, `MeshResource(shape:)`; `GroundingShadowComponent(castsShadow:)` (iOS 18+, lights do not affect it); `VNClassifyImageRequest` and its `[VNClassificationObservation]?` results; `SFSpeechRecognizer(locale:)`, `supportsOnDeviceRecognition`, `isAvailable`, `recognitionTask(with:resultHandler:)`, `requiresOnDeviceRecognition`; `AVAudioApplication.requestRecordPermission(completionHandler:)`; `LanguageModelSession(instructions:)`, `respond(to:generating:)`, `prewarm(promptPrefix:)`; SwiftUI `coordinateSpace(_:)` with `NamedCoordinateSpace` (iOS 17+).
+
 ## QA checklist
 
 - Postures (Device Hub, Xcode 27.1): closed → pocket layout; open flat → `ArrangementView` split; tabletop → stage above the fold, controls below; book → board on one page, stage on the other. The sun rises as the device opens; no letterboxing in any pose; interactive controls never sit on the fold.

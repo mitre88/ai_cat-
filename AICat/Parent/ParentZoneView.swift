@@ -45,6 +45,11 @@ struct ParentZoneView: View {
                     Text(L10n.string("parent.reset"))
                 }
             }
+            Section(L10n.string("parent.worlds_section")) {
+                ForEach(Curriculum.scenarios) { scenario in
+                    worldRow(scenario)
+                }
+            }
             Section(L10n.string("parent.privacy_section")) {
                 Text(L10n.string("parent.privacy_text"))
                     .font(.footnote)
@@ -64,6 +69,34 @@ struct ParentZoneView: View {
             Button(L10n.string("parent.reset"), role: .destructive) { app.resetProgress() }
             Button(L10n.string("common.cancel"), role: .cancel) {}
         }
+    }
+
+    /// One line per world: challenges passed, best stars, and the concept once the world is complete.
+    private func worldRow(_ scenario: Scenario) -> some View {
+        let passed = scenario.challenges.filter { app.profile.isPassed($0.id) }.count
+        let stars = scenario.challenges.reduce(0) { total, spec in
+            total + (app.profile.bestResult(for: spec.id).map { Scoring.stars(accuracy: $0.accuracy) } ?? 0)
+        }
+        let completed = app.profile.isCompleted(scenario.id)
+        return VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 6) {
+                Text(Theme.emoji(for: scenario.theme))
+                Text(L10n.string(scenario.titleKey.raw)).font(.subheadline.bold())
+                Spacer()
+                if completed {
+                    Image(systemName: "checkmark.seal.fill").foregroundStyle(Color.green)
+                }
+            }
+            Text(L10n.format("parent.world_progress_format", passed, scenario.challenges.count, stars, scenario.challenges.count * 3))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            if passed > 0 {
+                Text(L10n.string(scenario.conceptKey.raw))
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding(.vertical, 2)
     }
 
     private var versionString: String {

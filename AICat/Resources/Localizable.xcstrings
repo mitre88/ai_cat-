@@ -7736,6 +7736,40 @@
         }
       }
     },
+    "parent.world_progress_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld of %lld challenges passed · %lld of %lld stars"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld de %lld retos superados · %lld de %lld estrellas"
+          }
+        }
+      }
+    },
+    "parent.worlds_section": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What your child has learned"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo que tu hijo o hija ha aprendido"
+          }
+        }
+      }
+    },
     "parent.zone": {
       "extractionState": "manual",
       "localizations": {
