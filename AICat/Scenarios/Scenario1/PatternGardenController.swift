@@ -214,8 +214,9 @@ final class PatternGardenController: WorldInteraction {
         entity.physicsBody?.mode = .kinematic
         let transform = Transform(scale: entity.scale, rotation: entity.orientation, translation: [home.x, 0.18, home.z])
         entity.move(to: transform, relativeTo: entity.parent, duration: 0.45, timingFunction: .easeInOut)
-        Task { [weak entity] in
+        Task { [weak entity, weak self] in
             try? await Task.sleep(nanoseconds: 480_000_000)
+            guard self?.draggingID != id else { return }   // grabbed again mid-bounce: the drag owns it
             entity?.physicsBody?.mode = .dynamic
         }
     }
@@ -297,6 +298,7 @@ final class PatternGardenController: WorldInteraction {
     private func finishAISorting() {
         world.cat.lookAt(nil)
         if challenge.isComplete {
+            status = .watching
             app.say(.aiSorted)
             checkCompletion()
         } else {
@@ -306,19 +308,26 @@ final class PatternGardenController: WorldInteraction {
         }
     }
 
+    /// Ends the challenge once every fruit is in a basket and AI CAT is not still carrying some.
+    /// Celebrates only when the child's accuracy passes; otherwise a gentle gesture precedes "try again".
     private func checkCompletion() {
-        guard challenge.isComplete, status != .done else { return }
+        guard challenge.isComplete, status != .done, status != .sorting else { return }
         status = .done
         world.cat.lookAt(nil)
-        world.cat.play(gesture: .jump)
-        world.celebrate()
+        if Scoring.isPassed(accuracy: challenge.accuracy) {
+            world.cat.play(gesture: .jump)
+            world.celebrate()
+        } else {
+            world.cat.set(emotion: .curious)
+            world.cat.play(gesture: .headTilt)
+        }
         finishCountdown = 1.3
     }
 
     // MARK: Hints
 
     var canRequestHint: Bool {
-        hintsLeft > 0 && (status == .watching || status == .thinking)
+        hintsLeft > 0 && hintFruitID == nil && (status == .watching || status == .thinking)
     }
 
     func requestHint() {

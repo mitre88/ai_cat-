@@ -166,14 +166,19 @@ final class DataLibraryController {
         isDone = true
         selectedCardID = nil
         world.cat.lookAt(nil)
-        world.cat.play(gesture: .jump)
-        world.celebrate()
+        if Scoring.isPassed(accuracy: challenge.childAccuracy) {
+            world.cat.play(gesture: .jump)
+            world.celebrate()
+        } else {
+            world.cat.set(emotion: .curious)
+            world.cat.play(gesture: .headTilt)
+        }
         finishCountdown = 1.2
     }
 
     // MARK: Hints
 
-    var canRequestHint: Bool { hintsLeft > 0 && !isDone }
+    var canRequestHint: Bool { hintsLeft > 0 && !isDone && hintCardID == nil }
 
     func requestHint() {
         guard canRequestHint else { return }
