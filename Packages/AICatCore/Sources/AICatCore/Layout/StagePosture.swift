@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(CoreGraphics)
+import CoreGraphics   // Apple platforms: CGSize/CGRect's `.zero`, `width`, `height` and Equatable live in this overlay
+#endif
 
 /// How the screen is being held. Drives where the 3D stage and the challenge board go.
 public enum StagePosture: Equatable, Sendable {
