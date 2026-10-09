@@ -14,6 +14,8 @@ Status: **all 10 scenarios playable** (40 challenges), procedural textures and n
 2. Si Xcode no abre el proyecto escrito a mano: `brew install xcodegen && xcodegen generate`.
 3. Con Xcode 26 (sin SDK del Duo) quita `AICAT_DUO` de `SWIFT_ACTIVE_COMPILATION_CONDITIONS` en el target.
 4. Pruebas de la lógica sin simulador: `cd Packages/AICatCore && swift test`.
+5. Humo completo en la Mac (pruebas + build del simulador + build Duo): `Tools/xcode_smoke.sh` (Xcode 27.1) o `Tools/xcode_smoke.sh --no-duo` (Xcode 26). Si algo falla, el error casi seguro está en la tabla «First build on the Mac» de abajo: pega el error tal cual en el chat y se corrige por archivo.
+6. Para ver las texturas y el cielo procedurales como PNG sin abrir Xcode: `Tools/render_textures.sh` (escribe en `/tmp/aicat-textures`).
 
 ## Requirements
 
