@@ -25,7 +25,7 @@ final class AppModel {
         L10n.current = L10n.Language(rawValue: initial.languageCode) ?? .english
         voice = CatVoice()
         voice.isEnabled = initial.voiceEnabled
-        brain = ScriptedBrain()
+        brain = BrainRouter()
     }
 
     // MARK: Derived

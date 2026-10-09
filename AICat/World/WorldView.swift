@@ -11,6 +11,7 @@ struct WorldView: View {
     var body: some View {
         RealityView { content in
             content.camera = .virtual
+            await world.prepare()
             world.attach(to: &content)
         }
         .gesture(dragGesture)

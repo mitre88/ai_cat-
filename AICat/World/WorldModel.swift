@@ -11,7 +11,7 @@ final class WorldModel {
     let theme: WorldTheme
     let root = Entity()
     let propsRoot = Entity()
-    let cat: ProceduralCatRig
+    private(set) var cat: any CatRig
     let camera = CameraRig()
     let lighting = Lighting()
 
@@ -24,12 +24,25 @@ final class WorldModel {
     /// Called every frame with the delta time (challenge logic hooks in here).
     @ObservationIgnored var onFrame: ((Float) -> Void)?
     @ObservationIgnored private var lastGrowth: Double = -1
+    @ObservationIgnored private var prepared = false
+    @ObservationIgnored private var sky: EnvironmentResource?
 
     init(theme: WorldTheme) {
         self.theme = theme
         cat = ProceduralCatRig()
         root.name = "world"
         propsRoot.name = "props"
+    }
+
+    /// One-time asynchronous work: a bundled USDZ cat (if any) and the procedural sky used for the skybox
+    /// and image-based lighting. Safe to call many times.
+    func prepare() async {
+        guard !prepared else { return }
+        prepared = true
+        if let usdz = await USDZCatRig.load() {
+            cat = usdz
+        }
+        sky = await SkyEnvironment.resource(for: theme)
     }
 
     private func buildIfNeeded() {
@@ -43,6 +56,19 @@ final class WorldModel {
         root.addChild(cat.root)
         lighting.setTheme(skyTint: UIColor(Theme.palette(for: theme).sky))
         camera.applyPosture(posture)
+        if let sky {
+            root.components.set(ImageBasedLightComponent(source: .single(sky)))
+            applyLightReceivers(to: root)
+        }
+    }
+
+    private func applyLightReceivers(to entity: Entity) {
+        if entity is ModelEntity {
+            entity.components.set(ImageBasedLightReceiverComponent(imageBasedLight: root))
+        }
+        for child in entity.children {
+            applyLightReceivers(to: child)
+        }
     }
 
     /// Attach the graph to a (possibly new) RealityView content and start ticking.
@@ -50,9 +76,17 @@ final class WorldModel {
         buildIfNeeded()
         root.removeFromParent()
         content.add(root)
+        if let sky {
+            content.environment = .skybox(sky)
+        }
         subscription = content.subscribe(to: SceneEvents.Update.self) { [weak self] event in
             self?.tick(Float(event.deltaTime))
         }
+    }
+
+    func celebrate() {
+        guard !reduceEffects else { return }
+        Celebration.burst(in: self)
     }
 
     private func tick(_ rawDelta: Float) {
@@ -113,6 +147,9 @@ final class WorldModel {
         entity.name = id
         props[id] = entity
         propsRoot.addChild(entity)
+        if sky != nil {
+            applyLightReceivers(to: entity)
+        }
         return entity
     }
 

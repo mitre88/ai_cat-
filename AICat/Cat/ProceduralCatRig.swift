@@ -198,11 +198,13 @@ final class ProceduralCatRig: CatRig {
         animator.gazeTarget = point
     }
 
-    func walk(to point: SIMD3<Float>) {
+    func walk(to point: SIMD3<Float>, completion: (() -> Void)?) {
+        animator.onArrive = completion
         animator.walkTarget = point
     }
 
     func stopWalking() {
+        animator.onArrive = nil
         animator.walkTarget = nil
     }
 

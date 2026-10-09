@@ -16,7 +16,8 @@ protocol CatRig: AnyObject {
     func play(gesture: CatGesture)
     /// Point of interest the eyes and head follow (world space). nil = look at the camera.
     func lookAt(_ point: SIMD3<Float>?)
-    func walk(to point: SIMD3<Float>)
+    /// Walk to a point on the ground; `completion` runs on arrival.
+    func walk(to point: SIMD3<Float>, completion: (() -> Void)?)
     func stopWalking()
     func wear(_ items: [KnowledgeItem])
     func update(deltaTime: Float, cameraPosition: SIMD3<Float>)

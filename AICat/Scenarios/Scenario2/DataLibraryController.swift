@@ -167,6 +167,7 @@ final class DataLibraryController {
         selectedCardID = nil
         world.cat.lookAt(nil)
         world.cat.play(gesture: .jump)
+        world.celebrate()
         finishCountdown = 1.2
     }
 

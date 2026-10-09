@@ -273,8 +273,7 @@ final class PatternGardenController: WorldInteraction {
             entity.physicsBody?.mode = .kinematic
             aiState = .walkingToFruit(move)
             let standPoint = SIMD3<Float>(entity.position.x, 0, entity.position.z - 0.16)
-            world.cat.animator.onArrive = { [weak self] in self?.pickUp(move) }
-            world.cat.walk(to: standPoint)
+            world.cat.walk(to: standPoint) { [weak self] in self?.pickUp(move) }
         }
     }
 
@@ -283,8 +282,7 @@ final class PatternGardenController: WorldInteraction {
         aiState = .carrying(move)
         let center = basketCenters[move.basketID] ?? .zero
         let standPoint = SIMD3<Float>(center.x * 0.72, 0, center.z + 0.34)
-        world.cat.animator.onArrive = { [weak self] in self?.drop(move) }
-        world.cat.walk(to: standPoint)
+        world.cat.walk(to: standPoint) { [weak self] in self?.drop(move) }
     }
 
     private func drop(_ move: AIMove) {
@@ -313,6 +311,7 @@ final class PatternGardenController: WorldInteraction {
         status = .done
         world.cat.lookAt(nil)
         world.cat.play(gesture: .jump)
+        world.celebrate()
         finishCountdown = 1.3
     }
 
