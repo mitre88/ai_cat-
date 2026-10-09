@@ -10,6 +10,8 @@ struct ChallengeHost: View {
     @State private var world: WorldModel
     @State private var sorting: PatternGardenController?
     @State private var labeling: DataLibraryController?
+    @State private var workshop: ClassifierWorkshopController?
+    @State private var trail: AlgorithmTrailController?
 
     init(spec: ChallengeSpec) {
         self.spec = spec
@@ -54,6 +56,10 @@ struct ChallengeHost: View {
             SortingBoard(controller: sorting)
         } else if let labeling {
             LabelingBoard(controller: labeling)
+        } else if let workshop {
+            ScatterBoard(controller: workshop)
+        } else if let trail {
+            TrailBoard(controller: trail)
         } else {
             ComingSoonBoard(spec: spec)
         }
@@ -71,6 +77,18 @@ struct ChallengeHost: View {
             if labeling == nil {
                 let controller = DataLibraryController(spec: spec, world: world, session: session, app: app)
                 labeling = controller
+                controller.start()
+            }
+        case .scatterBoard:
+            if workshop == nil {
+                let controller = ClassifierWorkshopController(spec: spec, world: world, session: session, app: app)
+                workshop = controller
+                controller.start()
+            }
+        case .sequencing:
+            if trail == nil {
+                let controller = AlgorithmTrailController(spec: spec, world: world, session: session, app: app)
+                trail = controller
                 controller.start()
             }
         default:

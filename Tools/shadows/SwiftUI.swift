@@ -486,9 +486,25 @@ public struct DragGesture: Gesture {
     public init(minimumDistance: CGFloat = 10, coordinateSpace: some CoordinateSpaceProtocol = LocalCoordinateSpace()) {}
 }
 
+public enum ContentMode { case fit, fill }
+public struct NamedCoordinateSpace: CoordinateSpaceProtocol {
+    public init() {}
+    public static func named(_ name: some Hashable) -> NamedCoordinateSpace { NamedCoordinateSpace() }
+}
+extension CoordinateSpaceProtocol where Self == NamedCoordinateSpace {
+    public static func named(_ name: some Hashable) -> NamedCoordinateSpace { NamedCoordinateSpace() }
+}
+
 // MARK: - View modifiers
 
 extension View {
+    public func position(x: CGFloat, y: CGFloat) -> _Modified<Self> { _Modified() }
+    public func position(_ point: CGPoint) -> _Modified<Self> { _Modified() }
+    public func onTapGesture(count: Int = 1, perform action: @escaping () -> Void) -> _Modified<Self> { _Modified() }
+    public func clipped(antialiased: Bool = false) -> _Modified<Self> { _Modified() }
+    public func coordinateSpace(_ name: NamedCoordinateSpace) -> _Modified<Self> { _Modified() }
+    public func aspectRatio(_ ratio: CGFloat? = nil, contentMode: ContentMode) -> _Modified<Self> { _Modified() }
+    public func zIndex(_ value: Double) -> _Modified<Self> { _Modified() }
     public func font(_ font: Font?) -> _Modified<Self> { _Modified() }
     public func bold(_ isActive: Bool = true) -> _Modified<Self> { _Modified() }
     public func foregroundStyle<S: ShapeStyle>(_ style: S) -> _Modified<Self> { _Modified() }

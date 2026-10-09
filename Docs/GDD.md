@@ -24,8 +24,8 @@ La banda la elige un adulto en la **zona de padres** (puerta parental: mantener 
 |---|---|---|---|---|---|
 | 1 | Jardín de Patrones | Percepción | ¿Qué es IA? Patrones y reglas | arrastrar frutas 3D a canastas; AI CAT aprende la regla | **jugable** |
 | 2 | Biblioteca de Datos | Aprendizaje | Datos, etiquetas, calidad | etiquetar tarjetas; medidor de precisión k-NN; ratón travieso | **jugable** |
-| 3 | Taller de Clasificación | Aprendizaje | Clasificador, frontera de decisión | tablero 2D, centroides | definido |
-| 4 | Sendero de Instrucciones | Representación | Algoritmos, si/entonces, bucles | bloques de secuencia | definido |
+| 3 | Taller de Clasificación | Aprendizaje | Clasificador, frontera de decisión | tablero 2D (tamaño × pelusa): umbral, línea o centroides; medidor de precisión; animales de prueba | **jugable** |
+| 4 | Sendero de Instrucciones | Representación | Algoritmos, si/entonces, bucles | bloques de instrucciones que AI CAT ejecuta en 3D (avanzar, girar, saltar, SI charco, REPETIR) | **jugable** |
 | 5 | Laberinto de Recompensas | Aprendizaje | Aprendizaje por refuerzo | premios/castigos, Q-valores como calor | definido |
 | 6 | Fábrica de Neuronas | Aprendizaje | Redes neuronales, pesos | perillas, activaciones visibles | definido |
 | 7 | Ojos de AI CAT | Percepción | Visión por computadora | píxeles, bordes, cámara on-device | definido |
@@ -52,6 +52,24 @@ Cada mundo tiene 3 retos (tier 1, 2, 3) y un **reto maestro** (tier 3, opcional 
 4. **Maestro de la biblioteca** — rasgos ruidosos y dos etiquetas cambiadas.
 
 **La IA real detrás**: un clasificador **k-NN (k = 3)** sobre tres rasgos (tamaño, orejas puntiagudas, canto) cuyo único conocimiento son las etiquetas del niño (incluidas las erróneas, que se quedan hasta que se corrigen). El medidor evalúa un conjunto de prueba oculto. Cada etiqueta aparece como un bloque de datos en la pila de AI CAT en el escenario 3D; los bloques erróneos brillan en rojo.
+
+### 3.3 Taller de Clasificación (detalle)
+
+1. **Grande o pequeño** — dos grupos separables por el eje *tamaño*; el modelo es un **umbral** `x = t` que el niño arrastra.
+2. **Traza la línea** — dos grupos separables en diagonal; el modelo es una **recta** por dos manijas.
+3. **Tres grupos** — tres clases; el modelo son **tres centroides** (clasificación por centroide más cercano).
+4. **Maestro constructor** — tres clases con 2 **valores atípicos** (animales colocados en el grupo equivocado). El niño puede marcarlos con ❌ para excluirlos; marcar un animal real cuenta como error.
+
+**La IA real detrás**: el tablero es el espacio de rasgos `[0,1]²` (tamaño, pelusa). Los puntos de cada clase se muestrean alrededor de centros fijos con ruido uniforme `±0.11` (semilla determinista). La predicción es `signo(x − t)` (umbral), el **signo del producto cruzado** `(b − a) × (p − a)` (recta; la polaridad se elige con los datos para que la etiqueta "del lado correcto" no dependa de la dirección en que el niño trace la recta) o `argmin_k ‖p − c_k‖` (centroides). Precisión de entrenamiento `acc = correctos / (puntos no marcados + reales marcados)`, meta `0.9`. Al pulsar "¡Listo!" el mismo modelo clasifica **animales de prueba** no vistos: la generalización se ve en pantalla. La pista mueve el modelo a mitad de camino hacia el **modelo ideal** (umbral = punto medio entre centros; recta = mediatriz; centroides = medias reales). XP: `acc` si se alcanzó la meta, `acc/2` si no.
+
+### 3.4 Sendero de Instrucciones (detalle)
+
+1. **Primeros pasos** — avanzar/girar, 3 pasos hasta el pez; presupuesto de 6 bloques.
+2. **Si hay un charco** — aparece `SI charco adelante: salta`; sin él, AI CAT cae al charco (¡splash!) y vuelve al inicio.
+3. **Otra vez y otra vez** — `REPETIR n: avanzar` (n = 2…5) para subir una escalera larga con pocos bloques.
+4. **Maestro explorador** — SI + REPETIR combinados en un sendero con esquina.
+
+**La IA real detrás**: un **intérprete** determinista (`TrailInterpreter`) ejecuta el programa sobre una cuadrícula con orientación (N/E/S/O); los bloques de control cuestan 2 del presupuesto (el bloque y su cuerpo), hay dos trazados por nivel elegidos por `semilla mod 2`, y un límite de 60 pasos convierte un bucle infinito en el resultado "ese programa nunca termina". Resultados: `goal`, `splash`, `lost` (se detuvo antes del pez) y `tooLong`. Cada ejecución se anima en el mundo 3D: el gato camina celda a celda y gira con la pose correspondiente. Puntuación `s = max(0.55, 1 − 0.15·(ejecuciones − 1))` si llegó al pez; `0` si no.
 
 ## 4. Modelos matemáticos
 
@@ -115,7 +133,7 @@ AICatCore (SwiftPM, solo Foundation) → currículo, crecimiento, dificultad, pu
 
 ## 9. Hoja de ruta
 
-- M8: escenarios 3 (tablero 2D con centroides) y 4 (bloques de instrucciones), reutilizando `ChallengeSession` y `AdaptiveStage`.
+- M8 ✅: escenarios 3 (tablero 2D: umbral, recta, centroides, atípicos) y 4 (bloques de instrucciones ejecutados por el gato), reutilizando `ChallengeSession` y `AdaptiveStage`.
 - M9: 5 (Q-learning tabular visible) y 6 (red de 2 capas con perillas).
 - M10: 7 (Vision on-device) y 8 (reconocimiento de voz on-device + Foundation Models), con permisos localizados y puerta parental.
 - M11: 9 y 10, exportación de "mi mini IA", graduación.

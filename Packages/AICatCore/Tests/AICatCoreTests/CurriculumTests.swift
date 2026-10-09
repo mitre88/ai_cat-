@@ -19,7 +19,7 @@ final class CurriculumTests: XCTestCase {
                 XCTAssertLessThanOrEqual(c.itemRange.lowerBound, c.itemRange.upperBound)
             }
         }
-        XCTAssertEqual(Curriculum.playableScenarioIDs, [.patternGarden, .dataLibrary])
+        XCTAssertEqual(Curriculum.playableScenarioIDs, [.patternGarden, .dataLibrary, .classifierWorkshop, .algorithmTrail])
         XCTAssertEqual(Curriculum.challenge(id: "s2.c3")?.mechanic, .labeling)
         XCTAssertNil(Curriculum.challenge(id: "s2.c9"))
     }

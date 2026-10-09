@@ -6,7 +6,7 @@ physically (continuous morphology from kitten to adult cat) and in knowledge. Bi
 100 % on device, designed first for **iPhone Duo** (outer 5.4" display, inner 7.6" display, hinge postures)
 and runs on any iPhone with iOS 26+.
 
-Status: foundation + 10 scenarios defined + **scenarios 1 and 2 playable**. Design document: `Docs/GDD.md`.
+Status: foundation + 10 scenarios defined + **scenarios 1 to 4 playable**. Design document: `Docs/GDD.md`.
 
 ## Inicio rápido (ES)
 
@@ -52,7 +52,7 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 | `AICat/World` | RealityKit stage: materials, lighting with shadows, camera rig, sets, props, sky/IBL, drag interaction, celebration. |
 | `AICat/Cat` | `CatRig` protocol, procedural kitten, animator, USDZ slot. |
 | `AICat/Challenges` | Challenge host and session, sorting and labeling boards, result overlay. |
-| `AICat/Scenarios` | World map, scenario host, controllers for scenarios 1 and 2. |
+| `AICat/Scenarios` | World map, scenario host, controllers for scenarios 1 to 4. |
 | `AICat/Intelligence` | Scripted brain, Foundation Models brain, router with timeout, kid-safe filter, text-to-speech. |
 | `AICat/Parent` | Parental gate and parent zone. |
 | `Config/Info.plist` | Explicit Info.plist (kept outside the synchronized folder on purpose). |
@@ -60,10 +60,12 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 | `Tools/` | Python helpers: reference math model, string catalog generator, project validator. |
 | `Docs/` | Game design document and art pipeline. |
 
-## How the two playable worlds use real AI
+## How the playable worlds use real AI
 
 - **Pattern Garden**: AI CAT learns the sorting rule from the child's examples with a one-level decision tree, and only commits when a single hypothesis survives (a version-space idea). Then it carries the remaining fruit itself.
 - **Data Library**: AI CAT classifies with k-nearest neighbours over the child's labels; a hidden test set drives the accuracy meter, so wrong labels visibly hurt.
+- **Classifier Workshop**: the child *is* the training algorithm. A threshold, a line or three centroids are the model; the meter is the training accuracy, and after "Done" AI CAT classifies unseen test animals with the same model (generalisation). The master level adds outliers the child may flag, but flagging a genuine animal counts as an error.
+- **Algorithm Trail**: a tiny interpreter runs the child's block program (forward, turn, jump, *if puddle ahead*, *repeat n*) step by step on the 3-D cat, with a step limit that turns an endless loop into a visible "that program never ends". Fewer runs to reach the fish mean a higher score.
 
 ## QA checklist
 
@@ -81,6 +83,7 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 - *Unknown type `ArrangementView` / `DeviceHinge`*: you are on Xcode 26; remove `AICAT_DUO`.
 - *No shadows*: check the simulator's Metal support; shadows need a device or a recent simulator.
 - *Kitten does not grow*: XP only accrues on passed challenges (accuracy ≥ 60 %).
+- *Linux / CI without Xcode*: `Tools/verify_linux.sh <swift-toolchain-root>` builds and tests the package, parses every app file and type-checks the whole app against the shadow frameworks in `Tools/shadows` (see `Tools/shadows/README.md`).
 
 ## License
 
