@@ -45,7 +45,8 @@ jobs:
           xcodebuild -showsdks 2>/dev/null | grep -i "simulator" || true
       - name: Build for the iOS simulator (AICAT_DUO off; needs Xcode 26+, otherwise skipped)
         run: |
-          MAJOR=$(xcodebuild -version | head -1 | awk '{print $2}' | cut -d. -f1)
+          xcodebuild -version > /tmp/xcode-version.txt 2>&1   # no pipe: xcodebuild throws when head closes it early
+          MAJOR=$(head -1 /tmp/xcode-version.txt | awk '{print $2}' | cut -d. -f1)
           if [ "${MAJOR:-0}" -lt 26 ]; then echo "Xcode $MAJOR < 26 (iOS 26 SDK needed): app build skipped"; exit 0; fi
           xcodebuild build -project AICat.xcodeproj -scheme AICat -destination "generic/platform=iOS Simulator" \
             -derivedDataPath /tmp/aicat-dd \

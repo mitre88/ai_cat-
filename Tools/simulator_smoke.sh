@@ -40,7 +40,7 @@ for _ in $(seq 1 "$WAIT"); do
 done
 kill "$PID" 2>/dev/null || true
 echo "=== app output (smoke lines, errors) ==="
-grep -E "AICAT_SMOKE|error|Error|crash|Fatal|Terminating|exception" "$LOG" | head -80
+grep -E "AICAT_SMOKE|error|Error|crash|Fatal|Terminating|exception" "$LOG" | head -140
 OK_PATTERN="AICAT_SMOKE: frames=.* OK"
 [ "$MODE" = "tour" ] && OK_PATTERN="AICAT_SMOKE: tour=[0-9]+/[0-9]+ OK"
 if grep -qE "$OK_PATTERN" "$LOG"; then echo "=== SIMULATOR SMOKE OK ($MODE) ==="; exit 0; fi
