@@ -120,16 +120,16 @@ enum Materials {
                  repeats: 3, sheen: UIColor(white: 0.34, alpha: 1))
     }
 
-    /// Soft contact shadow: an unlit, transparent black disc with a radial falloff that works on every device.
-    /// `opacity` is the darkness at the centre.
+    /// Soft contact shadow: an unlit black disc whose opacity comes from the radial-falloff texture (the
+    /// falloff is in every channel of that texture, so it reads correctly whichever channel the opacity
+    /// sampler uses), scaled by `opacity` (the darkness at the centre). Works on every device.
     @MainActor
     static func blobShadow(opacity: Float) -> UnlitMaterial {
         var material = UnlitMaterial()
+        material.color = UnlitMaterial.BaseColor(tint: .black, texture: nil)
         if let resource = TextureLibrary.shared.texture(.blobShadow) {
-            material.color = UnlitMaterial.BaseColor(tint: .black, texture: MaterialParameters.Texture(resource))
-            material.blending = .transparent(opacity: .init(floatLiteral: opacity))
+            material.blending = .transparent(opacity: .init(scale: opacity, texture: MaterialParameters.Texture(resource)))
         } else {
-            material.color = UnlitMaterial.BaseColor(tint: .black, texture: nil)
             material.blending = .transparent(opacity: .init(floatLiteral: opacity * 0.45))
         }
         material.writesDepth = false

@@ -9,7 +9,7 @@ import Foundation
 public enum TextureKind: String, CaseIterable, Sendable {
     // colour (premultiplied RGBA, opaque)
     case grass, stone, wood, metal, carpet, labTile, sand, fur, bark, leaves, wicker, fruit
-    // alpha only (black with a radial falloff)
+    // falloff in every channel (premultiplied white): opacity map of the contact shadow
     case blobShadow
     // tangent-space normal maps
     case grassNormal, stoneNormal, woodNormal, furNormal, barkNormal, fruitNormal
@@ -95,15 +95,18 @@ public enum ProceduralTextures {
         }
     }
 
-    /// Black with the alpha the closure returns (premultiplied, so the colour channels stay 0).
+    /// Premultiplied white with the alpha the closure returns: every channel carries the falloff, so the
+    /// texture works both as an opacity map (whichever channel the renderer samples) and as a colour map
+    /// tinted black.
     private static func paintAlpha(_ pixels: inout [UInt8], _ size: Int, _ alpha: (Double, Double) -> Double) {
         for y in 0..<size {
             for x in 0..<size {
                 let index = (y * size + x) * 4
-                pixels[index] = 0
-                pixels[index + 1] = 0
-                pixels[index + 2] = 0
-                pixels[index + 3] = byte(alpha(Double(x) / Double(size), Double(y) / Double(size)))
+                let a = byte(alpha(Double(x) / Double(size), Double(y) / Double(size)))
+                pixels[index] = a
+                pixels[index + 1] = a
+                pixels[index + 2] = a
+                pixels[index + 3] = a
             }
         }
     }

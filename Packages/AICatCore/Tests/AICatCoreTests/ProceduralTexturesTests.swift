@@ -119,8 +119,8 @@ final class ProceduralTexturesTests: XCTestCase {
         }
     }
 
-    /// The contact shadow is a black, premultiplied disc: opaque in the middle, clear at the edge,
-    /// never getting darker again as it fades.
+    /// The contact shadow is a premultiplied disc whose every channel is the falloff: opaque in the middle,
+    /// clear at the edge, never getting darker again as it fades.
     func testBlobShadowFadesMonotonicallyToClear() {
         let image = ProceduralTextures.render(.blobShadow, size: 64)
         XCTAssertEqual(image.pixel(32, 32).a, 255)
@@ -130,9 +130,9 @@ final class ProceduralTexturesTests: XCTestCase {
         var previous = 255
         for x in 32..<64 {
             let p = image.pixel(x, 32)
-            XCTAssertEqual(p.r, 0)
-            XCTAssertEqual(p.g, 0)
-            XCTAssertEqual(p.b, 0)
+            XCTAssertEqual(p.r, p.a, "premultiplied white: colour equals alpha")
+            XCTAssertEqual(p.g, p.a)
+            XCTAssertEqual(p.b, p.a)
             XCTAssert(Int(p.a) <= previous, "alpha must not increase outwards (x=\(x))")
             previous = Int(p.a)
         }
