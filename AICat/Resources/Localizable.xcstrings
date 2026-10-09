@@ -2381,6 +2381,533 @@
         }
       }
     },
+    "chat.ask.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Why do cats purr?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Por qué ronronean los gatos?"
+          }
+        }
+      }
+    },
+    "chat.ask.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What is your favourite number?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Cuál es tu número favorito?"
+          }
+        }
+      }
+    },
+    "chat.ask.3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Can computers dream?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Pueden soñar las computadoras?"
+          }
+        }
+      }
+    },
+    "chat.ask_title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Creative mode: ask AI CAT (the on-device model answers)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo creativo: pregúntale a AI CAT (responde el modelo en el dispositivo)"
+          }
+        }
+      }
+    },
+    "chat.believe": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That's right"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Está bien"
+          }
+        }
+      }
+    },
+    "chat.caught": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Good catch! That answer was wrong."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Bien visto! Esa respuesta estaba mal."
+          }
+        }
+      }
+    },
+    "chat.doubt": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That's wrong"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Está mal"
+          }
+        }
+      }
+    },
+    "chat.doubted_right": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That one was actually true. Doubting is fine; checking is better!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esa en realidad era verdad. Dudar está bien; ¡comprobar es mejor!"
+          }
+        }
+      }
+    },
+    "chat.learn.a": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From examples, like the fruit you sorted for me."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con ejemplos, como las frutas que ordenaste para mí."
+          }
+        }
+      }
+    },
+    "chat.learn.q": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How do you learn?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Cómo aprendes?"
+          }
+        }
+      }
+    },
+    "chat.missed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Careful: that answer was actually wrong."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuidado: esa respuesta en realidad estaba mal."
+          }
+        }
+      }
+    },
+    "chat.model_answer_note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Written by the on-device model. It can sound sure and still be wrong!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escrito por el modelo en el dispositivo. ¡Puede sonar seguro y aun así equivocarse!"
+          }
+        }
+      }
+    },
+    "chat.model_silent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The model stayed quiet this time."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El modelo se quedó callado esta vez."
+          }
+        }
+      }
+    },
+    "chat.moon_cheese.a": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yes, the moon is delicious cheese."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sí, la luna es un queso delicioso."
+          }
+        }
+      }
+    },
+    "chat.moon_cheese.q": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Is the moon made of cheese?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿La luna es de queso?"
+          }
+        }
+      }
+    },
+    "chat.neuron.a": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It adds up signals with weights and decides."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suma señales con pesos y decide."
+          }
+        }
+      }
+    },
+    "chat.neuron.q": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What is a neuron?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué es una neurona?"
+          }
+        }
+      }
+    },
+    "chat.never_wrong.a": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No. I am never wrong about anything."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No. Nunca me equivoco en nada."
+          }
+        }
+      }
+    },
+    "chat.never_wrong.q": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Can you be wrong?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Puedes equivocarte?"
+          }
+        }
+      }
+    },
+    "chat.pattern.a": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A pattern is something that repeats, like the stripes on a cat."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un patrón es algo que se repite, como las rayas de un gato."
+          }
+        }
+      }
+    },
+    "chat.pattern.q": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What is a pattern?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué es un patrón?"
+          }
+        }
+      }
+    },
+    "chat.photos.a": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "They stay on this device. I never send them anywhere."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se quedan en este dispositivo. Nunca las envío a ningún lado."
+          }
+        }
+      }
+    },
+    "chat.photos.q": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where do my photos go?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿A dónde van mis fotos?"
+          }
+        }
+      }
+    },
+    "chat.progress_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Answers checked: %lld of %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Respuestas revisadas: %lld de %lld"
+          }
+        }
+      }
+    },
+    "chat.spider.a": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A spider has six legs."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una araña tiene seis patas."
+          }
+        }
+      }
+    },
+    "chat.spider.q": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How many legs does a spider have?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Cuántas patas tiene una araña?"
+          }
+        }
+      }
+    },
+    "chat.thinking": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT is thinking…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT está pensando…"
+          }
+        }
+      }
+    },
+    "chat.tip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT answers. Is each answer right? Models can sound sure and still be wrong."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT responde. ¿Está bien cada respuesta? Los modelos pueden sonar seguros y aun así equivocarse."
+          }
+        }
+      }
+    },
+    "chat.token.a": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A token is a piece of a word that I read."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un token es un pedazo de palabra que yo leo."
+          }
+        }
+      }
+    },
+    "chat.token.q": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What is a token?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué es un token?"
+          }
+        }
+      }
+    },
+    "chat.trusted_right": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Right, that one was true."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Correcto, esa era verdad."
+          }
+        }
+      }
+    },
     "common.back": {
       "extractionState": "manual",
       "localizations": {
@@ -6427,6 +6954,125 @@
         }
       }
     },
+    "nextword.after_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After \"%@\" comes…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Después de \"%@\" viene…"
+          }
+        }
+      }
+    },
+    "nextword.corpus_title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What AI CAT read"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo que leyó AI CAT"
+          }
+        }
+      }
+    },
+    "nextword.counts_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld times"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld veces"
+          }
+        }
+      }
+    },
+    "nextword.right": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Same guess as AI CAT!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡La misma adivinanza que AI CAT!"
+          }
+        }
+      }
+    },
+    "nextword.round_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guess %lld of %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adivinanza %lld de %lld"
+          }
+        }
+      }
+    },
+    "nextword.tip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT read these sentences. Which word most often comes next?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT leyó estas oraciones. ¿Qué palabra viene más seguido después?"
+          }
+        }
+      }
+    },
+    "nextword.wrong_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT's guess: \"%@\" (it counted it more often)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La adivinanza de AI CAT: \"%@\" (la contó más veces)."
+          }
+        }
+      }
+    },
     "onboarding.choose_language": {
       "extractionState": "manual",
       "localizations": {
@@ -6722,13 +7368,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT works entirely on this device. It never connects to the internet, shows no ads, collects no data and asks for no personal information. The kitten's name and the progress are stored only on this device and can be erased above."
+            "value": "AI CAT works entirely on this device. It never connects to the internet, shows no ads, collects no data and asks for no personal information. The kitten's name and the progress are stored only on this device and can be erased above. The camera (world 7) and the microphone (world 8) are used only after a grown-up passes the parental gate; images and speech are analysed on the device and never saved or sent anywhere."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI CAT funciona completamente en este dispositivo. Nunca se conecta a internet, no muestra anuncios, no recopila datos ni pide información personal. El nombre del gatito y el progreso se guardan solo en este dispositivo y pueden borrarse arriba."
+            "value": "AI CAT funciona completamente en este dispositivo. Nunca se conecta a internet, no muestra anuncios, no recopila datos ni pide información personal. El nombre del gatito y el progreso se guardan solo en este dispositivo y pueden borrarse arriba. La cámara (mundo 7) y el micrófono (mundo 8) se usan solo después de que un adulto pasa la puerta parental; las imágenes y la voz se analizan en el dispositivo y nunca se guardan ni se envían."
           }
         }
       }
@@ -9521,6 +10167,329 @@
         }
       }
     },
+    "talk.heard_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I heard: \"%@\""
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escuché: \"%@\""
+          }
+        }
+      }
+    },
+    "talk.listen": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listen, AI CAT!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Escucha, AI CAT!"
+          }
+        }
+      }
+    },
+    "talk.listening": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listening…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escuchando…"
+          }
+        }
+      }
+    },
+    "talk.parent_needed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A grown-up must allow the microphone first."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primero un adulto debe permitir el micrófono."
+          }
+        }
+      }
+    },
+    "talk.pretend.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The kittens are playing"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los gatitos están jugando"
+          }
+        }
+      }
+    },
+    "talk.pretend.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My robots jumped high"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis robots saltaron alto"
+          }
+        }
+      }
+    },
+    "talk.pretend.3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A sunflower under the rainbow"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un girasol bajo el arcoíris"
+          }
+        }
+      }
+    },
+    "talk.pretend_title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No microphone? Pretend you said…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Sin micrófono? Imagina que dijiste…"
+          }
+        }
+      }
+    },
+    "talk.private_note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your voice is turned into text on this device and never recorded."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu voz se convierte en texto en este dispositivo y nunca se graba."
+          }
+        }
+      }
+    },
+    "talk.progress_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sentences: %lld of %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oraciones: %lld de %lld"
+          }
+        }
+      }
+    },
+    "talk.tip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Say a short sentence. It becomes text, then tokens."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di una oración corta. Se vuelve texto y luego tokens."
+          }
+        }
+      }
+    },
+    "talk.tokens_title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As tokens:"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Como tokens:"
+          }
+        }
+      }
+    },
+    "talk.unavailable": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speech recognition is not available here, so use the sentence chips."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El reconocimiento de voz no está disponible aquí; usa las fichas de oraciones."
+          }
+        }
+      }
+    },
+    "tokens.confirm": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Listo!"
+          }
+        }
+      }
+    },
+    "tokens.round_done": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token by token!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Token a token!"
+          }
+        }
+      }
+    },
+    "tokens.round_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Word %lld of %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palabra %lld de %lld"
+          }
+        }
+      }
+    },
+    "tokens.so_far": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "So far:"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hasta ahora:"
+          }
+        }
+      }
+    },
+    "tokens.tip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap the chips in order to rebuild the word the way AI CAT splits it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca las fichas en orden para armar la palabra como la parte AI CAT."
+          }
+        }
+      }
+    },
+    "tokens.wrong": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not that piece. Which piece starts the rest of the word?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esa pieza no. ¿Qué pieza empieza el resto de la palabra?"
+          }
+        }
+      }
+    },
     "trail.block.forward": {
       "extractionState": "manual",
       "localizations": {
@@ -9840,6 +10809,720 @@
           "stringUnit": {
             "state": "translated",
             "value": "Arma un programa con bloques y córrelo. AI CAT hace exactamente lo que dices."
+          }
+        }
+      }
+    },
+    "vision.edges.confirm": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep this dial"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dejar esta perilla"
+          }
+        }
+      }
+    },
+    "vision.edges.done": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That's the outline!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Ese es el contorno!"
+          }
+        }
+      }
+    },
+    "vision.edges.match_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Outline match: %lld%%"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coincidencia con el contorno: %lld%%"
+          }
+        }
+      }
+    },
+    "vision.edges.threshold_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dial: a change of at least %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perilla: un cambio de al menos %lld"
+          }
+        }
+      }
+    },
+    "vision.edges.tip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An edge is where the number changes a lot between neighbours. Turn the dial until only the outline lights up."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un borde es donde el número cambia mucho entre vecinos. Gira la perilla hasta que solo se ilumine el contorno."
+          }
+        }
+      }
+    },
+    "vision.live.agree": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Right"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acertó"
+          }
+        }
+      }
+    },
+    "vision.live.ask_parent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Call a grown-up"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Llamar a un adulto"
+          }
+        }
+      }
+    },
+    "vision.live.checks_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Checks: %lld of %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisiones: %lld de %lld"
+          }
+        }
+      }
+    },
+    "vision.live.denied": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera not allowed, so AI CAT looks at sample pictures."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cámara no permitida, así que AI CAT mira imágenes de muestra."
+          }
+        }
+      }
+    },
+    "vision.live.disagree": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wrong"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Falló"
+          }
+        }
+      }
+    },
+    "vision.live.done": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You checked AI CAT's eyes!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Revisaste los ojos de AI CAT!"
+          }
+        }
+      }
+    },
+    "vision.live.guess_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ (%lld%% sure)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ (%lld%% seguro)"
+          }
+        }
+      }
+    },
+    "vision.live.next_sample": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next picture"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Siguiente imagen"
+          }
+        }
+      }
+    },
+    "vision.live.no_guess": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT is looking…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT está mirando…"
+          }
+        }
+      }
+    },
+    "vision.live.parent_needed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A grown-up must allow the camera first."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primero un adulto debe permitir la cámara."
+          }
+        }
+      }
+    },
+    "vision.live.private_note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The camera image is analysed on this device and never saved."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La imagen de la cámara se analiza en este dispositivo y nunca se guarda."
+          }
+        }
+      }
+    },
+    "vision.live.samples_tip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No camera here: AI CAT looks at sample pictures instead."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aquí no hay cámara: AI CAT mira imágenes de muestra."
+          }
+        }
+      }
+    },
+    "vision.live.start_camera": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open AI CAT's eyes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir los ojos de AI CAT"
+          }
+        }
+      }
+    },
+    "vision.live.thinking": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT is thinking…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT está pensando…"
+          }
+        }
+      }
+    },
+    "vision.live.tip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Point the camera at things. AI CAT guesses; you say if it is right. Nothing is saved."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apunta la cámara a cosas. AI CAT adivina; tú dices si acertó. No se guarda nada."
+          }
+        }
+      }
+    },
+    "vision.live.unknown": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "something I don't know yet"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "algo que todavía no conozco"
+          }
+        }
+      }
+    },
+    "vision.live.use_samples": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use sample pictures instead"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mejor usar imágenes de muestra"
+          }
+        }
+      }
+    },
+    "vision.pixels.done": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Those are the brightest pixels!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Esos son los píxeles más brillantes!"
+          }
+        }
+      }
+    },
+    "vision.pixels.remaining_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brightest pixels left: %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Píxeles más brillantes que faltan: %lld"
+          }
+        }
+      }
+    },
+    "vision.pixels.tip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoom in until the numbers appear, then tap every pixel with a 9: the brightest ones."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acerca hasta que aparezcan los números y toca cada píxel con un 9: los más brillantes."
+          }
+        }
+      }
+    },
+    "vision.pixels.wrong": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That one is darker. Look for the 9s."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ese es más oscuro. Busca los 9."
+          }
+        }
+      }
+    },
+    "vision.pixels.zoom_first": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoom in to the numbers first!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Primero acerca hasta los números!"
+          }
+        }
+      }
+    },
+    "vision.shape.ball": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ball"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pelota"
+          }
+        }
+      }
+    },
+    "vision.shape.cup": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cup"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "taza"
+          }
+        }
+      }
+    },
+    "vision.shape.fish": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fish"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pez"
+          }
+        }
+      }
+    },
+    "vision.shape.heart": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "heart"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "corazón"
+          }
+        }
+      }
+    },
+    "vision.shape.house": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "house"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "casa"
+          }
+        }
+      }
+    },
+    "vision.shape.star": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "star"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "estrella"
+          }
+        }
+      }
+    },
+    "vision.shapes.clues_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld clues"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld pistas"
+          }
+        }
+      }
+    },
+    "vision.shapes.confirm": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Listo!"
+          }
+        }
+      }
+    },
+    "vision.shapes.right": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yes! The most clues wins."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Sí! Ganan las pistas."
+          }
+        }
+      }
+    },
+    "vision.shapes.round_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Picture %lld of %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imagen %lld de %lld"
+          }
+        }
+      }
+    },
+    "vision.shapes.tip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Count the clues: the shape with the most matching pixels is what AI CAT recognises. Tap it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuenta las pistas: la forma con más píxeles iguales es la que AI CAT reconoce. Tócala."
+          }
+        }
+      }
+    },
+    "vision.shapes.wrong": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hmm, another shape had more clues."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mmm, otra forma tenía más pistas."
+          }
+        }
+      }
+    },
+    "vision.zoom.grid": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grid"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuadrícula"
+          }
+        }
+      }
+    },
+    "vision.zoom.numbers": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Numbers"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Números"
+          }
+        }
+      }
+    },
+    "vision.zoom.picture": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Picture"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imagen"
           }
         }
       }

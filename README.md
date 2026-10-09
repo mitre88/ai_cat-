@@ -6,7 +6,7 @@ physically (continuous morphology from kitten to adult cat) and in knowledge. Bi
 100 % on device, designed first for **iPhone Duo** (outer 5.4" display, inner 7.6" display, hinge postures)
 and runs on any iPhone with iOS 26+.
 
-Status: foundation + 10 scenarios defined + **scenarios 1 to 6, 9 and 10 playable** (7 and 8 need the camera and microphone and come last). Design document: `Docs/GDD.md`.
+Status: **all 10 scenarios playable** (40 challenges). Worlds 7 and 8 use the camera and the microphone, behind the parental gate, with sample pictures and sentence chips as fallbacks. Design document: `Docs/GDD.md`.
 
 ## Inicio rápido (ES)
 
@@ -52,7 +52,8 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 | `AICat/World` | RealityKit stage: materials, lighting with shadows, camera rig, sets, props, sky/IBL, drag interaction, celebration. |
 | `AICat/Cat` | `CatRig` protocol, procedural kitten, animator, USDZ slot. |
 | `AICat/Challenges` | Challenge host and session, sorting and labeling boards, result overlay. |
-| `AICat/Scenarios` | World map, scenario host, controllers for scenarios 1 to 6, 9 and 10. |
+| `AICat/Scenarios` | World map, scenario host, one controller folder per scenario (1–10). |
+| `AICat/Capture` | Camera classifier (AVFoundation + Vision), camera preview and on-device speech listener (Speech). Excluded from the Linux type-check and stubbed in `Tools/shadows/AppStubs.swift`. |
 | `AICat/Intelligence` | Scripted brain, Foundation Models brain, router with timeout, kid-safe filter, text-to-speech. |
 | `AICat/Parent` | Parental gate and parent zone. |
 | `Config/Info.plist` | Explicit Info.plist (kept outside the synchronized folder on purpose). |
@@ -68,6 +69,8 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 - **Algorithm Trail**: a tiny interpreter runs the child's block program (forward, turn, jump, *if puddle ahead*, *repeat n*) step by step on the 3-D cat, with a step limit that turns an endless loop into a visible "that program never ends". Fewer runs to reach the fish mean a higher score.
 - **Reward Maze**: real tabular Q-learning (α 0.5, γ 0.9, ε-greedy). The child designs the maze (treat, puddles), AI CAT explores in batches, every tile is painted with V(s) = max Q(s, a) so values visibly spread back from the treat, and the greedy policy is replayed on stage. The master level asks for a long *safe* path and lets the child pick how curious (ε) the kitten is. Changing the map makes AI CAT forget, because the old values are no longer true.
 - **Neuron Factory**: neurons with wires in {−1, 0, +1} and a "needs at least k" threshold that the child sets by hand; level 3 samples examples that provably need a hidden layer (brute-force separability check). The master level trains a 4-3-1 sigmoid network by full-batch gradient descent on cross-entropy; the child picks the learning rate (slow / medium / turbo, and turbo really does bounce) and watches the error curve.
+- **AI CAT's Eyes**: the picture is a 10×10 grid of digits (also built on stage as little cubes). Level 1 zooms until the numbers appear and asks for the brightest pixels; level 2 is a real edge detector (biggest change to a neighbour ≥ a dial the child turns, scored by F1 against the true outline); level 3 is template matching by counting matching pixels ("clues"); the master level runs Vision's on-device classifier on the live camera (or on sample pictures when there is no camera or no permission) and the child checks every guess.
+- **AI CAT's Voice**: a greedy longest-match tokenizer (a toy WordPiece) the child reproduces chip by chip; a bigram language model trained on eight visible sentences whose counts the child can verify; on-device speech recognition (`requiresOnDeviceRecognition`) that turns a spoken sentence into text and tokens, with "pretend you said…" chips as the fallback; and a conversation with planted wrong answers to spot. With creative mode on, the child can ask the on-device model one of three fixed questions, filtered and labelled as model-written.
 - **Fair Scale**: a data set with a missing coat and the kitten's failed guesses on exactly that coat; a balance game where recognition per group grows with its examples and the scale on stage tilts with the fairness gap; a data-minimisation sort (keep only what the game needs *and* is not private); and real-world cases to judge (cause + fix).
 - **Creative Lab**: a tiny generative model (a seeded three-sentence grammar: same seeds, same story; change a word, change the story) that the child remixes; with creative mode on and Apple Intelligence available, the on-device model writes the sentences instead, every one filtered by `KidSafeFilter`, and the card says which one wrote it. The child then designs a helper AI (goal, data, rules) against a six-point checklist, and graduates with a quiz over the ten worlds.
 
@@ -79,6 +82,8 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 - Reduce Motion (system or parent zone) removes particles, sunrise and fold gestures.
 - Apple Intelligence on + "Creative AI CAT" on → generated lines pass the filter; off or unavailable → scripted lines, no visible errors.
 - Progress survives relaunch; "Reset progress" asks for confirmation.
+- World 7 master: the parental gate appears before the camera; denying the permission (or the simulator) falls back to sample pictures; the preview stops when leaving the level.
+- World 8 "Talk to me": the parental gate appears before the microphone; speech is transcribed on device; without permission or support the sentence chips still complete the level.
 - VoiceOver reads cards, scenario titles and AI CAT's bubble; Dynamic Type reflows the boards.
 
 ## Troubleshooting

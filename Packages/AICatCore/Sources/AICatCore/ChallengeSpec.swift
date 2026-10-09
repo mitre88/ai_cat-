@@ -15,12 +15,7 @@ public enum ChallengeMechanic: String, Codable, Sendable, CaseIterable {
     case creativeLab    // 10 · generative project & graduation
 
     /// Whether this release ships a playable board for the mechanic.
-    public var isPlayable: Bool {
-        switch self {
-        case .sorting, .labeling, .scatterBoard, .sequencing, .rewardMaze, .neuronDials, .fairness, .creativeLab: return true
-        default: return false
-        }
-    }
+    public var isPlayable: Bool { true }
 }
 
 /// Static description of one challenge. Numbers that depend on the child (item count, distractors)

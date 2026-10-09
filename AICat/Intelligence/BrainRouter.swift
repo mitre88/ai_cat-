@@ -34,6 +34,16 @@ final class BrainRouter: CatBrain {
 
     static let storyTimeoutSeconds: Double = 8
 
+    func answer(question: String, context: BrainContext) async -> String? {
+        guard context.creativeMode, FoundationModelsBrain.isAvailable, !inFlight else { return nil }
+        inFlight = true
+        defer { inFlight = false }
+        let generative = self.generative
+        return await Self.withTimeout(seconds: Self.storyTimeoutSeconds, fallback: nil) {
+            await generative.answer(question: question, context: context)
+        }
+    }
+
     static func withTimeout<T: Sendable>(seconds: Double, fallback: T, operation: @escaping @Sendable () async -> T) async -> T {
         await withTaskGroup(of: T?.self) { group in
             group.addTask { await operation() }

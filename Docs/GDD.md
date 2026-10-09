@@ -28,8 +28,8 @@ La banda la elige un adulto en la **zona de padres** (puerta parental: mantener 
 | 4 | Sendero de Instrucciones | Representación | Algoritmos, si/entonces, bucles | bloques de instrucciones que AI CAT ejecuta en 3D (avanzar, girar, saltar, SI charco, REPETIR) | **jugable** |
 | 5 | Laberinto de Recompensas | Aprendizaje | Aprendizaje por refuerzo | el niño diseña el laberinto (premio, charcos); Q-learning tabular; casillas pintadas con V(s); repetición del mejor camino en 3D | **jugable** |
 | 6 | Fábrica de Neuronas | Aprendizaje | Redes neuronales, pesos | neuronas de cables ternarios y umbral; dos capas; red sigmoide que se entrena sola con curva de error | **jugable** |
-| 7 | Ojos de AI CAT | Percepción | Visión por computadora | píxeles, bordes, cámara on-device | definido |
-| 8 | Voz de AI CAT | Interacción natural | Lenguaje natural, tokens | hablarle al gato (voz + modelo on-device) | definido |
+| 7 | Ojos de AI CAT | Percepción | Visión por computadora | píxeles con números, detector de bordes por umbral, emparejado de formas por pistas, cámara con Vision on-device (o imágenes de muestra) | **jugable** |
+| 8 | Voz de AI CAT | Interacción natural | Lenguaje natural, tokens | tokenizador por fichas, bigramas contables, voz a texto on-device (o fichas), respuestas con errores plantados | **jugable** |
 | 9 | Balanza Justa | Impacto social | Sesgo, justicia, privacidad | grupo faltante, balancear el dataset (balanza 3D), minimización de datos, juzgar casos | **jugable** |
 | 10 | Laboratorio Creativo | Interacción natural | IA generativa, proyecto final | semillas de historia (gramática generativa o modelo on-device), remezcla, diseño de un ayudante, examen de graduación | **jugable** |
 
@@ -107,6 +107,20 @@ Cada mundo tiene 3 retos (tier 1, 2, 3) y un **reto maestro** (tier 3, opcional 
 
 **La IA real detrás**: la historia sale de un **modelo generativo mínimo**: una gramática de 3 oraciones × 3 variantes con huecos (%1 personaje, %2 lugar, %3 objeto) muestreada con semilla (`SeededGenerator`): mismas semillas ⇒ misma historia; cambiar una palabra cambia la historia. Con **modo creativo** (opt-in parental) y Apple Intelligence disponible, el modelo on-device escribe las tres oraciones (`@Generable ModelStory`, 8 s de tope, cada oración por `KidSafeFilter`; si algo falla, queda la historia de patrones) y la tarjeta dice quién la escribió. Las plantillas evitan concordancias de género en español (sin pronombres ni adjetivos tras los huecos).
 
+### 3.7 Ojos de AI CAT (detalle)
+
+1. **Píxeles** — una imagen de 10×10 dígitos (0 negro … 9 blanco) que también se construye en el escenario con cubitos; el niño acerca (imagen → cuadrícula → números) y toca los píxeles con 9.
+2. **Bordes** — un **detector de bordes**: `g(p) = max_{q vecino} |I(q) − I(p)|`; la perilla es el umbral `t` y se iluminan los píxeles con `g ≥ t`. Se mide con **F1** contra el contorno real (píxeles junto a un píxel del otro lado del nivel 5); con sombreado interno 6–8 y fondo 0–2, solo `t ≈ 4` da F1 ≥ 0.8 (probado para 12 semillas).
+3. **Formas** — emparejado por plantilla: la consulta es una plantilla con 7–13 píxeles cambiados; las **pistas** son los píxeles que coinciden (|Δ| ≤ 2); gana la plantilla con más pistas (probado).
+4. **Maestro de la vista** — cámara trasera + `VNClassifyImageRequest` (Vision, on-device) a ~1 fotograma/s; el niño marca cada conjetura como acierto/fallo. Sin cámara, sin permiso o en simulador: imágenes de muestra (emoji renderizado y clasificado por Vision). Puerta parental antes de la cámara; nada se guarda.
+
+### 3.8 Voz de AI CAT (detalle)
+
+1. **Tokens** — tokenizador **greedy de prefijo más largo** sobre un vocabulario pequeño (WordPiece de juguete): el niño reconstruye la palabra con fichas (piezas + distractores) en el orden del tokenizador; las letras sin pieza se vuelven trozos de ≤ 3 caracteres.
+2. **Adivina la siguiente palabra** — **modelo de bigramas** `P(w'|w) = c(w,w')/c(w,·)` sobre 8 oraciones visibles; el niño elige entre 3 opciones y compara con el argmax (empates en orden alfabético); después se muestran los conteos.
+3. **Háblame** — `SFSpeechRecognizer` con `requiresOnDeviceRecognition` (solo en el dispositivo, nunca se graba), 7 s por oración; la transcripción se tokeniza. Puerta parental antes del micrófono; sin soporte o permiso, fichas "imagina que dijiste…".
+4. **Maestro de las palabras** — conversación con respuestas **mal plantadas** (araña de seis patas, luna de queso, "nunca me equivoco"): el niño marca cada respuesta como bien/mal. Extra con modo creativo: tres preguntas fijas al modelo on-device (respuesta filtrada por `KidSafeFilter`, rotulada "puede sonar seguro y aun así equivocarse").
+
 ## 4. Modelos matemáticos
 
 ### 4.1 Crecimiento
@@ -172,5 +186,5 @@ AICatCore (SwiftPM, solo Foundation) → currículo, crecimiento, dificultad, pu
 - M8 ✅: escenarios 3 (tablero 2D: umbral, recta, centroides, atípicos) y 4 (bloques de instrucciones ejecutados por el gato), reutilizando `ChallengeSession` y `AdaptiveStage`.
 - M9 ✅: 5 (Q-learning tabular visible, el niño diseña el laberinto) y 6 (neuronas ternarias por perillas, dos capas, red sigmoide que se entrena sola).
 - M10 ✅: 9 (sesgo, balance, privacidad, juez) y 10 (historias generativas, remezcla, ayudante, graduación). Se adelantó a 7 y 8 porque se verifica por completo sin dispositivo.
-- M11: 7 (Vision on-device) y 8 (reconocimiento de voz on-device + Foundation Models), con permisos localizados y puerta parental.
-- Arte: sustituir el gato y los mundos procedurales por USDZ (`Docs/ART_PIPELINE.md`).
+- M11 ✅: 7 (píxeles, bordes, formas, Vision on-device) y 8 (tokens, bigramas, voz on-device, conversación), con permisos localizados (`InfoPlist.xcstrings`) y puerta parental antes de cámara y micrófono.
+- Pendiente: pruebas en dispositivo (Xcode 26/27.1), arte USDZ (`Docs/ART_PIPELINE.md`), pulido de audio y accesibilidad.

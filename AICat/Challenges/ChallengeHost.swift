@@ -16,6 +16,8 @@ struct ChallengeHost: View {
     @State private var factory: NeuronFactoryController?
     @State private var fairness: FairScaleController?
     @State private var creative: CreativeLabController?
+    @State private var eyes: CatEyesController?
+    @State private var voice: CatVoiceController?
 
     init(spec: ChallengeSpec) {
         self.spec = spec
@@ -72,6 +74,10 @@ struct ChallengeHost: View {
             FairnessBoard(controller: fairness)
         } else if let creative {
             CreativeBoard(controller: creative)
+        } else if let eyes {
+            VisionBoard(controller: eyes)
+        } else if let voice {
+            LanguageBoard(controller: voice)
         } else {
             ComingSoonBoard(spec: spec)
         }
@@ -127,8 +133,18 @@ struct ChallengeHost: View {
                 creative = controller
                 controller.start()
             }
-        default:
-            break
+        case .cameraVision:
+            if eyes == nil {
+                let controller = CatEyesController(spec: spec, world: world, session: session, app: app)
+                eyes = controller
+                controller.start()
+            }
+        case .voiceChat:
+            if voice == nil {
+                let controller = CatVoiceController(spec: spec, world: world, session: session, app: app)
+                voice = controller
+                controller.start()
+            }
         }
     }
 }

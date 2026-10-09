@@ -34,6 +34,57 @@
           }
         }
       }
+    },
+    "NSCameraUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT looks through the camera to guess what things are (scenario 7). Nothing is saved or sent anywhere."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT mira por la cámara para adivinar qué son las cosas (escenario 7). No se guarda ni se envía nada."
+          }
+        }
+      }
+    },
+    "NSMicrophoneUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT listens to a sentence to show it as text and tokens (scenario 8). Nothing is recorded or sent anywhere."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT escucha una oración para mostrarla como texto y tokens (escenario 8). No se graba ni se envía nada."
+          }
+        }
+      }
+    },
+    "NSSpeechRecognitionUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speech is turned into text on this device only."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La voz se convierte en texto solo en este dispositivo."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -22,6 +22,12 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>AI CAT looks through the camera to guess what things are (scenario 7). Nothing is saved or sent anywhere.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>AI CAT listens to a sentence to show it as text and tokens (scenario 8). Nothing is recorded or sent anywhere.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Speech is turned into text on this device only.</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.education</string>
 	<key>LSRequiresIPhoneOS</key>

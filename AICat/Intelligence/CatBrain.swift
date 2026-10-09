@@ -26,8 +26,11 @@ protocol CatBrain: AnyObject {
     /// Three short story sentences grown from the seed words (creative mode only), or nil when the
     /// on-device model is unavailable, declines, or its text does not pass the kid-safe filter.
     func story(from seeds: [String], context: BrainContext) async -> [String]?
+    /// A short answer to one of the game's own questions (creative mode only), or nil.
+    func answer(question: String, context: BrainContext) async -> String?
 }
 
 extension CatBrain {
     func story(from seeds: [String], context: BrainContext) async -> [String]? { nil }
+    func answer(question: String, context: BrainContext) async -> String? { nil }
 }

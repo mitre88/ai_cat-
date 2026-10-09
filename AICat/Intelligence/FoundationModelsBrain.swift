@@ -100,6 +100,22 @@ final class FoundationModelsBrain: CatBrain {
         #endif
     }
 
+    func answer(question: String, context: BrainContext) async -> String? {
+        #if canImport(FoundationModels)
+        guard context.creativeMode, Self.isAvailable, Self.supports(context.language.locale) else { return nil }
+        do {
+            let session = makeSession(for: context)
+            let prompt = "The child asks: \"\(question)\". Answer in at most two short sentences. If you are not sure, say that you are not sure."
+            let response = try await session.respond(to: prompt, generating: CreativeCatLine.self)
+            return KidSafeFilter.sanitize(response.content.text, maxWords: context.ageBand.maxSentenceWords * 2 + 4)
+        } catch {
+            return nil
+        }
+        #else
+        return nil
+        #endif
+    }
+
     #if canImport(FoundationModels)
     private func storyPrompt(seeds: [String], context: BrainContext) -> String {
         let languageName = context.language == .spanish ? "Spanish" : "English"
