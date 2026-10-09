@@ -282,15 +282,15 @@ public struct NoiseField: Sendable {
         return (1.0 * tone, 0.99 * tone, 0.97 * tone)
     }
 
-    /// Six planks (seams along u) with wavy grain lines running along each plank: `sin(54v + fBm)`.
+    /// Six planks (seams along u) with wavy grain lines running along each plank: `sin(30v + 3·fBm)`.
     public func wood(_ u: Double, _ v: Double) -> ProceduralTextures.RGB {
         let planks = 6
         let fv = fract(v * Double(planks))
         let seam = fv < 0.035 || fv > 0.965
         let plankShift = hash(0, cell(v * Double(planks), planks), 11)
-        let wobble = fbm(u, v, cells: 3, octaves: 2) * 1.6
-        let grain = 0.5 + 0.5 * sin((v * 54 + wobble + plankShift * 7) * 2 * .pi)
-        let tone = seam ? 0.50 : 0.84 + 0.12 * grain + 0.08 * (fbm(u, v, cells: 48, octaves: 2) - 0.5)
+        let wobble = fbm(u, v, cells: 3, octaves: 2) * 3.0
+        let grain = 0.5 + 0.5 * sin((v * 30 + wobble + plankShift * 7) * 2 * .pi)
+        let tone = seam ? 0.50 : 0.85 + 0.10 * grain + 0.08 * (fbm(u, v, cells: 48, octaves: 2) - 0.5)
         return (1.0 * tone, 0.90 * tone, 0.78 * tone)
     }
 
@@ -402,7 +402,7 @@ public struct NoiseField: Sendable {
         let fv = fract(v * planks)
         let seam = min(fv, 1 - fv)
         let plankBevel = clamp01(seam / 0.05)
-        let grain = 0.5 + 0.5 * sin((v * 54 + fbm(u, v, cells: 3, octaves: 2) * 1.6) * 2 * .pi)
+        let grain = 0.5 + 0.5 * sin((v * 30 + fbm(u, v, cells: 3, octaves: 2) * 3.0) * 2 * .pi)
         return 0.8 * plankBevel + 0.2 * grain
     }
 
