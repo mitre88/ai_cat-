@@ -207,6 +207,8 @@ public struct AnyTransition { public static let opacity = AnyTransition(), slide
 
 public protocol ShapeStyle {}
 public struct Color: ShapeStyle, View, Equatable, Hashable, Sendable {
+    public static let primary = Color(red: 0, green: 0, blue: 0)
+    public static let secondary = Color(red: 0.5, green: 0.5, blue: 0.5)
     public init(red: Double, green: Double, blue: Double, opacity: Double = 1) {}
     public init(white: Double, opacity: Double = 1) {}
     public static let red = Color(white: 0), blue = Color(white: 0), orange = Color(white: 0), pink = Color(white: 0)

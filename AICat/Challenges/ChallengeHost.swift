@@ -12,6 +12,8 @@ struct ChallengeHost: View {
     @State private var labeling: DataLibraryController?
     @State private var workshop: ClassifierWorkshopController?
     @State private var trail: AlgorithmTrailController?
+    @State private var maze: RewardMazeController?
+    @State private var factory: NeuronFactoryController?
 
     init(spec: ChallengeSpec) {
         self.spec = spec
@@ -60,6 +62,10 @@ struct ChallengeHost: View {
             ScatterBoard(controller: workshop)
         } else if let trail {
             TrailBoard(controller: trail)
+        } else if let maze {
+            MazeBoard(controller: maze)
+        } else if let factory {
+            NeuronBoard(controller: factory)
         } else {
             ComingSoonBoard(spec: spec)
         }
@@ -89,6 +95,18 @@ struct ChallengeHost: View {
             if trail == nil {
                 let controller = AlgorithmTrailController(spec: spec, world: world, session: session, app: app)
                 trail = controller
+                controller.start()
+            }
+        case .rewardMaze:
+            if maze == nil {
+                let controller = RewardMazeController(spec: spec, world: world, session: session, app: app)
+                maze = controller
+                controller.start()
+            }
+        case .neuronDials:
+            if factory == nil {
+                let controller = NeuronFactoryController(spec: spec, world: world, session: session, app: app)
+                factory = controller
                 controller.start()
             }
         default:

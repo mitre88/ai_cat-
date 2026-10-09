@@ -26,8 +26,8 @@ La banda la elige un adulto en la **zona de padres** (puerta parental: mantener 
 | 2 | Biblioteca de Datos | Aprendizaje | Datos, etiquetas, calidad | etiquetar tarjetas; medidor de precisión k-NN; ratón travieso | **jugable** |
 | 3 | Taller de Clasificación | Aprendizaje | Clasificador, frontera de decisión | tablero 2D (tamaño × pelusa): umbral, línea o centroides; medidor de precisión; animales de prueba | **jugable** |
 | 4 | Sendero de Instrucciones | Representación | Algoritmos, si/entonces, bucles | bloques de instrucciones que AI CAT ejecuta en 3D (avanzar, girar, saltar, SI charco, REPETIR) | **jugable** |
-| 5 | Laberinto de Recompensas | Aprendizaje | Aprendizaje por refuerzo | premios/castigos, Q-valores como calor | definido |
-| 6 | Fábrica de Neuronas | Aprendizaje | Redes neuronales, pesos | perillas, activaciones visibles | definido |
+| 5 | Laberinto de Recompensas | Aprendizaje | Aprendizaje por refuerzo | el niño diseña el laberinto (premio, charcos); Q-learning tabular; casillas pintadas con V(s); repetición del mejor camino en 3D | **jugable** |
+| 6 | Fábrica de Neuronas | Aprendizaje | Redes neuronales, pesos | neuronas de cables ternarios y umbral; dos capas; red sigmoide que se entrena sola con curva de error | **jugable** |
 | 7 | Ojos de AI CAT | Percepción | Visión por computadora | píxeles, bordes, cámara on-device | definido |
 | 8 | Voz de AI CAT | Interacción natural | Lenguaje natural, tokens | hablarle al gato (voz + modelo on-device) | definido |
 | 9 | Balanza Justa | Impacto social | Sesgo, justicia, privacidad | arreglar un dataset sesgado | definido |
@@ -70,6 +70,24 @@ Cada mundo tiene 3 retos (tier 1, 2, 3) y un **reto maestro** (tier 3, opcional 
 4. **Maestro explorador** — SI + REPETIR combinados en un sendero con esquina.
 
 **La IA real detrás**: un **intérprete** determinista (`TrailInterpreter`) ejecuta el programa sobre una cuadrícula con orientación (N/E/S/O); los bloques de control cuestan 2 del presupuesto (el bloque y su cuerpo), hay dos trazados por nivel elegidos por `semilla mod 2`, y un límite de 60 pasos convierte un bucle infinito en el resultado "ese programa nunca termina". Resultados: `goal`, `splash`, `lost` (se detuvo antes del pez) y `tooLong`. Cada ejecución se anima en el mundo 3D: el gato camina celda a celda y gira con la pose correspondiente. Puntuación `s = max(0.55, 1 − 0.15·(ejecuciones − 1))` si llegó al pez; `0` si no.
+
+### 3.5 Laberinto de Recompensas (detalle)
+
+1. **Un premio al final** — el niño coloca el premio (a ≥ 2 casillas); AI CAT explora y lo encuentra.
+2. **Cuidado con los charcos** — premio fijo; el niño coloca 1 charco (castigo) y ve cómo cambia el camino aprendido.
+3. **Casillas tibias** — laberinto de 6×6; el niño coloca el premio (a ≥ 4 casillas) y hasta 2 charcos; las casillas se pintan con lo que AI CAT espera.
+4. **Maestro del laberinto** — 7×7 con un pasillo corto y una vuelta larga; el niño coloca 3 charcos y elige la curiosidad (ε ∈ {0.05, 0.3, 0.8}). Solo cuenta si el camino aprendido es **largo y seguro** (más largo que la distancia Manhattan).
+
+**La IA real detrás**: **Q-learning tabular** sobre la cuadrícula: `Q(s,a) ← Q(s,a) + α·(r + γ·max_a' Q(s',a') − Q(s,a))` con α = 0.5, γ = 0.9, exploración ε-greedy (ε = 0.3 salvo en el maestro), 60 pasos por episodio, recompensas: paso −0.04, chocar −0.10, premio +1 (terminal), charco −1 (terminal). Cada "¡Explora!" corre una tanda de episodios (n = ítems + extra por nivel): el primero se anima en el escenario (el gatito deambula), después las casillas se pintan con `V(s) = max_a Q(s,a)` (cálido positivo, azul negativo) y se reproduce la política **greedy** desde el inicio. Resuelto cuando esa reproducción llega al premio (y da el rodeo exigido en el maestro). Cualquier cambio al mapa **borra la tabla Q** (los valores viejos ya no son verdad: honestidad con el niño). Trazados a mano (2 por nivel, `semilla mod 2`) con la garantía, probada en tests, de que toda casilla libre es alcanzable. Calibración en Python (40 semillas): nivel 1 en 2–3 tandas, nivel 4 con el pasillo bloqueado en 4–6 tandas de 10–12 episodios. Puntuación: `max(0.6, 1 − 0.06·max(0, tandas − 3))`; las pistas son tandas gratis.
+
+### 3.6 Fábrica de Neuronas (detalle)
+
+1. **Una neurona** — 2 lámparas de entrada, 3 perillas: dos cables ⚪/🟢/🔴 (peso 0/+1/−1) y el umbral "enciende si el total es al menos k".
+2. **Tres entradas** — 3 cables + umbral; reglas como "al menos dos", "la primera y la segunda", "la segunda pero no la tercera".
+3. **Dos capas** — 2 neuronas ocultas + neurona de salida (11 perillas) para patrones como XOR o "exactamente una encendida". Los ejemplos mostrados se eligen de modo que **ninguna neurona de una capa** los pueda resolver (comprobación por fuerza bruta: 3ⁿ·(n+1) candidatos).
+4. **Maestro ingeniero** — red 4-3-1 con sigmoides sobre la tabla de verdad completa (16 filas); el niño elige la velocidad de aprendizaje 🐢 0.5 / 🐇 3 / 🚀 20, pulsa "Entrenar" (60 épocas) y ve la curva de error; puede pedir "pesos nuevos" (reinicio aleatorio).
+
+**La IA real detrás**: niveles 1–3, neuronas **ternarias** `y = [Σ wᵢxᵢ ≥ k]` con `wᵢ ∈ {−1,0,1}`, `k ∈ 0…n`; la pista pone la primera perilla que difiere de la solución guardada. Nivel 4, **descenso de gradiente** por lotes completos con entropía cruzada: `∂L/∂z_out = o − t`, `∂L/∂z_h = (o − t)·w₂·h·(1 − h)`, pesos iniciales U(−0.8, 0.8) con semilla. Medido en Python (40 semillas): con η = 3 la regla XOR converge en 167 épocas (mediana, máx. 354) y "al menos tres" en ~30; con η = 20 solo 5/40 convergen (rebota: lección de "demasiado rápido"); con η = 0.5 XOR tarda ~1000 épocas (lección de "demasiado lento"). Puntuación: niveles 1–3 `max(0.7, 1 − 0.02·max(0, giros − 2·perillas))` si resuelto, si no `aciertos/2`; nivel 4 `max(0.6, 1 − 0.05·max(0, pulsaciones − 3))`.
 
 ## 4. Modelos matemáticos
 
@@ -134,7 +152,7 @@ AICatCore (SwiftPM, solo Foundation) → currículo, crecimiento, dificultad, pu
 ## 9. Hoja de ruta
 
 - M8 ✅: escenarios 3 (tablero 2D: umbral, recta, centroides, atípicos) y 4 (bloques de instrucciones ejecutados por el gato), reutilizando `ChallengeSession` y `AdaptiveStage`.
-- M9: 5 (Q-learning tabular visible) y 6 (red de 2 capas con perillas).
+- M9 ✅: 5 (Q-learning tabular visible, el niño diseña el laberinto) y 6 (neuronas ternarias por perillas, dos capas, red sigmoide que se entrena sola).
 - M10: 7 (Vision on-device) y 8 (reconocimiento de voz on-device + Foundation Models), con permisos localizados y puerta parental.
 - M11: 9 y 10, exportación de "mi mini IA", graduación.
 - Arte: sustituir el gato y los mundos procedurales por USDZ (`Docs/ART_PIPELINE.md`).

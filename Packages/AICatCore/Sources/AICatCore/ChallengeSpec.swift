@@ -17,7 +17,7 @@ public enum ChallengeMechanic: String, Codable, Sendable, CaseIterable {
     /// Whether this release ships a playable board for the mechanic.
     public var isPlayable: Bool {
         switch self {
-        case .sorting, .labeling, .scatterBoard, .sequencing: return true
+        case .sorting, .labeling, .scatterBoard, .sequencing, .rewardMaze, .neuronDials: return true
         default: return false
         }
     }

@@ -4098,6 +4098,771 @@
         }
       }
     },
+    "maze.batches_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorations: %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exploraciones: %lld"
+          }
+        }
+      }
+    },
+    "maze.curiosity.careful": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Careful"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cauteloso"
+          }
+        }
+      }
+    },
+    "maze.curiosity.curious": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curious"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curioso"
+          }
+        }
+      }
+    },
+    "maze.curiosity.wild": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wild"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alocado"
+          }
+        }
+      }
+    },
+    "maze.curiosity_label": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How curious should AI CAT be?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué tan curioso debe ser AI CAT?"
+          }
+        }
+      }
+    },
+    "maze.curiosity_value_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Random moves: %lld%% of the time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Movimientos al azar: %lld%% de las veces"
+          }
+        }
+      }
+    },
+    "maze.explore": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explore!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Explora!"
+          }
+        }
+      }
+    },
+    "maze.exploring": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT is exploring…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT está explorando…"
+          }
+        }
+      }
+    },
+    "maze.heat_legend": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm tiles: AI CAT expects a treat that way. Blue tiles: trouble. Every change to the maze makes AI CAT forget."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casillas cálidas: AI CAT espera un premio por ahí. Casillas azules: problemas. Cada cambio al laberinto hace que AI CAT olvide."
+          }
+        }
+      }
+    },
+    "maze.learned": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT learned the path!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡AI CAT aprendió el camino!"
+          }
+        }
+      }
+    },
+    "maze.notice.budget": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No more of those to place."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ya no quedan de esos para poner."
+          }
+        }
+      }
+    },
+    "maze.notice.need_treat": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Place the treat first."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primero pon el premio."
+          }
+        }
+      }
+    },
+    "maze.notice.puddle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Splash! The best path still ends in a puddle. Explore more."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Splash! El mejor camino todavía termina en un charco. Explora más."
+          }
+        }
+      }
+    },
+    "maze.notice.straight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT found a short path. Make it unsafe so the long way is better!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT encontró un camino corto. ¡Hazlo peligroso para que el camino largo sea mejor!"
+          }
+        }
+      }
+    },
+    "maze.notice.too_close": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Too close! Put the treat farther away."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Muy cerca! Pon el premio más lejos."
+          }
+        }
+      }
+    },
+    "maze.notice.unreachable": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT can't reach the treat without a puddle. Move one."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT no puede llegar al premio sin pisar un charco. Mueve uno."
+          }
+        }
+      }
+    },
+    "maze.notice.wandered": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT doesn't know the way yet. Explore again!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT aún no sabe el camino. ¡Explora otra vez!"
+          }
+        }
+      }
+    },
+    "maze.puddles_left_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puddles to place: %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Charcos por poner: %lld"
+          }
+        }
+      }
+    },
+    "maze.summary_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This round: 🐟 %lld   💧 %lld   🌀 %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta ronda: 🐟 %lld   💧 %lld   🌀 %lld"
+          }
+        }
+      }
+    },
+    "maze.testing": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trying the best path…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Probando el mejor camino…"
+          }
+        }
+      }
+    },
+    "maze.tip_place_puddle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap a tile to put a puddle. Tap it again to remove it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca una casilla para poner un charco. Tócala otra vez para quitarlo."
+          }
+        }
+      }
+    },
+    "maze.tip_place_treat": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap a tile to put the treat. Tap it again to remove it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca una casilla para poner el premio. Tócala otra vez para quitarlo."
+          }
+        }
+      }
+    },
+    "maze.tool_puddle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "💧 Puddle"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "💧 Charco"
+          }
+        }
+      }
+    },
+    "maze.tool_treat": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🐟 Treat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🐟 Premio"
+          }
+        }
+      }
+    },
+    "maze.treats_left_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Treats to place: %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premios por poner: %lld"
+          }
+        }
+      }
+    },
+    "neuron.correct_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld of %lld examples right"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld de %lld ejemplos bien"
+          }
+        }
+      }
+    },
+    "neuron.epochs_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Steps trained: %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasos entrenados: %lld"
+          }
+        }
+      }
+    },
+    "neuron.examples_title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Examples (tap one to show it on the machine)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ejemplos (toca uno para verlo en la máquina)"
+          }
+        }
+      }
+    },
+    "neuron.hidden_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neuron %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neurona %lld"
+          }
+        }
+      }
+    },
+    "neuron.loss_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error: %@"
+          }
+        }
+      }
+    },
+    "neuron.network_title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT's neurons"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las neuronas de AI CAT"
+          }
+        }
+      }
+    },
+    "neuron.output_neuron": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lamp neuron"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neurona de la lámpara"
+          }
+        }
+      }
+    },
+    "neuron.rate.fast": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turbo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turbo"
+          }
+        }
+      }
+    },
+    "neuron.rate.medium": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Medium"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Media"
+          }
+        }
+      }
+    },
+    "neuron.rate.slow": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slow"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lenta"
+          }
+        }
+      }
+    },
+    "neuron.rate_label": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Learning speed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Velocidad de aprendizaje"
+          }
+        }
+      }
+    },
+    "neuron.restart": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New weights"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pesos nuevos"
+          }
+        }
+      }
+    },
+    "neuron.solved": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The lamp agrees with every example!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡La lámpara coincide con todos los ejemplos!"
+          }
+        }
+      }
+    },
+    "neuron.sum_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "total %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "total %lld"
+          }
+        }
+      }
+    },
+    "neuron.target.at_least_three": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rule to learn: the lamp lights when at least three lamps are on."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regla a aprender: la lámpara enciende cuando al menos tres lámparas están encendidas."
+          }
+        }
+      }
+    },
+    "neuron.target.first_two_differ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rule to learn: the lamp lights when the first two lamps are different."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regla a aprender: la lámpara enciende cuando las dos primeras lámparas son distintas."
+          }
+        }
+      }
+    },
+    "neuron.threshold_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lights when the total is at least %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "enciende si el total es al menos %lld"
+          }
+        }
+      }
+    },
+    "neuron.train_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Train (%lld steps)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrenar (%lld pasos)"
+          }
+        }
+      }
+    },
+    "neuron.training_tip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press train and watch the error go down. Too fast can bounce; too slow takes forever."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulsa entrenar y mira cómo baja el error. Muy rápido puede rebotar; muy lento tarda una eternidad."
+          }
+        }
+      }
+    },
+    "neuron.wire_tip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap a wire: ⚪ off → 🟢 adds 1 → 🔴 subtracts 1. Make the lamp agree with every example."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca un cable: ⚪ apagado → 🟢 suma 1 → 🔴 resta 1. Haz que la lámpara coincida con todos los ejemplos."
+          }
+        }
+      }
+    },
     "onboarding.choose_language": {
       "extractionState": "manual",
       "localizations": {
