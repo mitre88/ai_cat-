@@ -759,3 +759,23 @@ STRINGS.update({
     "chat.moon_cheese.q": ("Is the moon made of cheese?", "¿La luna es de queso?"),
     "chat.moon_cheese.a": ("Yes, the moon is delicious cheese.", "Sí, la luna es un queso delicioso."),
 })
+
+# ---- accessibility (M12) -------------------------------------------------------
+STRINGS.update({
+    "a11y.maze_tile_format": ("Tile column %lld row %lld: %@", "Casilla columna %lld fila %lld: %@"),
+    "a11y.trail_cell_format": ("Cell column %lld row %lld: %@", "Celda columna %lld fila %lld: %@"),
+    "a11y.tile.cat": ("AI CAT is here", "AI CAT está aquí"),
+    "a11y.tile.treat": ("treat", "premio"),
+    "a11y.tile.fish": ("fish", "pez"),
+    "a11y.tile.puddle": ("puddle", "charco"),
+    "a11y.tile.wall": ("wall", "pared"),
+    "a11y.tile.free": ("empty", "vacía"),
+    "a11y.pixel_format": ("Pixel column %lld row %lld, value %lld", "Píxel columna %lld fila %lld, valor %lld"),
+    "a11y.cat_card_format": ("%@ cat", "gato %@"),
+    "a11y.wire_format": ("Wire %lld: %@", "Cable %lld: %@"),
+    "a11y.wire.excite": ("adds one", "suma uno"),
+    "a11y.wire.inhibit": ("subtracts one", "resta uno"),
+    "a11y.wire.off": ("off", "apagado"),
+    "a11y.threshold_down": ("Lower the dial", "Bajar la perilla"),
+    "a11y.threshold_up": ("Raise the dial", "Subir la perilla"),
+})

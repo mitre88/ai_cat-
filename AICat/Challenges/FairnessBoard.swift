@@ -293,5 +293,6 @@ struct CatCardView: View {
             Text("🐱").font(.system(size: size * 0.55))
         }
         .frame(width: size, height: size)
+        .accessibilityLabel(Text(L10n.format("a11y.cat_card_format", L10n.string(coat.nameKey))))
     }
 }

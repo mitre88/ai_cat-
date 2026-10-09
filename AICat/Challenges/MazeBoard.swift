@@ -198,7 +198,18 @@ struct MazeGridView: View {
         }
         .buttonStyle(.plain)
         .disabled(tile == .wall || !controller.canEdit)
+        .accessibilityLabel(Text(L10n.format("a11y.maze_tile_format", cell.x + 1, cell.y + 1, L10n.string(tileKey(tile, hasCat: hasCat)))))
         .animation(.easeInOut(duration: 0.25), value: value)
+    }
+
+    private func tileKey(_ tile: MazeTile, hasCat: Bool) -> String {
+        if hasCat { return "a11y.tile.cat" }
+        switch tile {
+        case .treat: return "a11y.tile.treat"
+        case .puddle: return "a11y.tile.puddle"
+        case .wall: return "a11y.tile.wall"
+        case .free: return "a11y.tile.free"
+        }
     }
 
     private func symbol(tile: MazeTile, hasCat: Bool) -> String {

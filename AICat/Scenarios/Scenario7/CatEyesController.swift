@@ -27,6 +27,7 @@ final class CatEyesController {
     private(set) var hintPoint: PixelPoint?
     private(set) var lastPickCorrect: Bool?
     private(set) var zoomNotice = false
+    private(set) var hintRound: Int?
 
     // Live level
     let camera = CameraClassifier()
@@ -323,26 +324,16 @@ final class CatEyesController {
         } else if var challenge = edges {
             challenge.setThreshold(challenge.threshold < 4 ? challenge.threshold + 1 : challenge.threshold - 1)
             edges = challenge
-        } else if let shapes, let round = shapes.current {
-            lastPickCorrect = nil
-            hintPoint = nil
-            _ = round
+        } else if let shapes, shapes.current != nil {
+            hintRound = shapes.currentIndex
         }
         react()
     }
 
-    /// Which template has the most clues in the current round (shown after a hint).
+    /// The template with the most clues, shown only for the round the hint was asked in.
     var hintedShapeID: String? {
-        guard hintsLeft < maxHints, let round = shapes?.current else { return nil }
+        guard let shapes, let round = shapes.current, hintRound == shapes.currentIndex else { return nil }
         return round.clues.max { $0.value < $1.value }?.key
-    }
-
-    private var maxHints: Int {
-        switch app.profile.ageBand {
-        case .explorer: return 9
-        case .apprentice: return spec.isMaster ? 2 : 4
-        case .master: return spec.isMaster ? 1 : 2
-        }
     }
 
     func confirm() {

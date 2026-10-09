@@ -143,6 +143,7 @@ struct NeuronBoard: View {
                     .buttonStyle(.bordered)
                     .tint(controller.lastHint == weightDial(pair.offset) ? Color.orange : Color.accentColor)
                     .disabled(controller.isDone)
+                    .accessibilityLabel(Text(L10n.format("a11y.wire_format", pair.offset + 1, L10n.string(pair.element > 0 ? "a11y.wire.excite" : (pair.element < 0 ? "a11y.wire.inhibit" : "a11y.wire.off")))))
                 }
                 Spacer()
             }
@@ -155,6 +156,7 @@ struct NeuronBoard: View {
                 }
                 .buttonStyle(.plain)
                 .disabled(controller.isDone || neuron.threshold <= 0)
+                .accessibilityLabel(Text(L10n.string("a11y.threshold_down")))
                 Button {
                     controller.adjustThreshold(thresholdDial, by: 1)
                 } label: {
@@ -162,6 +164,7 @@ struct NeuronBoard: View {
                 }
                 .buttonStyle(.plain)
                 .disabled(controller.isDone || neuron.threshold >= neuron.weights.count)
+                .accessibilityLabel(Text(L10n.string("a11y.threshold_up")))
                 if controller.lastHint == thresholdDial {
                     Image(systemName: "lightbulb.fill").foregroundStyle(Color.orange)
                 }

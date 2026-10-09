@@ -74,6 +74,18 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 - **Fair Scale**: a data set with a missing coat and the kitten's failed guesses on exactly that coat; a balance game where recognition per group grows with its examples and the scale on stage tilts with the fairness gap; a data-minimisation sort (keep only what the game needs *and* is not private); and real-world cases to judge (cause + fix).
 - **Creative Lab**: a tiny generative model (a seeded three-sentence grammar: same seeds, same story; change a word, change the story) that the child remixes; with creative mode on and Apple Intelligence available, the on-device model writes the sentences instead, every one filtered by `KidSafeFilter`, and the card says which one wrote it. The child then designs a helper AI (goal, data, rules) against a six-point checklist, and graduates with a quiz over the ten worlds.
 
+## First build on a Mac
+
+Everything was verified on Linux (package tests, syntax of every file, whole-app type-check against the shadow frameworks in `Tools/shadows`), so the remaining risk sits where Apple's real SDKs differ from the shadows. Run `Tools/xcode_smoke.sh` (Xcode 27.1) or `Tools/xcode_smoke.sh --no-duo` (Xcode 26) and map any error to this list:
+
+| Area | Files | What could differ |
+|---|---|---|
+| iPhone Duo (iOS 27.1 beta) | `AICat/Layout/Duo/*` | `onHingeChange`, `reservedRegions`, `ArrangementView` signatures; drop `AICAT_DUO` to build without them. |
+| Foundation Models | `AICat/Intelligence/FoundationModelsBrain.swift` | `@Generable` / `@Guide` spelling, `respond(to:generating:)`, `prewarm()`. The scripted brain is the fallback for everything. |
+| Camera, Vision, Speech | `AICat/Capture/*` | Not type-checked on Linux. `VNClassifyImageRequest`, `AVAudioApplication.requestRecordPermission`, `SFSpeechAudioBufferRecognitionRequest`. Sample pictures and sentence chips keep worlds 7 and 8 playable without them. |
+| RealityKit details | `AICat/World/*`, `AICat/Cat/*`, scenario controllers | `MeshResource(shape:)`, `GroundingShadowComponent`, `ImageBasedLightComponent`, `ParticleEmitterComponent.Presets`, `DragGesture().targetedToAnyEntity()`; all centralised, fix once. |
+| Text-to-speech, sky | `AICat/Intelligence/CatVoice.swift`, `AICat/World/SkyEnvironment.swift` | Stubbed on Linux; small files. |
+
 ## QA checklist
 
 - Postures (Device Hub, Xcode 27.1): closed → pocket layout; open flat → `ArrangementView` split; tabletop → stage above the fold, controls below; book → board on one page, stage on the other. The sun rises as the device opens; no letterboxing in any pose; interactive controls never sit on the fold.
@@ -93,6 +105,7 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 - *No shadows*: check the simulator's Metal support; shadows need a device or a recent simulator.
 - *Kitten does not grow*: XP only accrues on passed challenges (accuracy ≥ 60 %).
 - *Linux / CI without Xcode*: `Tools/verify_linux.sh <swift-toolchain-root>` builds and tests the package, parses every app file and type-checks the whole app against the shadow frameworks in `Tools/shadows` (see `Tools/shadows/README.md`).
+- *On a Mac*: `Tools/xcode_smoke.sh [--no-duo]` runs the package tests and a simulator build in one go.
 
 ## License
 

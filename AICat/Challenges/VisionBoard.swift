@@ -125,6 +125,7 @@ struct VisionBoard: View {
                 }
                 .buttonStyle(.plain)
                 .disabled(controller.isDone || challenge.threshold <= 0)
+                .accessibilityLabel(Text(L10n.string("a11y.threshold_down")))
                 Text(L10n.format("vision.edges.threshold_format", challenge.threshold)).font(.callout.bold())
                 Button {
                     controller.adjustThreshold(by: 1)
@@ -133,6 +134,7 @@ struct VisionBoard: View {
                 }
                 .buttonStyle(.plain)
                 .disabled(controller.isDone || challenge.threshold >= 9)
+                .accessibilityLabel(Text(L10n.string("a11y.threshold_up")))
             }
             Text(L10n.format("vision.edges.match_format", Int((challenge.f1 * 100).rounded())))
                 .font(.subheadline.bold())
@@ -318,5 +320,6 @@ struct PixelGridView: View {
         }
         .buttonStyle(.plain)
         .disabled(onTap == nil)
+        .accessibilityLabel(Text(L10n.format("a11y.pixel_format", point.x + 1, point.y + 1, value)))
     }
 }

@@ -164,6 +164,7 @@ struct TrailGridView: View {
                 .font(.system(size: 20))
         }
         .frame(width: 40, height: 40)
+        .accessibilityLabel(Text(L10n.format("a11y.trail_cell_format", cell.x + 1, cell.y + 1, L10n.string(hasCat ? "a11y.tile.cat" : (isGoal ? "a11y.tile.fish" : (isPuddle ? "a11y.tile.puddle" : "a11y.tile.free"))))))
         .animation(.easeInOut(duration: 0.2), value: controller.catCell)
     }
 
