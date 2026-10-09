@@ -456,10 +456,12 @@ extension LabeledContent where Label == Text, Content == Text {
 
 public struct NavigationPath {
     public init() {}
+    public var isEmpty: Bool { true }
+    public var count: Int { 0 }
     public mutating func append<V: Hashable>(_ value: V) {}
     public mutating func removeLast(_ k: Int = 1) {}
-    public var count: Int { 0 }
 }
+
 public struct NavigationStack<Root: View>: View {
     public init(@ViewBuilder root: () -> Root) {}
     public init(path: Binding<NavigationPath>, @ViewBuilder root: () -> Root) {}

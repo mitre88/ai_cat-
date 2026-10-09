@@ -37,7 +37,7 @@ struct CameraPreview: UIViewRepresentable {
 
     @MainActor
     private static func applyOrientation(to view: PreviewView, classifier: CameraClassifier) {
-        let interface = view.window?.windowScene?.interfaceOrientation ?? .portrait
+        let interface = view.window?.windowScene?.effectiveGeometry.interfaceOrientation ?? .portrait
         let angle: CGFloat
         let vision: CGImagePropertyOrientation
         switch interface {

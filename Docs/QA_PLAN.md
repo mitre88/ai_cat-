@@ -4,7 +4,7 @@ Guion para la primera sesión con Xcode: cada bloque dice qué tocar y qué debe
 
 ## 0. Arranque
 
-> Estado: la app compila para simulador en GitHub Actions con Xcode 26.6 (`AICAT_DUO` off) y se lanza en un simulador iPhone con `-AICatSmoke` hasta que el mundo 3D renderiza (job `ios-app`). En la Mac, `Tools/xcode_smoke.sh --no-duo` debería pasar a la primera; `Tools/xcode_smoke.sh` (Duo on) requiere Xcode 27.1 y es la única parte sin compilar.
+> Estado: la app compila para simulador en GitHub Actions con Xcode 26.6 (`AICAT_DUO` off) y se lanza en un simulador iPhone con `-AICatSmoke tour`: los 40 retos abren, preparan su mundo, crean su controlador y renderizan, con posturas y crecimiento probados (job `ios-app`). Lo que sigue siendo manual: iPhone Duo real (Xcode 27.1), Foundation Models, cámara y micrófono reales, y el juicio visual de este documento. En la Mac, `Tools/xcode_smoke.sh --no-duo` debería pasar a la primera; `Tools/xcode_smoke.sh` (Duo on) requiere Xcode 27.1 y es la única parte sin compilar.
 
 - `Tools/xcode_smoke.sh` (Xcode 27.1) o `Tools/xcode_smoke.sh --no-duo` (Xcode 26): pruebas del paquete en verde y build del simulador sin errores.
 - Primer arranque: onboarding pide solo el nombre del gato (nunca el del niño) y el idioma. AI CAT saluda en voz alta.

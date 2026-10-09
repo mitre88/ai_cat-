@@ -1,5 +1,5 @@
 import Foundation
-import AVFoundation
+@preconcurrency import AVFoundation
 import ImageIO
 import Vision
 import UIKit
@@ -40,6 +40,9 @@ final class CameraClassifier {
         }
     }
 
+    /// AVCaptureSession is not Sendable; the capture queue is its only user once it runs, so the hop is safe.
+    private struct SessionRef: @unchecked Sendable { let session: AVCaptureSession }
+
     /// Starts the session on its own queue; `isRunning` reflects what the session reports afterwards.
     func start() async {
         guard !isRunning else { return }
@@ -48,10 +51,10 @@ final class CameraClassifier {
             return
         }
         if !configured { configure() }
-        let session = self.session
+        let ref = SessionRef(session: session)
         await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
             sessionQueue.async {
-                if !session.isRunning { session.startRunning() }
+                if !ref.session.isRunning { ref.session.startRunning() }
                 continuation.resume()
             }
         }
@@ -59,9 +62,9 @@ final class CameraClassifier {
     }
 
     func stop() {
-        let session = self.session
+        let ref = SessionRef(session: session)
         sessionQueue.async {
-            if session.isRunning { session.stopRunning() }
+            if ref.session.isRunning { ref.session.stopRunning() }
         }
         isRunning = false
         guesses = []

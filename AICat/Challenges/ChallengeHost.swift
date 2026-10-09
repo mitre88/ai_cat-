@@ -60,6 +60,7 @@ struct ChallengeHost: View {
             await world.prepare()
             guard !Task.isCancelled else { return }
             setUpController()
+            SmokeMode.challengeStarted(spec, world: world)
         }
         .onDisappear {
             app.hushUnlessJustSpoke()

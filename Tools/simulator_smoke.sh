@@ -2,10 +2,12 @@
 # Boots an iPhone simulator, installs the built app and launches it with `-AICatSmoke`: the app skips
 # onboarding, opens the map, and prints `AICAT_SMOKE: … frames=60 OK` once the 3D home world has rendered with
 # its textures and sky, then exits 0. Fails if that line never appears (crash, hang, RealityKit failure).
-# Usage: Tools/simulator_smoke.sh <path/to/AICat.app> [seconds]   (CI builds with -derivedDataPath /tmp/aicat-dd)
+# Usage: Tools/simulator_smoke.sh <path/to/AICat.app> [seconds] [home|tour]   (CI builds with -derivedDataPath /tmp/aicat-dd)
+#   home (default): the map's home world must render.   tour: every challenge of every world is opened and rendered.
 set -uo pipefail
 APP=${1:?path to AICat.app}
 WAIT=${2:-120}
+MODE=${3:-home}
 LOG=/tmp/aicat-smoke-launch.log
 BUNDLE=com.mitre.aicat
 
@@ -26,15 +28,20 @@ xcrun simctl boot "$UDID" 2>/dev/null || true
 xcrun simctl bootstatus "$UDID" -b >/dev/null
 xcrun simctl install "$UDID" "$APP"
 : > "$LOG"
-xcrun simctl launch --console-pty "$UDID" "$BUNDLE" -AICatSmoke > "$LOG" 2>&1 &
+EXTRA=""; [ "$MODE" = "tour" ] && EXTRA="tour"
+xcrun simctl launch --console-pty "$UDID" "$BUNDLE" -AICatSmoke $EXTRA > "$LOG" 2>&1 &
 PID=$!
+DONE_PATTERN="AICAT_SMOKE: frames="
+[ "$MODE" = "tour" ] && DONE_PATTERN="AICAT_SMOKE: (tour=|TIMEOUT)"
 for _ in $(seq 1 "$WAIT"); do
-  grep -q "AICAT_SMOKE: frames=" "$LOG" && break
+  grep -qE "$DONE_PATTERN" "$LOG" && break
   kill -0 "$PID" 2>/dev/null || break
   sleep 1
 done
 kill "$PID" 2>/dev/null || true
 echo "=== app output (smoke lines, errors) ==="
-grep -E "AICAT_SMOKE|error|Error|crash|Fatal|Terminating|exception" "$LOG" | head -40
-if grep -q "AICAT_SMOKE: frames=.* OK" "$LOG"; then echo "=== SIMULATOR SMOKE OK ==="; exit 0; fi
+grep -E "AICAT_SMOKE|error|Error|crash|Fatal|Terminating|exception" "$LOG" | head -80
+OK_PATTERN="AICAT_SMOKE: frames=.* OK"
+[ "$MODE" = "tour" ] && OK_PATTERN="AICAT_SMOKE: tour=[0-9]+/[0-9]+ OK"
+if grep -qE "$OK_PATTERN" "$LOG"; then echo "=== SIMULATOR SMOKE OK ($MODE) ==="; exit 0; fi
 echo "=== SIMULATOR SMOKE FAILED (full log: $LOG) ==="; tail -40 "$LOG"; exit 1

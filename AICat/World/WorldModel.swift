@@ -101,7 +101,7 @@ final class WorldModel {
         buildIfNeeded()
         if SmokeMode.isActive {
             let kinds = TextureLibrary.kinds(for: theme)
-            SmokeMode.worldAttached(theme: theme, textures: TextureLibrary.shared.cachedCount(of: kinds), expected: Set(kinds).count, sky: sky != nil, usdz: cat is USDZCatRig)
+            SmokeMode.worldAttached(self, theme: theme, textures: TextureLibrary.shared.cachedCount(of: kinds), expected: Set(kinds).count, sky: sky != nil, usdz: cat is USDZCatRig)
         }
         root.removeFromParent()
         content.add(root)
@@ -124,7 +124,7 @@ final class WorldModel {
         camera.subjectHeight = Float(cat.morphology.standingHeight)
         camera.update(target: cat.chestPosition, deltaTime: dt)
         onFrame?(dt)
-        SmokeMode.frame()
+        SmokeMode.frame(self)
     }
 
     // MARK: Cat

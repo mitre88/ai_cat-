@@ -56,5 +56,5 @@ jobs:
           grep -q "BUILD SUCCEEDED" /tmp/xcodebuild.log
           echo "=== distinct warnings (first 60) ==="
           grep -E "warning:" /tmp/xcodebuild.log | sed -E 's#^.*/(AICat/|Packages/|Config/)#\1#' | sort -u | head -60 || true
-      - name: Launch in the simulator (-AICatSmoke) and wait for the home world to render
-        run: Tools/simulator_smoke.sh /tmp/aicat-dd/Build/Products/Debug-iphonesimulator/AICat.app 150
+      - name: Launch in the simulator (-AICatSmoke tour) and drive every challenge of every world
+        run: Tools/simulator_smoke.sh /tmp/aicat-dd/Build/Products/Debug-iphonesimulator/AICat.app 900 tour

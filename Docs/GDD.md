@@ -189,7 +189,7 @@ AICatCore (SwiftPM, solo Foundation) → currículo, crecimiento, dificultad, pu
 
 ### 7.1b Modo de humo
 
-Con el argumento de lanzamiento `-AICatSmoke` (`SmokeMode`), la app salta el onboarding, abre el mapa y, cuando el mundo de inicio queda adjunto (texturas subidas, cielo, rig del gato) y lleva 60 cuadros renderizados, imprime `AICAT_SMOKE: world=garden textures=N/N sky=true usdz=false` y `frames=60 OK`, y termina con código 0. `Tools/simulator_smoke.sh` lo ejecuta en un simulador (CI lo corre en cada push). El perfil del modo humo nunca se guarda.
+Con el argumento de lanzamiento `-AICatSmoke` (`SmokeMode`), la app salta el onboarding, abre el mapa y, cuando el mundo de inicio queda adjunto (texturas subidas, cielo, rig del gato) y lleva 60 cuadros renderizados, imprime `AICAT_SMOKE: world=garden textures=N/N sky=true usdz=false` y `frames=60 OK`, y termina con código 0. Con el argumento extra `tour`, después recorre los 40 retos: empuja cada `ChallengeSpec` en la `NavigationPath`, espera a que el host prepare el mundo y cree el controlador (`challengeStarted`), a que ese mundo renderice 30 cuadros (los cuadros se cuentan por mundo, no en total), en el primer reto de cada mundo cambia las cuatro posturas, la apertura y el crecimiento 0→1→0.5, y vuelve al mapa; un reto que no responde en 60 s produce `TIMEOUT challenge=<id>` y código 2. `Tools/simulator_smoke.sh` lo ejecuta en un simulador (CI corre el tour en cada push). El perfil del modo humo nunca se guarda.
 
 ### 7.2 Sombras y texturas
 

@@ -16,7 +16,7 @@ Status: **all 10 scenarios playable** (40 challenges). **The whole app builds fo
 4. Pruebas de la lógica sin simulador: `cd Packages/AICatCore && swift test`.
 5. Humo completo en la Mac (pruebas + build del simulador + build Duo): `Tools/xcode_smoke.sh` (Xcode 27.1) o `Tools/xcode_smoke.sh --no-duo` (Xcode 26). Si algo falla, el error casi seguro está en la tabla «First build on the Mac» de abajo: pega el error tal cual en el chat y se corrige por archivo.
 6. Para ver las texturas y el cielo procedurales como PNG sin abrir Xcode: `Tools/render_textures.sh` (escribe en `/tmp/aicat-textures`).
-7. Humo en simulador sin tocar nada: `Tools/simulator_smoke.sh /ruta/a/AICat.app` instala la app en un iPhone simulado y la lanza con `-AICatSmoke`; la app abre el mapa, espera a que el mundo 3D se renderice con texturas y cielo, imprime `AICAT_SMOKE: … frames=60 OK` y sale. CI hace exactamente esto en cada push (job `ios-app`).
+7. Humo en simulador sin tocar nada: `Tools/simulator_smoke.sh /ruta/a/AICat.app 120 home` instala la app en un iPhone simulado y la lanza con `-AICatSmoke`; la app abre el mapa, espera a que el mundo 3D se renderice con texturas y cielo, imprime `AICAT_SMOKE: … frames=60 OK` y sale. Con `… 900 tour` recorre además los 10 mundos y los 40 retos (cada uno debe preparar su mundo, crear su controlador y renderizar; en uno por mundo prueba las cuatro posturas y el crecimiento) y termina con `AICAT_SMOKE: tour=40/40 OK`. CI corre el tour en cada push (job `ios-app`).
 
 ## Requirements
 

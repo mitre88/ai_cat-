@@ -23,6 +23,7 @@ struct RootView: View {
             }
         }
         .environment(\.locale, app.language.locale)
+        .task { SmokeMode.begin(app: app) }
         .sheet(isPresented: $app.isParentZonePresented) {
             ParentFlowView()
                 .environment(app)
