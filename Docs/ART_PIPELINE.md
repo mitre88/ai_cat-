@@ -32,3 +32,7 @@ Everything on stage is generated from primitives so the game runs without a sing
 ## 5. Localization
 
 All text is generated from `Tools/strings_source.py` into the String Catalogs. Never edit the `.xcstrings` by hand; run `python3 Tools/gen_strings.py` and `python3 Tools/validate_project.py`.
+
+## Texturas procedurales (estado actual)
+
+No hay imágenes en el bundle: `AICat/World/ProceduralImages.swift` genera cada textura con ruido de valor teselable y las sube `TextureLibrary` con el semántico correcto (color o normal). Para sustituir una por una textura pintada: añade el PNG al asset catalog y cambia `TextureLibrary.prepare` para cargarla con `TextureResource(named:)` bajo la misma `TextureKind`; `Materials` no cambia. Para un gato USDZ con sus propias texturas, el rig USDZ ignora `Materials.fur` y conserva sus materiales.

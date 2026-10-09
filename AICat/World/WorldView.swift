@@ -10,9 +10,10 @@ struct WorldView: View {
 
     var body: some View {
         RealityView { content in
+            let generation = world.beginAttach()
             content.camera = .virtual
             await world.prepare()
-            world.attach(to: &content)
+            world.attach(to: &content, generation: generation)
         }
         .gesture(dragGesture)
         .background {
@@ -52,8 +53,10 @@ struct StageView: View {
     var interaction: (any WorldInteraction)?
     @Environment(AppModel.self) private var app
     @Environment(\.postureInfo) private var postureInfo
+    @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
     #if DEBUG
-    @State private var debugGrowth: Double = -1
+    @State private var debugGrowth: Double = 0
+    @State private var showDebugSlider = false
     #endif
 
     var body: some View {
@@ -65,19 +68,34 @@ struct StageView: View {
             debugBadge
         }
         #if DEBUG
-        .overlay(alignment: .bottom) {
-            Slider(value: $debugGrowth, in: 0...1)
-                .padding(.horizontal, 24)
-                .padding(.bottom, 8)
-                .tint(.white)
-                .opacity(0.6)
-                .onChange(of: debugGrowth) { _, value in
-                    if value >= 0 { world.setGrowth(value, animated: true) }
+        .overlay(alignment: .topTrailing) {
+            // Growth slider for testing, tucked behind a corner button so it never sits on the play area.
+            VStack(alignment: .trailing, spacing: 6) {
+                Button {
+                    showDebugSlider.toggle()
+                } label: {
+                    Image(systemName: "testtube.2").font(.caption).padding(6)
                 }
+                .buttonStyle(.bordered)
+                .opacity(0.5)
+                if showDebugSlider {
+                    Slider(value: $debugGrowth, in: 0...1)
+                        .frame(width: 150)
+                        .tint(.white)
+                        .onChange(of: debugGrowth) { _, value in
+                            world.setGrowth(value, animated: true)
+                        }
+                }
+            }
+            .padding(.top, 52)
+            .padding(.trailing, 10)
         }
         #endif
         .onAppear {
-            world.setReduceEffects(app.reduceMotion)
+            #if DEBUG
+            debugGrowth = app.profile.growth
+            #endif
+            world.setReduceEffects(app.profile.reduceEffects || systemReduceMotion)
             world.setGrowth(app.profile.growth, animated: false)
             world.wear(app.profile.unlockedKnowledge)
             world.apply(line: app.speech)
@@ -96,7 +114,10 @@ struct StageView: View {
             world.setOpenness(info.openness)
         }
         .onChange(of: app.profile.reduceEffects) { _, reduce in
-            world.setReduceEffects(reduce || app.reduceMotion)
+            world.setReduceEffects(reduce || systemReduceMotion)
+        }
+        .onChange(of: systemReduceMotion) { _, reduce in
+            world.setReduceEffects(app.profile.reduceEffects || reduce)
         }
     }
 

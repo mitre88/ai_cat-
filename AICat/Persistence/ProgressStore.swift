@@ -22,7 +22,15 @@ final class ProgressStore {
         guard let data = try? Data(contentsOf: fileURL) else { return nil }
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        return try? decoder.decode(PlayerProfile.self, from: data)
+        do {
+            return try decoder.decode(PlayerProfile.self, from: data)
+        } catch {
+            // Never lose a file we cannot read: keep it aside for a future migration and start fresh.
+            let backup = fileURL.deletingLastPathComponent()
+                .appendingPathComponent("profile-unreadable-\(Int(Date().timeIntervalSince1970)).json")
+            try? FileManager.default.moveItem(at: fileURL, to: backup)
+            return nil
+        }
     }
 
     func save(_ profile: PlayerProfile) {

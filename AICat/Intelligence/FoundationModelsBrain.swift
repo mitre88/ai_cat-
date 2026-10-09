@@ -62,6 +62,7 @@ final class FoundationModelsBrain: CatBrain {
         guard !candidates.isEmpty else { return fallback }
         do {
             let session = makeSession(for: context)
+            guard !session.isResponding else { return fallback }
             if context.creativeMode {
                 let response = try await session.respond(to: creativePrompt(moment: moment, context: context), generating: CreativeCatLine.self)
                 let maxWords = context.ageBand.maxSentenceWords * 2
@@ -76,6 +77,7 @@ final class FoundationModelsBrain: CatBrain {
                 return ScriptedBrain.render(candidates[index], context: context)
             }
         } catch {
+            recycleIfExhausted(error)
             return fallback
         }
         #else
@@ -88,11 +90,13 @@ final class FoundationModelsBrain: CatBrain {
         guard context.creativeMode, Self.isAvailable, Self.supports(context.language.locale), seeds.count == 3 else { return nil }
         do {
             let session = makeSession(for: context)
+            guard !session.isResponding else { return nil }
             let response = try await session.respond(to: storyPrompt(seeds: seeds, context: context), generating: ModelStory.self)
             let maxWords = context.ageBand.maxSentenceWords + 6
             let cleaned = response.content.sentences.prefix(3).compactMap { KidSafeFilter.sanitize($0, maxWords: maxWords) }
             return cleaned.count == 3 ? Array(cleaned) : nil
         } catch {
+            recycleIfExhausted(error)
             return nil
         }
         #else
@@ -105,10 +109,12 @@ final class FoundationModelsBrain: CatBrain {
         guard context.creativeMode, Self.isAvailable, Self.supports(context.language.locale) else { return nil }
         do {
             let session = makeSession(for: context)
+            guard !session.isResponding else { return nil }
             let prompt = "The child asks: \"\(question)\". Answer in at most two short sentences. If you are not sure, say that you are not sure."
             let response = try await session.respond(to: prompt, generating: CreativeCatLine.self)
             return KidSafeFilter.sanitize(response.content.text, maxWords: context.ageBand.maxSentenceWords * 2 + 4)
         } catch {
+            recycleIfExhausted(error)
             return nil
         }
         #else
@@ -117,6 +123,14 @@ final class FoundationModelsBrain: CatBrain {
     }
 
     #if canImport(FoundationModels)
+    /// A session whose context window filled up is thrown away; the next request starts a fresh one.
+    private func recycleIfExhausted(_ error: Error) {
+        if let generation = error as? LanguageModelSession.GenerationError, case .exceededContextWindowSize(_) = generation {
+            session = nil
+            sessionKey = ""
+        }
+    }
+
     private func storyPrompt(seeds: [String], context: BrainContext) -> String {
         let languageName = context.language == .spanish ? "Spanish" : "English"
         return "Write a tiny story in \(languageName) for a child, in exactly three short sentences (at most \(context.ageBand.maxSentenceWords + 4) words each). " +

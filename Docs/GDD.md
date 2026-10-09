@@ -183,7 +183,17 @@ AICatCore (SwiftPM, solo Foundation) → currículo, crecimiento, dificultad, pu
 - El **host del reto** (`ChallengeHost`) es dueño del ciclo de vida: crea el controlador una sola vez, apaga cámara, micrófono y ejecuciones en curso al salir, y vigila la inactividad (AI CAT habla a los 35 s sin progreso y luego cada 60 s). Los **tableros** se reconstruyen en cada cambio de postura del Duo, así que nunca deben poseer recursos.
 - Un reto **resuelto nunca reprueba**: todo `scoreAccuracy` de un estado resuelto tiene piso ≥ 0.6 (`Scoring.passThreshold`).
 - Los adaptadores de hardware (`Capture/`) **siempre devuelven**: temporizadores con identificador de sesión, continuaciones que se reanudan una sola vez, y comprobación del formato de audio antes de instalar el tap.
+- La **puerta parental** es mantener la pata 2 s y **escribir** la suma de dos números de dos cifras; una respuesta errónea bloquea 5 s y cambia la pregunta (adivinar no sirve). Solo detrás de ella se cambian edad, idioma, modo creativo, y se piden cámara o micrófono.
+- La voz usa la categoría de audio **playback / spokenAudio** mezclada con otros sonidos: AI CAT se oye aunque el interruptor de silencio esté activo (es contenido hablado esencial); el adulto puede apagar la voz en la zona de padres.
 - El cerebro generativo **nunca bloquea**: cada petición compite contra un temporizador que devuelve el guion aunque el modelo ignore la cancelación; las historias y respuestas esperan su turno en vez de rechazarse.
+
+### 7.2 Sombras y texturas
+
+- **Sin assets de imagen**: todas las texturas se generan en el dispositivo al arrancar (`ProceduralImages`) con **ruido de valor** en una retícula que envuelve (teselable) y suma fractal (fBm) de 2–4 octavas: pasto (parches + briznas + motas), piedra (losas con mortero y bisel), madera (tablones con veta `sin(22u + fBm)`), metal cepillado, alfombra, azulejo de laboratorio, arena con ondas y **pelaje** (hebras de alta frecuencia en una dirección). Resolución 512², ~5 texturas por mundo, cacheadas por sesión (`TextureLibrary`).
+- **Mapas de normales** derivados de campos de altura: `n = normalize(−∂h/∂x·s, −∂h/∂y·s, 1)` codificado en RGB, con diferencias centrales que envuelven; el pasto, la piedra (bisel de losas), la madera (juntas + veta) y el pelaje tienen relieve que reacciona a la luz.
+- **Materiales**: el suelo multiplica el color de la paleta por la textura del tema (`BaseColor(tint:texture:)`) y repite 6–10 veces (`textureCoordinateTransform`); el pelaje combina textura de hebras, normal map y **sheen** para que el gato negro no sea una silueta plana.
+- **Sombras**: sol direccional con mapa de sombras (10 m, bias 1.2), **luz de contorno** fría desde atrás teñida con el cielo del mundo, luz de relleno puntual, IBL del cielo procedural (ahora con sol y nubes, así la luz ambiental tiene dirección), `GroundingShadowComponent` en las piezas del gato y, para que funcione en cualquier dispositivo, una **sombra de contacto** (disco unlit transparente con degradado radial `1 − smoothstep`) que sigue al gato y crece con su morfología.
+- Cada material vive en `Materials.swift`: si una API de RealityKit cambia, se corrige en un solo lugar.
 
 ## 8. Seguridad y privacidad (categoría Kids)
 

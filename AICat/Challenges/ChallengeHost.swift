@@ -56,7 +56,7 @@ struct ChallengeHost: View {
             setUpController()
         }
         .onDisappear {
-            app.hush()
+            app.hushUnlessJustSpoke()
             trail?.stop()
             eyes?.stopCamera()
             voice?.stopListening()
@@ -228,12 +228,14 @@ struct ChallengeResultOverlay: View {
                 VStack(spacing: 10) {
                     if outcome.passed, let next = nextChallenge {
                         Button(L10n.string("result.next")) {
+                            app.hush()
                             app.path.removeLast()
                             app.path.append(next)
                         }
                         .buttonStyle(KidButtonStyle(tint: Theme.eyeGreen))
                     }
                     Button(L10n.string(outcome.passed ? "result.back" : "result.again")) {
+                        app.hush()
                         app.path.removeLast()
                     }
                     .buttonStyle(KidButtonStyle(tint: outcome.passed ? .accentColor : Theme.eyeGreen))

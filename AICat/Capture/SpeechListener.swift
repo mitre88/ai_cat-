@@ -153,7 +153,7 @@ final class SpeechListener {
 
     private func restoreAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
-        try? audioSession.setCategory(.ambient, mode: .default, options: [.mixWithOthers])
+        try? audioSession.setCategory(.playback, mode: .spokenAudio, options: [.mixWithOthers, .duckOthers])
         try? audioSession.setActive(true)
     }
 }

@@ -6,7 +6,7 @@ physically (continuous morphology from kitten to adult cat) and in knowledge. Bi
 100 % on device, designed first for **iPhone Duo** (outer 5.4" display, inner 7.6" display, hinge postures)
 and runs on any iPhone with iOS 26+.
 
-Status: **all 10 scenarios playable** (40 challenges). Worlds 7 and 8 use the camera and the microphone, behind the parental gate, with sample pictures and sentence chips as fallbacks. Design document: `Docs/GDD.md`.
+Status: **all 10 scenarios playable** (40 challenges), procedural textures and normal maps on every surface, contact shadow and rim light on the kitten. Worlds 7 and 8 use the camera and the microphone, behind the parental gate, with sample pictures and sentence chips as fallbacks. Design document: `Docs/GDD.md`.
 
 ## Inicio rápido (ES)
 
@@ -49,6 +49,7 @@ python3 Tools/validate_project.py    # pbxproj, plists, catalogs, Swift hygiene
 | `AICat/` | App target (SwiftUI + RealityKit). Synchronized folder: new files are picked up automatically. |
 | `AICat/App` | App entry, observable app model, root/onboarding views, theme, 2-D avatar, in-app localization. |
 | `AICat/Layout` | Posture model (`pocket` / `world` / `lab` / `book`), adaptive stage; `Duo/` holds the iOS 27.1 hinge and arrangement code behind `AICAT_DUO`. |
+| `AICat/World` (textures) | `ProceduralImages` generates tileable noise textures and normal maps on the device; `TextureLibrary` caches them; no image assets ship. |
 | `AICat/World` | RealityKit stage: materials, lighting with shadows, camera rig, sets, props, sky/IBL, drag interaction, celebration. |
 | `AICat/Cat` | `CatRig` protocol, procedural kitten, animator, USDZ slot. |
 | `AICat/Challenges` | Challenge host and session, sorting and labeling boards, result overlay. |

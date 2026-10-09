@@ -9,7 +9,7 @@ final class CatVoice {
 
     init() {
         let session = AVAudioSession.sharedInstance()
-        try? session.setCategory(.ambient, mode: .default, options: [.mixWithOthers])
+        try? session.setCategory(.playback, mode: .spokenAudio, options: [.mixWithOthers, .duckOthers])
         try? session.setActive(true)
     }
 

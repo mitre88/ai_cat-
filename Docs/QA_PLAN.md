@@ -90,3 +90,8 @@ Guion para la primera sesión con Xcode: cada bloque dice qué tocar y qué debe
 - Mundo 9: tocar el pelaje correcto en el nivel 1 **termina el reto** y desbloquea el nivel 2; las pistas de privacidad siguen disponibles mientras haya respuestas mal.
 - Mundo 10: con modo creativo y Apple Intelligence, la historia sí la escribe el modelo (tarjeta "escrita por el modelo"), no siempre el libro de patrones.
 - Todos: AI CAT dice una frase si el niño pasa 35 s sin avanzar; cambiar de postura en el Duo no reinicia cámara, micrófono ni ejecuciones.
+- Puerta parental: mantener 2 s, luego escribir la suma; una respuesta mala bloquea 5 s y cambia la pregunta; Cancelar cierra.
+- Al tocar "Siguiente" en el resultado, la frase de inicio del nuevo reto se oye completa (no se corta).
+- Girar el teléfono o plegar el Duo mientras carga un reto no deja el escenario vacío ni congelado.
+- Con el interruptor de silencio activado, AI CAT sigue hablando (contenido hablado); la voz se apaga desde la zona de padres.
+- Visual: el suelo de cada mundo tiene textura (pasto, madera, piedra, metal, arena, alfombra, azulejo) con relieve; el gato tiene pelaje con brillo y una sombra suave bajo las patas; hay una luz de contorno fría; el cielo muestra sol y nubes suaves.

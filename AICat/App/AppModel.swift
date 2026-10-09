@@ -16,6 +16,7 @@ final class AppModel {
     let voice: CatVoice
     @ObservationIgnored var brain: any CatBrain
     @ObservationIgnored private var speechTask: Task<Void, Never>?
+    @ObservationIgnored private var lastSayDate = Date.distantPast
 
     init(store: ProgressStore = ProgressStore()) {
         self.store = store
@@ -90,6 +91,7 @@ final class AppModel {
 
     func say(_ moment: DialogMoment, scenario: ScenarioID? = nil) {
         speechTask?.cancel()
+        lastSayDate = Date()
         let ctx = context
         speechTask = Task { [weak self] in
             guard let self else { return }
@@ -101,12 +103,19 @@ final class AppModel {
 
     func say(text: String, emotion: CatEmotion = .happy, gesture: CatGesture = .none) {
         speechTask?.cancel()
+        lastSayDate = Date()
         present(CatLine(text: text, emotion: emotion, gesture: gesture, lineID: nil))
     }
 
     func hush() {
         speechTask?.cancel()
         voice.stop()
+    }
+
+    /// Hush from a disappearing screen: a line the next screen started during the transition is kept.
+    func hushUnlessJustSpoke(within seconds: TimeInterval = 1.2) {
+        guard Date().timeIntervalSince(lastSayDate) > seconds else { return }
+        hush()
     }
 
     private func present(_ line: CatLine) {

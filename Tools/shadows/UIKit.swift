@@ -1,6 +1,7 @@
 @_exported import Foundation
 
 public class CGImage { public init() {} }
+public enum UIKeyboardType { case `default`, numberPad, decimalPad }
 
 open class UIColor {
     public init(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {}

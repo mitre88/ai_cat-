@@ -24,7 +24,8 @@ final class WorldModel {
     /// Called every frame with the delta time (challenge logic hooks in here).
     @ObservationIgnored var onFrame: ((Float) -> Void)?
     @ObservationIgnored private var lastGrowth: Double = -1
-    @ObservationIgnored private var prepared = false
+    @ObservationIgnored private var preparation: Task<Void, Never>?
+    @ObservationIgnored private var attachGeneration = 0
     @ObservationIgnored private var sky: EnvironmentResource?
 
     init(theme: WorldTheme) {
@@ -37,13 +38,30 @@ final class WorldModel {
     /// One-time asynchronous work: a bundled USDZ cat (if any) and the procedural sky used for the skybox
     /// and image-based lighting. Safe to call many times.
     func prepare() async {
-        guard !prepared else { return }
-        prepared = true
+        if let preparation {
+            await preparation.value   // a second RealityView waits for the same work
+            return
+        }
+        let task = Task { @MainActor in
+            await self.runPreparation()
+        }
+        preparation = task
+        await task.value
+    }
+
+    private func runPreparation() async {
         if let usdz = await USDZCatRig.load() {
             cat = usdz
         }
         await TextureLibrary.shared.prepare(TextureLibrary.kinds(for: theme))
         sky = await SkyEnvironment.resource(for: theme)
+    }
+
+    /// Call from a RealityView's make closure before `prepare()`; pass the token to `attach` so a view
+    /// that was replaced while preparing (posture change) never steals the scene from the live one.
+    func beginAttach() -> Int {
+        attachGeneration += 1
+        return attachGeneration
     }
 
     private func buildIfNeeded() {
@@ -76,7 +94,8 @@ final class WorldModel {
     }
 
     /// Attach the graph to a (possibly new) RealityView content and start ticking.
-    func attach(to content: inout RealityViewCameraContent) {
+    func attach(to content: inout RealityViewCameraContent, generation: Int? = nil) {
+        if let generation, generation != attachGeneration { return }
         buildIfNeeded()
         root.removeFromParent()
         content.add(root)

@@ -7549,6 +7549,40 @@
         }
       }
     },
+    "parent.gate_answer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type the answer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escribe la respuesta"
+          }
+        }
+      }
+    },
+    "parent.gate_check": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprobar"
+          }
+        }
+      }
+    },
     "parent.gate_hold": {
       "extractionState": "manual",
       "localizations": {
@@ -7596,6 +7630,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Para adultos"
+          }
+        }
+      }
+    },
+    "parent.gate_wait_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wait %lld s and try the new sum."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espera %lld s y prueba la nueva suma."
           }
         }
       }
