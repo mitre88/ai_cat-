@@ -106,6 +106,7 @@ Everything was verified on Linux (package tests, syntax of every file, whole-app
 - *Kitten does not grow*: XP only accrues on passed challenges (accuracy ≥ 60 %).
 - *Linux / CI without Xcode*: `Tools/verify_linux.sh <swift-toolchain-root>` builds and tests the package, parses every app file and type-checks the whole app against the shadow frameworks in `Tools/shadows` (see `Tools/shadows/README.md`).
 - *On a Mac*: `Tools/xcode_smoke.sh [--no-duo]` runs the package tests and a simulator build in one go.
+- *GitHub Actions*: `.github/workflows/verify.yml` runs the validators and the full Linux pipeline in the official `swift:6.1-noble` container, plus the package tests on macOS, on every push.
 
 ## License
 

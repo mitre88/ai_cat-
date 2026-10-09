@@ -142,6 +142,26 @@ def check_strings():
     for key in sorted(used):
         if key not in catalog:
             err(f"derived localization key '{key}' not in Localizable.xcstrings")
+    # Format specifiers must agree between en and es, and L10n.string must never show a raw specifier.
+    spec_re = re.compile(r"%(?:\d+\$)?[-+ 0#]*\d*(?:\.\d+)?(?:ll|l|h)?[@dfsux]")
+
+    def specifiers(value):
+        return sorted(spec_re.findall(value.replace("%%", "")))
+
+    for key, locs in catalog.items():
+        en = locs.get("en", {}).get("stringUnit", {}).get("value", "")
+        es = locs.get("es", {}).get("stringUnit", {}).get("value", "")
+        if specifiers(en) != specifiers(es):
+            err(f"format specifiers differ between en and es for '{key}': {specifiers(en)} vs {specifiers(es)}")
+    call_pat = re.compile(r'L10n\.(string|format)\(\s*"([^"\\]+)"')
+    for path in list(swift_files("AICat")):
+        src = open(path, encoding="utf-8").read()
+        for func, key in call_pat.findall(src):
+            value = catalog.get(key, {}).get("en", {}).get("stringUnit", {}).get("value", "")
+            if func == "string" and specifiers(value):
+                err(f"{os.path.relpath(path, ROOT)}: L10n.string(\"{key}\") would show raw specifiers {specifiers(value)}; use L10n.format")
+            if func == "format" and not specifiers(value):
+                warn(f"{os.path.relpath(path, ROOT)}: L10n.format(\"{key}\") has no specifiers")
     unused = sorted(set(catalog) - used)
     if unused:
         warn(f"{len(unused)} catalog keys not referenced from Swift (fine for data-driven keys): {unused[:8]}{'…' if len(unused) > 8 else ''}")

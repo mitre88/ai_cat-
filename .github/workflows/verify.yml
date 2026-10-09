@@ -1,0 +1,31 @@
+name: verify
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  linux:
+    name: Linux (package tests, syntax, shadow type-check)
+    runs-on: ubuntu-latest
+    container: swift:6.1-noble
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Python for the validators
+        run: |
+          apt-get update -qq
+          apt-get install -y -qq python3 python3-pip >/dev/null
+          pip3 install --break-system-packages --quiet openstep_parser
+      - name: Validate project, plists and string catalogs
+        run: python3 Tools/validate_project.py
+      - name: Build and test AICatCore, parse and type-check the app
+        run: Tools/verify_linux.sh
+
+  macos:
+    name: macOS (package tests)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: swift test (AICatCore)
+        run: cd Packages/AICatCore && swift test
