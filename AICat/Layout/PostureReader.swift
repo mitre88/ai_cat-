@@ -6,7 +6,15 @@ struct PostureReader<Content: View>: View {
     @ViewBuilder let content: (PostureInfo) -> Content
 
     var body: some View {
+        #if AICAT_DUO
+        if #available(iOS 27.1, *) {
+            DuoPostureProvider(content: content)
+        } else {
+            SizeClassPostureProvider(content: content)
+        }
+        #else
         SizeClassPostureProvider(content: content)
+        #endif
     }
 }
 
@@ -17,8 +25,7 @@ struct SizeClassPostureProvider<Content: View>: View {
 
     var body: some View {
         GeometryReader { proxy in
-            let posture: StagePosture = (horizontalSizeClass == .regular) ? .world : .pocket
-            let info = PostureInfo(posture: posture, hingeAngleDegrees: nil, containerSize: proxy.size)
+            let info = PosturePolicy.info(size: proxy.size, activeDivision: nil, isRegularWidth: horizontalSizeClass == .regular, hingeAngleDegrees: nil)
             content(info)
                 .environment(\.postureInfo, info)
                 .frame(width: proxy.size.width, height: proxy.size.height)

@@ -17,17 +17,20 @@ struct AdaptiveStage<Stage: View, Board: View>: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         case .world:
-            HStack(spacing: 0) {
-                board()
-                    .frame(width: boardWidth)
-                stage()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            #if AICAT_DUO
+            if #available(iOS 27.1, *) {
+                DuoStageArrangement(stage: stage, board: board)
+            } else {
+                worldSideBySide
             }
+            #else
+            worldSideBySide
+            #endif
         case .lab(let division):
             VStack(spacing: 0) {
                 stage()
                     .frame(height: max(division.minY, 120))
-                Color.clear
+                foldGap(horizontal: true)
                     .frame(height: division.height)
                 board()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -36,12 +39,30 @@ struct AdaptiveStage<Stage: View, Board: View>: View {
             HStack(spacing: 0) {
                 board()
                     .frame(width: max(division.minX, 200))
-                Color.clear
+                foldGap(horizontal: false)
                     .frame(width: division.width)
                 stage()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
+    }
+
+    private var worldSideBySide: some View {
+        HStack(spacing: 0) {
+            board()
+                .frame(width: boardWidth)
+            stage()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
+
+    @ViewBuilder
+    private func foldGap(horizontal: Bool) -> some View {
+        #if AICAT_DUO
+        FoldGap(isHorizontal: horizontal)
+        #else
+        Color.clear
+        #endif
     }
 
     private var boardWidth: CGFloat {

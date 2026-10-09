@@ -20,6 +20,7 @@ final class WorldModel {
     @ObservationIgnored private var props: [String: Entity] = [:]
     @ObservationIgnored private(set) var posture: StagePosture = .pocket
     @ObservationIgnored private(set) var openness: Double = 1
+    @ObservationIgnored private(set) var reduceEffects = false
     /// Called every frame with the delta time (challenge logic hooks in here).
     @ObservationIgnored var onFrame: ((Float) -> Void)?
     @ObservationIgnored private var lastGrowth: Double = -1
@@ -84,12 +85,23 @@ final class WorldModel {
     // MARK: Posture & hinge
 
     func setPosture(_ posture: StagePosture) {
+        let changedFold = posture.isFolded != self.posture.isFolded
         self.posture = posture
         camera.applyPosture(posture)
+        if changedFold, !reduceEffects {
+            cat.play(gesture: .headTilt)
+        }
+    }
+
+    /// Mirrors the parent-zone / system "reduce motion" preference: no sunrise, no particles, no gestures on fold.
+    func setReduceEffects(_ reduce: Bool) {
+        reduceEffects = reduce
+        if reduce { lighting.setOpenness(1) }
     }
 
     func setOpenness(_ openness: Double) {
         self.openness = openness
+        guard !reduceEffects else { return }
         lighting.setOpenness(openness)
     }
 

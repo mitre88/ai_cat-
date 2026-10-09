@@ -61,6 +61,7 @@ struct StageView: View {
             CatSpeechBubble(line: app.speech)
                 .frame(maxWidth: 380)
                 .padding(12)
+            debugBadge
         }
         #if DEBUG
         .overlay(alignment: .bottom) {
@@ -75,6 +76,7 @@ struct StageView: View {
         }
         #endif
         .onAppear {
+            world.setReduceEffects(app.reduceMotion)
             world.setGrowth(app.profile.growth, animated: false)
             world.wear(app.profile.unlockedKnowledge)
             world.apply(line: app.speech)
@@ -92,5 +94,24 @@ struct StageView: View {
             world.setPosture(info.posture)
             world.setOpenness(info.openness)
         }
+        .onChange(of: app.profile.reduceEffects) { _, reduce in
+            world.setReduceEffects(reduce || app.reduceMotion)
+        }
+    }
+
+    @ViewBuilder
+    private var debugBadge: some View {
+        #if DEBUG && AICAT_DUO
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                HingeDebugBadge(info: postureInfo)
+                    .padding(8)
+            }
+        }
+        #else
+        EmptyView()
+        #endif
     }
 }
