@@ -178,6 +178,13 @@ AICatCore (SwiftPM, solo Foundation) → currículo, crecimiento, dificultad, pu
 - La física es cosmética: la puntuación se decide por distancia XZ a la canasta en `DragPlaneMath` (probado).
 - Persistencia: `PlayerProfile` como JSON atómico en Application Support. Sin red, sin analítica, sin anuncios.
 
+### 7.1 Reglas de vida de un reto (tras las revisiones)
+
+- El **host del reto** (`ChallengeHost`) es dueño del ciclo de vida: crea el controlador una sola vez, apaga cámara, micrófono y ejecuciones en curso al salir, y vigila la inactividad (AI CAT habla a los 35 s sin progreso y luego cada 60 s). Los **tableros** se reconstruyen en cada cambio de postura del Duo, así que nunca deben poseer recursos.
+- Un reto **resuelto nunca reprueba**: todo `scoreAccuracy` de un estado resuelto tiene piso ≥ 0.6 (`Scoring.passThreshold`).
+- Los adaptadores de hardware (`Capture/`) **siempre devuelven**: temporizadores con identificador de sesión, continuaciones que se reanudan una sola vez, y comprobación del formato de audio antes de instalar el tap.
+- El cerebro generativo **nunca bloquea**: cada petición compite contra un temporizador que devuelve el guion aunque el modelo ignore la cancelación; las historias y respuestas esperan su turno en vez de rechazarse.
+
 ## 8. Seguridad y privacidad (categoría Kids)
 
 - No se pide nombre ni fecha de nacimiento del niño. Se nombra al gato.
@@ -191,4 +198,5 @@ AICatCore (SwiftPM, solo Foundation) → currículo, crecimiento, dificultad, pu
 - M9 ✅: 5 (Q-learning tabular visible, el niño diseña el laberinto) y 6 (neuronas ternarias por perillas, dos capas, red sigmoide que se entrena sola).
 - M10 ✅: 9 (sesgo, balance, privacidad, juez) y 10 (historias generativas, remezcla, ayudante, graduación). Se adelantó a 7 y 8 porque se verifica por completo sin dispositivo.
 - M11 ✅: 7 (píxeles, bordes, formas, Vision on-device) y 8 (tokens, bigramas, voz on-device, conversación), con permisos localizados (`InfoPlist.xcstrings`) y puerta parental antes de cámara y micrófono.
-- Pendiente: pruebas en dispositivo (Xcode 26/27.1), arte USDZ (`Docs/ART_PIPELINE.md`), pulido de audio y accesibilidad.
+- Endurecimiento ✅: revisiones adversariales por agentes de los diez mundos y de la infraestructura con sus correcciones, CI en GitHub Actions, valores dorados Python para RL/NN, política de privacidad, plan de QA.
+- Pendiente: pruebas en dispositivo (Xcode 26/27.1), arte USDZ (`Docs/ART_PIPELINE.md`), pulido de audio.
