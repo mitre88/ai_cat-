@@ -7,10 +7,12 @@ struct ChallengeHost: View {
     let spec: ChallengeSpec
     @Environment(AppModel.self) private var app
     @State private var session: ChallengeSession
+    @State private var world: WorldModel
 
     init(spec: ChallengeSpec) {
         self.spec = spec
         _session = State(initialValue: ChallengeSession(spec: spec))
+        _world = State(initialValue: WorldModel(theme: Curriculum.scenario(spec.scenario).theme))
     }
 
     private var scenario: Scenario { Curriculum.scenario(spec.scenario) }
@@ -18,7 +20,7 @@ struct ChallengeHost: View {
     var body: some View {
         PostureReader { info in
             AdaptiveStage(info: info) {
-                StagePlaceholderView(theme: scenario.theme)
+                StageView(world: world)
             } board: {
                 board
             }
@@ -44,26 +46,6 @@ struct ChallengeHost: View {
     @ViewBuilder
     private var board: some View {
         ComingSoonBoard(spec: spec)
-    }
-}
-
-/// Stage shown until the 3-D world replaces it.
-struct StagePlaceholderView: View {
-    let theme: WorldTheme
-    @Environment(AppModel.self) private var app
-
-    var body: some View {
-        let palette = Theme.palette(for: theme)
-        ZStack {
-            LinearGradient(colors: [palette.sky, palette.ground], startPoint: .top, endPoint: .bottom)
-            VStack(spacing: 12) {
-                CatAvatarView(emotion: app.speech?.emotion ?? .happy, size: 120)
-                CatSpeechBubble(line: app.speech)
-                    .frame(maxWidth: 360)
-            }
-            .padding()
-        }
-        .ignoresSafeArea(edges: .top)
     }
 }
 

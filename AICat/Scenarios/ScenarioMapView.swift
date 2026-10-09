@@ -4,6 +4,7 @@ import AICatCore
 /// The ten worlds. Locked worlds wake up when the previous one is completed.
 struct ScenarioMapView: View {
     @Environment(AppModel.self) private var app
+    @State private var homeWorld = WorldModel(theme: .garden)
 
     private let columns = [GridItem(.adaptive(minimum: 150, maximum: 230), spacing: 16)]
 
@@ -43,8 +44,11 @@ struct ScenarioMapView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 12) {
+            StageView(world: homeWorld)
+                .frame(height: 240)
+                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
             HStack(alignment: .top, spacing: 16) {
-                CatAvatarView(emotion: app.speech?.emotion ?? .happy, size: 96)
+                CatAvatarView(emotion: app.speech?.emotion ?? .happy, size: 64)
                 VStack(alignment: .leading, spacing: 6) {
                     Text(app.profile.catName)
                         .font(.title.bold())
@@ -58,7 +62,6 @@ struct ScenarioMapView: View {
                     knowledgeRow
                 }
             }
-            CatSpeechBubble(line: app.speech)
         }
         .padding(16)
         .background(Theme.cardBackground, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
