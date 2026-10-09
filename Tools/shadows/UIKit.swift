@@ -1,5 +1,7 @@
 @_exported import Foundation
 
+public class CGImage { public init() {} }
+
 open class UIColor {
     public init(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {}
     public init(white: CGFloat, alpha: CGFloat) {}

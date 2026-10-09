@@ -9,7 +9,7 @@ enum SceneBuilder {
 
     static func build(theme: WorldTheme, into root: Entity) {
         let palette = Theme.palette(for: theme)
-        let ground = ModelEntity(mesh: .generatePlane(width: groundSize, depth: groundSize, cornerRadius: 0), materials: [Materials.ground(palette.ground)])
+        let ground = ModelEntity(mesh: .generatePlane(width: groundSize, depth: groundSize, cornerRadius: 0), materials: [Materials.ground(theme: theme, palette: palette)])
         ground.name = "ground"
         let slab = ShapeResource.generateBox(size: [groundSize, 0.1, groundSize]).offsetBy(translation: [0, -0.05, 0])
         ground.collision = CollisionComponent(shapes: [slab])

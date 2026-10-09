@@ -7,6 +7,7 @@ final class Lighting {
     let root = Entity()
     private let sun = Entity()
     private let fill = Entity()
+    private let rim = Entity()
     private var elevation: Float = 0.9      // radians above the horizon
     private var azimuth: Float = 0.7        // radians around the Y axis
 
@@ -14,12 +15,16 @@ final class Lighting {
         root.name = "lighting"
         sun.name = "sun"
         sun.components.set(DirectionalLightComponent(color: .white, intensity: 4500, isRealWorldProxy: false))
-        sun.components.set(DirectionalLightComponent.Shadow(maximumDistance: 14, depthBias: 1.5))
+        sun.components.set(DirectionalLightComponent.Shadow(maximumDistance: 10, depthBias: 1.2))
         fill.name = "fill"
         fill.components.set(PointLightComponent(color: UIColor(red: 0.85, green: 0.9, blue: 1.0, alpha: 1), intensity: 900, attenuationRadius: 14))
         fill.position = [-2.5, 2.5, 2.5]
+        rim.name = "rim"
+        rim.components.set(DirectionalLightComponent(color: UIColor(red: 0.75, green: 0.85, blue: 1.0, alpha: 1), intensity: 1100, isRealWorldProxy: false))
+        rim.look(at: .zero, from: [-2.0, 2.4, -3.2], relativeTo: nil)
         root.addChild(sun)
         root.addChild(fill)
+        root.addChild(rim)
         applySun()
     }
 
@@ -32,6 +37,7 @@ final class Lighting {
 
     func setTheme(skyTint: UIColor) {
         fill.components.set(PointLightComponent(color: skyTint, intensity: 900, attenuationRadius: 14))
+        rim.components.set(DirectionalLightComponent(color: skyTint, intensity: 1100, isRealWorldProxy: false))
     }
 
     private func applySun(warmth: Float = 0) {

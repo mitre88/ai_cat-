@@ -16,6 +16,20 @@ enum SkyEnvironment {
         let ground = UIColor(palette.ground).cgColor
         guard let gradient = CGGradient(colorsSpace: colorSpace, colors: [top, horizon, ground] as CFArray, locations: [0, 0.5, 1]) else { return nil }
         context.drawLinearGradient(gradient, start: CGPoint(x: 0, y: CGFloat(height)), end: CGPoint(x: 0, y: 0), options: [])
+        // Sun: a warm radial glow high on one side, so the image-based light has a direction.
+        let sunCenter = CGPoint(x: CGFloat(width) * 0.68, y: CGFloat(height) * 0.74)
+        let sunColors = [UIColor(red: 1, green: 0.97, blue: 0.86, alpha: 1).cgColor, UIColor(red: 1, green: 0.95, blue: 0.80, alpha: 0).cgColor]
+        if let sun = CGGradient(colorsSpace: colorSpace, colors: sunColors as CFArray, locations: [0, 1]) {
+            context.drawRadialGradient(sun, startCenter: sunCenter, startRadius: 0, endCenter: sunCenter, endRadius: CGFloat(width) * 0.10, options: [])
+        }
+        // Clouds: a few soft, translucent ellipses in the upper half.
+        context.setFillColor(UIColor(white: 1, alpha: 0.16).cgColor)
+        let clouds: [(Double, Double, Double, Double)] = [(0.12, 0.66, 0.16, 0.05), (0.20, 0.63, 0.10, 0.04), (0.45, 0.70, 0.18, 0.05),
+                                                           (0.52, 0.67, 0.12, 0.04), (0.82, 0.62, 0.14, 0.045), (0.88, 0.60, 0.09, 0.035)]
+        for (cx, cy, rx, ry) in clouds {
+            let rect = CGRect(x: CGFloat(cx - rx) * CGFloat(width), y: CGFloat(cy - ry) * CGFloat(height), width: CGFloat(rx * 2) * CGFloat(width), height: CGFloat(ry * 2) * CGFloat(height))
+            context.fillEllipse(in: rect)
+        }
         return context.makeImage()
     }
 

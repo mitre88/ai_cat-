@@ -42,6 +42,7 @@ final class WorldModel {
         if let usdz = await USDZCatRig.load() {
             cat = usdz
         }
+        await TextureLibrary.shared.prepare(TextureLibrary.kinds(for: theme))
         sky = await SkyEnvironment.resource(for: theme)
     }
 
@@ -56,6 +57,7 @@ final class WorldModel {
             cat.root.position = [0, 0, 0.2]   // default spot unless a controller already placed the cat
         }
         root.addChild(cat.root)
+        cat.apply(morphology: cat.morphology, animated: false)   // rebuilds the coat with the textures now cached
         lighting.setTheme(skyTint: UIColor(Theme.palette(for: theme).sky))
         camera.applyPosture(posture)
         if let sky {

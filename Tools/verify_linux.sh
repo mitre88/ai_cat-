@@ -45,7 +45,7 @@ mkdir -p "$SHADOWS"
 for m in simd UIKit SwiftUI RealityKit; do
   "$TC/swiftc" -emit-module -parse-as-library -module-name $m -emit-module-path "$SHADOWS/$m.swiftmodule" -I "$SHADOWS" "Tools/shadows/$m.swift" || { echo "shadow module $m FAILED"; STATUS=1; }
 done
-APP_FILES=$(find AICat -name "*.swift" | grep -v "Intelligence/CatVoice.swift" | grep -v "World/SkyEnvironment.swift" | grep -v "Capture/" | sort)
+APP_FILES=$(find AICat -name "*.swift" | grep -v "Intelligence/CatVoice.swift" | grep -v "World/SkyEnvironment.swift" | grep -v "World/ProceduralImages.swift" | grep -v "Capture/" | sort)
 if "$TC/swiftc" -typecheck -swift-version 5 -D AICAT_DUO -D DEBUG -parse-as-library -I "$SHADOWS" -I "$(dirname "$MODDIR")" -module-name AICatApp \
   $APP_FILES Tools/shadows/AppStubs.swift; then echo "shadow typecheck ok"; else echo "shadow typecheck FAILED"; STATUS=1; fi
 

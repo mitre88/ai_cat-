@@ -1,5 +1,6 @@
 import RealityKit
 import SwiftUI
+import AICatCore
 
 /// Every material of the game is built here, so a wrong RealityKit material API is fixed in one place.
 enum Materials {
@@ -23,9 +24,53 @@ enum Materials {
         pbr(UIColor(color), roughness: roughness, metallic: metallic)
     }
 
-    /// Black fur with a soft sheen so the silhouette reads against dark backgrounds.
+    /// A PBR material with a procedural colour texture (and optionally a normal map) tinted by `tint`,
+    /// repeated `repeats` times across the UV square. Falls back to the flat tint until the texture exists.
+    @MainActor
+    static func textured(_ tint: UIColor, color: TextureKind, normal: TextureKind? = nil, roughness: Float = 0.9,
+                         repeats: Float = 1, sheen: UIColor? = nil) -> PhysicallyBasedMaterial {
+        var material = pbr(tint, roughness: roughness, sheen: sheen)
+        let library = TextureLibrary.shared
+        if let resource = library.texture(color) {
+            material.baseColor = PhysicallyBasedMaterial.BaseColor(tint: tint, texture: MaterialParameters.Texture(resource))
+        }
+        if let normal, let resource = library.texture(normal) {
+            material.normal = PhysicallyBasedMaterial.Normal(texture: MaterialParameters.Texture(resource))
+        }
+        material.textureCoordinateTransform = PhysicallyBasedMaterial.TextureCoordinateTransform(offset: .zero, scale: [repeats, repeats], rotation: 0)
+        return material
+    }
+
+    /// The ground of a world: the palette colour multiplied by the theme's grass, wood, stone, metal, sand,
+    /// carpet or tile texture, with a normal map where the surface has relief.
+    @MainActor
+    static func ground(theme: WorldTheme, palette: WorldPalette) -> PhysicallyBasedMaterial {
+        let surface = TextureLibrary.ground(for: theme)
+        let roughness: Float = theme == .factory ? 0.45 : (theme == .lab ? 0.35 : 0.95)
+        return textured(UIColor(palette.ground), color: surface.color, normal: surface.normal, roughness: roughness, repeats: surface.repeats)
+    }
+
+    /// Black fur: fine strands in the colour and normal textures plus a soft sheen, so the silhouette reads
+    /// against dark backgrounds and the coat catches the rim light.
+    @MainActor
     static var fur: PhysicallyBasedMaterial {
-        pbr(UIColor(red: 0.07, green: 0.07, blue: 0.09, alpha: 1), roughness: 0.88, sheen: UIColor(white: 0.32, alpha: 1))
+        textured(UIColor(red: 0.30, green: 0.30, blue: 0.34, alpha: 1), color: .fur, normal: .furNormal, roughness: 0.82,
+                 repeats: 3, sheen: UIColor(white: 0.34, alpha: 1))
+    }
+
+    /// Soft contact shadow under AI CAT: an unlit, transparent disc that works on every device.
+    @MainActor
+    static var blobShadow: UnlitMaterial {
+        var material = UnlitMaterial()
+        if let resource = TextureLibrary.shared.texture(.blobShadow) {
+            material.color = UnlitMaterial.BaseColor(tint: .black, texture: MaterialParameters.Texture(resource))
+            material.blending = .transparent(opacity: .init(floatLiteral: 0.55))
+        } else {
+            material.color = UnlitMaterial.BaseColor(tint: .black, texture: nil)
+            material.blending = .transparent(opacity: .init(floatLiteral: 0.25))
+        }
+        material.writesDepth = false
+        return material
     }
 
     static var eye: PhysicallyBasedMaterial {

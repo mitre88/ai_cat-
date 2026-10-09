@@ -28,6 +28,7 @@ final class ProceduralCatRig: CatRig {
     private let tailPivot = Entity()
     private let tailSegments: [ModelEntity] = [ModelEntity(), ModelEntity(), ModelEntity(), ModelEntity()]
     private let accessories = Entity()
+    private let shadowDisc = ModelEntity()
 
     let animator = CatAnimator()
     private var growthScaleTween: (from: Float, elapsed: Float)?
@@ -54,6 +55,8 @@ final class ProceduralCatRig: CatRig {
             parent = segment
         }
         root.addChild(accessories)
+        shadowDisc.name = "contactShadow"
+        root.addChild(shadowDisc)
         for model in [body, head, earL, earR] + legs + tailSegments {
             model.components.set(GroundingShadowComponent(castsShadow: true))
         }
@@ -127,6 +130,10 @@ final class ProceduralCatRig: CatRig {
             segment.position = index == 0 ? [0, 0, 0] : [0, segmentLength * 0.35, -segmentLength * 0.9]
             segment.orientation = simd_quatf(angle: -0.55 + Float(index) * 0.35, axis: [1, 0, 0])
         }
+
+        let shadowWidth = bodyLength * 1.6 + 0.12
+        shadowDisc.model = ModelComponent(mesh: .generatePlane(width: shadowWidth, depth: shadowWidth * 0.75, cornerRadius: 0), materials: [Materials.blobShadow])
+        shadowDisc.position = [0, 0.004, bodyLength * 0.06]
 
         rebuildAccessories()
         animator.configure(morphology: m)

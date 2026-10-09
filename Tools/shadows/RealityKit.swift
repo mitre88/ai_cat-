@@ -126,25 +126,63 @@ public class PhysicsMaterialResource {
 
 // MARK: Materials
 
+public class TextureResource {
+    public enum Semantic { case color, normal, raw, hdrColor, scalar }
+    public struct CreateOptions { public init(semantic: TextureResource.Semantic?) {} }
+    public init() {}
+    public convenience init(image: CGImage, withName name: String?, options: CreateOptions) async throws { self.init() }
+}
+
+public enum MaterialParameters {
+    public struct Texture { public init(_ resource: TextureResource) {} }
+}
+
+public enum MaterialParameterTypes {
+    public struct Opacity: ExpressibleByFloatLiteral { public init(floatLiteral value: Float) {}; public init(scale: Float, texture: MaterialParameters.Texture?) {} }
+    public enum Blending { case opaque, transparent(opacity: Opacity) }
+    public struct TextureCoordinateTransform { public init(offset: SIMD2<Float>, scale: SIMD2<Float>, rotation: Float) {} }
+}
+
 public struct PhysicallyBasedMaterial: Material {
-    public struct BaseColor { public var tint: UIColor; public init(tint: UIColor) { self.tint = tint } }
-    public struct Roughness: ExpressibleByFloatLiteral { public init(floatLiteral value: Float) {}; public init(scale: Float) {} }
+    public struct BaseColor { public var tint: UIColor; public var texture: MaterialParameters.Texture?; public init(tint: UIColor, texture: MaterialParameters.Texture? = nil) { self.tint = tint; self.texture = texture } }
+    public struct Roughness: ExpressibleByFloatLiteral { public init(floatLiteral value: Float) {}; public init(scale: Float, texture: MaterialParameters.Texture? = nil) {} }
     public struct Metallic: ExpressibleByFloatLiteral { public init(floatLiteral value: Float) {}; public init(scale: Float) {} }
+    public struct Normal { public init(texture: MaterialParameters.Texture?) {} }
     public struct SheenColor { public init(tint: UIColor) {} }
     public struct EmissiveColor { public init(color: UIColor) {} }
     public struct Clearcoat: ExpressibleByFloatLiteral { public init(floatLiteral value: Float) {} }
+    public typealias TextureCoordinateTransform = MaterialParameterTypes.TextureCoordinateTransform
+    public typealias Blending = MaterialParameterTypes.Blending
+    public typealias Opacity = MaterialParameterTypes.Opacity
     public var baseColor = BaseColor(tint: .white)
     public var roughness: Roughness = 0.5
     public var metallic: Metallic = 0.0
+    public var normal = Normal(texture: nil)
     public var sheen: SheenColor?
     public var emissiveColor = EmissiveColor(color: .black)
     public var emissiveIntensity: Float = 0
     public var clearcoat: Clearcoat = 0.0
+    public var blending: Blending = .opaque
+    public var opacityThreshold: Float?
+    public var writesDepth = true
+    public var readsDepth = true
+    public var textureCoordinateTransform = TextureCoordinateTransform(offset: .zero, scale: [1, 1], rotation: 0)
     public init() {}
 }
 
 public struct UnlitMaterial: Material {
+    public typealias BaseColor = PhysicallyBasedMaterial.BaseColor
+    public typealias Blending = MaterialParameterTypes.Blending
+    public typealias TextureCoordinateTransform = MaterialParameterTypes.TextureCoordinateTransform
+    public var color = BaseColor(tint: .white)
+    public var blending: Blending = .opaque
+    public var opacityThreshold: Float?
+    public var writesDepth = true
+    public var readsDepth = true
+    public var textureCoordinateTransform = TextureCoordinateTransform(offset: .zero, scale: [1, 1], rotation: 0)
+    public init() {}
     public init(color: UIColor) {}
+    public init(texture: TextureResource) {}
 }
 
 public struct SimpleMaterial: Material {
