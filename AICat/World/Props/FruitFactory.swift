@@ -4,6 +4,7 @@ import UIKit
 import AICatCore
 
 /// Fruits and numbered baskets of the Pattern Garden.
+@MainActor
 enum FruitFactory {
     static func color(for fruitColor: FruitColor) -> Color {
         switch fruitColor {

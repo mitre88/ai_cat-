@@ -10,6 +10,7 @@ protocol WorldInteraction: AnyObject {
 }
 
 /// Shared drag math: the touch ray meets a horizontal plane at `height`, scoring stays in AICatCore.
+@MainActor
 enum DragMath {
     static func groundPoint(for value: EntityTargetValue<DragGesture.Value>, height: Float) -> SIMD3<Float>? {
         guard let ray = value.ray(through: value.location, in: .local, to: .scene) else { return nil }

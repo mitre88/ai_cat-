@@ -3,6 +3,7 @@ import SwiftUI
 import AICatCore
 
 /// Low-poly props built from primitives. Replace any of them with USDZ later (see Docs/ART_PIPELINE.md).
+@MainActor
 enum PropFactory {
     static func tree(height: Float, palette: WorldPalette) -> Entity {
         let tree = Entity()
