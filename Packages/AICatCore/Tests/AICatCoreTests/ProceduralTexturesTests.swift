@@ -61,7 +61,8 @@ final class ProceduralTexturesTests: XCTestCase {
         for kind in TextureKind.allCases {
             let a = ProceduralTextures.render(kind, size: 24)
             let b = ProceduralTextures.render(kind, size: 24)
-            XCTAssertEqual(a.size, 24)
+            XCTAssertEqual(a.width, 24)
+            XCTAssertEqual(a.height, 24)
             XCTAssertEqual(a.pixels.count, 24 * 24 * 4, "\(kind)")
             XCTAssertEqual(a, b, "\(kind) must render the same bytes every time")
         }

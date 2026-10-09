@@ -85,6 +85,8 @@ Guion para la primera sesión con Xcode: cada bloque dice qué tocar y qué debe
 - El gato se lee como negro carbón con hebras visibles bajo la luz de contorno, nunca como una silueta plana ni como gris.
 - Primera carga de un mundo con todas sus texturas: menos de 1 s en iPhone (se generan en segundo plano, 512² el suelo, 256² los props); cambiar de postura en el Duo no vuelve a generarlas.
 - Modo claro/oscuro del sistema no cambia el mundo 3D (la iluminación es propia).
+- El cielo muestra degradado, sol y nubes (no un degradado plano); las sombras del sol caen en la misma dirección que el sol del cielo. Si no hay sombras del sol en ningún mundo, cambiar la proyección fija por `.automatic(maximumDistance: 10)` en `Lighting.swift`.
+- Las frutas del mundo 1 tienen poros finos y brillo; su color sigue siendo inequívoco (rojo, amarillo, verde, morado).
 
 ## Regresiones a vigilar (corregidas tras las revisiones adversariales)
 

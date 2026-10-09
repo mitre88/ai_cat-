@@ -53,7 +53,7 @@ final class TextureLibrary {
     /// (baskets, pedestals). Stone is everywhere because every pedestal is stone.
     static func props(for theme: WorldTheme) -> [TextureKind] {
         switch theme {
-        case .garden: return [.bark, .barkNormal, .leaves, .wicker, .stone, .stoneNormal]
+        case .garden: return [.bark, .barkNormal, .leaves, .wicker, .fruit, .fruitNormal, .stone, .stoneNormal]
         case .library: return [.wood, .woodNormal, .carpet, .stone, .stoneNormal]
         case .workshop: return [.wood, .woodNormal, .metal, .stone, .stoneNormal]
         case .trail: return [.bark, .barkNormal, .leaves, .sand, .stone, .stoneNormal]

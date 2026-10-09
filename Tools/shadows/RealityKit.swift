@@ -118,6 +118,7 @@ public class ShapeResource {
 
 public class EnvironmentResource {
     public init() {}
+    public convenience init(equirectangular image: CGImage, withName name: String?) async throws { self.init() }
 }
 
 public class PhysicsMaterialResource {
@@ -219,8 +220,17 @@ public struct BillboardComponent: Component { public init() {} }
 
 public struct DirectionalLightComponent: Component {
     public struct Shadow: Component {
+        public enum ShadowProjectionType: Equatable {
+            case automatic(maximumDistance: Float)
+            case fixed(zNear: Float, zFar: Float, orthographicScale: Float)
+        }
+        public enum ShadowMapCullMode { case none, front, back }
         public init() {}
         public init(maximumDistance: Float, depthBias: Float) {}
+        public init(shadowProjection: ShadowProjectionType, depthBias: Float, cullMode: ShadowMapCullMode?) {}
+        public var shadowProjection: ShadowProjectionType = .automatic(maximumDistance: 10)
+        public var depthBias: Float = 1
+        public var maximumDistance: Float = 10
     }
     public init(color: UIColor = .white, intensity: Float = 2145.7, isRealWorldProxy: Bool = false) {}
 }

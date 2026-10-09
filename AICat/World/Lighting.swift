@@ -1,7 +1,8 @@
 import RealityKit
 import UIKit
 
-/// Sun (directional light with shadows) and a soft fill. The sun can rise with the hinge angle.
+/// Sun (directional light with a fixed shadow box over the set), a soft sky-tinted fill and a cool rim light
+/// from behind. The sun can rise with the hinge angle.
 @MainActor
 final class Lighting {
     let root = Entity()
@@ -15,7 +16,10 @@ final class Lighting {
         root.name = "lighting"
         sun.name = "sun"
         sun.components.set(DirectionalLightComponent(color: .white, intensity: 4500, isRealWorldProxy: false))
-        sun.components.set(DirectionalLightComponent.Shadow(maximumDistance: 10, depthBias: 1.2))
+        // Fixed orthographic shadow box centred on the set (the sun entity sits 8 m out, looking at the origin):
+        // the shadow map covers the ±5 m play area instead of the whole camera frustum, so shadows stay crisp.
+        // If shadows vanish on device, fall back to `.automatic(maximumDistance: 10)`.
+        sun.components.set(DirectionalLightComponent.Shadow(shadowProjection: .fixed(zNear: 0.5, zFar: 20, orthographicScale: 10), depthBias: 1.2, cullMode: nil))
         fill.name = "fill"
         fill.components.set(PointLightComponent(color: UIColor(red: 0.85, green: 0.9, blue: 1.0, alpha: 1), intensity: 900, attenuationRadius: 14))
         fill.position = [-2.5, 2.5, 2.5]

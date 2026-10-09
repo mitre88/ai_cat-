@@ -41,6 +41,10 @@ Catálogo (`TextureKind`): `grass`, `stone`, `wood`, `metal`, `carpet`, `labTile
 
 Para sustituir una por una textura pintada: añade el PNG al asset catalog y cambia `TextureLibrary.prepare` para cargarla con `TextureResource(named:)` bajo la misma `TextureKind` (si es de color, mantenla clara para que el tinte siga mandando); `Materials` no cambia. Para añadir una superficie nueva: un caso en `TextureKind`, su fórmula periódica en `NoiseField` (y su altura si lleva normal map), un helper en `Materials` y el mundo que la usa en `props(for:)`; las pruebas de costura y rango la cubren automáticamente.
 
+### Cielo
+
+`ProceduralSky.render(SkyColors, width:height:)` (AICatCore) calcula el equirectangular (degradado, sol, nubes fBm); `SkyEnvironment` lo convierte en `EnvironmentResource` y `WorldModel` lo usa como skybox e IBL. Para un cielo pintado: `EnvironmentResource(named:)` con un equirectangular 2:1 cuyo sol esté en la misma dirección que la luz (`ProceduralSky.sunU/sunV`), o cambia `SkyColors` por mundo.
+
 ### Sombras de contacto
 
 `PropFactory.contactShadow(width:depth:opacity:)` crea el disco unlit (`Materials.blobShadow(opacity:)`) que los props llevan en su base; `SceneBuilder.shadow(at:_:width:depth:into:)` lo pone bajo los primitivos colocados por su centro. Un USDZ que sustituya a un prop debe conservar el origen a nivel del suelo y puede quedarse con el disco (es un hijo aparte).

@@ -1,6 +1,5 @@
 @_exported import Foundation
-
-public class CGImage { public init() {} }
+@_exported import CoreGraphics
 public enum UIKeyboardType { case `default`, numberPad, decimalPad }
 
 open class UIColor {
@@ -9,6 +8,7 @@ open class UIColor {
     public static let white = UIColor(white: 1, alpha: 1)
     public static let black = UIColor(white: 0, alpha: 1)
     public static let clear = UIColor(white: 0, alpha: 0)
+    public func getRed(_ red: UnsafeMutablePointer<CGFloat>?, green: UnsafeMutablePointer<CGFloat>?, blue: UnsafeMutablePointer<CGFloat>?, alpha: UnsafeMutablePointer<CGFloat>?) -> Bool { false }
 }
 
 open class UIFont {

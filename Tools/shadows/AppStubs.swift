@@ -4,7 +4,7 @@ import SwiftUI
 import Observation
 import AICatCore
 
-/// Stand-ins for the files that need frameworks the shadows do not model (AVFoundation, CoreGraphics).
+/// Stand-ins for the files that need frameworks the shadows do not model (AVFoundation, Vision, Speech).
 @MainActor
 final class CatVoice {
     var isEnabled = true
@@ -12,11 +12,6 @@ final class CatVoice {
     var isSpeaking: Bool { false }
     func speak(_ text: String, language: L10n.Language) {}
     func stop() {}
-}
-
-enum SkyEnvironment {
-    @MainActor
-    static func resource(for theme: WorldTheme) async -> EnvironmentResource? { nil }
 }
 
 // Capture/ (AVFoundation, Vision, Speech): the same surface the controllers and boards use.
@@ -53,9 +48,4 @@ final class SpeechListener {
     func requestAccess() async -> Bool { false }
     func listen(language: L10n.Language, seconds: Double = 7) async -> String? { nil }
     func stop() {}
-}
-
-// World/ProceduralImages.swift (CoreGraphics): only its signature matters for the type-check.
-enum ProceduralImages {
-    static func image(for kind: TextureKind, size: Int? = nil) -> CGImage? { nil }
 }

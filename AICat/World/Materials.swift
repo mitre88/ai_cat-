@@ -97,6 +97,12 @@ enum Materials {
         textured(UIColor(tint), color: .carpet, roughness: 0.95, repeats: repeats)
     }
 
+    /// Fruit peel: pores and a faint mottle under a glossy finish; the tint is the fruit's colour.
+    @MainActor
+    static func fruit(_ tint: Color) -> PhysicallyBasedMaterial {
+        textured(UIColor(tint), color: .fruit, normal: .fruitNormal, roughness: 0.32, repeats: 2)
+    }
+
     /// Dry earth paths.
     @MainActor
     static func sand(_ tint: Color, repeats: Float = 3) -> PhysicallyBasedMaterial {

@@ -8,18 +8,18 @@ import Foundation
 /// material's tint (the world palette) multiplies them, so each world keeps its colour identity.
 public enum TextureKind: String, CaseIterable, Sendable {
     // colour (premultiplied RGBA, opaque)
-    case grass, stone, wood, metal, carpet, labTile, sand, fur, bark, leaves, wicker
+    case grass, stone, wood, metal, carpet, labTile, sand, fur, bark, leaves, wicker, fruit
     // alpha only (black with a radial falloff)
     case blobShadow
     // tangent-space normal maps
-    case grassNormal, stoneNormal, woodNormal, furNormal, barkNormal
+    case grassNormal, stoneNormal, woodNormal, furNormal, barkNormal, fruitNormal
 
     public var isNormalMap: Bool { rawValue.hasSuffix("Normal") }
 
     /// Pixels per side. Grounds and the coat fill the screen; props are small, the shadow is a smooth gradient.
     public var preferredSize: Int {
         switch self {
-        case .bark, .barkNormal, .leaves, .wicker: return 256
+        case .bark, .barkNormal, .leaves, .wicker, .fruit, .fruitNormal: return 256
         case .blobShadow: return 128
         default: return 512
         }
@@ -31,19 +31,21 @@ public enum TextureKind: String, CaseIterable, Sendable {
     }
 }
 
-/// Row-major, premultiplied RGBA8 pixels of a square image.
+/// Row-major, premultiplied RGBA8 pixels.
 public struct RGBAImage: Equatable, Sendable {
-    public let size: Int
+    public let width: Int
+    public let height: Int
     public let pixels: [UInt8]
 
-    public init(size: Int, pixels: [UInt8]) {
-        self.size = size
+    public init(width: Int, height: Int, pixels: [UInt8]) {
+        self.width = width
+        self.height = height
         self.pixels = pixels
     }
 
     /// The four channels of pixel (x, y).
     public func pixel(_ x: Int, _ y: Int) -> (r: UInt8, g: UInt8, b: UInt8, a: UInt8) {
-        let i = (y * size + x) * 4
+        let i = (y * width + x) * 4
         return (pixels[i], pixels[i + 1], pixels[i + 2], pixels[i + 3])
     }
 }
@@ -58,6 +60,7 @@ public enum ProceduralTextures {
         case .grassNormal: return 1.6
         case .woodNormal: return 1.4
         case .barkNormal: return 1.8
+        case .fruitNormal: return 1.2
         default: return 1.0
         }
     }
@@ -74,7 +77,7 @@ public enum ProceduralTextures {
         } else {
             paintColor(&pixels, size) { field.color(kind, $0, $1) }
         }
-        return RGBAImage(size: size, pixels: pixels)
+        return RGBAImage(width: size, height: size, pixels: pixels)
     }
 
     // MARK: Pixel painters
@@ -227,7 +230,8 @@ public struct NoiseField: Sendable {
         case .bark: return bark(u, v)
         case .leaves: return leaves(u, v)
         case .wicker: return wicker(u, v)
-        case .blobShadow, .grassNormal, .stoneNormal, .woodNormal, .furNormal, .barkNormal:
+        case .fruit: return fruit(u, v)
+        case .blobShadow, .grassNormal, .stoneNormal, .woodNormal, .furNormal, .barkNormal, .fruitNormal:
             let a = blob(u, v)
             return (a, a, a)
         }
@@ -241,6 +245,7 @@ public struct NoiseField: Sendable {
         case .woodNormal: return woodHeight(u, v)
         case .furNormal: return furHeight(u, v)
         case .barkNormal: return barkHeight(u, v)
+        case .fruitNormal: return fruitHeight(u, v)
         default: return 0.5
         }
     }
@@ -350,6 +355,14 @@ public struct NoiseField: Sendable {
         return (1.0 * tone, 0.96 * tone, 0.90 * tone)
     }
 
+    /// Fruit peel: small pores (dimples) over a faint mottle, glossy in the material.
+    public func fruit(_ u: Double, _ v: Double) -> ProceduralTextures.RGB {
+        let pores = noise(u, v, cellsX: 40, cellsY: 40, salt: 71)
+        let mottle = fbm(u, v, cells: 6, octaves: 2, salt: 72)
+        let tone = 0.84 + 0.16 * smoothstep(0.30, 0.80, pores) + 0.06 * (mottle - 0.5)
+        return (1.0 * tone, 0.98 * tone, 0.95 * tone)
+    }
+
     /// Soft contact shadow: opaque in the middle, fading to nothing at the edge of the disc: 1 − smoothstep.
     public func blob(_ u: Double, _ v: Double) -> Double {
         let dx = u - 0.5
@@ -384,6 +397,10 @@ public struct NoiseField: Sendable {
 
     public func furHeight(_ u: Double, _ v: Double) -> Double {
         noise(u, v, cellsX: 180, cellsY: 9, salt: 21)
+    }
+
+    public func fruitHeight(_ u: Double, _ v: Double) -> Double {
+        0.5 + 0.5 * smoothstep(0.30, 0.80, noise(u, v, cellsX: 40, cellsY: 40, salt: 71))
     }
 
     public func barkHeight(_ u: Double, _ v: Double) -> Double {

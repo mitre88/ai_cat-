@@ -28,7 +28,7 @@ enum FruitFactory {
             mesh = MeshResource(shape: .generateCapsule(height: r * 2.8, radius: r * 0.72))
             shape = .generateCapsule(height: r * 2.8, radius: r * 0.72)
         }
-        let entity = ModelEntity(mesh: mesh, materials: [Materials.glossy(color(for: fruit.color))])
+        let entity = ModelEntity(mesh: mesh, materials: [Materials.fruit(color(for: fruit.color))])
         entity.collision = CollisionComponent(shapes: [shape])
         entity.physicsBody = PhysicsBodyComponent(
             shapes: [shape],
