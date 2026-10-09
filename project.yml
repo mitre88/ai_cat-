@@ -1,0 +1,57 @@
+# XcodeGen spec — recovery path for AICat.xcodeproj.
+# If Xcode refuses to open the hand-written project:  brew install xcodegen && xcodegen generate
+name: AICat
+options:
+  bundleIdPrefix: com.mitre
+  deploymentTarget:
+    iOS: "26.0"
+  developmentLanguage: en
+  xcodeVersion: "27.1"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+packages:
+  AICatCore:
+    path: Packages/AICatCore
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    SWIFT_STRICT_CONCURRENCY: minimal
+    IPHONEOS_DEPLOYMENT_TARGET: "26.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+targets:
+  AICat:
+    type: application
+    platform: iOS
+    sources:
+      - path: AICat
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: "NO"
+        INFOPLIST_FILE: Config/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.mitre.aicat
+        PRODUCT_NAME: AICat
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        SUPPORTED_PLATFORMS: "iphoneos iphonesimulator"
+        SWIFT_EMIT_LOC_STRINGS: "YES"
+        # AICAT_DUO enables the iPhone Duo (iOS 27.1 SDK) layout files. Remove it to build with Xcode 26.
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) AICAT_DUO"
+      configs:
+        Debug:
+          SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) DEBUG AICAT_DUO"
+    dependencies:
+      - package: AICatCore
+schemes:
+  AICat:
+    build:
+      targets:
+        AICat: all
+    run:
+      config: Debug
+    archive:
+      config: Release
