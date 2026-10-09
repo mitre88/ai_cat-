@@ -13,26 +13,33 @@ final class TextureLibrary {
 
     func texture(_ kind: TextureKind) -> TextureResource? { cache[kind] }
 
-    /// Generates and uploads the textures that are not cached yet; a second caller for a texture already
-    /// being generated waits for it instead of returning without it. Safe to call many times.
+    /// Generates and uploads the textures that are not cached yet. Every missing texture is generated at the
+    /// same time (one detached task each, so a world's set takes about one texture's time on a multi-core
+    /// phone); a second caller for a texture already being generated waits for it instead of returning
+    /// without it. Safe to call many times.
     func prepare(_ kinds: [TextureKind]) async {
+        var pending: [(TextureKind, Task<TextureResource?, Never>)] = []
         for kind in kinds where cache[kind] == nil {
-            let load: Task<TextureResource?, Never>
             if let running = loads[kind] {
-                load = running
-            } else {
-                load = Task { @MainActor in
-                    let image = await Task.detached(priority: .userInitiated) { ProceduralImages.image(for: kind) }.value
-                    guard let image else { return nil }
-                    let options = TextureResource.CreateOptions(semantic: Self.semantic(for: kind))
-                    return try? await TextureResource(image: image, withName: "aicat.\(kind.rawValue)", options: options)
-                }
-                loads[kind] = load
+                pending.append((kind, running))
+                continue
             }
+            let load = Task<TextureResource?, Never> { @MainActor in
+                let image = await Task.detached(priority: .userInitiated) { ProceduralImages.image(for: kind) }.value
+                guard let image else { return nil }
+                let options = TextureResource.CreateOptions(semantic: Self.semantic(for: kind))
+                return try? await TextureResource(image: image, withName: "aicat.\(kind.rawValue)", options: options)
+            }
+            loads[kind] = load
+            pending.append((kind, load))
+        }
+        for (kind, load) in pending {
             if let resource = await load.value {
                 cache[kind] = resource
             }
-            loads[kind] = nil
+            if loads[kind] == load {
+                loads[kind] = nil
+            }
         }
     }
 
