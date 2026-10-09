@@ -25,7 +25,7 @@ DEST="generic/platform=iOS Simulator"
 if [ "${1:-}" = "--no-duo" ]; then
   echo "=== Xcode: build for simulator (AICAT_DUO off) ==="
   xcodebuild build -project AICat.xcodeproj -scheme AICat -destination "$DEST" \
-    SWIFT_ACTIVE_COMPILATION_CONDITIONS='$(inherited) DEBUG' CODE_SIGNING_ALLOWED=NO > "$LOG/xcodebuild.log" 2>&1
+    SWIFT_ACTIVE_COMPILATION_CONDITIONS='DEBUG' CODE_SIGNING_ALLOWED=NO > "$LOG/xcodebuild.log" 2>&1
 else
   echo "=== Xcode: build for simulator (AICAT_DUO on) ==="
   xcodebuild build -project AICat.xcodeproj -scheme AICat -destination "$DEST" CODE_SIGNING_ALLOWED=NO > "$LOG/xcodebuild.log" 2>&1
