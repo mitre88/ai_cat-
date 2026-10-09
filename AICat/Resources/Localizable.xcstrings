@@ -1,6 +1,108 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "ageband.apprentice.description": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More items, hints on request, numbers and bars."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Más elementos, pistas a pedido, números y barras."
+          }
+        }
+      }
+    },
+    "ageband.apprentice.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apprentice (8–10)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aprendiz (8–10)"
+          }
+        }
+      }
+    },
+    "ageband.explorer.description": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Short sentences, AI CAT reads everything aloud and helps right away."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frases cortas, AI CAT lee todo en voz alta y ayuda enseguida."
+          }
+        }
+      }
+    },
+    "ageband.explorer.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer (6–7)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorador (6–7)"
+          }
+        }
+      }
+    },
+    "ageband.master.description": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bigger challenges, a gentle timer and the real numbers behind the AI."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retos más grandes, un cronómetro suave y los números reales detrás de la IA."
+          }
+        }
+      }
+    },
+    "ageband.master.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Master (11–12)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maestro (11–12)"
+          }
+        }
+      }
+    },
     "app.name": {
       "extractionState": "manual",
       "localizations": {
@@ -31,6 +133,2182 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aprende IA con un gatito curioso"
+          }
+        }
+      }
+    },
+    "basket.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "basket 1"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "canasta 1"
+          }
+        }
+      }
+    },
+    "basket.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "basket 2"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "canasta 2"
+          }
+        }
+      }
+    },
+    "basket.3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "basket 3"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "canasta 3"
+          }
+        }
+      }
+    },
+    "bigidea.learning": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Learning"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aprendizaje"
+          }
+        }
+      }
+    },
+    "bigidea.natural_interaction": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Natural interaction"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interacción natural"
+          }
+        }
+      }
+    },
+    "bigidea.perception": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perception"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Percepción"
+          }
+        }
+      }
+    },
+    "bigidea.representation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Representation and reasoning"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Representación y razonamiento"
+          }
+        }
+      }
+    },
+    "bigidea.societal_impact": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Societal impact"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impacto social"
+          }
+        }
+      }
+    },
+    "challenge.s1.c1.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A rule tells us what to do. Follow it and I will watch."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una regla nos dice qué hacer. Síguela y yo observo."
+          }
+        }
+      }
+    },
+    "challenge.s1.c1.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Put each fruit in the basket of its colour."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pon cada fruta en la canasta de su color."
+          }
+        }
+      }
+    },
+    "challenge.s1.c1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Red or green?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Roja o verde?"
+          }
+        }
+      }
+    },
+    "challenge.s1.c2.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Learning means finding the pattern from examples."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aprender es encontrar el patrón a partir de ejemplos."
+          }
+        }
+      }
+    },
+    "challenge.s1.c2.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nobody told us the rule. Try, watch the glow, and find the pattern."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nadie nos dijo la regla. Prueba, mira el brillo y descubre el patrón."
+          }
+        }
+      }
+    },
+    "challenge.s1.c2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The secret pattern"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El patrón secreto"
+          }
+        }
+      }
+    },
+    "challenge.s1.c3.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rules can combine clues. Harder patterns need more examples."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las reglas pueden combinar pistas. Los patrones difíciles necesitan más ejemplos."
+          }
+        }
+      }
+    },
+    "challenge.s1.c3.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only the fruits with BOTH clues go to basket 1."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo las frutas con las DOS pistas van a la canasta 1."
+          }
+        }
+      }
+    },
+    "challenge.s1.c3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two clues at once"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dos pistas a la vez"
+          }
+        }
+      }
+    },
+    "challenge.s1.c4.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI learns from your examples, so good examples matter."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La IA aprende de tus ejemplos, así que los buenos ejemplos importan."
+          }
+        }
+      }
+    },
+    "challenge.s1.c4.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More fruits, more clues, fewer hints. Find the pattern and let me finish."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Más frutas, más pistas, menos ayuda. Encuentra el patrón y déjame terminar."
+          }
+        }
+      }
+    },
+    "challenge.s1.c4.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Master gardener"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maestro del jardín"
+          }
+        }
+      }
+    },
+    "challenge.s10.c1.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generation follows the prompt."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La generación sigue la instrucción."
+          }
+        }
+      }
+    },
+    "challenge.s10.c1.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Give me three words and I'll grow a story. Change a word, change the story."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dame tres palabras y haré crecer una historia. Cambia una palabra, cambia la historia."
+          }
+        }
+      }
+    },
+    "challenge.s10.c1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Story seeds"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semillas de historia"
+          }
+        }
+      }
+    },
+    "challenge.s10.c2.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Humans and AI create together."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Humanos e IA crean juntos."
+          }
+        }
+      }
+    },
+    "challenge.s10.c2.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remix my story so it is really yours."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remezcla mi historia para que sea realmente tuya."
+          }
+        }
+      }
+    },
+    "challenge.s10.c2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remix"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remezcla"
+          }
+        }
+      }
+    },
+    "challenge.s10.c3.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every AI needs data, a goal and limits."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toda IA necesita datos, un objetivo y límites."
+          }
+        }
+      }
+    },
+    "challenge.s10.c3.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose data, a goal and rules for your own helper AI."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige datos, un objetivo y reglas para tu propia IA ayudante."
+          }
+        }
+      }
+    },
+    "challenge.s10.c3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Design a helper"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diseña un ayudante"
+          }
+        }
+      }
+    },
+    "challenge.s10.c4.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You understand AI. Keep asking how it works!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entiendes la IA. ¡Sigue preguntando cómo funciona!"
+          }
+        }
+      }
+    },
+    "challenge.s10.c4.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show everything you learned in one project."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muestra todo lo que aprendiste en un proyecto."
+          }
+        }
+      }
+    },
+    "challenge.s10.c4.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Graduation"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Graduación"
+          }
+        }
+      }
+    },
+    "challenge.s2.c1.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Each label is one piece of data for me."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada etiqueta es un dato para mí."
+          }
+        }
+      }
+    },
+    "challenge.s2.c1.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Label each card and watch my accuracy meter rise."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etiqueta cada tarjeta y mira cómo sube mi medidor."
+          }
+        }
+      }
+    },
+    "challenge.s2.c1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cat or dog?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Gato o perro?"
+          }
+        }
+      }
+    },
+    "challenge.s2.c2.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More kinds need more examples of each kind."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Más tipos necesitan más ejemplos de cada tipo."
+          }
+        }
+      }
+    },
+    "challenge.s2.c2.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Now birds too. Label them all so I can guess the hidden cards."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahora también aves. Etiqueta todas para que adivine las tarjetas ocultas."
+          }
+        }
+      }
+    },
+    "challenge.s2.c2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Three animals"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tres animales"
+          }
+        }
+      }
+    },
+    "challenge.s2.c3.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wrong data makes AI guess wrong. Quality matters."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los datos malos hacen que la IA se equivoque. La calidad importa."
+          }
+        }
+      }
+    },
+    "challenge.s2.c3.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A mouse mixed up a label! Find it and fix it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Un ratón cambió una etiqueta! Encuéntrala y arréglala."
+          }
+        }
+      }
+    },
+    "challenge.s2.c3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sneaky mouse"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El ratón travieso"
+          }
+        }
+      }
+    },
+    "challenge.s2.c4.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clean, balanced data is the secret of good AI."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datos limpios y balanceados son el secreto de una buena IA."
+          }
+        }
+      }
+    },
+    "challenge.s2.c4.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noisy cards and two mixed-up labels. Build a clean dataset."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarjetas confusas y dos etiquetas cambiadas. Construye un conjunto de datos limpio."
+          }
+        }
+      }
+    },
+    "challenge.s2.c4.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Master librarian"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maestro de la biblioteca"
+          }
+        }
+      }
+    },
+    "challenge.s3.c1.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Features are numbers that describe things."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los rasgos son números que describen cosas."
+          }
+        }
+      }
+    },
+    "challenge.s3.c1.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Place animals on the board by size and fluffiness."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coloca animales en el tablero por tamaño y pelusa."
+          }
+        }
+      }
+    },
+    "challenge.s3.c1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Big or small"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grande o pequeño"
+          }
+        }
+      }
+    },
+    "challenge.s3.c2.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The decision boundary separates classes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La frontera de decisión separa las clases."
+          }
+        }
+      }
+    },
+    "challenge.s3.c2.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Move the line so each group stays on its side."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mueve la línea para que cada grupo quede de su lado."
+          }
+        }
+      }
+    },
+    "challenge.s3.c2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Draw the line"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traza la línea"
+          }
+        }
+      }
+    },
+    "challenge.s3.c3.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Centroids are the average of each group."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los centroides son el promedio de cada grupo."
+          }
+        }
+      }
+    },
+    "challenge.s3.c3.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find the centres of three groups and let me classify new animals."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encuentra los centros de tres grupos y deja que clasifique nuevos animales."
+          }
+        }
+      }
+    },
+    "challenge.s3.c3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Three groups"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tres grupos"
+          }
+        }
+      }
+    },
+    "challenge.s3.c4.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Outliers can confuse a classifier."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los valores atípicos pueden confundir a un clasificador."
+          }
+        }
+      }
+    },
+    "challenge.s3.c4.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strange animals appear. Decide if they are mistakes or a new group."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecen animales raros. Decide si son errores o un grupo nuevo."
+          }
+        }
+      }
+    },
+    "challenge.s3.c4.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Master builder"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maestro constructor"
+          }
+        }
+      }
+    },
+    "challenge.s4.c1.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order matters in an algorithm."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El orden importa en un algoritmo."
+          }
+        }
+      }
+    },
+    "challenge.s4.c1.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Put the blocks in order to reach the fish."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordena los bloques para llegar al pez."
+          }
+        }
+      }
+    },
+    "challenge.s4.c1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First steps"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primeros pasos"
+          }
+        }
+      }
+    },
+    "challenge.s4.c2.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conditions let a program choose."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las condiciones permiten que un programa elija."
+          }
+        }
+      }
+    },
+    "challenge.s4.c2.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use an IF block to jump over puddles."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usa un bloque SI para saltar los charcos."
+          }
+        }
+      }
+    },
+    "challenge.s4.c2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If there is a puddle"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si hay un charco"
+          }
+        }
+      }
+    },
+    "challenge.s4.c3.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loops repeat steps without rewriting them."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los bucles repiten pasos sin reescribirlos."
+          }
+        }
+      }
+    },
+    "challenge.s4.c3.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use a REPEAT block to climb the stairs."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usa un bloque REPETIR para subir la escalera."
+          }
+        }
+      }
+    },
+    "challenge.s4.c3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Again and again"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otra vez y otra vez"
+          }
+        }
+      }
+    },
+    "challenge.s4.c4.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Big programs are small ideas combined."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los programas grandes son ideas pequeñas combinadas."
+          }
+        }
+      }
+    },
+    "challenge.s4.c4.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combine IF and REPEAT to cross the whole trail."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combina SI y REPETIR para cruzar todo el sendero."
+          }
+        }
+      }
+    },
+    "challenge.s4.c4.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Master explorer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maestro explorador"
+          }
+        }
+      }
+    },
+    "challenge.s5.c1.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rewards tell an agent what is good."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las recompensas le dicen al agente qué es bueno."
+          }
+        }
+      }
+    },
+    "challenge.s5.c1.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Place a treat and watch me explore until I find it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pon un premio y mira cómo exploro hasta encontrarlo."
+          }
+        }
+      }
+    },
+    "challenge.s5.c1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A treat at the end"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un premio al final"
+          }
+        }
+      }
+    },
+    "challenge.s5.c2.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penalties teach what to avoid."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los castigos enseñan qué evitar."
+          }
+        }
+      }
+    },
+    "challenge.s5.c2.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add a puddle with a penalty and see how my path changes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agrega un charco con castigo y mira cómo cambia mi camino."
+          }
+        }
+      }
+    },
+    "challenge.s5.c2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watch out for puddles"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuidado con los charcos"
+          }
+        }
+      }
+    },
+    "challenge.s5.c3.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Values spread backwards from the reward."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los valores se propagan hacia atrás desde la recompensa."
+          }
+        }
+      }
+    },
+    "challenge.s5.c3.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The tiles glow with how much I expect. Guide me with rewards."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las casillas brillan según lo que espero. Guíame con premios."
+          }
+        }
+      }
+    },
+    "challenge.s5.c3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm tiles"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casillas tibias"
+          }
+        }
+      }
+    },
+    "challenge.s5.c4.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exploring and exploiting is a balance."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorar y aprovechar es un equilibrio."
+          }
+        }
+      }
+    },
+    "challenge.s5.c4.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Design a maze where I must learn the long, safe path."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diseña un laberinto donde deba aprender el camino largo y seguro."
+          }
+        }
+      }
+    },
+    "challenge.s5.c4.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Master of the maze"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maestro del laberinto"
+          }
+        }
+      }
+    },
+    "challenge.s6.c1.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A neuron multiplies, adds and decides."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una neurona multiplica, suma y decide."
+          }
+        }
+      }
+    },
+    "challenge.s6.c1.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set two weights so the lamp lights only for the right input."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajusta dos pesos para que la lámpara encienda solo con la entrada correcta."
+          }
+        }
+      }
+    },
+    "challenge.s6.c1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One neuron"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una neurona"
+          }
+        }
+      }
+    },
+    "challenge.s6.c2.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weights say how important each input is."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los pesos dicen qué tan importante es cada entrada."
+          }
+        }
+      }
+    },
+    "challenge.s6.c2.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More dials, same idea. Make the lamp agree with the examples."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Más perillas, misma idea. Haz que la lámpara coincida con los ejemplos."
+          }
+        }
+      }
+    },
+    "challenge.s6.c2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Three inputs"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tres entradas"
+          }
+        }
+      }
+    },
+    "challenge.s6.c3.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layers let networks learn complex patterns."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las capas permiten aprender patrones complejos."
+          }
+        }
+      }
+    },
+    "challenge.s6.c3.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connect neurons in layers to solve the tricky pattern."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conecta neuronas en capas para resolver el patrón difícil."
+          }
+        }
+      }
+    },
+    "challenge.s6.c3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two layers"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dos capas"
+          }
+        }
+      }
+    },
+    "challenge.s6.c4.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Training adjusts weights a little at a time."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrenar ajusta los pesos poco a poco."
+          }
+        }
+      }
+    },
+    "challenge.s6.c4.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let the network train itself and watch the error go down."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deja que la red se entrene sola y mira cómo baja el error."
+          }
+        }
+      }
+    },
+    "challenge.s6.c4.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Master engineer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maestro ingeniero"
+          }
+        }
+      }
+    },
+    "challenge.s7.c1.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Images are made of pixels."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las imágenes están hechas de píxeles."
+          }
+        }
+      }
+    },
+    "challenge.s7.c1.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoom into an image until you see the numbers."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acerca una imagen hasta ver los números."
+          }
+        }
+      }
+    },
+    "challenge.s7.c1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixels"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Píxeles"
+          }
+        }
+      }
+    },
+    "challenge.s7.c2.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edges outline shapes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los bordes delinean las formas."
+          }
+        }
+      }
+    },
+    "challenge.s7.c2.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find where colours change quickly: those are edges."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encuentra dónde cambian rápido los colores: esos son bordes."
+          }
+        }
+      }
+    },
+    "challenge.s7.c2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edges"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bordes"
+          }
+        }
+      }
+    },
+    "challenge.s7.c3.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recognition combines many small clues."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconocer combina muchas pistas pequeñas."
+          }
+        }
+      }
+    },
+    "challenge.s7.c3.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Match shapes to the objects I recognise."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relaciona formas con los objetos que reconozco."
+          }
+        }
+      }
+    },
+    "challenge.s7.c3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shapes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Formas"
+          }
+        }
+      }
+    },
+    "challenge.s7.c4.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On-device vision keeps your photos private."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La visión en el dispositivo mantiene tus fotos privadas."
+          }
+        }
+      }
+    },
+    "challenge.s7.c4.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Point the camera at real things and check my guesses."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apunta la cámara a cosas reales y revisa mis respuestas."
+          }
+        }
+      }
+    },
+    "challenge.s7.c4.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Master of sight"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maestro de la vista"
+          }
+        }
+      }
+    },
+    "challenge.s8.c1.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Models read tokens, not words."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los modelos leen tokens, no palabras."
+          }
+        }
+      }
+    },
+    "challenge.s8.c1.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Split sentences into pieces the way I do."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parte oraciones en pedazos como lo hago yo."
+          }
+        }
+      }
+    },
+    "challenge.s8.c1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tokens"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tokens"
+          }
+        }
+      }
+    },
+    "challenge.s8.c2.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prediction is choosing the likeliest continuation."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Predecir es elegir la continuación más probable."
+          }
+        }
+      }
+    },
+    "challenge.s8.c2.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick the most likely next word and compare it with my guess."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige la palabra más probable y compárala con la mía."
+          }
+        }
+      }
+    },
+    "challenge.s8.c2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guess the next word"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adivina la siguiente palabra"
+          }
+        }
+      }
+    },
+    "challenge.s8.c3.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speech recognition turns sound into text."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El reconocimiento de voz convierte el sonido en texto."
+          }
+        }
+      }
+    },
+    "challenge.s8.c3.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Say a sentence and watch it become text and tokens."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di una oración y mira cómo se vuelve texto y tokens."
+          }
+        }
+      }
+    },
+    "challenge.s8.c3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Talk to me"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Háblame"
+          }
+        }
+      }
+    },
+    "challenge.s8.c4.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Models can sound sure and still be wrong."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los modelos pueden sonar seguros y aun así equivocarse."
+          }
+        }
+      }
+    },
+    "challenge.s8.c4.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Have a short conversation with me and spot when I'm unsure."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ten una conversación corta conmigo y detecta cuándo no estoy seguro."
+          }
+        }
+      }
+    },
+    "challenge.s8.c4.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Master of words"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maestro de las palabras"
+          }
+        }
+      }
+    },
+    "challenge.s9.c1.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Missing examples create bias."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los ejemplos que faltan crean sesgo."
+          }
+        }
+      }
+    },
+    "challenge.s9.c1.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find out why I can't see orange cats."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descubre por qué no veo gatos naranjas."
+          }
+        }
+      }
+    },
+    "challenge.s9.c1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only black cats"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo gatos negros"
+          }
+        }
+      }
+    },
+    "challenge.s9.c2.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balanced data is fairer data."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datos balanceados son datos más justos."
+          }
+        }
+      }
+    },
+    "challenge.s9.c2.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add examples until every kind of cat is represented."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agrega ejemplos hasta que todos los tipos de gato estén representados."
+          }
+        }
+      }
+    },
+    "challenge.s9.c2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balance the scale"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Equilibra la balanza"
+          }
+        }
+      }
+    },
+    "challenge.s9.c3.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Private data stays with its owner."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los datos privados se quedan con su dueño."
+          }
+        }
+      }
+    },
+    "challenge.s9.c3.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose which data an app should keep and which it should not."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige qué datos debe guardar una app y cuáles no."
+          }
+        }
+      }
+    },
+    "challenge.s9.c3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep it private"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantenlo privado"
+          }
+        }
+      }
+    },
+    "challenge.s9.c4.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "People must check AI decisions."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las personas deben revisar las decisiones de la IA."
+          }
+        }
+      }
+    },
+    "challenge.s9.c4.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review an AI decision and explain what went wrong."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisa una decisión de IA y explica qué salió mal."
+          }
+        }
+      }
+    },
+    "challenge.s9.c4.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Master judge"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maestro juez"
           }
         }
       }
@@ -422,6 +2700,1961 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sí"
+          }
+        }
+      }
+    },
+    "dialog.ai_learned.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I found the pattern! Let me sort the rest."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Encontré el patrón! Déjame acomodar el resto."
+          }
+        }
+      }
+    },
+    "dialog.ai_learned.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I think I understand the rule now!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Creo que ya entiendo la regla!"
+          }
+        }
+      }
+    },
+    "dialog.ai_needs_more.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I'm not sure yet. Show me more examples."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no estoy seguro. Muéstrame más ejemplos."
+          }
+        }
+      }
+    },
+    "dialog.ai_needs_more.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two rules could explain this. One more example, please!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dos reglas podrían explicarlo. ¡Un ejemplo más, por favor!"
+          }
+        }
+      }
+    },
+    "dialog.ai_sorted.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done! I sorted them using what you taught me."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Listo! Los acomodé con lo que me enseñaste."
+          }
+        }
+      }
+    },
+    "dialog.challenge_complete.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We did it! I feel bigger already."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Lo logramos! Ya me siento más grande."
+          }
+        }
+      }
+    },
+    "dialog.challenge_complete.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Challenge complete! High paw!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Reto completado! ¡Choca esa pata!"
+          }
+        }
+      }
+    },
+    "dialog.challenge_complete.3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That was fun. What's next?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eso fue divertido. ¿Qué sigue?"
+          }
+        }
+      }
+    },
+    "dialog.challenge_start.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let's try this one. Take your time."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Probemos este. Tómate tu tiempo."
+          }
+        }
+      }
+    },
+    "dialog.challenge_start.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A new challenge! I'm watching closely."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Un reto nuevo! Observo con atención."
+          }
+        }
+      }
+    },
+    "dialog.correct.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yes! That's right."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Sí! Así es."
+          }
+        }
+      }
+    },
+    "dialog.correct.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purr-fect!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Purr-fecto!"
+          }
+        }
+      }
+    },
+    "dialog.correct.3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I'm learning from you."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estoy aprendiendo de ti."
+          }
+        }
+      }
+    },
+    "dialog.correct.4": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Great move!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Gran jugada!"
+          }
+        }
+      }
+    },
+    "dialog.encouragement.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You can do it!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Tú puedes!"
+          }
+        }
+      }
+    },
+    "dialog.encouragement.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep going, you're close."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sigue, estás cerca."
+          }
+        }
+      }
+    },
+    "dialog.encouragement.3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every try makes us smarter."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada intento nos hace más listos."
+          }
+        }
+      }
+    },
+    "dialog.greeting.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hi! I'm AI CAT. Ready to learn with me?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Hola! Soy AI CAT. ¿Listo para aprender conmigo?"
+          }
+        }
+      }
+    },
+    "dialog.greeting.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meow! What shall we discover today?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Miau! ¿Qué descubrimos hoy?"
+          }
+        }
+      }
+    },
+    "dialog.greeting.3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You're back! My tail is wagging with joy."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Volviste! Mi cola se mueve de alegría."
+          }
+        }
+      }
+    },
+    "dialog.hint.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Here's a clue. Watch where this one goes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aquí va una pista. Mira a dónde va esta."
+          }
+        }
+      }
+    },
+    "dialog.hint.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Psst… let me show you one."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Psst… déjame mostrarte una."
+          }
+        }
+      }
+    },
+    "dialog.idle.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yawn… I'm here when you're ready."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bostezo… Aquí estoy cuando quieras."
+          }
+        }
+      }
+    },
+    "dialog.idle.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What are you thinking?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿En qué piensas?"
+          }
+        }
+      }
+    },
+    "dialog.idle.3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I love this place."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Me encanta este lugar."
+          }
+        }
+      }
+    },
+    "dialog.locked.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This world is still asleep. Finish the one before it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este mundo aún duerme. Termina el anterior."
+          }
+        }
+      }
+    },
+    "dialog.master_intro.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This is the master challenge. Fewer hints, more thinking!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este es el reto maestro. ¡Menos pistas, más pensar!"
+          }
+        }
+      }
+    },
+    "dialog.s1.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smell those fruits! Let's sort them."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Huele esas frutas! Vamos a acomodarlas."
+          }
+        }
+      }
+    },
+    "dialog.s10.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let's create something new together!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Creemos algo nuevo juntos!"
+          }
+        }
+      }
+    },
+    "dialog.s2.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "So many cards! Help me label them."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Cuántas tarjetas! Ayúdame a etiquetarlas."
+          }
+        }
+      }
+    },
+    "dialog.s3.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time to build a sorting machine."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hora de construir una máquina que separa."
+          }
+        }
+      }
+    },
+    "dialog.s4.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guide my paws with instructions!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Guía mis patas con instrucciones!"
+          }
+        }
+      }
+    },
+    "dialog.s5.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A maze! Where are the treats?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Un laberinto! ¿Dónde están los premios?"
+          }
+        }
+      }
+    },
+    "dialog.s6.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welcome to my brain factory."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bienvenido a la fábrica de mi cerebro."
+          }
+        }
+      }
+    },
+    "dialog.s7.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look through my eyes!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Mira a través de mis ojos!"
+          }
+        }
+      }
+    },
+    "dialog.s8.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let's play with words."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juguemos con palabras."
+          }
+        }
+      }
+    },
+    "dialog.s9.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Something isn't fair here. Help me fix it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algo no es justo aquí. Ayúdame a arreglarlo."
+          }
+        }
+      }
+    },
+    "dialog.scenario_complete.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A whole world finished! Look what I earned."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Un mundo completo! Mira lo que gané."
+          }
+        }
+      }
+    },
+    "dialog.scenario_complete.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You taught me so much here. A new world is open!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Me enseñaste mucho aquí. ¡Se abrió un mundo nuevo!"
+          }
+        }
+      }
+    },
+    "dialog.stage_up.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whoa, I grew! Thank you!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Guau, crecí! ¡Gracias!"
+          }
+        }
+      }
+    },
+    "dialog.stage_up.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look at me, I'm bigger and smarter."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mírame, soy más grande y más listo."
+          }
+        }
+      }
+    },
+    "dialog.trap_found.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wait… this label looks wrong. Something is confusing me!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espera… esta etiqueta parece incorrecta. ¡Algo me confunde!"
+          }
+        }
+      }
+    },
+    "dialog.wrong.1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hmm, not that one. Look again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mmm, esa no. Mira otra vez."
+          }
+        }
+      }
+    },
+    "dialog.wrong.2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Almost! Try again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Casi! Intenta de nuevo."
+          }
+        }
+      }
+    },
+    "dialog.wrong.3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mistakes help us learn. Try again!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los errores nos ayudan a aprender. ¡Otra vez!"
+          }
+        }
+      }
+    },
+    "feature.ears": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pointy ears"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "orejas puntiagudas"
+          }
+        }
+      }
+    },
+    "feature.size": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "size"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tamaño"
+          }
+        }
+      }
+    },
+    "feature.song": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "song"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "canto"
+          }
+        }
+      }
+    },
+    "fruit.attribute.color": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "colour"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "color"
+          }
+        }
+      }
+    },
+    "fruit.attribute.shape": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "shape"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "forma"
+          }
+        }
+      }
+    },
+    "fruit.attribute.size": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "size"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tamaño"
+          }
+        }
+      }
+    },
+    "fruit.color.green": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "green"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "verdes"
+          }
+        }
+      }
+    },
+    "fruit.color.purple": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "purple"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "moradas"
+          }
+        }
+      }
+    },
+    "fruit.color.red": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "red"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "rojas"
+          }
+        }
+      }
+    },
+    "fruit.color.yellow": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yellow"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "amarillas"
+          }
+        }
+      }
+    },
+    "fruit.shape.long": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "long"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "alargadas"
+          }
+        }
+      }
+    },
+    "fruit.shape.round": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "round"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "redondas"
+          }
+        }
+      }
+    },
+    "fruit.size.big": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "big"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "grandes"
+          }
+        }
+      }
+    },
+    "fruit.size.small": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "small"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pequeñas"
+          }
+        }
+      }
+    },
+    "knowledge.backpack": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algorithm backpack"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mochila de algoritmos"
+          }
+        }
+      }
+    },
+    "knowledge.badge": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fairness badge"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Insignia de justicia"
+          }
+        }
+      }
+    },
+    "knowledge.bandana": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data bandana"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pañoleta de datos"
+          }
+        }
+      }
+    },
+    "knowledge.collar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Learner's collar"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collar de aprendiz"
+          }
+        }
+      }
+    },
+    "knowledge.compass": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer's compass"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brújula exploradora"
+          }
+        }
+      }
+    },
+    "knowledge.glasses": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classifier glasses"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lentes clasificadores"
+          }
+        }
+      }
+    },
+    "knowledge.goggles": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vision goggles"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gafas de visión"
+          }
+        }
+      }
+    },
+    "knowledge.graduation_cap": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Graduation cap"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Birrete de graduación"
+          }
+        }
+      }
+    },
+    "knowledge.headband": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neuron headband"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diadema de neuronas"
+          }
+        }
+      }
+    },
+    "knowledge.headphones": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Language headphones"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Audífonos de lenguaje"
+          }
+        }
+      }
+    },
+    "rule.conjunction": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fruits that are %@ AND %@ go to basket %lld. The rest go to basket %lld."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las frutas %@ Y %@ van a la canasta %lld. Las demás van a la canasta %lld."
+          }
+        }
+      }
+    },
+    "rule.hidden": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The rule is a secret. Try a fruit and watch the baskets glow."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La regla es secreta. Prueba una fruta y mira cómo brillan las canastas."
+          }
+        }
+      }
+    },
+    "rule.value_to_basket": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The %@ fruits go to basket %lld."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las frutas %@ van a la canasta %lld."
+          }
+        }
+      }
+    },
+    "scenario.1.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A computer can follow a rule you give it, or learn the rule from your examples. That second thing is AI!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una computadora puede seguir una regla que le das, o aprender la regla con tus ejemplos. ¡Eso segundo es IA!"
+          }
+        }
+      }
+    },
+    "scenario.1.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welcome to my garden! Sort the fruits into the baskets and watch me learn the pattern."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Bienvenido a mi jardín! Acomoda las frutas en las canastas y mira cómo aprendo el patrón."
+          }
+        }
+      }
+    },
+    "scenario.1.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What is AI? Patterns and rules"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué es la IA? Patrones y reglas"
+          }
+        }
+      }
+    },
+    "scenario.1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pattern Garden"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jardín de Patrones"
+          }
+        }
+      }
+    },
+    "scenario.10.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generative AI makes new things from patterns it learned. You decide how to use it, and you take the credit!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La IA generativa crea cosas nuevas a partir de patrones que aprendió. Tú decides cómo usarla, ¡y el mérito es tuyo!"
+          }
+        }
+      }
+    },
+    "scenario.10.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Final world! Let's create stories and ideas together, then build your own mini AI."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Último mundo! Creemos historias e ideas juntos y luego construye tu propia mini IA."
+          }
+        }
+      }
+    },
+    "scenario.10.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generative AI and your project"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA generativa y tu proyecto"
+          }
+        }
+      }
+    },
+    "scenario.10.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Creative Lab"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laboratorio Creativo"
+          }
+        }
+      }
+    },
+    "scenario.2.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI learns from data. Labels tell it what each example is. More and better data means better guesses."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La IA aprende de datos. Las etiquetas le dicen qué es cada ejemplo. Más y mejores datos, mejores respuestas."
+          }
+        }
+      }
+    },
+    "scenario.2.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This library is full of animal cards. Label them and I will learn to tell them apart!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta biblioteca está llena de tarjetas de animales. ¡Etiquétalas y aprenderé a distinguirlos!"
+          }
+        }
+      }
+    },
+    "scenario.2.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data, labels and quality"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datos, etiquetas y calidad"
+          }
+        }
+      }
+    },
+    "scenario.2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data Library"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biblioteca de Datos"
+          }
+        }
+      }
+    },
+    "scenario.3.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A classifier draws a line between groups. Examples on each side teach it where the line goes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un clasificador traza una línea entre grupos. Los ejemplos de cada lado le enseñan dónde va la línea."
+          }
+        }
+      }
+    },
+    "scenario.3.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In my workshop we build a machine that separates things. Put examples on the board!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En mi taller construimos una máquina que separa cosas. ¡Pon ejemplos en el tablero!"
+          }
+        }
+      }
+    },
+    "scenario.3.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Training a classifier"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrenar un clasificador"
+          }
+        }
+      }
+    },
+    "scenario.3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classifier Workshop"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taller de Clasificación"
+          }
+        }
+      }
+    },
+    "scenario.4.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An algorithm is a list of clear steps. Computers follow them exactly, even the silly ones."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un algoritmo es una lista de pasos claros. Las computadoras los siguen tal cual, hasta los tontos."
+          }
+        }
+      }
+    },
+    "scenario.4.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guide me along the trail with instruction blocks. I only do exactly what you say!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guíame por el sendero con bloques de instrucciones. ¡Solo hago exactamente lo que dices!"
+          }
+        }
+      }
+    },
+    "scenario.4.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algorithms: step by step"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algoritmos: paso a paso"
+          }
+        }
+      }
+    },
+    "scenario.4.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algorithm Trail"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sendero de Instrucciones"
+          }
+        }
+      }
+    },
+    "scenario.5.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Some AI learns by trying: good moves earn rewards, bad moves lose them. After many tries it finds the best path."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algunas IA aprenden probando: los buenos movimientos ganan recompensas, los malos las pierden. Tras muchos intentos encuentra el mejor camino."
+          }
+        }
+      }
+    },
+    "scenario.5.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I don't know this maze. Place treats and let me explore. I'll remember what worked!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No conozco este laberinto. Pon premios y déjame explorar. ¡Recordaré lo que funcionó!"
+          }
+        }
+      }
+    },
+    "scenario.5.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Learning from rewards"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aprender con recompensas"
+          }
+        }
+      }
+    },
+    "scenario.5.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reward Maze"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laberinto de Recompensas"
+          }
+        }
+      }
+    },
+    "scenario.6.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Artificial neurons add up signals with weights. Many neurons together can learn almost anything."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las neuronas artificiales suman señales con pesos. Muchas neuronas juntas pueden aprender casi cualquier cosa."
+          }
+        }
+      }
+    },
+    "scenario.6.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welcome to the factory where my brain is built! Turn the dials and light the right lamp."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Bienvenido a la fábrica donde se construye mi cerebro! Gira las perillas y enciende la lámpara correcta."
+          }
+        }
+      }
+    },
+    "scenario.6.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neural networks"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Redes neuronales"
+          }
+        }
+      }
+    },
+    "scenario.6.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neuron Factory"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fábrica de Neuronas"
+          }
+        }
+      }
+    },
+    "scenario.7.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To a computer an image is a grid of numbers. Finding edges and shapes in the numbers is how it sees."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para una computadora una imagen es una cuadrícula de números. Encontrar bordes y formas en los números es su forma de ver."
+          }
+        }
+      }
+    },
+    "scenario.7.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let's look through my eyes! Pixels, edges, shapes… and then real objects with your camera."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Miremos con mis ojos! Píxeles, bordes, formas… y luego objetos reales con tu cámara."
+          }
+        }
+      }
+    },
+    "scenario.7.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Computer vision"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visión por computadora"
+          }
+        }
+      }
+    },
+    "scenario.7.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT's Eyes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ojos de AI CAT"
+          }
+        }
+      }
+    },
+    "scenario.8.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Language models split words into tokens and predict what comes next. That is how I talk!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los modelos de lenguaje parten las palabras en tokens y predicen lo que sigue. ¡Así hablo yo!"
+          }
+        }
+      }
+    },
+    "scenario.8.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On this stage we play with words: tokens, guessing the next word and, finally, talking to me!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En este escenario jugamos con palabras: tokens, adivinar la siguiente palabra y, al final, ¡hablar conmigo!"
+          }
+        }
+      }
+    },
+    "scenario.8.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Natural language"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lenguaje natural"
+          }
+        }
+      }
+    },
+    "scenario.8.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI CAT's Voice"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voz de AI CAT"
+          }
+        }
+      }
+    },
+    "scenario.9.concept": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If the data is unfair, the AI is unfair. Good AI needs balanced data, privacy and people who check it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si los datos son injustos, la IA es injusta. Una buena IA necesita datos balanceados, privacidad y personas que la revisen."
+          }
+        }
+      }
+    },
+    "scenario.9.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Something is wrong with this dataset: I only recognise black cats! Help me make it fair."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algo anda mal con estos datos: ¡solo reconozco gatos negros! Ayúdame a hacerlos justos."
+          }
+        }
+      }
+    },
+    "scenario.9.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bias, fairness and privacy"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesgo, justicia y privacidad"
+          }
+        }
+      }
+    },
+    "scenario.9.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fair Scale"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balanza Justa"
+          }
+        }
+      }
+    },
+    "species.bird": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bird"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ave"
+          }
+        }
+      }
+    },
+    "species.cat": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gato"
+          }
+        }
+      }
+    },
+    "species.dog": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dog"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "perro"
           }
         }
       }

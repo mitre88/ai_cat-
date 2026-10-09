@@ -131,6 +131,17 @@ def check_strings():
             used.add(key)
             if key not in catalog:
                 err(f"{os.path.relpath(path, ROOT)}: localization key '{key}' not in Localizable.xcstrings")
+    # Keys built by interpolation in Curriculum.swift follow fixed patterns: enumerate them.
+    for n in range(1, 11):
+        for suffix in ("title", "subtitle", "concept", "intro"):
+            used.add(f"scenario.{n}.{suffix}")
+        used.add(f"dialog.s{n}.intro")
+        for k in range(1, 5):
+            for suffix in ("title", "goal", "concept"):
+                used.add(f"challenge.s{n}.c{k}.{suffix}")
+    for key in sorted(used):
+        if key not in catalog:
+            err(f"derived localization key '{key}' not in Localizable.xcstrings")
     unused = sorted(set(catalog) - used)
     if unused:
         warn(f"{len(unused)} catalog keys not referenced from Swift (fine for data-driven keys): {unused[:8]}{'…' if len(unused) > 8 else ''}")
