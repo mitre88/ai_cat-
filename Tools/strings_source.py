@@ -368,3 +368,20 @@ STRINGS.update({
     "result.back": ("Back to the world", "Volver al mundo"),
     "result.again": ("Play again", "Jugar de nuevo"),
 })
+
+# ---- scenario 1 board (M4) ---------------------------------------------------
+STRINGS.update({
+    "sorting.drag_tip": ("Drag a fruit into a basket. Watch AI CAT learn from you.", "Arrastra una fruta a una canasta. Mira cómo AI CAT aprende de ti."),
+    "sorting.rule_title": ("The rule", "La regla"),
+    "sorting.secret_rule": ("Secret rule: try a fruit and watch what happens.", "Regla secreta: prueba una fruta y mira qué pasa."),
+    "sorting.learned_title": ("AI CAT learned:", "AI CAT aprendió:"),
+    "sorting.progress_format": ("%lld of %lld fruits sorted", "%lld de %lld frutas acomodadas"),
+    "sorting.status.watching": ("AI CAT is watching your examples.", "AI CAT observa tus ejemplos."),
+    "sorting.status.thinking": ("AI CAT is thinking… show it more examples.", "AI CAT está pensando… muéstrale más ejemplos."),
+    "sorting.status.learned": ("AI CAT found the pattern!", "¡AI CAT encontró el patrón!"),
+    "sorting.status.sorting": ("AI CAT is sorting the rest by itself.", "AI CAT acomoda el resto por su cuenta."),
+    "sorting.status.done": ("All fruits sorted!", "¡Todas las frutas acomodadas!"),
+    "sorting.hint_button": ("Hint (%lld left)", "Pista (quedan %lld)"),
+    "sorting.hint_auto": ("AI CAT helps automatically", "AI CAT ayuda automáticamente"),
+    "sorting.basket_format": ("Basket %lld", "Canasta %lld"),
+})

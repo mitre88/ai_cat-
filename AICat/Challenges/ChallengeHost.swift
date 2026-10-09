@@ -8,6 +8,7 @@ struct ChallengeHost: View {
     @Environment(AppModel.self) private var app
     @State private var session: ChallengeSession
     @State private var world: WorldModel
+    @State private var sorting: PatternGardenController?
 
     init(spec: ChallengeSpec) {
         self.spec = spec
@@ -20,7 +21,7 @@ struct ChallengeHost: View {
     var body: some View {
         PostureReader { info in
             AdaptiveStage(info: info) {
-                StageView(world: world)
+                StageView(world: world, interaction: sorting)
             } board: {
                 board
             }
@@ -39,13 +40,33 @@ struct ChallengeHost: View {
                     .tint(Theme.eyeGreen)
             }
         }
-        .onAppear { app.say(spec.isMaster ? .masterIntro : .challengeStart) }
+        .onAppear {
+            app.say(spec.isMaster ? .masterIntro : .challengeStart)
+            setUpController()
+        }
         .onDisappear { app.hush() }
     }
 
     @ViewBuilder
     private var board: some View {
-        ComingSoonBoard(spec: spec)
+        if let sorting {
+            SortingBoard(controller: sorting)
+        } else {
+            ComingSoonBoard(spec: spec)
+        }
+    }
+
+    private func setUpController() {
+        switch spec.mechanic {
+        case .sorting:
+            if sorting == nil {
+                let controller = PatternGardenController(spec: spec, world: world, session: session, app: app)
+                sorting = controller
+                controller.start()
+            }
+        default:
+            break
+        }
     }
 }
 

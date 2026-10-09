@@ -17,7 +17,7 @@ final class WorldModel {
 
     @ObservationIgnored private var subscription: EventSubscription?
     @ObservationIgnored private var built = false
-    @ObservationIgnored private var props: [String: ModelEntity] = [:]
+    @ObservationIgnored private var props: [String: Entity] = [:]
     @ObservationIgnored private(set) var posture: StagePosture = .pocket
     @ObservationIgnored private(set) var openness: Double = 1
     /// Called every frame with the delta time (challenge logic hooks in here).
@@ -96,7 +96,7 @@ final class WorldModel {
     // MARK: Props
 
     @discardableResult
-    func addProp(_ entity: ModelEntity, id: String) -> ModelEntity {
+    func addProp(_ entity: Entity, id: String) -> Entity {
         removeProp(id: id)
         entity.name = id
         props[id] = entity
@@ -104,7 +104,7 @@ final class WorldModel {
         return entity
     }
 
-    func prop(id: String) -> ModelEntity? {
+    func prop(id: String) -> Entity? {
         props[id]
     }
 

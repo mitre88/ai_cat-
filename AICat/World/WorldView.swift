@@ -6,15 +6,28 @@ import AICatCore
 /// because `RealityViewEnvironment.default` shows the view's background style.
 struct WorldView: View {
     let world: WorldModel
+    var interaction: (any WorldInteraction)?
 
     var body: some View {
         RealityView { content in
             content.camera = .virtual
             world.attach(to: &content)
         }
+        .gesture(dragGesture)
         .background {
             SkyGradient(theme: world.theme)
         }
+    }
+
+    private var dragGesture: some Gesture {
+        DragGesture(minimumDistance: 0, coordinateSpace: .local)
+            .targetedToAnyEntity()
+            .onChanged { value in
+                interaction?.dragChanged(value)
+            }
+            .onEnded { value in
+                interaction?.dragEnded(value)
+            }
     }
 }
 
@@ -35,6 +48,7 @@ struct SkyGradient: View {
 /// Stage = world + AI CAT's speech bubble (+ a growth slider in debug builds).
 struct StageView: View {
     let world: WorldModel
+    var interaction: (any WorldInteraction)?
     @Environment(AppModel.self) private var app
     @Environment(\.postureInfo) private var postureInfo
     #if DEBUG
@@ -43,7 +57,7 @@ struct StageView: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            WorldView(world: world)
+            WorldView(world: world, interaction: interaction)
             CatSpeechBubble(line: app.speech)
                 .frame(maxWidth: 380)
                 .padding(12)
