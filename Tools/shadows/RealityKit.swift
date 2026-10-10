@@ -329,6 +329,9 @@ public struct RealityView<Content: View>: View {
 extension RealityView where Content == Never {
     public init(make: @escaping @MainActor (inout RealityViewCameraContent) async -> Void,
                 update: (@MainActor (inout RealityViewCameraContent) -> Void)? = nil) {}
+    public init<P: View>(make: @escaping @MainActor (inout RealityViewCameraContent) async -> Void,
+                         update: (@MainActor (inout RealityViewCameraContent) -> Void)? = nil,
+                         @ViewBuilder placeholder: () -> P) {}
 }
 public struct EntityTargetGesture<G: Gesture>: Gesture {
     public typealias Value = EntityTargetValue<G.Value>

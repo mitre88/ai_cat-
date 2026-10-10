@@ -14,6 +14,8 @@ struct WorldView: View {
             content.camera = .virtual
             await world.prepare()
             world.attach(to: &content, generation: generation)
+        } placeholder: {
+            WorldPlaceholder(theme: world.theme)
         }
         .gesture(dragGesture)
         .background {
@@ -30,6 +32,46 @@ struct WorldView: View {
             .onEnded { value in
                 interaction?.dragEnded(value)
             }
+    }
+}
+
+/// What the stage shows while a world's textures and sky are being generated: the world's sky, two felt
+/// hills and the kitten's portrait breathing gently, so the wait reads as "the world is getting ready",
+/// not as a broken view. Still with Reduce Motion.
+struct WorldPlaceholder: View {
+    let theme: WorldTheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var breathing = false
+
+    private var palette: WorldPalette { Theme.palette(for: theme) }
+    private var skyTop: Color { Theme.mix(palette.sky, white: 0.45) }
+    private var skyBottom: Color { Theme.mix(palette.sky, white: 0.15) }
+    private var farHill: Color { Theme.mix(palette.accent, white: 0.5) }
+    private var nearHill: Color { Theme.mix(palette.ground, white: 0.35) }
+
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            LinearGradient(colors: [skyTop, skyBottom], startPoint: .top, endPoint: .bottom)
+            Ellipse()
+                .fill(farHill)
+                .frame(width: 620, height: 200)
+                .offset(x: 160, y: 90)
+            Ellipse()
+                .fill(nearHill)
+                .frame(width: 760, height: 220)
+                .offset(x: -140, y: 120)
+            CatAvatarView(emotion: .curious, size: 72)
+                .scaleEffect(breathing ? 1.04 : 0.96)
+                .padding(.bottom, 70)
+        }
+        .clipped()
+        .onAppear {
+            guard !reduceMotion else { return }
+            withAnimation(.easeInOut(duration: 1.3).repeatForever(autoreverses: true)) {
+                breathing = true
+            }
+        }
+        .accessibilityHidden(true)
     }
 }
 
@@ -72,16 +114,10 @@ struct StageView: View {
             debugBadge
         }
         #if DEBUG
-        .overlay(alignment: .topTrailing) {
-            // Growth slider for testing, tucked behind a corner button so it never sits on the play area.
-            VStack(alignment: .trailing, spacing: 6) {
-                Button {
-                    showDebugSlider.toggle()
-                } label: {
-                    Image(systemName: "testtube.2").font(.caption).padding(6)
-                }
-                .buttonStyle(.bordered)
-                .opacity(0.5)
+        .overlay(alignment: .bottomLeading) {
+            // Growth slider for testing, tucked behind a corner button in the bottom-left corner, away from
+            // the speech bubble (top) and the hinge badge (bottom-right).
+            VStack(alignment: .leading, spacing: 6) {
                 if showDebugSlider {
                     Slider(value: $debugGrowth, in: 0...1)
                         .frame(width: 150)
@@ -90,9 +126,15 @@ struct StageView: View {
                             world.setGrowth(value, animated: true)
                         }
                 }
+                Button {
+                    showDebugSlider.toggle()
+                } label: {
+                    Image(systemName: "testtube.2").font(.caption2).padding(5)
+                }
+                .buttonStyle(.bordered)
+                .opacity(0.35)
             }
-            .padding(.top, 52)
-            .padding(.trailing, 10)
+            .padding(10)
         }
         #endif
         .onAppear {

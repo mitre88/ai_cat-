@@ -211,8 +211,10 @@ public struct Animation: Equatable {
     public static func easeIn(duration: Double) -> Animation { Animation() }
     public static func easeOut(duration: Double) -> Animation { Animation() }
     public static func spring(response: Double = 0.5, dampingFraction: Double = 0.8, blendDuration: Double = 0) -> Animation { Animation() }
+    public func repeatForever(autoreverses: Bool = true) -> Animation { self }
 }
 public struct AnyTransition { public static let opacity = AnyTransition(), slide = AnyTransition(), scale = AnyTransition() }
+public func withAnimation<Result>(_ animation: Animation? = .easeInOut, _ body: () throws -> Result) rethrows -> Result { try body() }
 
 // MARK: - Shape styles & colors
 
