@@ -26,11 +26,14 @@ for kind in TextureKind.allCases {
     let image = ProceduralTextures.render(kind)
     write(image, to: URL(fileURLWithPath: "\(out)/\(kind.rawValue).png"))
 }
-// Skies of three worlds (same numbers as Theme.palette): garden, theater, lookout.
+// Skies of three worlds (same numbers as Theme.palette, same haze formula as SkyEnvironment): garden, theater, lookout.
+func sky(top: ProceduralTextures.RGB, ground: ProceduralTextures.RGB) -> SkyColors {
+    SkyColors(top: top, horizon: (top.r * 0.42 + 0.58, top.g * 0.42 + 0.57, top.b * 0.42 + 0.55), ground: ground)
+}
 let skies: [(String, SkyColors)] = [
-    ("sky_garden", SkyColors(top: (0.62, 0.84, 0.98), horizon: (1, 1, 1), ground: (0.47, 0.72, 0.38))),
-    ("sky_theater", SkyColors(top: (0.35, 0.25, 0.45), horizon: (1, 1, 1), ground: (0.55, 0.25, 0.30))),
-    ("sky_lookout", SkyColors(top: (0.98, 0.80, 0.60), horizon: (1, 1, 1), ground: (0.50, 0.60, 0.45))),
+    ("sky_garden", sky(top: (0.62, 0.84, 0.98), ground: (0.56, 0.78, 0.47))),
+    ("sky_theater", sky(top: (0.35, 0.25, 0.45), ground: (0.55, 0.25, 0.30))),
+    ("sky_lookout", sky(top: (0.98, 0.80, 0.60), ground: (0.50, 0.60, 0.45))),
 ]
 for (name, colors) in skies {
     write(ProceduralSky.render(colors), to: URL(fileURLWithPath: "\(out)/\(name).png"))

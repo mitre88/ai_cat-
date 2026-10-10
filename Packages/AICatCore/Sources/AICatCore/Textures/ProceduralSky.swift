@@ -65,8 +65,8 @@ public enum ProceduralSky {
         let clouds = cloudDensity(u: u, v: v, field: field)
         if clouds > 0 {
             let detail = field.fbm(u, v * 2, cells: 24, octaves: 2, salt: 82)
-            let shade = 0.84 + 0.16 * detail
-            c = mix(c, (shade, shade, shade), clouds * 0.9)
+            let shade = 0.90 + 0.10 * detail
+            c = mix(c, (shade, shade, shade), clouds * 0.85)
         }
         let light = sunlight(u: u, v: v, sun: sun ?? defaultSun)
         c.r = min(1, c.r + light.disc * 1.0 + light.glow * 0.60)
@@ -91,8 +91,8 @@ public enum ProceduralSky {
     public static func cloudDensity(u: Double, v: Double, field: NoiseField) -> Double {
         let elevation = 0.5 - v
         guard elevation > 0.01 else { return 0 }
-        let cover = field.fbm(u, v * 2, cells: 6, octaves: 4, salt: 81)
-        return smoothstep(0.50, 0.68, cover) * smoothstep(0.01, 0.12, elevation)
+        let cover = field.fbm(u, v * 2, cells: 5, octaves: 4, salt: 81)
+        return smoothstep(0.50, 0.72, cover) * smoothstep(0.01, 0.12, elevation)
     }
 
     /// Sun disc (hard edge) and glow (Gaussian in angle) at (u, v), from the angle between that direction
