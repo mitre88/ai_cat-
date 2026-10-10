@@ -47,10 +47,12 @@ struct SkyGradient: View {
     }
 }
 
-/// Stage = world + AI CAT's speech bubble (+ a growth slider in debug builds).
+/// Stage = world + AI CAT's speech bubble (+ a growth slider in debug builds). A caller that shows the line
+/// elsewhere (the map puts it under the stage, next to the portrait) passes `showsSpeech: false`.
 struct StageView: View {
     let world: WorldModel
     var interaction: (any WorldInteraction)?
+    var showsSpeech = true
     @Environment(AppModel.self) private var app
     @Environment(\.postureInfo) private var postureInfo
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
@@ -62,9 +64,11 @@ struct StageView: View {
     var body: some View {
         ZStack(alignment: .top) {
             WorldView(world: world, interaction: interaction)
-            CatSpeechBubble(line: app.speech)
-                .frame(maxWidth: 380)
-                .padding(12)
+            if showsSpeech {
+                CatSpeechBubble(line: app.speech)
+                    .frame(maxWidth: 380)
+                    .padding(12)
+            }
             debugBadge
         }
         #if DEBUG

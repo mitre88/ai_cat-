@@ -376,7 +376,12 @@ private struct Whiskers: Shape {
 
 /// The bubble where AI CAT's current line appears.
 struct CatSpeechBubble: View {
+    /// `floating` sits over the 3D stage (white card with a shadow); `inset` sits inside another card, as a
+    /// tinted band with no shadow, so the stage stays clear.
+    enum Style { case floating, inset }
+
     let line: CatLine?
+    var style: Style = .floating
 
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
@@ -389,10 +394,14 @@ struct CatSpeechBubble: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(14)
-        .background(Theme.cardBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-        .shadow(color: .black.opacity(0.08), radius: 8, y: 3)
+        .background(background, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .shadow(color: .black.opacity(style == .floating ? 0.08 : 0), radius: 8, y: 3)
         .opacity((line?.text.isEmpty ?? true) ? 0 : 1)
         .animation(.easeInOut(duration: 0.3), value: line?.text ?? "")
         .accessibilityElement(children: .combine)
+    }
+
+    private var background: Color {
+        style == .floating ? Theme.cardBackground : Theme.eyeGreen.opacity(0.14)
     }
 }

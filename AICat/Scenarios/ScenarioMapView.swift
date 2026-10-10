@@ -44,9 +44,13 @@ struct ScenarioMapView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 12) {
-            StageView(world: homeWorld)
+            StageView(world: homeWorld, showsSpeech: false)
                 .frame(height: 240)
                 .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+            // The kitten's line lives under the stage, so the world stays in full view.
+            if let line = app.speech, !line.text.isEmpty {
+                CatSpeechBubble(line: line, style: .inset)
+            }
             HStack(alignment: .top, spacing: 16) {
                 CatAvatarView(emotion: app.speech?.emotion ?? .happy, size: 64)
                 VStack(alignment: .leading, spacing: 6) {
