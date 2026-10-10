@@ -557,6 +557,7 @@ extension View {
     public func mask<M: View>(alignment: Alignment = .center, @ViewBuilder _ mask: () -> M) -> _Modified<Self> { _Modified() }
     public func accessibilityHidden(_ hidden: Bool) -> _Modified<Self> { _Modified() }
     public func preferredColorScheme(_ colorScheme: ColorScheme?) -> _Modified<Self> { _Modified() }
+    public func saturation(_ amount: Double) -> _Modified<Self> { _Modified() }
     public func offset(x: CGFloat = 0, y: CGFloat = 0) -> _Modified<Self> { _Modified() }
     public func multilineTextAlignment(_ alignment: TextAlignment) -> _Modified<Self> { _Modified() }
     public func lineLimit(_ number: Int?) -> _Modified<Self> { _Modified() }

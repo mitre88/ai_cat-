@@ -95,6 +95,8 @@ struct ScenarioMapView: View {
     }
 }
 
+/// A world as a postcard: its sky, two felt hills in its palette and the emoji as a sticker, with no
+/// outline. Locked worlds fade to grey, finished ones wear a seal.
 struct ScenarioCard: View {
     let scenario: Scenario
     let isUnlocked: Bool
@@ -105,46 +107,91 @@ struct ScenarioCard: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack {
-                    Text(Theme.emoji(for: scenario.theme))
-                        .font(.largeTitle)
+            VStack(alignment: .leading, spacing: 0) {
+                HStack(alignment: .top) {
+                    sticker
                     Spacer()
                     status
                 }
+                Spacer(minLength: 18)
                 Text(L10n.string(scenario.titleKey.raw))
                     .font(.headline)
                     .foregroundStyle(.primary)
+                    .lineLimit(2)
                 Text(L10n.string(scenario.subtitleKey.raw))
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.primary)
+                    .opacity(0.7)
                     .lineLimit(2)
+                    .padding(.top, 3)
             }
             .padding(14)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(palette.sky.opacity(isUnlocked ? 0.55 : 0.22), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .stroke(palette.accent.opacity(isUnlocked ? 0.6 : 0.2), lineWidth: 2)
-            )
+            .frame(maxWidth: .infinity, minHeight: 172, alignment: .leading)
+            .background(postcard)
+            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+            .shadow(color: .black.opacity(0.06), radius: 10, y: 4)
+            .saturation(isUnlocked ? 1 : 0.35)   // locked worlds keep a hint of their colour
+            .opacity(isUnlocked ? 1 : 0.8)
         }
         .buttonStyle(.plain)
-        .opacity(isUnlocked ? 1 : 0.8)
         .accessibilityLabel(Text(L10n.string(scenario.titleKey.raw)))
+    }
+
+    // MARK: Postcard
+
+    private var skyTop: Color { Theme.mix(palette.sky, white: 0.72) }
+    private var skyBottom: Color { Theme.mix(palette.sky, white: 0.35) }
+    private var farHill: Color { Theme.mix(palette.accent, white: 0.55) }
+    private var nearHill: Color { Theme.mix(palette.ground, white: 0.45) }
+
+    private var sky: LinearGradient {
+        LinearGradient(colors: [skyTop, skyBottom], startPoint: .top, endPoint: .bottom)
+    }
+
+    /// Sky gradient with two soft hills along the bottom, like the stage's horizon.
+    private var postcard: some View {
+        ZStack(alignment: .bottom) {
+            sky
+            Ellipse()
+                .fill(farHill)
+                .frame(width: 260, height: 130)
+                .offset(x: 70, y: 25)
+            Ellipse()
+                .fill(nearHill)
+                .frame(width: 320, height: 150)
+                .offset(x: -50, y: 55)
+        }
+    }
+
+    private var sticker: some View {
+        Text(Theme.emoji(for: scenario.theme))
+            .font(.title)
+            .frame(width: 48, height: 48)
+            .background(Color.white, in: Circle())
+            .shadow(color: .black.opacity(0.08), radius: 4, y: 2)
     }
 
     @ViewBuilder
     private var status: some View {
         if isCompleted {
-            Image(systemName: "checkmark.seal.fill").foregroundStyle(.green)
+            badge("checkmark", tint: .green)
         } else if !scenario.isPlayable {
             Text(L10n.string("common.coming_soon"))
                 .font(.caption2.bold())
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
-                .background(Theme.lockedGray, in: Capsule())
+                .background(Color.white.opacity(0.85), in: Capsule())
         } else if !isUnlocked {
-            Image(systemName: "lock.fill").foregroundStyle(.secondary)
+            badge("lock.fill", tint: .secondary)
         }
+    }
+
+    private func badge(_ symbol: String, tint: Color) -> some View {
+        Image(systemName: symbol)
+            .font(.caption.bold())
+            .foregroundStyle(tint)
+            .frame(width: 28, height: 28)
+            .background(Color.white, in: Circle())
+            .shadow(color: .black.opacity(0.08), radius: 4, y: 2)
     }
 }

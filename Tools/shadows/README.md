@@ -27,3 +27,5 @@ new modifier, add it here with the same signature as Apple's and keep the body a
 `mask(alignment:_:)` and `accessibilityHidden`.
 
 `ColorScheme` and `preferredColorScheme(_:)` (the app locks the light appearance at its root).
+
+`saturation(_:)` (locked map cards fade to grey).

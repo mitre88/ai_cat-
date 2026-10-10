@@ -16,6 +16,17 @@ enum Theme {
     static let cardBackground = Color.white
     static let lockedGray = Color(red: 0.82, green: 0.83, blue: 0.86)
 
+    /// `color` moved towards white by `amount` (0 = unchanged, 1 = white): the pastel tints of the map cards.
+    static func mix(_ color: Color, white amount: Double) -> Color {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        _ = UIColor(color).getRed(&r, green: &g, blue: &b, alpha: &a)
+        func lift(_ c: CGFloat) -> Double { Double(c) + (1 - Double(c)) * amount }
+        return Color(red: lift(r), green: lift(g), blue: lift(b))
+    }
+
     static func palette(for theme: WorldTheme) -> WorldPalette {
         switch theme {
         case .garden: return WorldPalette(sky: Color(red: 0.62, green: 0.84, blue: 0.98), ground: Color(red: 0.50, green: 0.72, blue: 0.44), primary: Color(red: 0.95, green: 0.42, blue: 0.36), secondary: Color(red: 0.98, green: 0.80, blue: 0.30), accent: Color(red: 0.36, green: 0.62, blue: 0.28))
