@@ -25,7 +25,8 @@ final class CameraRig {
 
     /// Smoothly follow `target` (the cat's chest in world space). Call every frame.
     func update(target: SIMD3<Float>, deltaTime: Float) {
-        let distance = (1.5 + 3.2 * subjectHeight) * distanceFactor
+        // Close enough that the kitten reads as the hero, far enough that a board ±1 m wide fits a portrait view.
+        let distance = (1.0 + 2.6 * subjectHeight) * distanceFactor
         let height = distance * elevationFactor + subjectHeight * 0.5
         let azimuth: Float = 0.28
         let desiredPosition = SIMD3<Float>(target.x + sin(azimuth) * distance + lateralOffset, height, target.z + cos(azimuth) * distance)
@@ -42,11 +43,11 @@ final class CameraRig {
         switch posture {
         case .pocket:
             distanceFactor = 1.05
-            elevationFactor = 0.62
+            elevationFactor = 0.5
             lateralOffset = 0
         case .world:
             distanceFactor = 1.0
-            elevationFactor = 0.52
+            elevationFactor = 0.45
             lateralOffset = 0
         case .lab:
             distanceFactor = 1.1
@@ -54,7 +55,7 @@ final class CameraRig {
             lateralOffset = 0
         case .book:
             distanceFactor = 1.0
-            elevationFactor = 0.5
+            elevationFactor = 0.45
             lateralOffset = 0
         }
     }
