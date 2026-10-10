@@ -81,7 +81,8 @@ final class WorldModel {
         lighting.setTheme(skyTint: UIColor(Theme.palette(for: theme).sky))
         camera.applyPosture(posture)
         if let sky {
-            root.components.set(ImageBasedLightComponent(source: .single(sky)))
+            // A touch more sky light than the image alone gives: lifts the shadows, keeps the felt look soft.
+            root.components.set(ImageBasedLightComponent(source: .single(sky), intensityExponent: 0.3))
             applyLightReceivers(to: root)
         }
     }

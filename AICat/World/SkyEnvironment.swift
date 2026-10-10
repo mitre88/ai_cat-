@@ -10,7 +10,10 @@ import AICatCore
 enum SkyEnvironment {
     static func image(for theme: WorldTheme, width: Int = 512, height: Int = 256) -> CGImage? {
         let palette = Theme.palette(for: theme)
-        let colors = SkyColors(top: rgb(palette.sky), horizon: (1, 1, 1), ground: rgb(palette.ground))
+        let top = rgb(palette.sky)
+        // Pale haze that keeps a little of the sky's tint, slightly warm: no bright white band on the horizon.
+        let horizon = (top.r * 0.42 + 0.58, top.g * 0.42 + 0.57, top.b * 0.42 + 0.55)
+        let colors = SkyColors(top: top, horizon: horizon, ground: rgb(palette.ground))
         return ProceduralImages.cgImage(ProceduralSky.render(colors, width: width, height: height))
     }
 

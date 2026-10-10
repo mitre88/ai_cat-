@@ -14,8 +14,9 @@ final class Lighting {
     private var elevation = Float(ProceduralSky.defaultSunElevation)   // radians above the horizon; the sky's sun uses the same
     private var azimuth = Float(ProceduralSky.defaultSunAzimuth)       // radians around the Y axis
 
-    /// Point lights are in lumens: 40 000 lm at ~3.7 m is ≈ 230 lux, a 5–7 % fill against the 3 200–4 800 lux sun.
-    static let fillLumens: Float = 40_000
+    /// Point lights are in lumens: 70 000 lm at ~3.7 m is ≈ 400 lux, a 10–14 % fill against the 2 800–4 000 lux
+    /// sun: soft shadows that still read as shadows.
+    static let fillLumens: Float = 70_000
 
     init() {
         root.name = "lighting"
@@ -29,7 +30,7 @@ final class Lighting {
         fill.components.set(PointLightComponent(color: UIColor(red: 0.85, green: 0.9, blue: 1.0, alpha: 1), intensity: Self.fillLumens, attenuationRadius: 14))
         fill.position = [-2.5, 2.5, 2.5]
         rim.name = "rim"
-        rim.components.set(DirectionalLightComponent(color: UIColor(red: 0.75, green: 0.85, blue: 1.0, alpha: 1), intensity: 1100, isRealWorldProxy: false))
+        rim.components.set(DirectionalLightComponent(color: UIColor(red: 0.75, green: 0.85, blue: 1.0, alpha: 1), intensity: 800, isRealWorldProxy: false))
         rim.look(at: .zero, from: [-2.0, 2.4, -3.2], relativeTo: nil)
         root.addChild(sun)
         root.addChild(fill)
@@ -46,7 +47,7 @@ final class Lighting {
 
     func setTheme(skyTint: UIColor) {
         fill.components.set(PointLightComponent(color: skyTint, intensity: Self.fillLumens, attenuationRadius: 14))
-        rim.components.set(DirectionalLightComponent(color: skyTint, intensity: 1100, isRealWorldProxy: false))
+        rim.components.set(DirectionalLightComponent(color: skyTint, intensity: 800, isRealWorldProxy: false))
     }
 
     private func applySun(warmth: Float = 0) {
@@ -55,7 +56,8 @@ final class Lighting {
         let horizontal = cos(elevation) * distance
         let position = SIMD3<Float>(sin(azimuth) * horizontal, y, cos(azimuth) * horizontal)
         sun.look(at: .zero, from: position, relativeTo: nil)
-        let color = UIColor(red: 1.0, green: CGFloat(1.0 - 0.25 * warmth), blue: CGFloat(1.0 - 0.45 * warmth), alpha: 1)
-        sun.components.set(DirectionalLightComponent(color: color, intensity: 3200 + 1600 * (1 - warmth), isRealWorldProxy: false))
+        // A faintly warm daylight; the sunrise (warmth 1) goes amber.
+        let color = UIColor(red: 1.0, green: CGFloat(0.98 - 0.23 * warmth), blue: CGFloat(0.94 - 0.40 * warmth), alpha: 1)
+        sun.components.set(DirectionalLightComponent(color: color, intensity: 2800 + 1200 * (1 - warmth), isRealWorldProxy: false))
     }
 }

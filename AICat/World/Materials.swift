@@ -50,7 +50,8 @@ enum Materials {
     static func ground(theme: WorldTheme, palette: WorldPalette) -> PhysicallyBasedMaterial {
         let surface = TextureLibrary.ground(for: theme)
         let roughness: Float = theme == .factory ? 0.45 : (theme == .lab ? 0.35 : 0.95)
-        return textured(UIColor(palette.ground), color: surface.color, normal: surface.normal, roughness: roughness, repeats: surface.repeats)
+        let repeats = surface.repeats * (SceneBuilder.groundSize / 14)   // the repeat counts were tuned for a 14 m plane
+        return textured(UIColor(palette.ground), color: surface.color, normal: surface.normal, roughness: roughness, repeats: repeats)
     }
 
     // MARK: Prop surfaces

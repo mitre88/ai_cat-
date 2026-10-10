@@ -4,11 +4,15 @@ import AICatCore
 
 /// Builds the static set of a world: textured ground with physics and the decoration of each theme, every
 /// standing prop on a soft contact shadow. Decorative planes (rug, path) sit at y = 0.003, contact shadows at
-/// 0.006 and AI CAT's shadow at 0.008, so nothing z-fights.
+/// 0.006 and AI CAT's shadow at 0.008, so nothing z-fights. Outdoor worlds get a ring of soft hills on the
+/// horizon, so the ground never ends in a hard line against the sky.
 @MainActor
 enum SceneBuilder {
-    static let groundSize: Float = 14
+    /// Side of the ground plane. The texture tiles are sized for 14 m (`Materials.ground` scales the repeats).
+    static let groundSize: Float = 36
     static let decorHeight: Float = 0.003
+    /// Themes that happen outdoors: they get hills; the others are rooms, their sky is the backdrop.
+    static let outdoorThemes: Set<WorldTheme> = [.garden, .trail, .maze, .factory, .lookout, .plaza]
 
     static func build(theme: WorldTheme, into root: Entity) {
         let palette = Theme.palette(for: theme)
@@ -20,6 +24,7 @@ enum SceneBuilder {
         root.addChild(ground)
 
         var rng = SeededGenerator(seed: UInt64(WorldTheme.allCases.firstIndex(of: theme) ?? 0) &+ 7)
+        addHills(theme: theme, palette: palette, into: root, rng: &rng)
         switch theme {
         case .garden:
             for (x, z, h) in [(-2.4, -2.2, 1.4), (2.6, -2.6, 1.7), (-3.2, 0.4, 1.1), (3.4, 0.2, 1.3)] {
@@ -32,7 +37,7 @@ enum SceneBuilder {
             root.addChild(hedge)
             let colors = [palette.primary, palette.secondary, Color.pink, Color.purple]
             for i in 0..<8 {
-                let flower = PropFactory.flower(color: colors[i % colors.count], height: Float(0.12 + rng.nextDouble(in: 0..<0.08)))
+                let flower = PropFactory.flower(color: colors[i % colors.count], height: Float(0.17 + rng.nextDouble(in: 0..<0.10)))
                 flower.position = [Float(rng.nextDouble(in: -2.8..<2.8)), 0, Float(rng.nextDouble(in: -2.9 ..< -1.3))]
                 root.addChild(flower)
             }
@@ -187,6 +192,32 @@ enum SceneBuilder {
             let board = box([2.6, 1.2, 0.06], Materials.matte(Color(red: 0.15, green: 0.35, blue: 0.3)))
             board.position = [0, 1.0, -3.3]
             root.addChild(board)
+        }
+    }
+
+    /// Twelve soft domes around the set, 10–14 m out, tinted towards the sky (aerial perspective) so they read
+    /// as distant hills. They cast no shadow (outside the shadow box anyway) and only hide the ground's edge.
+    private static func addHills(theme: WorldTheme, palette: WorldPalette, into root: Entity, rng: inout SeededGenerator) {
+        guard outdoorThemes.contains(theme) else { return }
+        let ground = SkyEnvironment.rgb(palette.ground)
+        let sky = SkyEnvironment.rgb(palette.sky)
+        let red = ground.r * 0.55 + sky.r * 0.45
+        let green = ground.g * 0.55 + sky.g * 0.45
+        let blue = ground.b * 0.55 + sky.b * 0.45
+        let tint = Color(red: red, green: green, blue: blue)
+        let material = Materials.leaves(tint, repeats: 6)
+        let count = 12
+        for i in 0..<count {
+            let angle = Float(i) / Float(count) * 2 * .pi + Float(rng.nextDouble(in: -0.12..<0.12))
+            let radius = Float(rng.nextDouble(in: 10.5..<13.5))
+            let width = Float(rng.nextDouble(in: 3.2..<5.4))
+            let height = Float(rng.nextDouble(in: 1.2..<2.4))
+            let hill = ModelEntity(mesh: .generateSphere(radius: 1), materials: [material])
+            hill.name = "hill"
+            hill.scale = [width, height, width * 0.8]
+            hill.position = [sin(angle) * radius, 0, cos(angle) * radius]
+            hill.components.set(DynamicLightShadowComponent(castsShadow: false))
+            root.addChild(hill)
         }
     }
 
