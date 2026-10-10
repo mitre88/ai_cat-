@@ -188,6 +188,7 @@ public struct Angle: Equatable, Hashable, Sendable {
     public static func degrees(_ v: Double) -> Angle { Angle(degrees: v) }
 }
 public enum Visibility { case automatic, visible, hidden }
+public enum ColorScheme { case light, dark }
 public enum AccessibilityChildBehavior { case ignore, contain, combine }
 public enum SubmitLabel { case done, go, next, search }
 
@@ -555,6 +556,7 @@ extension View {
     public func compositingGroup() -> _Modified<Self> { _Modified() }
     public func mask<M: View>(alignment: Alignment = .center, @ViewBuilder _ mask: () -> M) -> _Modified<Self> { _Modified() }
     public func accessibilityHidden(_ hidden: Bool) -> _Modified<Self> { _Modified() }
+    public func preferredColorScheme(_ colorScheme: ColorScheme?) -> _Modified<Self> { _Modified() }
     public func offset(x: CGFloat = 0, y: CGFloat = 0) -> _Modified<Self> { _Modified() }
     public func multilineTextAlignment(_ alignment: TextAlignment) -> _Modified<Self> { _Modified() }
     public func lineLimit(_ number: Int?) -> _Modified<Self> { _Modified() }

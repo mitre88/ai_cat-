@@ -25,3 +25,5 @@ new modifier, add it here with the same signature as Apple's and keep the body a
 `RadialGradient`, `UnitPoint(x:y:)` with the corner points, `StrokeStyle(lineWidth:lineCap:…)` with `CGLineCap` / `CGLineJoin`,
 `Path.addQuadCurve` / `addCurve`, and the modifiers `rotationEffect`, `scaleEffect(x:y:anchor:)`, `blur`, `compositingGroup`,
 `mask(alignment:_:)` and `accessibilityHidden`.
+
+`ColorScheme` and `preferredColorScheme(_:)` (the app locks the light appearance at its root).
