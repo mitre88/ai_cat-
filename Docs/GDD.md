@@ -128,7 +128,7 @@ Cada mundo tiene 3 retos (tier 1, 2, 3) y un **reto maestro** (tier 3, opcional 
 - XP por reto: `xp = 100 · tier · clamp(precisión, 0.5, 1)` (reto fallido: 25 XP de consuelo).
 - Crecimiento normalizado: `ĝ = clamp(XP / 7200, 0, 1)` (7200 = 80 % del máximo teórico de 9000, para que un juego imperfecto también llegue a adulto). Etapa visible `s = ⌊10·ĝ⌋`; un mundo completo ≈ una etapa.
 - *Nota de diseño*: se evaluó primero una logística `g(x)=1/(1+e^{-k(x-x₀)})`; se descartó porque mantenía al gato en etapa 0 durante ~2.4 mundos. El modelo lineal con `smoothstep` en la morfología da progreso visible en cada reto.
-- Morfología: `p(ĝ) = p_gatito + (p_adulto − p_gatito)·smoothstep(ĝ)` para longitud del cuerpo (0.18→0.45 m), razón cabeza/cuerpo (0.42→0.30), patas (0.05→0.16 m), orejas (1.3→1.0), cola (0.10→0.30 m), ojos/cabeza (0.28→0.18). La cámara se reencuadra con la altura resultante.
+- Morfología: `p(ĝ) = p_gatito + (p_adulto − p_gatito)·smoothstep(ĝ)` para longitud del cuerpo (0.23→0.54 m), razón cabeza/cuerpo (0.42→0.30), patas (0.062→0.185 m), orejas (1.3→1.0), cola (0.125→0.35 m), ojos/cabeza (0.28→0.18). Proporciones de juguete, algo más grandes que un gato real, para que el gatito sea el protagonista junto a canastas, losetas y frutas (2026-10-10; antes 0.18→0.45 m). La cámara se reencuadra con la altura resultante.
 
 ### 4.2 Dificultad adaptativa
 

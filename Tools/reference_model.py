@@ -58,11 +58,11 @@ def smoothstep(t: float) -> float:
 
 # (name, kitten, adult) — metres unless noted
 MORPHOLOGY = [
-    ("bodyLength", 0.18, 0.45),
+    ("bodyLength", 0.23, 0.54),
     ("headRadiusRatio", 0.42, 0.30),   # head radius / body length
-    ("legLength", 0.05, 0.16),
+    ("legLength", 0.062, 0.185),
     ("earScale", 1.30, 1.00),
-    ("tailLength", 0.10, 0.30),
+    ("tailLength", 0.125, 0.35),
     ("eyeRadiusRatio", 0.28, 0.18),    # eye radius / head radius
 ]
 

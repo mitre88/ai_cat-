@@ -19,8 +19,10 @@ public struct CatMorphology: Equatable, Sendable {
         self.eyeRadiusRatio = eyeRadiusRatio
     }
 
-    public static let kitten = CatMorphology(bodyLength: 0.18, headRadiusRatio: 0.42, legLength: 0.05, earScale: 1.30, tailLength: 0.10, eyeRadiusRatio: 0.28)
-    public static let adult = CatMorphology(bodyLength: 0.45, headRadiusRatio: 0.30, legLength: 0.16, earScale: 1.00, tailLength: 0.30, eyeRadiusRatio: 0.18)
+    /// Toy proportions, a little larger than life: the kitten must read as the hero next to baskets, tiles
+    /// and fruit that keep their play-friendly sizes (same numbers in Tools/reference_model.py).
+    public static let kitten = CatMorphology(bodyLength: 0.23, headRadiusRatio: 0.42, legLength: 0.062, earScale: 1.30, tailLength: 0.125, eyeRadiusRatio: 0.28)
+    public static let adult = CatMorphology(bodyLength: 0.54, headRadiusRatio: 0.30, legLength: 0.185, earScale: 1.00, tailLength: 0.35, eyeRadiusRatio: 0.18)
 
     /// p(ĝ) = p_kitten + (p_adult − p_kitten) · smoothstep(ĝ)
     public static func interpolated(growth: Double) -> CatMorphology {
