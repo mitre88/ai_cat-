@@ -170,7 +170,16 @@ public enum Edge { case top, leading, bottom, trailing
         public static let top = Set(rawValue: 1), leading = Set(rawValue: 2), bottom = Set(rawValue: 4), trailing = Set(rawValue: 8)
         public static let horizontal: Set = [.leading, .trailing], vertical: Set = [.top, .bottom], all: Set = [.horizontal, .vertical] }
 }
-public struct UnitPoint { public static let top = UnitPoint(), bottom = UnitPoint(), leading = UnitPoint(), trailing = UnitPoint(), center = UnitPoint() }
+public struct UnitPoint {
+    public var x: CGFloat
+    public var y: CGFloat
+    public init() { x = 0; y = 0 }
+    public init(x: CGFloat, y: CGFloat) { self.x = x; self.y = y }
+    public static let zero = UnitPoint(), center = UnitPoint(x: 0.5, y: 0.5)
+    public static let top = UnitPoint(x: 0.5, y: 0), bottom = UnitPoint(x: 0.5, y: 1), leading = UnitPoint(x: 0, y: 0.5), trailing = UnitPoint(x: 1, y: 0.5)
+    public static let topLeading = UnitPoint(x: 0, y: 0), topTrailing = UnitPoint(x: 1, y: 0)
+    public static let bottomLeading = UnitPoint(x: 0, y: 1), bottomTrailing = UnitPoint(x: 1, y: 1)
+}
 public enum RoundedCornerStyle { case circular, continuous }
 public struct Angle: Equatable, Hashable, Sendable {
     public var degrees: Double
@@ -250,14 +259,23 @@ public struct LinearGradient: ShapeStyle, View {
     public init(colors: [Color], startPoint: UnitPoint, endPoint: UnitPoint) {}
     public var body: Never { fatalError() }
 }
+public struct RadialGradient: ShapeStyle, View {
+    public init(colors: [Color], center: UnitPoint, startRadius: CGFloat, endRadius: CGFloat) {}
+    public var body: Never { fatalError() }
+}
 
 // MARK: - Shapes
 
-public struct StrokeStyle { public init(lineWidth: CGFloat = 1, dash: [CGFloat] = []) {} }
+public struct StrokeStyle {
+    public init(lineWidth: CGFloat = 1, lineCap: CGLineCap = .butt, lineJoin: CGLineJoin = .miter, miterLimit: CGFloat = 10,
+                dash: [CGFloat] = [], dashPhase: CGFloat = 0) {}
+}
 public struct Path {
     public init() {}
     public mutating func move(to p: CGPoint) {}
     public mutating func addLine(to p: CGPoint) {}
+    public mutating func addQuadCurve(to end: CGPoint, control: CGPoint) {}
+    public mutating func addCurve(to end: CGPoint, control1: CGPoint, control2: CGPoint) {}
     public mutating func closeSubpath() {}
 }
 public struct _ShapeView<S: Shape>: View { public var body: Never { fatalError() } }
@@ -531,6 +549,12 @@ extension View {
     public func clipShape<S: Shape>(_ shape: S) -> _Modified<Self> { _Modified() }
     public func shadow(color: Color = .black, radius: CGFloat, x: CGFloat = 0, y: CGFloat = 0) -> _Modified<Self> { _Modified() }
     public func scaleEffect(_ s: CGFloat, anchor: UnitPoint = .center) -> _Modified<Self> { _Modified() }
+    public func scaleEffect(x: CGFloat = 1, y: CGFloat = 1, anchor: UnitPoint = .center) -> _Modified<Self> { _Modified() }
+    public func rotationEffect(_ angle: Angle, anchor: UnitPoint = .center) -> _Modified<Self> { _Modified() }
+    public func blur(radius: CGFloat, opaque: Bool = false) -> _Modified<Self> { _Modified() }
+    public func compositingGroup() -> _Modified<Self> { _Modified() }
+    public func mask<M: View>(alignment: Alignment = .center, @ViewBuilder _ mask: () -> M) -> _Modified<Self> { _Modified() }
+    public func accessibilityHidden(_ hidden: Bool) -> _Modified<Self> { _Modified() }
     public func offset(x: CGFloat = 0, y: CGFloat = 0) -> _Modified<Self> { _Modified() }
     public func multilineTextAlignment(_ alignment: TextAlignment) -> _Modified<Self> { _Modified() }
     public func lineLimit(_ number: Int?) -> _Modified<Self> { _Modified() }

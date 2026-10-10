@@ -21,6 +21,8 @@ public enum CGImageAlphaInfo: UInt32 {
 }
 
 public enum CGColorRenderingIntent { case defaultIntent }
+public enum CGLineCap: Int32 { case butt = 0, round = 1, square = 2 }
+public enum CGLineJoin: Int32 { case miter = 0, round = 1, bevel = 2 }
 
 public class CGImage {
     public init() {}

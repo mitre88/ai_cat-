@@ -19,3 +19,9 @@ with Apple's docs when adding new framework calls.
 `scrollDisabled`, `task(priority:_:)`, `task(id:priority:_:)`, `ProgressView()`, `Color.primary` / `Color.secondary`,
 and the Capture stubs (`CameraClassifier`, `CameraPreview`, `SpeechListener`) in `AppStubs.swift`. When a board uses a
 new modifier, add it here with the same signature as Apple's and keep the body a no-op.
+
+## Added for the avatar portrait
+
+`RadialGradient`, `UnitPoint(x:y:)` with the corner points, `StrokeStyle(lineWidth:lineCap:…)` with `CGLineCap` / `CGLineJoin`,
+`Path.addQuadCurve` / `addCurve`, and the modifiers `rotationEffect`, `scaleEffect(x:y:anchor:)`, `blur`, `compositingGroup`,
+`mask(alignment:_:)` and `accessibilityHidden`.
