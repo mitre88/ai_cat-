@@ -36,6 +36,8 @@ struct CatAvatarView: View {
     private var innerEar: Color { Color(red: 0.93, green: 0.47, blue: 0.58) }
     private var irisLight: Color { Color(red: 0.62, green: 0.97, blue: 0.84) }
     private var irisDark: Color { Color(red: 0.04, green: 0.40, blue: 0.32) }
+    private var noseTop: Color { Color(red: 1.0, green: 0.64, blue: 0.72) }
+    private var noseBottom: Color { Color(red: 0.86, green: 0.32, blue: 0.44) }
     private var mouthLine: Color { Color(red: 0.95, green: 0.52, blue: 0.62) }
     private var mouthInside: Color { Color(red: 0.36, green: 0.05, blue: 0.13) }
     private var tongue: Color { Color(red: 0.98, green: 0.50, blue: 0.60) }
@@ -154,15 +156,20 @@ struct CatAvatarView: View {
 
     private var nose: some View {
         RoundedTriangle()
-            .fill(LinearGradient(colors: [Color(red: 1.0, green: 0.64, blue: 0.72), Color(red: 0.86, green: 0.32, blue: 0.44)],
-                                 startPoint: .top, endPoint: .bottom))
-            .overlay(
-                Ellipse()
-                    .fill(Color.white.opacity(0.5))
-                    .frame(width: size * 0.035, height: size * 0.018)
-                    .offset(x: -size * 0.015, y: -size * 0.017)
-            )
+            .fill(noseGradient)
+            .overlay(noseHighlight)
             .frame(width: size * 0.1, height: size * 0.072)
+    }
+
+    private var noseGradient: LinearGradient {
+        LinearGradient(colors: [noseTop, noseBottom], startPoint: .top, endPoint: .bottom)
+    }
+
+    private var noseHighlight: some View {
+        Ellipse()
+            .fill(Color.white.opacity(0.5))
+            .frame(width: size * 0.035, height: size * 0.018)
+            .offset(x: size * -0.015, y: size * -0.017)
     }
 
     @ViewBuilder
